@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { SERVICES_DATA, SERVICES_SECTION_HEADER } from "@/data/services";
 import { PACKAGES_DATA } from "@/data/packages";
 import { ServicesClient } from "./ServicesClient";
 import { ScrollText } from "@/components/motion/ScrollText";
+import { FluidLink } from "@/components/ui/FluidButton";
 
 export function ServicesSection() {
   return (
@@ -120,16 +120,15 @@ export function ServicesSection() {
                   </p>
                 </div>
 
-                <Link
+                {/* CTA Padronizado com FluidLink */}
+                <FluidLink
                   href="#contact"
-                  className={`text-center py-3 px-6 rounded-full text-sm font-medium transition-all duration-300 ${
-                    pkg.highlight
-                      ? "bg-gradient-to-r from-[#a15cf5] to-white text-[#04091d] font-semibold hover:opacity-95 shadow-md shadow-[#a15cf5]/20"
-                      : "border border-white/20 text-white hover:border-[#a15cf5] hover:text-[#a15cf5]"
-                  }`}
+                  variant={pkg.highlight ? "primary" : "secondary"}
+                  pulse={pkg.highlight}
+                  className="w-full text-center py-3.5 text-sm"
                 >
-                  Quero um diagnóstico gratuito
-                </Link>
+                  Diagnóstico Gratuito
+                </FluidLink>
               </div>
             ))}
           </div>

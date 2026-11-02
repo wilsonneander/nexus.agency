@@ -137,3 +137,173 @@ body {
     box-shadow: 0 0 0 0 rgba(33, 142, 73, 0);
   }
 }
+
+/* ==========================================================================
+   Fluid Button Design System — Inspirado na fluidez Framer (Hover 1.05 & Overlay)
+   ========================================================================== */
+.fluid-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 9999px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  outline: none;
+  user-select: none;
+  isolation: isolate;
+  transform: translateZ(0);
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              border-color 0.35s ease,
+              background-color 0.35s ease,
+              color 0.35s ease;
+}
+
+.fluid-btn:focus-visible {
+  ring: 2px solid #ad7dff;
+  ring-offset: 2px;
+  ring-offset-color: #04091d;
+}
+
+.fluid-btn__content {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.fluid-btn__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 50%;
+  transform: translateY(115%);
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+              border-radius 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+}
+
+/* Hover e Active base */
+@media (hover: hover) {
+  .fluid-btn:hover {
+    transform: scale(1.05);
+  }
+  .fluid-btn:hover .fluid-btn__overlay {
+    transform: translateY(0);
+    border-radius: 9999px;
+  }
+}
+
+.fluid-btn:active {
+  transform: scale(0.97);
+  transition-duration: 0.1s;
+}
+
+/* --- Variante: Primary (Diagnóstico Gratuito / CTA Principal) --- */
+.fluid-btn--primary {
+  background: linear-gradient(135deg, #a15cf5 0%, #ffffff 100%);
+  color: #04091d;
+  box-shadow: 0 4px 18px -2px rgba(161, 92, 245, 0.28),
+              inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.fluid-btn--primary .fluid-btn__overlay {
+  background: linear-gradient(135deg, #ffffff 0%, #ad7dff 100%);
+}
+
+@media (hover: hover) {
+  .fluid-btn--primary:hover {
+    box-shadow: 0 8px 28px -4px rgba(161, 92, 245, 0.45),
+                0 0 16px rgba(173, 125, 255, 0.35);
+  }
+}
+
+/* --- Variante: Secondary / Outline --- */
+.fluid-btn--secondary {
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.fluid-btn--secondary .fluid-btn__overlay {
+  background: linear-gradient(135deg, rgba(161, 92, 245, 0.2) 0%, rgba(255, 255, 255, 0.12) 100%);
+}
+
+@media (hover: hover) {
+  .fluid-btn--secondary:hover {
+    border-color: #ad7dff;
+    color: #ffffff;
+    box-shadow: 0 0 16px rgba(161, 92, 245, 0.22);
+  }
+}
+
+/* --- Variante: Filter (Criação e Desenvolvimento) --- */
+.fluid-btn--filter {
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.5rem 1.4rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.fluid-btn--filter .fluid-btn__overlay {
+  background: rgba(161, 92, 245, 0.16);
+}
+
+@media (hover: hover) {
+  .fluid-btn--filter:hover {
+    color: #ffffff;
+    border-color: rgba(173, 125, 255, 0.5);
+    transform: scale(1.05);
+  }
+}
+
+.fluid-btn--filter.fluid-btn--active {
+  background: linear-gradient(135deg, #a15cf5 0%, #ffffff 100%);
+  color: #04091d;
+  font-weight: 600;
+  border-color: transparent;
+  box-shadow: 0 4px 16px -2px rgba(161, 92, 245, 0.35);
+  transform: scale(1.02);
+}
+
+/* --- Pulse Sutil para o CTA Prioritário --- */
+.fluid-btn--pulse {
+  animation: fluidPulse 3.5s infinite;
+}
+
+@keyframes fluidPulse {
+  0%, 100% {
+    box-shadow: 0 4px 18px -2px rgba(161, 92, 245, 0.28),
+                0 0 0 0 rgba(161, 92, 245, 0.4);
+  }
+  50% {
+    box-shadow: 0 6px 24px -2px rgba(161, 92, 245, 0.45),
+                0 0 0 8px rgba(161, 92, 245, 0);
+  }
+}
+
+/* --- Respeito a prefers-reduced-motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .fluid-btn,
+  .fluid-btn__content,
+  .fluid-btn__overlay {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .fluid-btn--pulse {
+    animation: none !important;
+  }
+}
+

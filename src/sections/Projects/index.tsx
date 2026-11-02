@@ -1,14 +1,14 @@
 "use client";
 
 /**
- * ProjectsSection — Client Component existente, agora com:
+ * ProjectsSection — Client Component com:
+ * - Filtros padronizados com FluidButton (variant="filter")
  * - ScrollReveal staggered nos cards de projetos
- * - GSAP Flip para transição suave entre filtros
+ * - GSAP Flip para transição suave entre categorias
  *
  * PRESERVADO integralmente:
  * - Lógica de filtro React (useState)
- * - Estrutura HTML/visual original
- * - Todos os projetos e categorias
+ * - Seleção e renderização dos 6 cases
  */
 
 import { useState, useRef, useCallback, useEffect } from "react";
@@ -20,6 +20,7 @@ import { flushSync } from "react-dom";
 import { PROJECTS_DATA, PROJECT_FILTERS } from "@/data/projects";
 import { ProjectCategory } from "@/types";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { FluidButton } from "@/components/ui/FluidButton";
 
 export function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>("all");
@@ -61,7 +62,7 @@ export function ProjectsSection() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reduced]);
 
-  // Flip animation ao trocar filtro — B4: flushSync garante DOM atualizado antes do Flip.from
+  // Flip animation ao trocar filtro — flushSync assegura DOM atualizado antes do Flip.from
   const handleFilter = useCallback(
     (filter: string) => {
       if (reduced || !gridRef.current) {
@@ -74,8 +75,6 @@ export function ProjectsSection() {
       // Captura estado ANTES da mudança de DOM
       const state = Flip.getState("[data-project-card]");
 
-      // flushSync força React a aplicar setState de forma síncrona,
-      // garantindo que o DOM está pronto quando Flip.from() rodar.
       flushSync(() => setActiveFilter(filter as ProjectCategory));
 
       Flip.from(state, {
@@ -107,22 +106,22 @@ export function ProjectsSection() {
           Criação e Desenvolvimento
         </h2>
 
-        {/* Barra de Filtros */}
-        <div className="flex justify-center flex-wrap gap-3 sm:gap-4 mb-14">
+        {/* Barra de Filtros com FluidButton */}
+        <div className="flex justify-center flex-wrap gap-3 sm:gap-4 mb-14" role="tablist" aria-label="Filtro de projetos">
           {PROJECT_FILTERS.map((f) => {
             const isActive = activeFilter === f.filter;
             return (
-              <button
+              <FluidButton
                 key={f.filter}
                 onClick={() => handleFilter(f.filter)}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  isActive
-                    ? "bg-gradient-to-r from-[#a15cf5] to-white text-[#04091d] shadow-md shadow-[#a15cf5]/20 font-semibold"
-                    : "text-white/80 hover:text-white bg-transparent"
-                }`}
+                variant="filter"
+                isActive={isActive}
+                role="tab"
+                aria-selected={isActive}
+                className="px-6 py-2.5"
               >
                 {f.label}
-              </button>
+              </FluidButton>
             );
           })}
         </div>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SITE_CONFIG } from "@/lib/constants";
+import { FluidLink } from "@/components/ui/FluidButton";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,14 +37,15 @@ export function Navbar() {
             </li>
           ))}
           <li>
-            <a
+            <FluidLink
               href={SITE_CONFIG.whatsapp.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-2 rounded-full font-medium text-[15px] text-[#04091d] bg-gradient-to-r from-[#a15cf5] to-white hover:opacity-95 hover:shadow-lg hover:shadow-[#a15cf5]/20 transition-all duration-300 inline-block"
+              variant="primary"
+              className="px-6 py-2 text-sm font-semibold"
             >
               Contato
-            </a>
+            </FluidLink>
           </li>
         </ul>
 
@@ -70,15 +72,16 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
-          <a
+          <FluidLink
             href={SITE_CONFIG.whatsapp.url}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsOpen(false)}
-            className="mt-2 text-center py-2.5 rounded-full font-medium text-[#04091d] bg-gradient-to-r from-[#a15cf5] to-white"
+            variant="primary"
+            className="mt-2 text-center py-2.5 text-sm font-semibold"
           >
             Contato
-          </a>
+          </FluidLink>
         </div>
       )}
     </nav>

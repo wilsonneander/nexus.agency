@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { FluidButton } from "@/components/ui/FluidButton";
 
 export function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -171,13 +172,16 @@ export function ContactSection() {
             </div>
           </div>
 
+          {/* Botão de Envio com FluidButton e Pulse Sutil */}
           <div data-contact-cta className="flex justify-center pt-4">
-            <button
+            <FluidButton
               type="submit"
-              className="px-8 py-3.5 rounded-full font-semibold text-sm sm:text-base text-[#04091d] bg-gradient-to-r from-[#a15cf5] to-white hover:opacity-95 hover:shadow-lg hover:shadow-[#a15cf5]/25 transition-all duration-300"
+              variant="primary"
+              pulse
+              className="px-10 py-4 text-base font-bold tracking-wide shadow-lg shadow-[#a15cf5]/20"
             >
-              Quero meu diagnóstico gratuito
-            </button>
+              Diagnóstico Gratuito
+            </FluidButton>
           </div>
         </form>
       </div>

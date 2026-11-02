@@ -110,16 +110,16 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 
 ## Fase 6 — QA e entrega
 
-- [ ] 6.1 Executar checklist completo em `QA-CHECKLIST.md`.
-- [ ] 6.2 Testar links, WhatsApp e redes sociais.
-- [ ] 6.3 Testar scroll para baixo e para cima.
-- [ ] 6.4 Testar reduced motion.
-- [ ] 6.5 Testar viewports definidos.
-- [ ] 6.6 Executar lint, testes disponíveis e build de produção.
-- [ ] 6.7 Corrigir erros e regressões.
-- [ ] 6.8 Registrar resumo de entrega e limitações conhecidas.
+- [x] 6.1 Executar checklist completo em `QA-CHECKLIST.md`. (Status: DONE | Todos os itens checados)
+- [x] 6.2 Testar links, WhatsApp e redes sociais. (Status: DONE | Links de contato e destinos preservados)
+- [x] 6.3 Testar scroll para baixo e para cima. (Status: DONE | Scrub bidirecional validado)
+- [x] 6.4 Testar reduced motion. (Status: DONE | Fallback seguro ativo)
+- [x] 6.5 Testar viewports definidos. (Status: DONE | 375px a 1200px capturados e validados)
+- [x] 6.6 Executar lint, testes disponíveis e build de produção. (Status: DONE | Build limpo, exit code 0)
+- [x] 6.7 Corrigir erros e regressões. (Status: DONE | Padronização Fluid Button dos botões de contato e filtros concluída)
+- [x] 6.8 Registrar resumo de entrega e limitações conhecidas. (Status: DONE | Relatório final apresentado)
 
-**Critério de saída:** checklist aprovado, build concluído e nenhuma regressão crítica conhecida.
+**Critério de saída:** checklist aprovado, build concluído e nenhuma regressão crítica conhecida. [ATENDIDO]
 
 ## Coordenação de múltiplos agentes
 
