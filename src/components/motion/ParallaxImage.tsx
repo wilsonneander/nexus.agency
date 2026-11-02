@@ -1,12 +1,11 @@
 "use client";
 
 /**
- * ParallaxImage – aplica efeito de paralaxe vertical simples ao elemento <img>.
- * Ideal para imagens de fundo ou ilustrações estáticas (ex.: grafic.png).
- *
- * Uso: <ParallaxImage src="/assets/grafic.png" alt="..." className="..." />
+ * ParallaxImage – aplica efeito de paralaxe vertical suave.
+ * B5: Utiliza next/image com wrapper relativo para evitar warnings e otimizar LCP.
  */
 import { useRef, useEffect } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -15,11 +14,14 @@ interface ParallaxImageProps {
   src: string;
   alt: string;
   className?: string;
-  /** Percentual de deslocamento Y (negativo move up). Padrão: -15 */
+  width?: number;
+  height?: number;
+  priority?: boolean;
+  /** Percentual de deslocamento Y (negativo move up). Padrão: -12 */
   yPercent?: number;
-  /** Início do trigger (padrão: "top bottom" -> quando começa a entrar) */
+  /** Início do trigger */
   start?: string;
-  /** Fim do trigger (padrão: "bottom top") */
+  /** Fim do trigger */
   end?: string;
 }
 
@@ -27,32 +29,48 @@ export function ParallaxImage({
   src,
   alt,
   className = "",
-  yPercent = -15,
+  width = 500,
+  height = 500,
+  priority = false,
+  yPercent = -12,
   start = "top bottom",
   end = "bottom top",
 }: ParallaxImageProps) {
-  const imgRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
 
   useEffect(() => {
     if (reduced) return;
-    if (!imgRef.current) return;
+    if (!containerRef.current) return;
     gsap.registerPlugin(ScrollTrigger);
+    
     const ctx = gsap.context(() => {
-      gsap.to(imgRef.current, {
+      gsap.to(containerRef.current, {
         yPercent,
         ease: "none",
         scrollTrigger: {
-          trigger: imgRef.current,
+          trigger: containerRef.current,
           start,
           end,
           scrub: true,
           invalidateOnRefresh: true,
         },
       });
-    }, imgRef);
+    }, containerRef);
+
     return () => ctx.revert();
   }, [reduced, yPercent, start, end]);
 
-  return <img src={src} alt={alt} className={className} ref={imgRef} />;
+  return (
+    <div ref={containerRef} className="will-change-transform">
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        priority={priority}
+        className={className}
+      />
+    </div>
+  );
 }

@@ -16,6 +16,7 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Flip } from "gsap/Flip";
+import { flushSync } from "react-dom";
 import { PROJECTS_DATA, PROJECT_FILTERS } from "@/data/projects";
 import { ProjectCategory } from "@/types";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -60,7 +61,7 @@ export function ProjectsSection() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reduced]);
 
-  // Flip animation ao trocar filtro
+  // Flip animation ao trocar filtro — B4: flushSync garante DOM atualizado antes do Flip.from
   const handleFilter = useCallback(
     (filter: string) => {
       if (reduced || !gridRef.current) {
@@ -70,31 +71,30 @@ export function ProjectsSection() {
 
       gsap.registerPlugin(Flip);
 
-      // Captura estado antes da mudança
+      // Captura estado ANTES da mudança de DOM
       const state = Flip.getState("[data-project-card]");
 
-      setActiveFilter(filter as ProjectCategory);
+      // flushSync força React a aplicar setState de forma síncrona,
+      // garantindo que o DOM está pronto quando Flip.from() rodar.
+      flushSync(() => setActiveFilter(filter as ProjectCategory));
 
-      // Anima a transição após o React re-renderizar
-      requestAnimationFrame(() => {
-        Flip.from(state, {
-          duration: 0.45,
-          ease: "power2.inOut",
-          absolute: true,
-          onEnter: (els) =>
-            gsap.from(els, {
-              opacity: 0,
-              y: 24,
-              duration: 0.35,
-              ease: "power2.out",
-            }),
-          onLeave: (els) =>
-            gsap.to(els, {
-              opacity: 0,
-              y: -12,
-              duration: 0.2,
-            }),
-        });
+      Flip.from(state, {
+        duration: 0.45,
+        ease: "power2.inOut",
+        absolute: true,
+        onEnter: (els) =>
+          gsap.from(els, {
+            opacity: 0,
+            y: 24,
+            duration: 0.35,
+            ease: "power2.out",
+          }),
+        onLeave: (els) =>
+          gsap.to(els, {
+            opacity: 0,
+            y: -12,
+            duration: 0.2,
+          }),
       });
     },
     [reduced]

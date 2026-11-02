@@ -64,13 +64,11 @@ export function AboutSection() {
               <p className="text-white/70 text-sm">{ABOUT_DATA.paragraphs[4]}</p>
             </div>
 
-            {/* Métrica +50 */}
+            {/* Métrica +50 — B3: número em span separado para não quebrar bg-clip-text */}
             <div className="flex items-center gap-6 p-4 bg-[#0f1221] rounded-lg border border-white/5">
-              <div
-                data-about-metric-value
-                className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#a15cf5] to-white"
-              >
-                {ABOUT_DATA.metric.value}
+              <div className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#a15cf5] to-white">
+                <span data-about-metric-value>+</span>
+                <span data-about-metric-number>50</span>
               </div>
               <div>
                 <p className="text-base font-semibold text-white uppercase tracking-wide">

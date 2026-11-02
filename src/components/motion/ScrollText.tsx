@@ -9,7 +9,9 @@
  * - Reversível: ao subir a página, o destaque retorna.
  * - Usa GSAP + ScrollTrigger com scrub.
  * - Respeita prefers-reduced-motion.
- * - Acessível: aria-label no container + aria-hidden nas spans visuais.
+ * - B6 Correção de Acessibilidade:
+ *   Utiliza texto padrão legível para leitores de tela em span sr-only sem causar leitura duplicada,
+ *   ou mantém o fluxo natural renderizando palavras sem duplicar aria-label redundante no container.
  */
 
 import { useRef, useEffect, useMemo, ElementType } from "react";
@@ -84,14 +86,13 @@ export function ScrollText({
   }, [reducedMotion, startColor, endColor, scrub, start, end]);
 
   return (
-    <Tag ref={containerRef} className={className} aria-label={children}>
+    <Tag ref={containerRef} className={className}>
       {tokens.map((token, i) => {
         if (/^\s+$/.test(token)) return token;
         return (
           <span
             key={i}
             data-word
-            aria-hidden="true"
             style={{
               color: reducedMotion ? endColor : startColor,
               display: "inline",

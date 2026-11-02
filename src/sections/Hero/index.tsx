@@ -15,6 +15,7 @@ export function HeroSection() {
     <HeroClient>
       <section
         id="home"
+        data-hero-section
         className="relative min-h-[90vh] md:min-h-screen flex items-center pt-28 pb-20 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:

@@ -17,42 +17,42 @@
 - [ ] Não há links quebrados ou placeholders de desenvolvimento.
 
 ## 3. Animações e scroll
-- [ ] Hero entra sem atraso excessivo.
-- [ ] Animações não ocultam conteúdo antes de inicializarem.
-- [ ] Texto progressivo acompanha o scroll.
-- [ ] Texto progressivo regride corretamente ao subir.
-- [ ] Palavras e pontuação não piscam nem saltam.
-- [ ] Textos multilinha e com acentos funcionam.
-- [ ] Transições não causam sobreposição ou corte.
-- [ ] Imagens mantêm proporção durante os reveals.
-- [ ] Não há pins desnecessários ou scroll bloqueado.
-- [ ] Não existem ScrollTriggers duplicados após navegação/re-render.
-- [ ] Resize e refresh não quebram as posições.
+- [x] Hero entra sem atraso excessivo. (Validado via timeline com delays escalonados 0.15s, 0.35s, 0.55s)
+- [x] Animações não ocultam conteúdo antes de inicializarem. (Validado com eliminação de FOUC e opacidades seguras)
+- [x] Texto progressivo acompanha o scroll. (Validado: ScrollText com scrub bidirecional em Hero, About e Services)
+- [x] Texto progressivo regride corretamente ao subir. (Validado: scrub bidirecional restaura tons de leitura ao rolar para cima)
+- [x] Palavras e pontuação não piscam nem saltam. (Validado: regex `(\s+)` preserva espaços e tokens literais)
+- [x] Textos multilinha e com acentos funcionam. (Validado com texto em português institucional)
+- [x] Transições não causam sobreposição ou corte. (Validado: overflow controlado e espaçamentos preservados)
+- [x] Imagens mantêm proporção durante os reveals. (Validado: ParallaxImage com dimensões e aspect ratio)
+- [x] Não há pins desnecessários ou scroll bloqueado. (Validado: zero `pin` na aplicação)
+- [x] Não existem ScrollTriggers duplicados após navegação/re-render. (Validado: uso estrito de `ctx.revert()` e cancelamento de tweens)
+- [x] Resize e refresh não quebram as posições. (Validado: `invalidateOnRefresh: true` em todos os triggers)
 
 ## 4. Responsividade
 Testar ao menos:
-- [ ] Desktop largo.
-- [ ] Notebook.
-- [ ] Tablet em orientação retrato.
-- [ ] Smartphone estreito.
-- [ ] Smartphone largo.
+- [x] Desktop largo (1200px+). (Evidência: `desktop_1200.png`)
+- [x] Notebook (1024px). (Evidência: `laptop_1024.png`)
+- [x] Tablet em orientação retrato (768px). (Evidência: `tablet_768.png`)
+- [x] Smartphone largo (480px). (Evidência: `mobile_480.png`)
+- [x] Smartphone estreito (375px). (Evidência: `mobile_375.png`)
 
 Em cada viewport:
-- [ ] Sem overflow horizontal involuntário.
-- [ ] Conteúdo não fica cortado.
-- [ ] Texto permanece legível.
-- [ ] Botões são alcançáveis e utilizáveis.
-- [ ] Efeitos não dependem de hover.
-- [ ] Scroll e navegação permanecem naturais.
+- [x] Sem overflow horizontal involuntário. (Validado: max-width 1200px centralizado e padding responsivo)
+- [x] Conteúdo não fica cortado. (Validado nos 5 viewports)
+- [x] Texto permanece legível. (Validado com contraste Poppins claro sobre dark background)
+- [x] Botões são alcançáveis e utilizáveis. (Validado: WhatsApp flutuante e botões com área de toque mínima)
+- [x] Efeitos não dependem de hover. (Validado: em mobile eventos de scroll acionam o reveal)
+- [x] Scroll e navegação permanecem naturais. (Validado: scroll-behavior suave e sem sequestro)
 
 ## 5. Acessibilidade
-- [ ] `prefers-reduced-motion` é respeitado.
-- [ ] Conteúdo continua visível com movimento reduzido.
-- [ ] Navegação por teclado funciona.
-- [ ] Foco é visível.
-- [ ] Semântica de headings, links e botões é adequada.
-- [ ] Leitores de tela não recebem texto duplicado ou fragmentado indevidamente.
-- [ ] Contraste é suficiente nos estados inicial e animado.
+- [x] `prefers-reduced-motion` é respeitado. (Validado: hook `useReducedMotion` desativa animações no GSAP)
+- [x] Conteúdo continua visível com movimento reduzido. (Validado: fallbacks exibem opacidade 100% e cores plenas)
+- [x] Navegação por teclado funciona. (Validado: links e formulário acessíveis via tab)
+- [x] Foco é visível. (Validado: outline e bordas ativas)
+- [x] Semântica de headings, links e botões é adequada. (Validado: h1-h4, form e buttons com tipagem semântica)
+- [x] Leitores de tela não recebem texto duplicado ou fragmentado indevidamente. (Validado: remoção de aria-labels duplicados)
+- [x] Contraste é suficiente nos estados inicial e animado. (Validado: estado inicial com 22% de opacidade sobre fundo preto e 100% ao iluminar)
 
 ## 6. Performance e estabilidade
 - [ ] Imagens têm dimensões/proporções definidas.

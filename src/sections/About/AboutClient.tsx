@@ -87,8 +87,8 @@ export function AboutClient({ children }: AboutClientProps) {
         });
       }
 
-      // Métrica +50 — counter
-      const metricEl = section.querySelector("[data-about-metric-value]");
+      // Métrica +50 — B3: anima apenas o span do número para preservar bg-clip-text
+      const metricEl = section.querySelector("[data-about-metric-number]");
       if (metricEl) {
         const counter = { val: 0 };
         gsap.to(counter, {
@@ -96,7 +96,7 @@ export function AboutClient({ children }: AboutClientProps) {
           duration: 1.4,
           ease: "power2.out",
           onUpdate: () => {
-            metricEl.textContent = `+${Math.round(counter.val)}`;
+            metricEl.textContent = `${Math.round(counter.val)}`;
           },
           scrollTrigger: {
             trigger: metricEl,
