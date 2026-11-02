@@ -3,7 +3,7 @@
 ## 1. Visão geral
 
 ### 1.1 Nome do projeto
-Reconstrução do site institucional da agência — nome oficial a confirmar pela auditoria do projeto.
+Reconstrução do site institucional da Nexus Agency (Nexus | Agency). Confirmado oficialmente através da auditoria do site legado.
 
 ### 1.2 Resumo executivo
 Reconstruir tecnicamente o site existente, atualmente desenvolvido com HTML, CSS e JavaScript, utilizando uma stack moderna baseada em Next.js, React, TypeScript, Tailwind CSS e GSAP. A reconstrução deve preservar a identidade visual, a mensagem, o conteúdo, as seções e as funcionalidades existentes, enquanto eleva a qualidade da navegação por meio de animações fluidas e sincronizadas com o scroll.
@@ -100,9 +100,20 @@ Perfis específicos, segmentos de público e localização da agência devem ser
 | Agentes implementarem padrões diferentes | `AGENTS.md`, documentos como fonte da verdade e tarefas delimitadas |
 | Alteração acidental de links ou botões sociais | Inventário de destinos e testes de regressão |
 
-## 10. Aprovações pendentes
+## 10. Aprovações pendentes e decisões de negócio
 
-- Nome oficial e informações institucionais: confirmar pelo site atual.
-- Se haverá mais de uma rota/página: descobrir na auditoria.
-- Estratégia de hospedagem/deploy: confirmar antes da entrega.
-- Eventuais mudanças de conteúdo ou identidade: exigem aprovação explícita.
+- **Itens confirmados na auditoria:**
+  - Nome oficial: Nexus Agency (confirmado).
+  - Rotas: Rota única institucional `/` com navegação por âncoras (confirmado).
+  - WhatsApp oficial: `+55 61 99539-5969` (confirmado).
+  - Identidade dos botões sociais: Preservação integral com rotação 3D inalterável (confirmado).
+
+- **Pendências de decisão para aprovação do responsável:**
+  1. **Comportamento do Formulário de Contato:** O formulário da seção `#contact` possui apenas `action="/"`. Definir se a versão reconstruída manterá apenas simulação visual (mock com mensagem de sucesso), se será integrada a um serviço de e-mail / API Route (ex: Resend/Formspree), ou se montará mensagem para o WhatsApp.
+  2. **Links Placeholder:** Definir os destinos definitivos para os 3 botões "Saiba Mais" do Blog e os 8 links do rodapé (Serviços e Suporte), atualmente configurados como `href="#"`.
+  3. **Inconsistências Textuais do Site Legado:**
+     - Cards 5 e 6 da seção Serviços em inglês ("Our SEO strategies are tailored...").
+     - Card 4 da seção Serviços com frase duplicada ("Campanhas de tráfego pago de alta performance...").
+     - URL do Instagram com aspas duplas adicionais no atributo original (`igsh=ZDNlZDc0MzIxNw==""`).
+     *Diretriz:* O rebuild manterá a fidelidade estrita até que o responsável aprove as correções textuais.
+  4. **Estratégia de hospedagem e deploy:** Confirmar a plataforma de hospedagem de produção (Vercel, VPS ou outro provedor).

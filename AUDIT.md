@@ -1,11 +1,11 @@
-# AUDIT — Relatório de Auditoria e Inventário do Site Legado (Nexus Agency)
+# AUDIT — Relatório de Auditoria e Inventário (Duplicata de Referência)
 
-> **Data da Auditoria:** 02 de Novembro de 2026  
-> **Status:** Concluído (`DONE`)  
-> **Papel:** Auditor Técnico e de UI  
-> **Fonte da Verdade:** Repositório local e arquivos de código na raiz do projeto (`index.html`, `styles.css`, `main.js`, diretório `assets/`).
+> [!IMPORTANT]
+> **Documento Oficial Canônico:** [`docs/AUDIT.md`](./docs/AUDIT.md)  
+> Este arquivo na raiz foi identificado como duplicata gerada durante a auditoria inicial. Ele é mantido temporariamente por rastreabilidade e histórico, aguardando autorização expressa para descarte definitivo. Todas as atualizações e decisões devem ser consultadas em [`docs/AUDIT.md`](./docs/AUDIT.md).
 
 ---
+
 
 ## 1. Visão Geral do Projeto
 

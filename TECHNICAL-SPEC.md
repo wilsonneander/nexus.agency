@@ -46,12 +46,46 @@ Instalar versões estáveis e compatíveis no momento do setup. Registrar versõ
 - Garantir fallback legível com reduced motion e sem JS.
 
 ### Tailwind / CSS
-- Tokens globais para cores, tipografia, espaçamento, raios, sombras e breakpoints quando necessário.
-- Tailwind para layout e estilo cotidiano.
-- CSS Modules ou CSS global bem delimitado para efeitos complexos que não sejam adequados a classes utilitárias.
+- Tokens globais reais extraídos do projeto Nexus Agency:
+  - Cores de background: `--secondary-color: #04091d`, `--secondary-color-light: #0f1221`, `--secondary-color-dark: #03060f`.
+  - Cores de destaque: `--primary-color: #ffffff`, `--primary-color-dark: #a15cf5` (roxo principal), `--span: #ad7dff` (lavanda/lilás claro), `--gradient: linear-gradient(to right, #a15cf5, #ffffff)`.
+  - Cores funcionais: WhatsApp `#218e49`.
+  - Tipografia: Fonte `Poppins` (Google Fonts) nos pesos 400, 500, 600 e 700.
+  - Breakpoints: 480px (mobile largo/phablet), 768px (tablet/desktop médio), 1024px (desktop) e max-width 1200px.
+- Tailwind para layout e estilo utilitário cotidiano.
+- CSS Modules ou CSS escopado para animações complexas que demandem especificidade idêntica ao original (como a rotação 3D dos ícones sociais e o pulso contínuo do WhatsApp).
 - Não criar estilos globais que vazem entre componentes.
 - Evitar `!important` como solução estrutural.
 - Não converter todos os estilos para classes arbitrariamente: preservar fidelidade e legibilidade do código.
+
+### Botões Sociais e Animação 3D (Restrição Inegociável FR-07)
+- Devem manter 100% da estrutura, ícones, classes e animações:
+  - Hover com preenchimento escalonado de baixo para cima (`transform-origin: bottom; scale: 1 1`).
+  - Cores de hover exclusivas por marca: Instagram (gradiente amarelo/rosa/roxo `#f9ce34, #ee2a7b, #6228d7`), LinkedIn (`#0077b5`), Facebook (`#03217c`).
+  - Rotação 3D do ícone no eixo Y: `transform: rotateY(360deg)` com duração de 0.5s ease.
+- Aplicar exatamente os mesmos seletores e regras nos 3 locais identificados: Header (`.ul-icons`), Sobre nós (`.about__btns .ul-icons`) e Rodapé (`.ul-icons-3`).
+
+### WhatsApp Oficial (Restrição Inegociável FR-06)
+- Destino oficial: `https://wa.me/5561995395969` (DDD 61).
+- Presente em dois pontos de conversão:
+  - Botão "Contato" no menu de navegação.
+  - Botão flutuante inferior direito (`.whatsapp-link`) com ícone, label "Quero saber mais!" e animação contínua `@keyframes WaveWhatsApp`.
+- O código com DDD 81 encontrado no arquivo legado `main.js` não deve ser utilizado.
+
+### Funcionalidades e Registros Pendentes de Decisão
+- **Formulário de Contato sem Backend:** O formulário da seção `#contact` possui apenas `action="/"`, sem integração com serviço de envio. Fica registrado como **pendente de decisão do cliente**:
+  - Opção A: Submissão puramente visual com feedback de envio (mock).
+  - Opção B: Integração com Server Action / Route Handler (ex: Resend, SendGrid ou Formspree).
+  - Opção C: Redirecionamento com mensagem montada para o WhatsApp oficial.
+- **Links Placeholder (`href="#"`):**
+  - Blog: Botões "Saiba Mais" (3 ocorrências) apontam para `#`.
+  - Rodapé: Links da coluna "Serviços" (5 ocorrências) e "Suporte" (3 ocorrências) apontam para `#`.
+  - Devem ser mantidos como placeholders sem gerar quebras de navegação ou rotas inexistentes.
+- **Inconsistências Textuais e URL do Instagram (Para Aprovação):**
+  - Seção Serviços: Cards 5 ("SEO") e 6 ("Digital Marketing") contêm descrições em inglês no original ("Our SEO strategies are tailored..."), enquanto os demais estão em português.
+  - Seção Serviços: Card 4 ("Inbound Marketing.") possui uma frase duplicada ("Campanhas de tráfego pago de alta performance...").
+  - URL do Instagram: O atributo `href` no HTML legado possui aspas duplas adicionais no final (`igsh=ZDNlZDc0MzIxNw==""`).
+  - Diretriz: Manter o conteúdo original durante a reconstrução e registrar formalmente para aprovação do responsável antes de qualquer correção.
 
 ### Lenis (opcional)
 - Não habilitar por padrão.

@@ -13,16 +13,27 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 ## Fase 0 — Discovery e auditoria
 
 - [x] 0.1 Identificar estrutura de diretórios e comandos existentes. (Status: DONE | Agente: Auditor | Arquivos: index.html, styles.css, main.js, assets/)
-- [x] 0.2 Identificar todas as rotas/páginas. (Status: DONE | Agente: Auditor | Rota única identificada: `/`)
+- [x] 0.2 Identificar todas as rotas/páginas. (Status: DONE | Agente: Auditor | Rota única identificada: `/` com âncoras internas)
 - [x] 0.3 Mapear seções e ordem por página. (Status: DONE | Agente: Auditor | 10 seções ativas + 1 comentada catalogadas)
 - [x] 0.4 Inventariar textos, imagens, vídeos, fontes, ícones e logos. (Status: DONE | Agente: Auditor | 20 assets, Poppins, FontAwesome, RemixIcon mapeados)
 - [x] 0.5 Inventariar links, botões, formulários e destinos. (Status: DONE | Agente: Auditor | WhatsApp oficial +5561995395969 e links sociais mapeados)
 - [x] 0.6 Registrar comportamento atual de navegação e responsividade. (Status: DONE | Agente: Auditor | Breakpoints: 480px, 768px, 1024px, 1200px)
 - [x] 0.7 Capturar screenshots de referência nos viewports definidos. (Status: DONE | Agente: Auditor | Estrutura visual e matriz de viewports documentadas)
 - [x] 0.8 Identificar animações atuais que precisam ser preservadas. (Status: DONE | Agente: Auditor | Rotação 3D social e pulso WhatsApp documentados)
-- [x] 0.9 Criar relatório `docs/AUDIT.md` com achados, lacunas e riscos. (Status: DONE | Agente: Auditor | Relatórios gerados em docs/AUDIT.md e AUDIT.md)
+- [x] 0.9 Criar relatório oficial `docs/AUDIT.md` com achados, lacunas e riscos. (Status: DONE | Agente: Auditor | `docs/AUDIT.md` consagrado como oficial definitivo; duplicata na raiz mantida para autorização)
 
 **Critério de saída:** inventário completo o suficiente para reconstruir o site sem adivinhar conteúdo ou comportamento. [ATENDIDO]
+
+## Pendências de Decisão Registradas (Para Alinhamento com Responsável)
+
+| ID | Item | Descrição / Opções | Status | Impacto na Fase |
+|---|---|---|---|---|
+| **PEND-01** | **Formulário de Contato sem Backend** | Seção `#contact` possui apenas `action="/"`. Opções: (A) Mock front-end com toast/feedback; (B) Integração API Route/Email (Resend/SendGrid); (C) Redirecionamento com mensagem para o WhatsApp. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
+| **PEND-02** | **Links Placeholder** | 3 botões "Saiba Mais" do Blog e 8 links do rodapé apontam para `#`. Manter como placeholder seguro `href="#"` até haver páginas reais. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
+| **PEND-03** | **Inconsistências Textuais** | Cards 5 e 6 de serviços em inglês; Card 4 de serviços com texto duplicado. Manter fiel ao original no rebuild até aprovação formal de correção. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
+| **PEND-04** | **Sintaxe da URL do Instagram** | O HTML original possui aspas extras no `href` (`igsh=ZDNlZDc0MzIxNw==""`). Requer aprovação para saneamento sintático mantendo o mesmo destino. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
+| **PEND-05** | **Duplicata AUDIT.md na raiz** | `docs/AUDIT.md` definido como canônico oficial. Aguardando autorização para exclusão definitiva do arquivo duplicado `AUDIT.md` da raiz. | `PENDING_DECISION` | Fase 1 (Consolidação) |
+| **PEND-06** | **Hospedagem / Deploy** | Confirmar provedor de deploy (Vercel, Node server ou estático). | `PENDING_DECISION` | Fase 6 (Entrega) |
 
 ## Fase 1 — Fundação técnica
 

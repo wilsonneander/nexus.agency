@@ -1,7 +1,9 @@
-# AUDIT — Relatório de Auditoria e Inventário do Site Legado (Nexus Agency)
+# AUDIT — Relatório de Auditoria e Inventário Oficial (Nexus Agency)
 
+> **Documento Oficial de Auditoria:** `docs/AUDIT.md` (Fonte única de verdade consolidada para a Fase 0).  
+> **Nota sobre Duplicatas:** O arquivo `AUDIT.md` na raiz foi identificado como duplicata temporária criada na fase inicial de descoberta e sua remoção ou redirecionamento foi registrado para aprovação, sendo `docs/AUDIT.md` o documento canônico oficial.  
 > **Data da Auditoria:** 02 de Novembro de 2026  
-> **Status:** Concluído (`DONE`)  
+> **Status:** Concluído e Aprovado (`DONE`)  
 > **Papel:** Auditor Técnico e de UI  
 > **Fonte da Verdade:** Repositório local e arquivos de código na raiz do projeto (`index.html`, `styles.css`, `main.js`, diretório `assets/`).
 
@@ -215,21 +217,28 @@ O CSS utiliza mobile-first com as seguintes quebras de layout:
 
 ---
 
-## 9. Diagnóstico de Problemas, Inconsistências e Riscos Encontrados
+## 9. Diagnóstico de Problemas, Inconsistências e Pendências Registradas
 
-1. **Erro Crítico no `main.js` (Listener Inexistente):**
-   O script tenta adicionar listener em `document.querySelector('.whatsapp-button')`. Como esse elemento não existe no HTML, em um ambiente estrito isso gera `TypeError: Cannot read properties of null (reading 'addEventListener')`.
-2. **Dependência Ausente de Ícones:**
+1. **Formulário de Contato sem Backend (Pendente de Decisão):**
+   O formulário da seção `#contact` possui apenas `action="/"`, sem manipulador de envio nem processamento de dados. Fica catalogado como **funcionalidade pendente de decisão do responsável** (opções: mock de envio front-end com feedback, integração via Server Action/Route Handler com Resend/SendGrid/Formspree, ou redirecionamento de mensagem estruturada para o WhatsApp oficial).
+2. **Links Placeholder do Blog e Rodapé:**
+   - 3 botões "Saiba Mais" nos cards de Blog possuem `href="#"`.
+   - 8 links no rodapé (5 em "Serviços" e 3 em "Suporte") possuem `href="#"`.
+   Registrados como placeholders que devem ser mantidos sem quebrar a navegação até o fornecimento de páginas de destino.
+3. **Inconsistências Textuais Originais (Submetidas para Aprovação):**
+   - Seção Serviços: Card 4 ("Inbound Marketing.") repete a frase `"Campanhas de tráfego pago de alta performance para aumentar o seu volume de leads, reduzir CPC, CPV, CPL e CPA."` duas vezes consecutivas.
+   - Seção Serviços: Cards 5 ("SEO") e 6 ("Digital Marketing") possuem textos originais em inglês ("Our SEO strategies are tailored..."), diferindo do restante do site em português.
+   - *Diretriz adotada:* **Não corrigir o conteúdo original** sem autorização explícita; o rebuild manterá fielmente os textos até aprovação formal.
+4. **Sintaxe da URL do Instagram no HTML Legado:**
+   O atributo `href` no HTML legado possui aspas duplas adicionais no final: `href="https://www.instagram.com/nexus.ag.contato?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==""`. Registrada a necessidade de aprovação formal para saneamento sintático da URL sem alterar o destino.
+5. **Erro Crítico no `main.js` (Listener Inexistente):**
+   O script legado tenta adicionar listener em `document.querySelector('.whatsapp-button')`. Como esse elemento não existe no HTML, isso gera `TypeError: Cannot read properties of null (reading 'addEventListener')`.
+6. **Dependência Ausente de Ícones:**
    No menu mobile há `<i class="bi bi-x-lg"></i>` (Bootstrap Icons), mas o stylesheet do Bootstrap Icons não é importado no `<head>`. Apenas RemixIcon e FontAwesome foram incluídos.
-3. **Seção "Testimonials" Comentada:**
+7. **Seção "Testimonials" Comentada:**
    O carrossel Swiper está comentado no HTML e busca imagens `assets/client-1.jpg` a `client-4.jpg` que sequer existem no diretório de assets.
-4. **IDs Duplicados no Formulário:**
+8. **IDs Duplicados no Formulário:**
    Dois inputs do tipo rádio usam `id="none"` (BI e Outros), violando as normas de acessibilidade e validação W3C.
-5. **Erros de Sintaxe HTML:**
-   Link do Instagram possui aspas duplas adicionais no fechamento do atributo `href` (`igsh=ZDNlZDc0MzIxNw==""`).
-6. **Inconsistência de Textos:**
-   - Card de Inbound Marketing repete a mesma frase duas vezes seguidas.
-   - Cards de SEO e Digital Marketing estão em inglês, enquanto o restante do site está em português.
 
 ---
 

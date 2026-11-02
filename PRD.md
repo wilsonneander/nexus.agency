@@ -138,10 +138,32 @@ Para efeitos vinculados ao scroll:
 - Funcionalidades ou integrações novas não presentes no site atual.
 - Animações que bloqueiem o scroll ou impeçam acesso ao conteúdo.
 
-## 8. Questões a resolver na auditoria
-- Quantas rotas existem?
-- Quais são as seções e sua ordem?
-- Quais textos são adequados para leitura progressiva?
-- Quais animações/interações já existem e precisam ser preservadas?
-- Quais breakpoints e dispositivos precisam de suporte?
-- Há formulários, mapas, vídeos, galerias ou integrações de terceiros?
+## 8. Questões resolvidas na auditoria e pendências de decisão
+
+Com base no relatório oficial `docs/AUDIT.md`:
+- **Quantas rotas existem?**
+  1 rota única (`/` - Single Page Application) com navegação interna por âncoras (`#home`, `#about`, `#project`, `#service`, `#blog`, `#contact`).
+- **Quais são as seções e sua ordem?**
+  10 seções ativas: Header/Nav, Hero (`#home`), Sobre nós (`#about`), Banner de Diferenciais, Projetos (`#project`), Serviços (`#service`), Blog (`#blog`), Contato (`#contact`), Rodapé e Botão Flutuante de WhatsApp. A seção `#client` (depoimentos) está comentada no código original e foi mantida inativa.
+- **Quais textos são adequados para leitura progressiva?**
+  O parágrafo institucional do Hero (`.header__content p`) e os dois blocos textuais da seção Sobre nós (`.about__content p` e `.about__content h4`).
+- **Quais animações/interações já existem e precisam ser preservadas?**
+  - Rotação 3D dos ícones de redes sociais no hover (`rotateY(360deg)`).
+  - Pulso contínuo `@keyframes WaveWhatsApp` e escala do botão flutuante.
+  - Filtro por categoria nos projetos (originalmente via MixItUp, a ser migrado para estado React limpo).
+- **Quais breakpoints e dispositivos precisam de suporte?**
+  Mobile (<480px), Phablet (>480px), Tablet/Desktop Médio (>768px), Desktop Grande (>1024px) e Max Container (1200px).
+- **Há formulários, mapas, vídeos, galerias ou integrações de terceiros?**
+  - Formulário: 1 formulário de contato com `action="/"`, sem backend configurado.
+  - Vídeos e mapas: Não existem.
+  - Galeria: Grid de 6 projetos com filtro de categoria.
+  - Terceiros: WhatsApp API (`wa.me`) e links de redes sociais.
+
+### 8.1 Pendências de decisão registradas para aprovação
+1. **Formulário de Contato sem Backend:** Definir se o formulário manterá apenas comportamento front-end com mensagem de sucesso (mock), se receberá integração de e-mail (Resend/Formspree/API Route) ou se redirecionará para o WhatsApp oficial.
+2. **Destino dos Links Placeholder:** Os 3 botões "Saiba Mais" do Blog e os 8 links do Rodapé (5 de serviços e 3 de suporte) possuem `href="#"`. Aguardam definição se terão páginas futuras ou se permanecerão como âncoras/placeholders.
+3. **Inconsistências de Texto e URL Social:**
+   - Serviços: Cards 5 ("SEO") e 6 ("Digital Marketing") estão em inglês ("Our SEO strategies are tailored...").
+   - Serviços: Card 4 ("Inbound Marketing.") repete a frase de tráfego pago duas vezes seguidas.
+   - Instagram: Atributo `href` possui aspas duplas adicionais no final (`igsh=ZDNlZDc0MzIxNw==""`).
+   - *Diretriz:* O rebuild preservará o código e texto fiéis ao original até que o cliente autorize formalmente as correções.

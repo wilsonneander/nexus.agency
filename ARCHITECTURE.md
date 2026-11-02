@@ -9,61 +9,68 @@
 - Reutilização com parcimônia: abstrair padrões repetidos, não diferenças visuais relevantes.
 - A arquitetura final deve refletir o inventário real do site, não uma lista hipotética de seções.
 
-## 2. Estrutura de referência
+## 2. Estrutura de referência (Aplicada ao Nexus Agency)
 
 ```text
-project/
+nexus/
 ├── public/
-│   ├── images/
-│   ├── icons/
-│   ├── fonts/
-│   └── videos/
+│   ├── assets/                   # 20 assets visuais originais (imagens, logo, favicon)
+│   │   ├── logo.png
+│   │   ├── icon2.png (favicon)
+│   │   ├── header.webp
+│   │   ├── grafic.png
+│   │   └── ...
 │
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx
-│   │   ├── page.tsx
-│   │   ├── globals.css
-│   │   └── [rotas identificadas na auditoria]/
+│   │   ├── layout.tsx            # RootLayout (metadados, fonte Poppins, links sociais)
+│   │   ├── page.tsx              # Rota única '/' compondo as seções na ordem original
+│   │   └── globals.css           # Variáveis CSS e tokens de estilo legados
 │   │
 │   ├── components/
 │   │   ├── layout/
-│   │   │   ├── SiteHeader.tsx
-│   │   │   └── SiteFooter.tsx
+│   │   │   ├── Navbar.tsx        # Navegação com âncoras e menu mobile
+│   │   │   └── Footer.tsx        # Rodapé com 3 colunas e links institucionais
 │   │   ├── ui/
-│   │   │   ├── Button.tsx
-│   │   │   └── WhatsAppButton.tsx
+│   │   │   ├── Button.tsx        # Botão com gradiente roxo padrão
+│   │   │   ├── SocialIcons.tsx   # Ícones com rotação 3D inalterável (Header, About, Footer)
+│   │   │   └── WhatsAppFloat.tsx # Botão flutuante WhatsApp (WaveWhatsApp + link oficial)
 │   │   └── motion/
-│   │       ├── ScrollText.tsx
-│   │       ├── ScrollReveal.tsx
-│   │       └── Parallax.tsx
+│   │       ├── ScrollText.tsx    # Leitura progressiva bidirecional (GSAP scrub)
+│   │       └── ScrollReveal.tsx  # Revelações e transições escalonadas
 │   │
 │   ├── sections/
-│   │   └── [uma pasta por seção real]/
-│   │       ├── SectionName.tsx
-│   │       ├── SectionName.module.css
-│   │       └── index.ts
+│   │   ├── Header/               # Topbar social, navbar e hero container
+│   │   ├── Hero/                 # Dobra de entrada (#home) com texto institucional
+│   │   ├── About/                # Seção Sobre nós (#about) com grafic.png e destaque
+│   │   ├── Banners/              # Banner horizontal de diferenciais (Design, Dev, QA)
+│   │   ├── Projects/             # Grid de portfólio (#project) com filtro por categoria
+│   │   ├── Services/             # Grid de 6 serviços (#service) com badges
+│   │   ├── Blog/                 # Grid de artigos (#blog) com 3 cards
+│   │   └── Contact/              # Formulário (#contact) [Pendente decisão de backend]
 │   │
 │   ├── animations/
-│   │   ├── gsap.client.ts
-│   │   ├── presets.ts
-│   │   └── [módulos por seção quando necessário]/
+│   │   ├── gsap.client.ts        # Registro e configuração do GSAP e ScrollTrigger
+│   │   └── presets.ts            # Presets de stagger, timelines e easing
 │   │
 │   ├── hooks/
-│   │   ├── useReducedMotion.ts
-│   │   └── [hooks reutilizáveis comprovados]/
+│   │   ├── useReducedMotion.ts   # Detecção e respeito a prefers-reduced-motion
+│   │   └── useScrollProgress.ts  # Utilitário para progresso de leitura
 │   │
 │   ├── lib/
-│   │   ├── utils.ts
-│   │   └── links.ts
+│   │   ├── utils.ts              # Helpers de classes Tailwind e formatação
+│   │   └── constants.ts          # Links oficiais, WhatsApp (+5561995395969) e dados
 │   │
 │   ├── data/
-│   │   └── [dados reais separados quando necessário]/
+│   │   ├── projects.ts           # 6 projetos e suas categorias (Fast Food, Tecnologia, Viagens)
+│   │   ├── services.ts           # 6 serviços originais
+│   │   └── blog.ts               # 3 artigos de blog originais
 │   │
 │   └── types/
-│       └── index.ts
+│       └── index.ts              # Tipagens de dados, filtros e props
 │
 ├── docs/
+│   ├── AUDIT.md                  # Documento oficial de auditoria consolidado
 │   ├── BRD.md
 │   ├── PRD.md
 │   ├── TECHNICAL-SPEC.md
@@ -127,12 +134,33 @@ Dados reais do site, como listas de serviços ou projetos, quando for útil sepa
 - Usar aliases de importação se configurados no projeto.
 - Evitar nomes genéricos como `data2`, `temp` ou `animationFinalFinal`.
 
-## 7. Decisões arquiteturais a registrar
-Durante a auditoria/setup, registrar:
-- número de rotas;
-- seções por rota;
-- estratégia de assets e fontes;
-- estratégia de animações por seção;
-- necessidade ou não de Lenis;
-- estratégia de testes;
-- hospedagem e pipeline de deploy, se confirmados.
+## 7. Decisões arquiteturais registradas na auditoria
+
+Com base no relatório oficial `docs/AUDIT.md`:
+- **Número de rotas:** 1 rota principal (`/` - Single Page Application institucional) com navegação interna por âncoras (`#home`, `#about`, `#project`, `#service`, `#blog`, `#contact`).
+- **Seções por rota (ordem exata):**
+  1. Header com Topbar de Redes Sociais e Navbar
+  2. Hero (`#home`)
+  3. Sobre nós (`#about`)
+  4. Banner de Diferenciais (Design, Desenvolvimento, Teste & QA)
+  5. Projetos / Criação e Desenvolvimento (`#project`)
+  6. Nossos Serviços (`#service`)
+  7. *(Inativo/Comentado)* Testimonials (`#client`) — mantido fora do bundle ativo para fidelidade
+  8. Blog (`#blog`)
+  9. Contato / Formulário (`#contact`)
+  10. Rodapé (Footer) com 3 colunas e redes sociais
+  11. Botão Flutuante de WhatsApp fixo
+- **Estratégia de assets e fontes:**
+  - Manter todos os 20 assets em `public/assets/`, servidos pelo `next/image` para otimização automática.
+  - Carregar a fonte `Poppins` via `next/font/google` com pesos 400, 500, 600, 700.
+- **Estratégia de animações por seção:**
+  - Leitura progressiva com ScrollTrigger e `scrub` aplicada exclusivamente no Hero e Sobre nós.
+  - Reveals suaves nos cards de Banner, Serviços e Blog.
+  - Botão WhatsApp com animação contínua `@keyframes WaveWhatsApp` em CSS e transição de escala.
+  - Botões de Redes Sociais: **preservação integral** da rotação 3D (`rotateY(360deg)`) e expansão de cor de fundo sem alterações.
+- **Avaliação de Lenis:** Descartado para a versão inicial. O scroll nativo (`scroll-behavior: smooth`) e o ScrollTrigger padrão atendem perfeitamente à proposta sem os riscos de conflito em mobile/touch.
+- **Formulário de contato:** Registrado como **pendente de decisão**. O formulário legado possui apenas `action="/"`. Recomenda-se aprovação sobre manter apenas ação visual no front-end, integrar com rota de API Next.js ou direcionar os dados ao WhatsApp.
+- **Links placeholder:** Links de blog ("Saiba Mais") e do rodapé possuem `href="#"`. Mantidos como placeholders até fornecimento de destinos oficiais.
+- **Inconsistências textuais e Instagram URL:** Registradas para aprovação do responsável (Cards 5 e 6 de serviços em inglês, Card 4 com texto duplicado e URL do Instagram com aspas duplas no atributo original). O rebuild manterá o texto fiel até definição explícita.
+- **Estratégia de testes:** Execução do `docs/QA-CHECKLIST.md` nos viewports 375px, 480px, 768px, 1024px e 1280px.
+- **Hospedagem e pipeline de deploy:** Pendente de confirmação pelo cliente.
