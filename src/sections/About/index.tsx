@@ -1,8 +1,9 @@
 import { ABOUT_DATA } from "@/data/about";
-import { SocialIcons } from "@/components/ui/SocialIcons";
+import { SocialIcons, SocialAboutIcons } from "@/components/ui/SocialIcons";
 import { AboutClient } from "./AboutClient";
 import { ScrollText } from "@/components/motion/ScrollText";
 import { ParallaxImage } from "@/components/motion/ParallaxImage";
+
 
 export function AboutSection() {
   return (
@@ -10,18 +11,9 @@ export function AboutSection() {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Bloco Principal: Imagem + Narrativa ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-12 lg:gap-16 items-center mb-20">
 
-          {/* Ilustração original — ParallaxImage + entrada da esquerda */}
-          <div data-about-image className="flex justify-center overflow-hidden">
-            <ParallaxImage
-              src="/assets/grafic.png"
-              alt="Estratégia e Dados da Nexus Agency"
-              className="w-full max-w-[480px] h-auto object-contain drop-shadow-2xl"
-              yPercent={-12}
-            />
-          </div>
-
+         
           {/* Conteúdo institucional */}
           <div className="flex flex-col gap-6">
             <div>
@@ -82,7 +74,7 @@ export function AboutSection() {
 
             {/* Redes Sociais */}
             <div className="flex items-center gap-4 pt-2">
-              <SocialIcons variant="about" className="flex-row" />
+              <SocialAboutIcons variant="about" className="flex-row" />
             </div>
           </div>
         </div>

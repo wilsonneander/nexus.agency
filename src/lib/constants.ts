@@ -5,14 +5,14 @@ export const SITE_CONFIG = {
     "Nossa agência de soluções digitais combina expertise em marketing digital e tecnologia para oferecer soluções personalizadas que fortalecem sua marca e geram resultados concretos.",
   url: "https://nexusagency.com.br", // URL base de referência
   whatsapp: {
-    number: "5561995395969",
-    displayNumber: "+55 (61) 99539-5969",
-    url: "https://wa.me/5561995395969",
+    number: "556192985392",
+    displayNumber: "+55 (61) 9298-5392",
+    url: "https://wa.me/556192985392",
     defaultMessage: "Quero saber mais!",
   },
   socials: {
-    instagram: "https://www.instagram.com/nexus.ag.contato?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-    linkedin: "https://www.linkedin.com/in/nexusagency/",
+    instagram: "https://www.instagram.com/nexusagencybr/",
+    linkedin: "https://www.linkedin.com/company/nexus-ag-br/posts/?feedView=all",
     facebook: "https://www.facebook.com/profile.php?id=61561543675556&mibextid=LQQJ4d",
   },
   navLinks: [
