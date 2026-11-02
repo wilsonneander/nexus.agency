@@ -1,46 +1,88 @@
 import { ServiceItem } from "@/types";
 
+export const SERVICES_SECTION_HEADER = {
+  title: "Do anúncio ao atendimento, cuidamos de toda a jornada do seu cliente.",
+  subtitle:
+    "Não entregamos peças soltas. Montamos um sistema em que cada etapa alimenta a próxima: atrair, converter, atender e medir.",
+};
+
 export const SERVICES_DATA: ServiceItem[] = [
   {
-    id: "criacao-desenvolvimento",
-    title: "Criação e Desenvolvimento",
+    id: "planejamento-estrategico",
+    title: "Planejamento estratégico",
     description:
-      "Mais de 14 anos de experiência na criação de sites em Curitiba e todo o Brasil. Foco em performance, para clientes que buscam ter uma forte presença na internet, ser encontrado no Google, transmitir seus valores adequadamente e converter visitas em negócios.",
-    iconClass: "globe",
+      "Todo resultado começa com um bom plano. Antes de investir, entendemos o seu negócio, o seu público e a sua concorrência. Com base nesses dados, desenhamos uma estratégia sob medida, com metas claras para redes sociais, tráfego e conversão.",
+    iconClass: "compass",
+    benefits: [
+      "Diagnóstico da presença digital atual",
+      "Definição de público, metas e indicadores",
+      "Plano de ação por canal",
+      "Cronograma e orçamento recomendado",
+    ],
   },
   {
-    id: "bi",
-    title: "Business Intelligence!",
+    id: "gestao-trafego-pago",
+    title: "Gestão de tráfego pago",
     description:
-      "Conheça as expertises da Agência Nexus e conte com o nosso time de especialistas para realizar análises empresariais, mineração de informações e demais práticas ideais para ajudar a sua marca na tomada de decisões impulsionadas por dados.",
-    iconClass: "database",
-  },
-  {
-    id: "trafego-pago",
-    title: "Trafego Pago",
-    description:
-      "Investir em um serviço de tráfego pago é uma estratégia poderosa para acelerar o crescimento do seu negócio. Com ele, sua marca atinge o público certo no momento certo, gerando resultados imediatos e aumentando a visibilidade da sua empresa.",
+      "Campanhas no Instagram, Facebook e Google planejadas para gerar resultado, não só curtidas. Definimos público, criativos e orçamento, acompanhamos diariamente e ajustamos o que não performa.",
     iconClass: "rectangle-ad",
+    benefits: [
+      "Planejamento e estrutura de campanhas",
+      "Segmentação de público e testes de criativos",
+      "Otimização contínua de custo por resultado",
+      "Configuração de pixel e eventos de conversão",
+    ],
   },
   {
-    id: "inbound-marketing",
-    title: "Inbound Marketing.",
+    id: "analise-posicionamento",
+    title: "Análise e posicionamento nas redes sociais",
     description:
-      "Campanhas de tráfego pago de alta performance para aumentar o seu volume de leads, reduzir CPC, CPV, CPL e CPA. Campanhas de tráfego pago de alta performance para aumentar o seu volume de leads, reduzir CPC, CPV, CPL e CPA.",
-    iconClass: "bullseye",
+      "Monitoramos a presença da sua marca nas redes e transformamos dados em decisões. Analisamos tendências, comparamos com a concorrência e identificamos oportunidades de engajamento, para que cada publicação tenha um motivo.",
+    iconClass: "chart-line",
+    benefits: [
+      "Monitoramento de redes sociais e site",
+      "Análise de concorrência e tendências",
+      "Identificação de oportunidades de conteúdo e engajamento",
+      "Recomendações de posicionamento da marca",
+    ],
   },
   {
-    id: "seo",
-    title: "SEO",
+    id: "criacao-sites-landing-pages",
+    title: "Criação de sites e landing pages",
     description:
-      "Our SEO strategies are tailored to your specific goals, helping you reach your target audience and grow your online presence.",
-    iconClass: "seo",
+      "Sites rápidos, bonitos e pensados para converter visitantes em contatos. Cada página tem um objetivo claro e funciona bem no celular.",
+    iconClass: "globe",
+    benefits: [
+      "Sites institucionais e landing pages de campanha",
+      "Textos orientados à conversão",
+      "Integração com WhatsApp, formulários e ferramentas de análise",
+      "Otimização para Google (SEO básico) e velocidade",
+    ],
   },
   {
-    id: "digital-marketing",
-    title: "Digital Marketing",
+    id: "chatbots-automacao",
+    title: "Chatbots e automação de atendimento",
     description:
-      "From pay-per-click (PPC) advertising to social media marketing, we ensure your brand stands out in the crowded digital landscape.",
-    iconClass: "share-circle",
+      "Seu cliente é atendido na hora, 24 horas por dia. Criamos chatbots para WhatsApp, Instagram e site que respondem dúvidas, qualificam contatos e agendam conversas com a sua equipe.",
+    iconClass: "robot",
+    benefits: [
+      "Fluxos de atendimento personalizados",
+      "Qualificação automática de leads",
+      "Integração com CRM, planilhas e e-mail",
+      "Follow-up automático para não perder oportunidades",
+    ],
+  },
+  {
+    id: "relatorios-analise",
+    title: "Relatórios e análise de resultados",
+    description:
+      "Todo mês você recebe um relatório claro: quanto investiu, quantas pessoas alcançou, quanto custou cada resultado e o que vamos melhorar no próximo ciclo.",
+    iconClass: "file-lines",
+    benefits: [
+      "Relatório mensal de performance",
+      "Comparativo com meses anteriores",
+      "Recomendações práticas para o próximo mês",
+      "Reunião de alinhamento",
+    ],
   },
 ];

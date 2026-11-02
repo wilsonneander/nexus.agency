@@ -19,6 +19,15 @@ export type ServiceItem = {
   title: string;
   description: string;
   iconClass: string;
+  benefits?: string[];
+};
+
+export type CommercialPackage = {
+  id: string;
+  name: string;
+  includes: string;
+  targetAudience: string;
+  highlight?: boolean;
 };
 
 export type BlogPostItem = {

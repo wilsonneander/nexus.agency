@@ -4,59 +4,59 @@ import { SocialIcons } from "@/components/ui/SocialIcons";
 
 export function Footer() {
   return (
-    <footer className="bg-secondary-dark text-white py-12 border-t border-secondary-light">
-      <div className="max-w-container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-        {/* Coluna 1: Institucional */}
-        <div className="sm:col-span-2 md:col-span-2 flex flex-col gap-4">
-          <Link href="/">
+    <footer className="bg-[#03060f] text-white pt-16 pb-12 border-t border-white/5">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12">
+        {/* Coluna 1: Logo, Compromisso e Redes Sociais */}
+        <div className="md:col-span-6 flex flex-col gap-5">
+          <Link href="#home">
             <Image
               src="/assets/logo.png"
-              alt="Nexus Agency"
-              width={120}
-              height={40}
-              className="h-auto w-28"
+              alt="Nexus Performance & Insights"
+              width={140}
+              height={45}
+              className="h-auto w-32 object-contain"
             />
           </Link>
-          <p className="text-white/80 max-w-md text-sm leading-relaxed">
+          <p className="text-white/70 max-w-md text-xs sm:text-sm leading-relaxed font-light">
             Nosso compromisso com a excelência. Trabalhamos com dedicação para entregar produtos de
             alta qualidade e desempenho, projetados para atender às suas necessidades e impulsionar o
             crescimento do seu negócio, garantindo soluções que fazem a diferença no mercado.
           </p>
-          <div className="mt-2">
-            <SocialIcons variant="footer" />
+          <div className="pt-2">
+            <SocialIcons variant="footer" className="flex-row gap-3" />
           </div>
         </div>
 
-        {/* Coluna 2: Serviços (placeholders preservados) */}
-        <div className="flex flex-col gap-3">
-          <h4 className="font-semibold text-base mb-1">Serviços</h4>
-          <a href="#" className="text-white/70 hover:text-primary-dark transition-colors text-sm">
+        {/* Coluna 2: Serviços (5 links originais preservados) */}
+        <div className="md:col-span-3 flex flex-col gap-3">
+          <h4 className="font-semibold text-base text-white mb-2">Serviços</h4>
+          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">
             Inbound Marketing
           </a>
-          <a href="#" className="text-white/70 hover:text-primary-dark transition-colors text-sm">
+          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">
             Criação e Desenvolvimento
           </a>
-          <a href="#" className="text-white/70 hover:text-primary-dark transition-colors text-sm">
+          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">
             Tráfego Pago
           </a>
-          <a href="#" className="text-white/70 hover:text-primary-dark transition-colors text-sm">
+          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">
             Business Intelligence
           </a>
-          <a href="#" className="text-white/70 hover:text-primary-dark transition-colors text-sm">
+          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">
             Marketing
           </a>
         </div>
 
-        {/* Coluna 3: Suporte (placeholders preservados) */}
-        <div className="flex flex-col gap-3">
-          <h4 className="font-semibold text-base mb-1">Suporte</h4>
-          <a href="#" className="text-white/70 hover:text-primary-dark transition-colors text-sm">
+        {/* Coluna 3: Suporte (3 links originais preservados) */}
+        <div className="md:col-span-3 flex flex-col gap-3">
+          <h4 className="font-semibold text-base text-white mb-2">Suporte</h4>
+          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">
             Contato
           </a>
-          <a href="#" className="text-white/70 hover:text-primary-dark transition-colors text-sm">
+          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">
             Blogs
           </a>
-          <a href="#" className="text-white/70 hover:text-primary-dark transition-colors text-sm">
+          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">
             Politica e Privacidade
           </a>
         </div>

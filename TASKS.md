@@ -55,18 +55,18 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 
 ## Fase 2 — Reconstrução visual e funcional (Com Integração do Cliente)
 
-- [ ] 2.1 Reproduzir layout global e navegação com base em `screenshot.png` e CSS original.
-- [ ] 2.2 Reconstruir o Hero com imagem de background `header.webp`, overlay gradiente e composição original.
-- [ ] 2.3 Reconstruir seção Sobre nós integrando o novo texto aprovado e bloco Missão, Visão e Valores.
-- [ ] 2.4 Reconstruir a seção de Serviços com os 6 novos serviços e seus bullets (eliminando textos em inglês legados).
-- [ ] 2.5 Incorporar os Pacotes Comerciais (Essencial, Crescimento, Completo) no layout sem alterar a identidade.
-- [ ] 2.6 Preservar portfólio de Projetos e cards do Banner de Diferenciais sem alterações.
-- [ ] 2.7 Reconstruir o formulário de contato com os 4 campos especificados pelo cliente.
-- [ ] 2.8 Preservar botões de redes sociais e botão flutuante de WhatsApp sem alterações de animação/estilo.
-- [ ] 2.9 Reproduzir responsividade em todos os breakpoints (sm, md, lg, xl).
-- [ ] 2.10 Validar fidelidade visual comparando com `docs/references/screenshot.png`.
+- [x] 2.1 Reproduzir layout global e navegação com base em `screenshot.png` e CSS original. (Status: DONE | Navbar e Footer alinhados ao visual escuro)
+- [x] 2.2 Reconstruir o Hero com imagem de background `header.webp`, overlay gradiente e composição original. (Status: DONE | Background aplicado e composição idêntica)
+- [x] 2.3 Reconstruir seção Sobre nós integrando o novo texto aprovado e bloco Missão, Visão e Valores. (Status: DONE | +50 clientes atendidos e valores adicionados)
+- [x] 2.4 Reconstruir a seção de Serviços com os 6 novos serviços e seus bullets (eliminando textos em inglês legados). (Status: DONE | 6 serviços em PT com 4 bullets cada)
+- [x] 2.5 Incorporar os Pacotes Comerciais (Essencial, Crescimento, Completo) no layout sem alterar a identidade. (Status: DONE | Grade de 3 pacotes e CTA adicionados)
+- [x] 2.6 Preservar portfólio de Projetos e cards do Banner de Diferenciais sem alterações. (Status: DONE | 6 cases e 3 diferenciais preservados)
+- [x] 2.7 Reconstruir o formulário de contato com os 4 campos especificados pelo cliente. (Status: DONE | 4 campos, linha roxa e CTA Quero meu diagnóstico gratuito)
+- [x] 2.8 Preservar botões de redes sociais e botão flutuante de WhatsApp sem alterações de animação/estilo. (Status: DONE | Rotação 3D e WaveWhatsApp preservados)
+- [x] 2.9 Reproduzir responsividade em todos os breakpoints (sm, md, lg, xl). (Status: DONE | Validado de 375px a 1200px)
+- [x] 2.10 Validar fidelidade visual comparando com `docs/references/screenshot.png`. (Status: DONE | Cores, proporções e hierarquia validadas)
 
-**Critério de saída:** site funcional, visualmente fiel à captura de tela de referência e com o conteúdo aprovado do cliente integrado, sem erros de compilação ou console.
+**Critério de saída:** site funcional, visualmente fiel à captura de tela de referência e com o conteúdo aprovado do cliente integrado, sem erros de compilação ou console. [ATENDIDO]
 
 ## Fase 3 — Sistema de movimento
 

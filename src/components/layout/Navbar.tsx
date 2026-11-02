@@ -9,24 +9,28 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed w-full z-40 bg-secondary/80 backdrop-blur-md">
-      <div className="max-w-container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-[#04091d]/85 backdrop-blur-md border-b border-white/5 transition-colors">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="#home" className="flex items-center">
           <Image
             src="/assets/logo.png"
-            alt="Nexus Agency"
-            width={120}
-            height={40}
+            alt="Nexus Performance & Insights"
+            width={140}
+            height={45}
             priority
-            className="h-auto w-28"
+            className="h-auto w-32 sm:w-36 object-contain"
           />
         </Link>
 
-        {/* Menu Desktop */}
-        <ul className="hidden md:flex items-center gap-6">
+        {/* Links Desktop */}
+        <ul className="hidden md:flex items-center gap-8 text-[15px] font-normal text-white">
           {SITE_CONFIG.navLinks.map((item) => (
             <li key={item.href}>
-              <Link href={item.href} className="text-white hover:text-primary-dark transition-colors">
+              <Link
+                href={item.href}
+                className="hover:text-[#a15cf5] transition-colors duration-200"
+              >
                 {item.label}
               </Link>
             </li>
@@ -36,7 +40,7 @@ export function Navbar() {
               href={SITE_CONFIG.whatsapp.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-primary-gradient text-secondary font-medium px-5 py-2 rounded-full hover:opacity-90 transition-opacity"
+              className="px-6 py-2 rounded-full font-medium text-[15px] text-[#04091d] bg-gradient-to-r from-[#a15cf5] to-white hover:opacity-95 hover:shadow-lg hover:shadow-[#a15cf5]/20 transition-all duration-300 inline-block"
             >
               Contato
             </a>
@@ -46,22 +50,22 @@ export function Navbar() {
         {/* Botão Mobile */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-white text-2xl focus:outline-none"
+          className="md:hidden text-white text-2xl p-2 focus:outline-none"
           aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
         >
-          <span className="ri-menu-3-line" />
+          <i className={isOpen ? "ri-close-line" : "ri-menu-3-line"} />
         </button>
       </div>
 
-      {/* Menu Gaveta Mobile */}
+      {/* Gaveta Mobile */}
       {isOpen && (
-        <div className="md:hidden bg-secondary-light px-6 py-4 flex flex-col gap-4 border-t border-primary-dark/20">
+        <div className="md:hidden bg-[#0f1221] px-6 py-6 border-b border-[#a15cf5]/20 flex flex-col gap-4 text-base">
           {SITE_CONFIG.navLinks.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setIsOpen(false)}
-              className="text-white py-1 hover:text-primary-dark transition-colors"
+              className="text-white hover:text-[#a15cf5] py-1 transition-colors"
             >
               {item.label}
             </Link>
@@ -71,7 +75,7 @@ export function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsOpen(false)}
-            className="bg-primary-gradient text-secondary text-center font-medium px-5 py-2 rounded-full hover:opacity-90 transition-opacity mt-2"
+            className="mt-2 text-center py-2.5 rounded-full font-medium text-[#04091d] bg-gradient-to-r from-[#a15cf5] to-white"
           >
             Contato
           </a>

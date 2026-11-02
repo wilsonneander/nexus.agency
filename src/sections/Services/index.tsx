@@ -1,30 +1,114 @@
-import { SERVICES_DATA } from "@/data/services";
+import Link from "next/link";
+import { SERVICES_DATA, SERVICES_SECTION_HEADER } from "@/data/services";
+import { PACKAGES_DATA } from "@/data/packages";
 
 export function ServicesSection() {
   return (
-    <section id="service" className="py-20 bg-secondary">
-      <div className="max-w-container mx-auto px-4">
-        <p className="text-sm font-medium text-primary-dark text-center mb-2">Nossos Serviços</p>
-        <h2 className="text-3xl sm:text-4xl font-semibold text-center mb-4">O que fazemos?</h2>
-        <p className="max-w-2xl mx-auto text-white/80 text-center mb-16 text-sm leading-relaxed">
-          Oferecemos uma ampla gama de soluções digitais para ajudar sua empresa a crescer e se destacar no ambiente
-          online, desde a criação de estratégias até o desenvolvimento de plataformas, sempre focando em resultados e na
-          transformação das suas ideias em projetos de sucesso.
-        </p>
+    <section id="service" className="py-24 bg-[#04091d]">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Cabeçalho da Seção */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <p className="text-sm font-semibold uppercase tracking-wider text-[#a15cf5] mb-2">
+            Nossos Serviços
+          </p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white leading-tight mb-6">
+            {SERVICES_SECTION_HEADER.title}
+          </h2>
+          <p className="text-white/75 text-sm sm:text-base leading-relaxed font-light">
+            {SERVICES_SECTION_HEADER.subtitle}
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {/* Grid dos 6 Novos Serviços com Badges Flutuantes (Visual Original Preservado) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-8 mb-24">
           {SERVICES_DATA.map((service) => (
             <div
               key={service.id}
-              className="relative pt-12 pb-8 px-6 bg-secondary-light rounded-md border-b-2 border-transparent hover:border-primary-dark transition-colors text-center"
+              className="group relative pt-12 pb-8 px-6 sm:px-8 bg-[#0f1221] rounded-xl border-b-2 border-transparent hover:border-[#a15cf5] transition-all duration-300 shadow-xl flex flex-col justify-between"
             >
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 bg-secondary-light border border-secondary-dark rounded text-primary-dark text-xl">
+              {/* Badge Circular Flutuante no Topo Centralizado */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-md bg-[#0f1221] border border-[#04091d] flex items-center justify-center text-2xl text-[#a15cf5] group-hover:bg-gradient-to-r group-hover:from-[#a15cf5] group-hover:to-white group-hover:text-[#04091d] transition-all duration-300 shadow-md">
                 <i className={`fa-solid fa-${service.iconClass}`} />
               </div>
-              <h4 className="text-lg font-semibold mb-3">{service.title}</h4>
-              <p className="text-white/70 text-sm leading-relaxed">{service.description}</p>
+
+              <div>
+                <h3 className="text-xl font-semibold text-white text-center mb-4 mt-2">
+                  {service.title}
+                </h3>
+                <p className="text-white/75 text-xs sm:text-sm leading-relaxed font-light mb-6 text-center">
+                  {service.description}
+                </p>
+
+                {/* 4 Benefícios/Bullets Oficiais do Cliente */}
+                {service.benefits && service.benefits.length > 0 && (
+                  <ul className="space-y-2 border-t border-white/5 pt-4">
+                    {service.benefits.map((benefit, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start gap-2.5 text-xs sm:text-sm text-white/80 font-light"
+                      >
+                        <i className="fa-solid fa-check text-[#a15cf5] text-xs mt-1 flex-shrink-0" />
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
           ))}
+        </div>
+
+        {/* Novo Bloco: Pacotes Comerciais Oficiais do Cliente */}
+        <div className="mt-16 pt-16 border-t border-white/10">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[#ad7dff] mb-2">
+              Soluções Sob Medida
+            </p>
+            <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-4">
+              Pacotes para o seu Momento
+            </h3>
+            <p className="text-white/70 text-sm font-light">
+              Escolha a estrutura ideal para transformar o investimento em resultados reais e mensuráveis.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {PACKAGES_DATA.map((pkg) => (
+              <div
+                key={pkg.id}
+                className={`p-8 rounded-2xl flex flex-col justify-between transition-all duration-300 ${
+                  pkg.highlight
+                    ? "bg-[#0f1221] border-2 border-[#a15cf5] shadow-2xl shadow-[#a15cf5]/10 scale-105"
+                    : "bg-[#0f1221] border border-white/5 hover:border-[#a15cf5]/40"
+                }`}
+              >
+                <div>
+                  {pkg.highlight && (
+                    <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-[#a15cf5]/20 text-[#ad7dff] mb-4">
+                      Recomendado
+                    </span>
+                  )}
+                  <h4 className="text-2xl font-bold text-white mb-2">{pkg.name}</h4>
+                  <p className="text-sm font-medium text-[#ad7dff] mb-4">{pkg.includes}</p>
+                  <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-light mb-8">
+                    <span className="font-semibold text-white">Para quem é: </span>
+                    {pkg.targetAudience}
+                  </p>
+                </div>
+
+                <Link
+                  href="#contact"
+                  className={`text-center py-3 px-6 rounded-full text-sm font-medium transition-all duration-300 ${
+                    pkg.highlight
+                      ? "bg-gradient-to-r from-[#a15cf5] to-white text-[#04091d] font-semibold hover:opacity-95 shadow-md shadow-[#a15cf5]/20"
+                      : "border border-white/20 text-white hover:border-[#a15cf5] hover:text-[#a15cf5]"
+                  }`}
+                >
+                  Quero um diagnóstico gratuito
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

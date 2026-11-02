@@ -3,36 +3,53 @@ import { BLOG_DATA } from "@/data/blog";
 
 export function BlogSection() {
   return (
-    <section id="blog" className="py-20 bg-secondary">
-      <div className="max-w-container mx-auto px-4">
-        <p className="text-sm font-medium text-primary-dark text-center mb-2">Postagens de blog</p>
-        <h2 className="text-3xl sm:text-4xl font-semibold text-center mb-12">
-          Atualidades sobre tecnologia
-        </h2>
+    <section id="blog" className="py-24 bg-[#04091d]">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <p className="text-sm font-semibold uppercase tracking-wider text-[#a15cf5] mb-2">
+            Postagens de blog
+          </p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white">
+            Atualidades sobre tecnologia
+          </h2>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {BLOG_DATA.map((post) => (
-            <div key={post.id} className="flex flex-col gap-3">
-              <div className="overflow-hidden rounded-md">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  width={400}
-                  height={250}
-                  className="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
-                />
+            <article
+              key={post.id}
+              className="group bg-[#0f1221] rounded-xl overflow-hidden border border-white/5 hover:border-[#a15cf5]/40 transition-all duration-300 flex flex-col justify-between shadow-xl"
+            >
+              <div>
+                <div className="aspect-[16/10] w-full overflow-hidden">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    width={450}
+                    height={280}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="text-xs font-semibold text-[#a15cf5] uppercase tracking-wider mb-2">
+                    {post.tag}
+                  </p>
+                  <h3 className="text-lg font-semibold text-white leading-snug group-hover:text-[#ad7dff] transition-colors">
+                    {post.title}
+                  </h3>
+                </div>
               </div>
-              <p className="text-xs font-semibold text-primary-dark uppercase tracking-wider">
-                {post.tag}
-              </p>
-              <h4 className="text-base font-semibold leading-snug">{post.title}</h4>
-              <a
-                href={post.href}
-                className="text-white/80 hover:text-primary-dark transition-colors text-sm font-medium inline-block mt-1"
-              >
-                Saiba Mais
-              </a>
-            </div>
+
+              <div className="px-6 pb-6 pt-2">
+                <a
+                  href={post.href}
+                  className="text-sm font-medium text-white/80 hover:text-[#a15cf5] transition-colors inline-flex items-center gap-1.5"
+                >
+                  <span>Saiba Mais</span>
+                  <i className="fa-solid fa-arrow-right text-xs" />
+                </a>
+              </div>
+            </article>
           ))}
         </div>
       </div>
