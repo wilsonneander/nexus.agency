@@ -121,7 +121,7 @@ export function AboutSection() {
           <h3 className="text-2xl sm:text-3xl font-semibold text-center text-white mb-10">
             Nossos Valores
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div data-about-values-grid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {ABOUT_DATA.values.map((val, index) => (
               <div
                 key={val.title}

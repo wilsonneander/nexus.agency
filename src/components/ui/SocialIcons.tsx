@@ -10,7 +10,7 @@ export function SocialIcons({ className, variant = "header" }: SocialIconsProps)
   const isFooter = variant === "footer";
 
   return (
-    <ul className={cn("flex gap-2", isFooter ? "flex-row" : "flex-col", className)}>
+    <ul className={cn("flex gap-2", isFooter ? "flex-row social-footer" : "flex-col", className)}>
       <li className="item">
         <a
           href={SITE_CONFIG.socials.instagram}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SocialIcons } from "@/components/ui/SocialIcons";
+import { RollingLink } from "@/components/ui/RollingText";
 import { FooterClient } from "./FooterClient";
 
 export function Footer() {
@@ -32,19 +33,19 @@ export function Footer() {
         {/* Coluna 2 — Serviços */}
         <div data-footer-col className="md:col-span-3 flex flex-col gap-3">
           <h4 className="font-semibold text-base text-white mb-2">Serviços</h4>
-          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">Inbound Marketing</a>
-          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">Criação e Desenvolvimento</a>
-          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">Tráfego Pago</a>
-          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">Business Intelligence</a>
-          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">Marketing</a>
+          <div><RollingLink href="#" className="text-xs sm:text-sm font-light">Inbound Marketing</RollingLink></div>
+          <div><RollingLink href="#" className="text-xs sm:text-sm font-light">Criação e Desenvolvimento</RollingLink></div>
+          <div><RollingLink href="#" className="text-xs sm:text-sm font-light">Tráfego Pago</RollingLink></div>
+          <div><RollingLink href="#" className="text-xs sm:text-sm font-light">Business Intelligence</RollingLink></div>
+          <div><RollingLink href="#" className="text-xs sm:text-sm font-light">Marketing</RollingLink></div>
         </div>
 
         {/* Coluna 3 — Suporte */}
         <div data-footer-col className="md:col-span-3 flex flex-col gap-3">
           <h4 className="font-semibold text-base text-white mb-2">Suporte</h4>
-          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">Contato</a>
-          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">Blogs</a>
-          <a href="#" className="text-white/70 hover:text-[#a15cf5] transition-colors text-xs sm:text-sm font-light">Politica e Privacidade</a>
+          <div><RollingLink href="#" className="text-xs sm:text-sm font-light">Contato</RollingLink></div>
+          <div><RollingLink href="#" className="text-xs sm:text-sm font-light">Blogs</RollingLink></div>
+          <div><RollingLink href="#" className="text-xs sm:text-sm font-light">Politica e Privacidade</RollingLink></div>
         </div>
       </div>
     </FooterClient>

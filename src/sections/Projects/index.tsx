@@ -2,8 +2,8 @@
 
 /**
  * ProjectsSection — Client Component com:
- * - Filtros padronizados com FluidButton (variant="filter")
- * - ScrollReveal staggered nos cards de projetos
+ * - Filtros padronizados com FluidButton (variant="filter") e microinteração do botão Contato
+ * - ScrollReveal com fromTo e immediateRender: false (garantindo que o 1º card e todos os demais renderizem sempre)
  * - GSAP Flip para transição suave entre categorias
  *
  * PRESERVADO integralmente:
@@ -25,6 +25,7 @@ import { FluidButton } from "@/components/ui/FluidButton";
 export function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>("all");
   const gridRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
   const hasRevealedRef = useRef(false);
 
@@ -33,7 +34,7 @@ export function ProjectsSection() {
       ? PROJECTS_DATA
       : PROJECTS_DATA.filter((p) => p.category === activeFilter);
 
-  // ScrollReveal inicial dos cards (apenas uma vez)
+  // ScrollReveal inicial dos cards (garantido com fromTo para que o primeiro card nunca desapareça)
   useEffect(() => {
     if (reduced || hasRevealedRef.current) return;
     if (!gridRef.current) return;
@@ -43,23 +44,32 @@ export function ProjectsSection() {
     const cards = gridRef.current.querySelectorAll("[data-project-card]");
     if (!cards.length) return;
 
-    gsap.from(cards, {
-      y: 48,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: gridRef.current,
-        start: "top 88%",
-        toggleActions: "play none none none",
-        invalidateOnRefresh: true,
-        onEnter: () => {
-          hasRevealedRef.current = true;
+    const anim = gsap.fromTo(
+      cards,
+      { y: 48, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "power3.out",
+        immediateRender: false,
+        scrollTrigger: {
+          trigger: gridRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none",
+          invalidateOnRefresh: true,
+          onEnter: () => {
+            hasRevealedRef.current = true;
+          },
         },
-      },
-    });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+      }
+    );
+
+    return () => {
+      anim.scrollTrigger?.kill();
+      anim.kill();
+    };
   }, [reduced]);
 
   // Flip animation ao trocar filtro — flushSync assegura DOM atualizado antes do Flip.from
@@ -82,12 +92,11 @@ export function ProjectsSection() {
         ease: "power2.inOut",
         absolute: true,
         onEnter: (els) =>
-          gsap.from(els, {
-            opacity: 0,
-            y: 24,
-            duration: 0.35,
-            ease: "power2.out",
-          }),
+          gsap.fromTo(
+            els,
+            { opacity: 0, y: 24 },
+            { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }
+          ),
         onLeave: (els) =>
           gsap.to(els, {
             opacity: 0,
@@ -100,13 +109,13 @@ export function ProjectsSection() {
   );
 
   return (
-    <section id="project" className="py-24 bg-[#04091d]">
+    <section ref={sectionRef} id="project" className="py-24 bg-[#04091d]">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-center text-white mb-10">
           Criação e Desenvolvimento
         </h2>
 
-        {/* Barra de Filtros com FluidButton */}
+        {/* Barra de Filtros com FluidButton padronizado */}
         <div className="flex justify-center flex-wrap gap-3 sm:gap-4 mb-14" role="tablist" aria-label="Filtro de projetos">
           {PROJECT_FILTERS.map((f) => {
             const isActive = activeFilter === f.filter;

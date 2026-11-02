@@ -3,14 +3,9 @@
 /**
  * AboutClient — Wrapper client-side para animações da seção Sobre Nós.
  *
- * Animações:
- * - Ilustração: ScrollReveal from left (x: -60) + ParallaxImage leve
- * - Título: ScrollText (leitura progressiva)
- * - Parágrafos: ScrollReveal staggered
- * - Bloco destaque (borda roxa): ScrollReveal
- * - Métrica +50: counter ao entrar no viewport
- * - Missão / Visão: ScrollReveal pair
- * - 6 Valores: stagger de cards
+ * Correção do bug do 1º card:
+ * - Uso de gsap.fromTo com immediateRender: false
+ * - Trigger referenciando o container da grid ou section
  */
 
 import { useRef, useEffect, ReactNode } from "react";
@@ -38,56 +33,71 @@ export function AboutClient({ children }: AboutClientProps) {
       // Ilustração — entrada da esquerda
       const illustration = section.querySelector("[data-about-image]");
       if (illustration) {
-        gsap.from(illustration, {
-          x: -60,
-          opacity: 0,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: illustration,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true,
-          },
-        });
+        gsap.fromTo(
+          illustration,
+          { x: -60, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.9,
+            ease: "power3.out",
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: illustration,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true,
+            },
+          }
+        );
       }
 
       // Parágrafos — stagger
       const paragraphs = section.querySelectorAll("[data-about-para]");
       if (paragraphs.length) {
-        gsap.from(paragraphs, {
-          y: 30,
-          opacity: 0,
-          duration: 0.65,
-          stagger: 0.15,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: paragraphs[0],
-            start: "top 88%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true,
-          },
-        });
+        gsap.fromTo(
+          paragraphs,
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.65,
+            stagger: 0.15,
+            ease: "power2.out",
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: paragraphs[0],
+              start: "top 88%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true,
+            },
+          }
+        );
       }
 
       // Destaque institucional (borda roxa)
       const highlight = section.querySelector("[data-about-highlight]");
       if (highlight) {
-        gsap.from(highlight, {
-          y: 24,
-          opacity: 0,
-          duration: 0.65,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: highlight,
-            start: "top 88%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true,
-          },
-        });
+        gsap.fromTo(
+          highlight,
+          { y: 24, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.65,
+            ease: "power2.out",
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: highlight,
+              start: "top 88%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true,
+            },
+          }
+        );
       }
 
-      // Métrica +50 — B3: anima apenas o span do número para preservar bg-clip-text
+      // Métrica +50 — counter
       const metricEl = section.querySelector("[data-about-metric-number]");
       if (metricEl) {
         const counter = { val: 0 };
@@ -110,37 +120,48 @@ export function AboutClient({ children }: AboutClientProps) {
       // Missão + Visão — fade sequencial
       const mvCards = section.querySelectorAll("[data-about-mv]");
       if (mvCards.length) {
-        gsap.from(mvCards, {
-          y: 32,
-          opacity: 0,
-          duration: 0.7,
-          stagger: 0.18,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: mvCards[0],
-            start: "top 88%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true,
-          },
-        });
+        gsap.fromTo(
+          mvCards,
+          { y: 32, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            stagger: 0.18,
+            ease: "power2.out",
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: mvCards[0],
+              start: "top 88%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true,
+            },
+          }
+        );
       }
 
-      // 6 Valores — stagger grid
+      // 6 Valores — stagger grid (Correção de desaparecimento do 1º card: fromTo + trigger no container da grid)
       const valueCards = section.querySelectorAll("[data-about-value]");
+      const valuesGrid = section.querySelector("[data-about-values-grid]") || valueCards[0];
       if (valueCards.length) {
-        gsap.from(valueCards, {
-          y: 40,
-          opacity: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: valueCards[0],
-            start: "top 90%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true,
-          },
-        });
+        gsap.fromTo(
+          valueCards,
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power2.out",
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: valuesGrid,
+              start: "top 88%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true,
+            },
+          }
+        );
       }
     }, sectionRef);
 

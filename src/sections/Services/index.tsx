@@ -39,7 +39,7 @@ export function ServicesSection() {
         </div>
 
         {/* ── Grid dos 6 Serviços ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-8 mb-24">
+        <div data-services-grid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-8 mb-24">
           {SERVICES_DATA.map((service) => (
             <div
               key={service.id}
@@ -95,7 +95,7 @@ export function ServicesSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div data-packages-grid className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {PACKAGES_DATA.map((pkg) => (
               <div
                 key={pkg.id}

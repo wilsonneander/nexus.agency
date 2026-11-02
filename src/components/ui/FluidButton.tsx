@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
  * Variantes de Botão Fluid:
  * - primary: Botão principal de conversão com fundo gradiente, overlay fluido suave e pulso opcional.
  * - secondary: Botão com borda luminosa e preenchimento fluido translúcido ao passar o mouse.
- * - filter: Botão de filtro para portfólio com estados (ativo, repouso, hover) e transições suaves.
+ * - filter: Botão de filtro para portfólio seguindo exatamente a identidade visual e microinterações dos botões principais.
  */
 export type FluidButtonVariant = "primary" | "secondary" | "filter";
 
@@ -26,7 +26,7 @@ export const FluidButton = forwardRef<HTMLButtonElement, FluidButtonProps>(
       <button
         ref={ref}
         className={cn(
-          "fluid-btn",
+          "fluid-btn group",
           `fluid-btn--${variant}`,
           pulse && "fluid-btn--pulse",
           isActive && "fluid-btn--active",
@@ -58,7 +58,7 @@ export const FluidLink = forwardRef<HTMLAnchorElement, FluidLinkProps>(
           ref={ref}
           href={href}
           className={cn(
-            "fluid-btn",
+            "fluid-btn group",
             `fluid-btn--${variant}`,
             pulse && "fluid-btn--pulse",
             isActive && "fluid-btn--active",
@@ -77,7 +77,7 @@ export const FluidLink = forwardRef<HTMLAnchorElement, FluidLinkProps>(
         ref={ref}
         href={href}
         className={cn(
-          "fluid-btn",
+          "fluid-btn group",
           `fluid-btn--${variant}`,
           pulse && "fluid-btn--pulse",
           isActive && "fluid-btn--active",

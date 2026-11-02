@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SITE_CONFIG } from "@/lib/constants";
 import { FluidLink } from "@/components/ui/FluidButton";
+import { RollingLink, RollingText } from "@/components/ui/RollingText";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,16 +25,16 @@ export function Navbar() {
           />
         </Link>
 
-        {/* Links Desktop */}
+        {/* Links Desktop com animação de circulação vertical */}
         <ul className="hidden md:flex items-center gap-8 text-[15px] font-normal text-white">
           {SITE_CONFIG.navLinks.map((item) => (
             <li key={item.href}>
-              <Link
+              <RollingLink
                 href={item.href}
-                className="hover:text-[#a15cf5] transition-colors duration-200"
+                className="text-white hover:text-[#ad7dff] transition-colors duration-200"
               >
                 {item.label}
-              </Link>
+              </RollingLink>
             </li>
           ))}
           <li>
@@ -44,7 +45,7 @@ export function Navbar() {
               variant="primary"
               className="px-6 py-2 text-sm font-semibold"
             >
-              Contato
+              <RollingText className="h-[1.2em]">Contato</RollingText>
             </FluidLink>
           </li>
         </ul>

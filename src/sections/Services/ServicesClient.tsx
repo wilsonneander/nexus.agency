@@ -3,12 +3,9 @@
 /**
  * ServicesClient — Wrapper client-side para a seção de Serviços.
  *
- * Animações:
- * - ScrollText no título e subtítulo do cabeçalho
- * - Entrada sequencial dos 6 cards de serviços (stagger)
- * - Pulse de entrada nos badges/ícones flutuantes
- * - Revelação dos 4 benefícios dentro de cada card
- * - Entrada dos 3 pacotes comerciais
+ * Correção do bug do 1º card:
+ * - Uso de gsap.fromTo com immediateRender: false
+ * - Triggers referenciando os containers de grid
  */
 
 import { useRef, useEffect, ReactNode } from "react";
@@ -31,57 +28,74 @@ export function ServicesClient({ children }: { children: ReactNode }) {
 
       // 6 cards de serviços
       const serviceCards = section.querySelectorAll("[data-service-card]");
-      if (serviceCards.length) {
-        gsap.from(serviceCards, {
-          y: 55,
-          opacity: 0,
-          duration: 0.65,
-          stagger: 0.12,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: serviceCards[0],
-            start: "top 88%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true,
-          },
-        });
+      const servicesGrid = section.querySelector("[data-services-grid]") || serviceCards[0];
+      if (serviceCards.length && servicesGrid) {
+        gsap.fromTo(
+          serviceCards,
+          { y: 55, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.65,
+            stagger: 0.12,
+            ease: "power3.out",
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: servicesGrid,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true,
+            },
+          }
+        );
       }
 
       // Badges flutuantes — pulse
       const badges = section.querySelectorAll("[data-service-badge]");
-      if (badges.length) {
-        gsap.from(badges, {
-          scale: 0,
-          opacity: 0,
-          duration: 0.4,
-          stagger: 0.12,
-          ease: "back.out(2.2)",
-          delay: 0.25,
-          scrollTrigger: {
-            trigger: serviceCards[0] || section,
-            start: "top 88%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true,
-          },
-        });
+      if (badges.length && servicesGrid) {
+        gsap.fromTo(
+          badges,
+          { scale: 0, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.4,
+            stagger: 0.12,
+            ease: "back.out(2.2)",
+            delay: 0.25,
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: servicesGrid,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true,
+            },
+          }
+        );
       }
 
-      // 3 pacotes comerciais
+      // 3 pacotes comerciais (Correção de desaparecimento do 1º card: fromTo + trigger no container da grid)
       const packages = section.querySelectorAll("[data-package-card]");
-      if (packages.length) {
-        gsap.from(packages, {
-          y: 48,
-          opacity: 0,
-          duration: 0.65,
-          stagger: 0.15,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: packages[0],
-            start: "top 88%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true,
-          },
-        });
+      const packagesGrid = section.querySelector("[data-packages-grid]") || packages[0];
+      if (packages.length && packagesGrid) {
+        gsap.fromTo(
+          packages,
+          { y: 48, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.65,
+            stagger: 0.15,
+            ease: "power2.out",
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: packagesGrid,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true,
+            },
+          }
+        );
       }
     }, ref);
 
