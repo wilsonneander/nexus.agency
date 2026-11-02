@@ -65,13 +65,13 @@ Em cada viewport:
 - [ ] Bundle não carrega dependências de animação desnecessariamente em rotas/partes estáticas.
 
 ## 7. SEO e build
-- [ ] Title e description estão corretos.
-- [ ] Metadados sociais e favicon foram preservados/configurados.
-- [ ] Estrutura semântica está correta.
-- [ ] Conteúdo principal está presente no HTML renderizado.
-- [ ] Lint passa.
-- [ ] Testes existentes passam.
-- [ ] Build de produção passa.
+- [x] Title e description estão corretos. (Title: "Nexus | Agency", description institucional)
+- [x] Metadados sociais e favicon foram preservados/configurados. (OpenGraph, Twitter Cards, icon2.png)
+- [x] Estrutura semântica está correta. (H1 único no Hero, H2 e H3 nas seções e cards)
+- [x] Conteúdo principal está presente no HTML renderizado. (SSR / SSG completo)
+- [x] Lint passa. (Zero warnings/errors)
+- [x] Testes existentes passam. (Validações de renderização, IDs e scripts headless)
+- [x] Build de produção passa. (Exit code 0, rotas /, /robots.txt, /sitemap.xml estáticas)
 
 ## 8. Registro de defeitos
 

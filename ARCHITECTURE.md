@@ -23,31 +23,34 @@ nexus/
 │
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx            # RootLayout (metadados, fonte Poppins, links sociais)
+│   │   ├── layout.tsx            # RootLayout (metadados OpenGraph/Twitter, fonte Poppins, links sociais)
 │   │   ├── page.tsx              # Rota única '/' compondo as seções na ordem original
-│   │   └── globals.css           # Variáveis CSS e tokens de estilo legados
+│   │   ├── globals.css           # Variáveis CSS e tokens de estilo legados
+│   │   ├── robots.ts             # Geração dinâmica de robots.txt
+│   │   └── sitemap.ts            # Geração dinâmica de sitemap.xml
 │   │
 │   ├── components/
 │   │   ├── layout/
 │   │   │   ├── Navbar.tsx        # Navegação com âncoras e menu mobile
-│   │   │   └── Footer.tsx        # Rodapé com 3 colunas e links institucionais
+│   │   │   ├── Footer.tsx        # Rodapé com 3 colunas e links institucionais
+│   │   │   └── FooterClient.tsx  # Wrapper animado do rodapé
 │   │   ├── ui/
 │   │   │   ├── Button.tsx        # Botão com gradiente roxo padrão
 │   │   │   ├── SocialIcons.tsx   # Ícones com rotação 3D inalterável (Header, About, Footer)
-│   │   │   └── WhatsAppFloat.tsx # Botão flutuante WhatsApp (WaveWhatsApp + link oficial)
+│   │   │   └── WhatsAppFloat.tsx # Botão flutuante WhatsApp (WaveWhatsApp + GSAP spring)
 │   │   └── motion/
 │   │       ├── ScrollText.tsx    # Leitura progressiva bidirecional (GSAP scrub)
-│   │       └── ScrollReveal.tsx  # Revelações e transições escalonadas
+│   │       ├── ScrollReveal.tsx  # Revelações e transições escalonadas
+│   │       └── ParallaxImage.tsx # Paralaxe suave vertical com next/image
 │   │
 │   ├── sections/
-│   │   ├── Header/               # Topbar social, navbar e hero container
-│   │   ├── Hero/                 # Dobra de entrada (#home) com texto institucional
-│   │   ├── About/                # Seção Sobre nós (#about) com grafic.png e destaque
-│   │   ├── Banners/              # Banner horizontal de diferenciais (Design, Dev, QA)
-│   │   ├── Projects/             # Grid de portfólio (#project) com filtro por categoria
-│   │   ├── Services/             # Grid de 6 serviços (#service) com badges
-│   │   ├── Blog/                 # Grid de artigos (#blog) com 3 cards
-│   │   └── Contact/              # Formulário (#contact) [Pendente decisão de backend]
+│   │   ├── Hero/                 # Dobra de entrada (#home) com HeroClient e ScrollText
+│   │   ├── About/                # Seção Sobre nós (#about) com AboutClient, Parallax e Métrica
+│   │   ├── Banners/              # Banner horizontal de diferenciais (BannersClient)
+│   │   ├── Projects/             # Grid de portfólio (#project) com GSAP Flip
+│   │   ├── Services/             # Grid de 6 serviços (#service) + 3 Pacotes com ServicesClient
+│   │   ├── Blog/                 # Grid de artigos (#blog) com BlogClient
+│   │   └── Contact/              # Formulário (#contact) com validação e animações
 │   │
 │   ├── animations/
 │   │   ├── gsap.client.ts        # Registro e configuração do GSAP e ScrollTrigger

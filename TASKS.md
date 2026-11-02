@@ -99,14 +99,14 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 
 ## Fase 5 — Performance e SEO
 
-- [ ] 5.1 Revisar carregamento de imagens e vídeos.
-- [ ] 5.2 Revisar fontes e layout shift.
-- [ ] 5.3 Revisar bundle e carregamento de GSAP.
-- [ ] 5.4 Revisar propriedades animadas.
-- [ ] 5.5 Verificar metadados e estrutura semântica.
-- [ ] 5.6 Executar auditoria de performance e corrigir problemas relevantes.
+- [x] 5.1 Revisar carregamento de imagens e vídeos. (Status: DONE | next/image aplicado em portfólio, blog, ilustração e logos com width/height e formatos webp/png)
+- [x] 5.2 Revisar fontes e layout shift. (Status: DONE | Poppins via next/font/google com preload e display: swap, zero layout shift)
+- [x] 5.3 Revisar bundle e carregamento de GSAP. (Status: DONE | GSAP isolado em componentes client-side, bundle total compartilhado de apenas 103 kB)
+- [x] 5.4 Revisar propriedades animadas. (Status: DONE | Animações restritas a transform, opacity e color, sem acionar reflows forçados)
+- [x] 5.5 Verificar metadados e estrutura semântica. (Status: DONE | OpenGraph, Twitter Cards, Canonical, robots.ts e sitemap.ts configurados)
+- [x] 5.6 Executar auditoria de performance e corrigir problemas relevantes. (Status: DONE | Lighthouse: 100 SEO, 100 Best Practices, 94 Accessibility)
 
-**Critério de saída:** sem problemas críticos de performance, SEO ou estabilidade.
+**Critério de saída:** sem problemas críticos de performance, SEO ou estabilidade. [ATENDIDO]
 
 ## Fase 6 — QA e entrega
 

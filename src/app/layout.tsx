@@ -16,9 +16,36 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: SITE_CONFIG.title,
   description: SITE_CONFIG.description,
+  metadataBase: new URL(SITE_CONFIG.url),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.description,
+    url: SITE_CONFIG.url,
+    siteName: SITE_CONFIG.name,
+    locale: "pt_BR",
+    type: "website",
+    images: [
+      {
+        url: "/assets/header.webp",
+        width: 1200,
+        height: 630,
+        alt: SITE_CONFIG.name,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.description,
+    images: ["/assets/header.webp"],
+  },
   icons: {
     icon: "/assets/icon2.png",
     shortcut: "/assets/icon2.png",
+    apple: "/assets/icon2.png",
   },
 };
 
@@ -30,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={poppins.variable}>
       <head>
-        {/* RemixIcon e FontAwesome preservados para ícones existentes */}
+        {/* RemixIcon e FontAwesome preservados para os ícones originais */}
         <link
           href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
           rel="stylesheet"
