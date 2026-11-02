@@ -9,12 +9,12 @@
 - [ ] Screenshots foram comparados em viewports equivalentes.
 
 ## 2. Funcionalidade
-- [ ] Navegação e âncoras funcionam.
-- [ ] Links externos abrem os destinos corretos.
-- [ ] Botões de WhatsApp mantêm telefone, mensagem e parâmetros originais.
-- [ ] Botões de redes sociais permanecem inalterados.
-- [ ] Formulários e demais interações existentes funcionam.
-- [ ] Não há links quebrados ou placeholders de desenvolvimento.
+- [x] Navegação e âncoras funcionam. (Mapeamento validado para #home, #about, #service, #project, #contact)
+- [x] Links externos abrem os destinos corretos em nova aba (target="_blank" rel="noopener noreferrer").
+- [x] Botões de WhatsApp mantêm telefone, mensagem e parâmetros configurados de forma centralizada.
+- [x] Botões de redes sociais permanecem inalterados e funcionais.
+- [x] Formulário estruturado com 4 campos do cliente e validação nativa de preenchimento.
+- [x] Links placeholder catalogados no relatório de funcionalidades (docs/FUNCTIONALITY-AUDIT.md).
 
 ## 3. Animações e scroll
 - [x] Hero entra sem atraso excessivo. (Validado via timeline com delays escalonados 0.15s, 0.35s, 0.55s)

@@ -34,10 +34,12 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 | **PEND-04** | **Sintaxe da URL do Instagram** | O HTML original possui aspas extras no `href` (`igsh=ZDNlZDc0MzIxNw==""`). Requer aprovação para saneamento sintático mantendo o mesmo destino. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
 | **PEND-05** | **Duplicata AUDIT.md na raiz** | `docs/AUDIT.md` definido como canônico oficial. Duplicata `AUDIT.md` da raiz excluída com autorização formal. | `RESOLVED` | Fase 1 (Consolidação) |
 | **PEND-06** | **Hospedagem / Deploy** | Confirmar provedor de deploy (Vercel, Node server ou estático). | `PENDING_DECISION` | Fase 6 (Entrega) |
-| **PEND-07** | **Número do WhatsApp (Legado vs. Cliente)** | Site legado usa `+55 (61) 99539-5969`; relatório do cliente cita `+55 (61) 9298-5392`. Necessário confirmar número definitivo para os botões. | `PENDING_APPROVAL` | Fase 2 (Reconstrução) |
-| **PEND-08** | **Perfil do Instagram (Legado vs. Cliente)** | Site legado usa `@nexus.ag.contato`; relatório do cliente indica `@nexusagencybr`. Necessário aprovação formal. | `PENDING_APPROVAL` | Fase 2 (Reconstrução) |
-| **PEND-09** | **Informações entre colchetes do Cliente** | Preenchimento dos números em falta (`[número]` milhões de pessoas, conversas, anos) e prazos (`[24 horas úteis]`). | `PENDING_APPROVAL` | Fase 2 (Reconstrução) |
-| **PEND-10** | **Formulário de Contato do Cliente** | Validação dos 4 novos campos (Nome, WhatsApp, Empresa, O que precisa?) e destino da mensagem. | `PENDING_APPROVAL` | Fase 2 (Reconstrução) |
+| **PEND-07** | **Número do WhatsApp (Legado vs. Cliente)** | Site legado usa `+55 (61) 99539-5969`; relatório do cliente cita `+55 (61) 9298-5392`. Necessário confirmar número definitivo para os botões. | `PENDING_APPROVAL` | Fase 4 (Conversão) |
+| **PEND-08** | **Perfil do Instagram (Legado vs. Cliente)** | Site legado usa `@nexus.ag.contato`; relatório do cliente indica `@nexusagencybr`. Necessário aprovação formal. | `PENDING_APPROVAL` | Fase 4 (Conversão) |
+| **PEND-09** | **Informações entre colchetes do Cliente** | Preenchimento dos números em falta (`[número]` milhões de pessoas, conversas, anos) e prazos (`[24 horas úteis]`). | `PENDING_APPROVAL` | Fase 2 / 4 |
+| **PEND-10** | **Formulário de Contato do Cliente** | Decisão de integração: (A) Route Handler/Server Action com Resend; (B) Redirecionamento WhatsApp; (C) CRM Externo. | `PENDING_APPROVAL` | Fase 4 (Conversão) |
+| **PEND-11** | **E-mail Institucional** | Inclusão de `contato@nexusagencybr.com.br` no Footer e canais de contato. | `PENDING_APPROVAL` | Fase 4 (Conversão) |
+| **PEND-12** | **Política de Privacidade e LGPD** | Criação de rota/modal `/politica-de-privacidade` e termo de consentimento no form. | `PENDING_APPROVAL` | Fase 4 (Conversão) |
 
 ## Fase 1 — Fundação técnica
 
