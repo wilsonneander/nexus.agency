@@ -71,8 +71,8 @@ As regras completas e inegociáveis estão em [AGENTS.md](AGENTS.md) — leia an
 │   ├── lib/            # constants.ts (SITE_CONFIG), utils.ts (cn)
 │   └── types/          # tipos do conteúdo
 ├── scripts/            # capturas headless e verificação de âncoras
-├── docs/               # auditorias e referências de QA
-└── *.md                # documentos de planejamento (BRD, PRD, specs, tarefas, QA)
+├── docs/               # toda a documentação — índice em docs/README.md
+└── AGENTS.md, CLAUDE.md # regras para agentes (ficam na raiz)
 ```
 
 ## Arquitetura
@@ -131,49 +131,35 @@ node scripts/check_ids.js          # verifica âncoras/IDs
 | `capture_mvv.js` | Missão, Visão e Valores |
 | `check_ids.js` | Âncoras e IDs vs. navegação |
 
-As imagens são salvas em `docs/references/qa/`. O plano de testes e os critérios de aceite estão em [QA-CHECKLIST.md](QA-CHECKLIST.md).
+As imagens são salvas em `docs/references/qa/`. O plano de testes e os critérios de aceite estão em [docs/QA-CHECKLIST.md](docs/QA-CHECKLIST.md).
 
 ## Documentação
 
-Documentos de planejamento ficam na **raiz** (o `AGENTS.md` os cita como `docs/…`); relatórios produzidos ficam em `docs/`.
+Toda a documentação mora em [docs/](docs/README.md) — o índice lá diz qual é a **fonte única** de cada assunto. Na raiz ficam só [AGENTS.md](AGENTS.md) (regras inegociáveis — **leia primeiro**), [CLAUDE.md](CLAUDE.md) e este README.
 
 | Documento | Finalidade |
 |---|---|
-| [AGENTS.md](AGENTS.md) | Regras permanentes e formato de entrega para agentes de IA — **leia primeiro** |
-| [CLAUDE.md](CLAUDE.md) | Guia resumido para o Claude Code |
-| [BRD.md](BRD.md) | Objetivos de negócio, contexto e resultados esperados |
-| [PRD.md](PRD.md) | Requisitos funcionais, experiência e comportamento |
-| [TECHNICAL-SPEC.md](TECHNICAL-SPEC.md) | Stack, padrões técnicos e restrições |
-| [ARCHITECTURE.md](ARCHITECTURE.md) | Organização de pastas, módulos e responsabilidades |
-| [TASKS.md](TASKS.md) | Fases, tarefas, status e pendências de decisão (PEND-xx) |
-| [QA-CHECKLIST.md](QA-CHECKLIST.md) | Plano de testes e critérios de aceite |
-| [docs/AUDIT.md](docs/AUDIT.md) | Auditoria canônica do site legado |
-| [docs/CONTENT-MAPPING.md](docs/CONTENT-MAPPING.md) | Mapeamento de conteúdo legado → componentes |
-| [docs/FUNCTIONALITY-AUDIT.md](docs/FUNCTIONALITY-AUDIT.md) | Auditoria de funcionalidades |
-| [docs/references/](docs/references/) | Screenshots de referência, conteúdo do cliente e capturas de QA |
+| [docs/BRD.md](docs/BRD.md) | Objetivos de negócio, escopo e riscos |
+| [docs/PRD.md](docs/PRD.md) | Requisitos funcionais (FR-xx) e comportamento |
+| [docs/TECHNICAL-SPEC.md](docs/TECHNICAL-SPEC.md) | Stack, padrões técnicos e restrições |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Pastas, módulos, responsabilidades e decisões |
+| [docs/TASKS.md](docs/TASKS.md) | Quadro de status e pendências de decisão (PEND-xx) |
+| [docs/QA-CHECKLIST.md](docs/QA-CHECKLIST.md) | Critérios de aceite e de liberação |
+| [docs/AUDIT.md](docs/AUDIT.md) | Inventário do legado + auditoria de funcionalidades e conversão |
+| [docs/CONTENT-MAPPING.md](docs/CONTENT-MAPPING.md) | Conteúdo do cliente vs. site legado |
+| [docs/stories/](docs/stories/README.md) | Uma story por tarefa |
+| [docs/tdds/](docs/tdds/README.md) | Um TDD por fluxo técnico |
+| [docs/references/](docs/references/) | Screenshot do legado, PDF do cliente e capturas de QA |
 
 ## Fluxo de trabalho
 
 1. Leia [AGENTS.md](AGENTS.md).
-2. Verifique o status em [TASKS.md](TASKS.md) (`TODO` / `IN_PROGRESS` / `BLOCKED` / `DONE`) e se a tarefa depende de alguma pendência PEND-xx.
-3. Use o [PRD.md](PRD.md) como referência de comportamento e [TECHNICAL-SPEC.md](TECHNICAL-SPEC.md) / [ARCHITECTURE.md](ARCHITECTURE.md) como referência técnica.
+2. Verifique o status em [docs/TASKS.md](docs/TASKS.md) (`TODO` / `IN_PROGRESS` / `BLOCKED` / `DONE`) e se a tarefa depende de alguma pendência PEND-xx.
+3. Escreva/leia a story da tarefa em [docs/stories/](docs/stories/README.md); use o [PRD](docs/PRD.md) como referência de comportamento e a [TECHNICAL-SPEC](docs/TECHNICAL-SPEC.md) / [ARCHITECTURE](docs/ARCHITECTURE.md) como referência técnica.
 4. Implemente comparando com o site legado; valide com `npm run build` e os scripts de captura.
 5. Entregue no formato do `AGENTS.md`: **Objetivo / Arquivos / Decisões / Validação / Pendências / Riscos**.
-6. Atualize o `TASKS.md` ao concluir e os documentos quando decisões forem confirmadas.
+6. Atualize a story e o `docs/TASKS.md` ao concluir e os documentos quando decisões forem confirmadas.
 
 ## Pendências em aberto
 
-Decisões que dependem do cliente/responsável — não resolver silenciosamente. Status completo e atualizado na tabela PEND-xx do [TASKS.md](TASKS.md).
-
-| ID | Tema |
-|---|---|
-| PEND-01 / PEND-10 | Formulário de contato sem backend (mock, API/e-mail, WhatsApp ou CRM) |
-| PEND-02 | Links placeholder (`href="#"`) no Blog e no rodapé |
-| PEND-03 | Inconsistências textuais nos cards de serviços |
-| PEND-04 | Saneamento da URL do Instagram |
-| PEND-06 | Hospedagem / deploy |
-| PEND-07 | Número do WhatsApp: legado vs. informado pelo cliente |
-| PEND-08 | Perfil do Instagram: legado vs. informado pelo cliente |
-| PEND-09 | Valores entre colchetes (`[número]`, prazos) no conteúdo do cliente |
-| PEND-11 | E-mail institucional no rodapé |
-| PEND-12 | Política de Privacidade e LGPD |
+Decisões que dependem do cliente/responsável (formulário de contato, links placeholder, número do WhatsApp, perfil do Instagram, LGPD, deploy…) — não resolver silenciosamente. A lista e o status vivem **somente** na tabela PEND-xx do [docs/TASKS.md](docs/TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável).

@@ -40,17 +40,19 @@
 
 ## 3. Análise Detalhada das Divergências Críticas e Decisões Pendentes
 
-### Divergência 1: Número de WhatsApp Oficial
+> O status de cada divergência mora na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável); esta seção guarda só o detalhe de conteúdo.
+
+### Divergência 1: Número de WhatsApp Oficial (`PEND-07`)
 - **Site Legado:** `+55 (61) 99539-5969` (presente em todos os botões ativos de `index.html`).
 - **Relatório do Cliente:** `+55 (61) 9298-5392` (página 4 do PDF).
 - **Ação:** `AGUARDAR APROVAÇÃO`. Ambos são DDD 61 (Distrito Federal). É necessário que o responsável confirme se o número novo substitui o anterior em todos os botões ou se ambos coexistem.
 
-### Divergência 2: Perfil do Instagram
+### Divergência 2: Perfil do Instagram (`PEND-08`)
 - **Site Legado:** `https://www.instagram.com/nexus.ag.contato`
 - **Relatório do Cliente:** `@nexusagencybr` (`https://www.instagram.com/nexusagencybr`)
 - **Ação:** `AGUARDAR APROVAÇÃO`. Confirmar a migração para a nova conta oficial `@nexusagencybr`.
 
-### Divergência 3: Informações entre Colchetes que o Cliente Não Preencheu
+### Divergência 3: Informações entre Colchetes que o Cliente Não Preencheu (`PEND-09`)
 O próprio cliente sinalizou na página 5 que faltam dados. São eles:
 - `[ano]` de fundação da agência.
 - `[número]` milhões de pessoas alcançadas em campanhas.
@@ -71,8 +73,8 @@ O próprio cliente sinalizou na página 5 que faltam dados. São eles:
 
 ## 4. Próximos Passos na Reconstrução da Fase 2
 
-1. Atualizar o arquivo central de dados [`src/data/services.ts`](file:///c:/Users/wilso/Desktop/Wilson/clients/nexus/src/data/services.ts) com os 6 novos serviços e bullets do cliente.
-2. Criar [`src/data/packages.ts`](file:///c:/Users/wilso/Desktop/Wilson/clients/nexus/src/data/packages.ts) para comportar os 3 pacotes comerciais (Essencial, Crescimento, Completo).
-3. Atualizar [`src/data/about.ts`](file:///c:/Users/wilso/Desktop/Wilson/clients/nexus/src/data/about.ts) com o novo texto de 5 parágrafos e a estrutura de Missão, Visão e Valores.
-4. Ajustar os campos e mensagens do formulário em [`src/sections/Contact/index.tsx`](file:///c:/Users/wilso/Desktop/Wilson/clients/nexus/src/sections/Contact/index.tsx) para os 4 campos solicitados.
+1. Atualizar o arquivo central de dados [`src/data/services.ts`](../src/data/services.ts) com os 6 novos serviços e bullets do cliente.
+2. Criar [`src/data/packages.ts`](../src/data/packages.ts) para comportar os 3 pacotes comerciais (Essencial, Crescimento, Completo).
+3. Atualizar [`src/data/about.ts`](../src/data/about.ts) com o novo texto de 5 parágrafos e a estrutura de Missão, Visão e Valores.
+4. Ajustar os campos e mensagens do formulário em [`src/sections/Contact/index.tsx`](../src/sections/Contact/index.tsx) para os 4 campos solicitados.
 5. Reconstruir a fidelidade visual da seção **Hero** aplicando o background `header.webp` conforme evidenciado na captura de tela.

@@ -105,15 +105,7 @@ Perfis específicos, segmentos de público e localização da agência devem ser
 - **Itens confirmados na auditoria:**
   - Nome oficial: Nexus Agency (confirmado).
   - Rotas: Rota única institucional `/` com navegação por âncoras (confirmado).
-  - WhatsApp oficial: `+55 61 99539-5969` (confirmado).
+  - WhatsApp do site legado: `+55 61 99539-5969` (em uso; a troca pelo número informado pelo cliente está em `PEND-07`).
   - Identidade dos botões sociais: Preservação integral com rotação 3D inalterável (confirmado).
 
-- **Pendências de decisão para aprovação do responsável:**
-  1. **Comportamento do Formulário de Contato:** O formulário da seção `#contact` possui apenas `action="/"`. Definir se a versão reconstruída manterá apenas simulação visual (mock com mensagem de sucesso), se será integrada a um serviço de e-mail / API Route (ex: Resend/Formspree), ou se montará mensagem para o WhatsApp.
-  2. **Links Placeholder:** Definir os destinos definitivos para os 3 botões "Saiba Mais" do Blog e os 8 links do rodapé (Serviços e Suporte), atualmente configurados como `href="#"`.
-  3. **Inconsistências Textuais do Site Legado:**
-     - Cards 5 e 6 da seção Serviços em inglês ("Our SEO strategies are tailored...").
-     - Card 4 da seção Serviços com frase duplicada ("Campanhas de tráfego pago de alta performance...").
-     - URL do Instagram com aspas duplas adicionais no atributo original (`igsh=ZDNlZDc0MzIxNw==""`).
-     *Diretriz:* O rebuild manterá a fidelidade estrita até que o responsável aprove as correções textuais.
-  4. **Estratégia de hospedagem e deploy:** Confirmar a plataforma de hospedagem de produção (Vercel, VPS ou outro provedor).
+- **Pendências de decisão:** registradas **somente** na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável) — formulário de contato (`PEND-10`), links placeholder (`PEND-02`), inconsistências textuais e URL do Instagram (`PEND-03`, `PEND-04`), hospedagem/deploy (`PEND-06`) e divergências do conteúdo do cliente (`PEND-07` a `PEND-12`). Não replicar a lista aqui.

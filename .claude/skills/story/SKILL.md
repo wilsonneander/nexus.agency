@@ -12,9 +12,9 @@ O código conta **o que** foi feito; a story guarda **por que** foi feito assim,
 Acima da story estão, nesta ordem: o **site legado** (`index.html`,
 `styles.css`, `main.js`, `assets/`) como fonte de verdade de conteúdo e visual,
 o [AGENTS.md](../../../AGENTS.md) (restrições inegociáveis), o
-[PRD.md](../../../PRD.md) (comportamentos novos aprovados) e a
-[TECHNICAL-SPEC.md](../../../TECHNICAL-SPEC.md) /
-[ARCHITECTURE.md](../../../ARCHITECTURE.md) (padrões técnicos). A story não
+[PRD.md](../../../docs/PRD.md) (comportamentos novos aprovados) e a
+[TECHNICAL-SPEC.md](../../../docs/TECHNICAL-SPEC.md) /
+[ARCHITECTURE.md](../../../docs/ARCHITECTURE.md) (padrões técnicos). A story não
 redecide o que já está decidido lá — ela cita. Conflito entre eles **não se
 resolve na story**: vira pendência `PEND-xx` no `TASKS.md` e pergunta ao
 responsável (AGENTS.md § 3).
@@ -24,8 +24,9 @@ responsável (AGENTS.md § 3).
 | Artefato | Caminho |
 | --- | --- |
 | A story | `docs/stories/<id>-<slug>.md` (ex.: `4.1` → `docs/stories/4-1-comportamento-por-breakpoint.md`) |
-| O quadro de status | [TASKS.md](../../../TASKS.md) — a linha `- [ ] <id> …` da fase |
-| Pendências de decisão | `TASKS.md` § _Pendências de Decisão Registradas_ (`PEND-xx`) |
+| Índice das stories | `docs/stories/README.md` — acrescente a linha da story nova |
+| O quadro de status | [docs/TASKS.md](../../../docs/TASKS.md) — a linha `- [ ] <id> …` da fase |
+| Pendências de decisão | `docs/TASKS.md` § _Pendências de Decisão Registradas_ (`PEND-xx`) |
 | Evidência visual | `docs/references/qa/<nome>.png` |
 | Referência do legado | `docs/references/screenshot.png`, `docs/AUDIT.md`, `docs/CONTENT-MAPPING.md`, `docs/references/client-content.pdf` |
 

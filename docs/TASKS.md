@@ -10,6 +10,8 @@
 
 Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 
+**Este arquivo é a fonte única** do status das tarefas e das pendências de decisão (`PEND-xx`). Os demais documentos citam o ID; não replicam a lista. O detalhe de cada tarefa mora na story em [`docs/stories/`](stories/README.md), e a linha da tarefa carrega o link: `(Status: TODO | Story: docs/stories/<id>-<slug>.md)`.
+
 ## Fase 0 — Discovery e auditoria
 
 - [x] 0.1 Identificar estrutura de diretórios e comandos existentes. (Status: DONE | Agente: Auditor | Arquivos: index.html, styles.css, main.js, assets/)
@@ -28,7 +30,7 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 
 | ID | Item | Descrição / Opções | Status | Impacto na Fase |
 |---|---|---|---|---|
-| **PEND-01** | **Formulário de Contato sem Backend** | Seção `#contact` possui apenas `action="/"`. Opções: (A) Mock front-end com toast/feedback; (B) Integração API Route/Email (Resend/SendGrid); (C) Redirecionamento com mensagem para o WhatsApp. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
+| **PEND-01** | **Formulário de Contato sem Backend** | Mesma decisão de `PEND-10` — acompanhar lá (ID mantido para histórico; não reaproveitar). | `CONSOLIDADA em PEND-10` | — |
 | **PEND-02** | **Links Placeholder** | 3 botões "Saiba Mais" do Blog e 8 links do rodapé apontam para `#`. Manter como placeholder seguro `href="#"` até haver páginas reais. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
 | **PEND-03** | **Inconsistências Textuais** | Cards 5 e 6 de serviços em inglês; Card 4 de serviços com texto duplicado. Manter fiel ao original no rebuild até aprovação formal de correção. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
 | **PEND-04** | **Sintaxe da URL do Instagram** | O HTML original possui aspas extras no `href` (`igsh=ZDNlZDc0MzIxNw==""`). Requer aprovação para saneamento sintático mantendo o mesmo destino. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
@@ -37,7 +39,7 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 | **PEND-07** | **Número do WhatsApp (Legado vs. Cliente)** | Site legado usa `+55 (61) 99539-5969`; relatório do cliente cita `+55 (61) 9298-5392`. Necessário confirmar número definitivo para os botões. | `PENDING_APPROVAL` | Fase 4 (Conversão) |
 | **PEND-08** | **Perfil do Instagram (Legado vs. Cliente)** | Site legado usa `@nexus.ag.contato`; relatório do cliente indica `@nexusagencybr`. Necessário aprovação formal. | `PENDING_APPROVAL` | Fase 4 (Conversão) |
 | **PEND-09** | **Informações entre colchetes do Cliente** | Preenchimento dos números em falta (`[número]` milhões de pessoas, conversas, anos) e prazos (`[24 horas úteis]`). | `PENDING_APPROVAL` | Fase 2 / 4 |
-| **PEND-10** | **Formulário de Contato do Cliente** | Decisão de integração: (A) Route Handler/Server Action com Resend; (B) Redirecionamento WhatsApp; (C) CRM Externo. | `PENDING_APPROVAL` | Fase 4 (Conversão) |
+| **PEND-10** | **Formulário de Contato (sem backend)** | Hoje `action="/"` + `preventDefault`, nada é enviado. Opções: (A) Route Handler/Server Action com e-mail (Resend); (B) Redirecionamento com mensagem para o WhatsApp; (C) CRM/plataforma externa; (D) Mock front-end com feedback. Comparação em [AUDIT.md § 12.2](AUDIT.md). | `PENDING_APPROVAL` | Fase 4 (Conversão) |
 | **PEND-11** | **E-mail Institucional** | Inclusão de `contato@nexusagencybr.com.br` no Footer e canais de contato. | `PENDING_APPROVAL` | Fase 4 (Conversão) |
 | **PEND-12** | **Política de Privacidade e LGPD** | Criação de rota/modal `/politica-de-privacidade` e termo de consentimento no form. | `PENDING_APPROVAL` | Fase 4 (Conversão) |
 

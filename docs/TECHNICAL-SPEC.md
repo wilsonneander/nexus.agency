@@ -74,20 +74,9 @@ Registradas no `package.json` e `package-lock.json` com sucesso na Fase 1. Build
   - Botão flutuante inferior direito (`.whatsapp-link`) com ícone, label "Quero saber mais!" e animação contínua `@keyframes WaveWhatsApp`.
 - O código com DDD 81 encontrado no arquivo legado `main.js` não deve ser utilizado.
 
-### Funcionalidades e Registros Pendentes de Decisão
-- **Formulário de Contato sem Backend:** O formulário da seção `#contact` possui apenas `action="/"`, sem integração com serviço de envio. Fica registrado como **pendente de decisão do cliente**:
-  - Opção A: Submissão puramente visual com feedback de envio (mock).
-  - Opção B: Integração com Server Action / Route Handler (ex: Resend, SendGrid ou Formspree).
-  - Opção C: Redirecionamento com mensagem montada para o WhatsApp oficial.
-- **Links Placeholder (`href="#"`):**
-  - Blog: Botões "Saiba Mais" (3 ocorrências) apontam para `#`.
-  - Rodapé: Links da coluna "Serviços" (5 ocorrências) e "Suporte" (3 ocorrências) apontam para `#`.
-  - Devem ser mantidos como placeholders sem gerar quebras de navegação ou rotas inexistentes.
-- **Inconsistências Textuais e URL do Instagram (Para Aprovação):**
-  - Seção Serviços: Cards 5 ("SEO") e 6 ("Digital Marketing") contêm descrições em inglês no original ("Our SEO strategies are tailored..."), enquanto os demais estão em português.
-  - Seção Serviços: Card 4 ("Inbound Marketing.") possui uma frase duplicada ("Campanhas de tráfego pago de alta performance...").
-  - URL do Instagram: O atributo `href` no HTML legado possui aspas duplas adicionais no final (`igsh=ZDNlZDc0MzIxNw==""`).
-  - Diretriz: Manter o conteúdo original durante a reconstrução e registrar formalmente para aprovação do responsável antes de qualquer correção.
+### Funcionalidades pendentes de decisão
+- Formulário de contato (`PEND-10`), links placeholder `href="#"` (`PEND-02`), inconsistências textuais e URL do Instagram (`PEND-03`, `PEND-04`): status e opções na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável); comparação técnica das opções do formulário em [AUDIT.md § 12.2](AUDIT.md).
+- Regra técnica enquanto abertas: placeholders não podem gerar navegação quebrada nem rota inexistente, e o conteúdo original é mantido até aprovação formal.
 
 ### Lenis (opcional)
 - Não habilitar por padrão.

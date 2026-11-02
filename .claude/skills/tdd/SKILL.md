@@ -14,9 +14,9 @@ prefere movimento reduzido, e onde em `src/` cada pedaço mora.
 
 | Documento | Escopo | Pergunta que responde |
 | --- | --- | --- |
-| `ARCHITECTURE.md` | o sistema | pastas, responsabilidades, convenções, decisões registradas |
-| `TECHNICAL-SPEC.md` | as regras | stack, padrões GSAP/Next/Tailwind, restrições |
-| `PRD.md` | o comportamento aprovado | o que o usuário deve ver (FR-xx) |
+| `docs/ARCHITECTURE.md` | o sistema | pastas, responsabilidades, convenções, decisões registradas |
+| `docs/TECHNICAL-SPEC.md` | as regras | stack, padrões GSAP/Next/Tailwind, restrições |
+| `docs/PRD.md` | o comportamento aprovado | o que o usuário deve ver (FR-xx) |
 | **TDD** (`docs/tdds/`) | **um fluxo** | como a leitura progressiva vai do markup do servidor até a cor da palavra no scroll |
 | Story (`docs/stories/`) | uma tarefa | o que muda, por quê, e como saber que acabou |
 

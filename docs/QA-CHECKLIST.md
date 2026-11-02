@@ -14,7 +14,7 @@
 - [x] Botões de WhatsApp mantêm telefone, mensagem e parâmetros configurados de forma centralizada.
 - [x] Botões de redes sociais permanecem inalterados e funcionais.
 - [x] Formulário estruturado com 4 campos do cliente e validação nativa de preenchimento.
-- [x] Links placeholder catalogados no relatório de funcionalidades (docs/FUNCTIONALITY-AUDIT.md).
+- [x] Links placeholder catalogados na auditoria de funcionalidades ([AUDIT.md § 12.3](AUDIT.md)).
 
 ## 3. Animações e scroll
 - [x] Hero entra sem atraso excessivo. (Validado via timeline com delays escalonados 0.15s, 0.35s, 0.55s)

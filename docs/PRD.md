@@ -159,11 +159,6 @@ Com base no relatório oficial `docs/AUDIT.md`:
   - Galeria: Grid de 6 projetos com filtro de categoria.
   - Terceiros: WhatsApp API (`wa.me`) e links de redes sociais.
 
-### 8.1 Pendências de decisão registradas para aprovação
-1. **Formulário de Contato sem Backend:** Definir se o formulário manterá apenas comportamento front-end com mensagem de sucesso (mock), se receberá integração de e-mail (Resend/Formspree/API Route) ou se redirecionará para o WhatsApp oficial.
-2. **Destino dos Links Placeholder:** Os 3 botões "Saiba Mais" do Blog e os 8 links do Rodapé (5 de serviços e 3 de suporte) possuem `href="#"`. Aguardam definição se terão páginas futuras ou se permanecerão como âncoras/placeholders.
-3. **Inconsistências de Texto e URL Social:**
-   - Serviços: Cards 5 ("SEO") e 6 ("Digital Marketing") estão em inglês ("Our SEO strategies are tailored...").
-   - Serviços: Card 4 ("Inbound Marketing.") repete a frase de tráfego pago duas vezes seguidas.
-   - Instagram: Atributo `href` possui aspas duplas adicionais no final (`igsh=ZDNlZDc0MzIxNw==""`).
-   - *Diretriz:* O rebuild preservará o código e texto fiéis ao original até que o cliente autorize formalmente as correções.
+### 8.1 Pendências de decisão
+
+Registradas **somente** na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável) (formulário `PEND-10`, links placeholder `PEND-02`, textos/Instagram `PEND-03`/`PEND-04`, conteúdo do cliente `PEND-07` a `PEND-12`). Diretriz enquanto abertas: o rebuild preserva o original até aprovação formal.

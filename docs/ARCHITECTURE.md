@@ -72,16 +72,19 @@ nexus/
 │   └── types/
 │       └── index.ts              # Tipagens de dados, filtros e props
 │
-├── docs/
-│   ├── AUDIT.md                  # Documento oficial de auditoria consolidado
-│   ├── BRD.md
-│   ├── PRD.md
-│   ├── TECHNICAL-SPEC.md
-│   ├── ARCHITECTURE.md
-│   ├── TASKS.md
-│   └── QA-CHECKLIST.md
+├── docs/                         # toda a documentação — índice em docs/README.md
+│   ├── BRD.md, PRD.md            # negócio e requisitos (FR-xx)
+│   ├── TECHNICAL-SPEC.md         # stack e regras técnicas
+│   ├── ARCHITECTURE.md           # este documento
+│   ├── TASKS.md                  # quadro de status + pendências PEND-xx
+│   ├── QA-CHECKLIST.md           # critérios de aceite e liberação
+│   ├── AUDIT.md                  # inventário do legado + auditoria de funcionalidades
+│   ├── CONTENT-MAPPING.md        # conteúdo do cliente vs. legado
+│   ├── stories/                  # uma story por tarefa (skill `story`)
+│   ├── tdds/                     # um TDD por fluxo (skill `tdd`)
+│   └── references/               # screenshot.png, client-content.pdf, qa/
 │
-├── AGENTS.md
+├── AGENTS.md, CLAUDE.md, README.md  # ficam na raiz: lidos automaticamente por agentes e pelo GitHub
 ├── package.json
 └── ...
 ```
@@ -162,8 +165,5 @@ Com base no relatório oficial `docs/AUDIT.md`:
   - Botão WhatsApp com animação contínua `@keyframes WaveWhatsApp` em CSS e transição de escala.
   - Botões de Redes Sociais: **preservação integral** da rotação 3D (`rotateY(360deg)`) e expansão de cor de fundo sem alterações.
 - **Avaliação de Lenis:** Descartado para a versão inicial. O scroll nativo (`scroll-behavior: smooth`) e o ScrollTrigger padrão atendem perfeitamente à proposta sem os riscos de conflito em mobile/touch.
-- **Formulário de contato:** Registrado como **pendente de decisão**. O formulário legado possui apenas `action="/"`. Recomenda-se aprovação sobre manter apenas ação visual no front-end, integrar com rota de API Next.js ou direcionar os dados ao WhatsApp.
-- **Links placeholder:** Links de blog ("Saiba Mais") e do rodapé possuem `href="#"`. Mantidos como placeholders até fornecimento de destinos oficiais.
-- **Inconsistências textuais e Instagram URL:** Registradas para aprovação do responsável (Cards 5 e 6 de serviços em inglês, Card 4 com texto duplicado e URL do Instagram com aspas duplas no atributo original). O rebuild manterá o texto fiel até definição explícita.
-- **Estratégia de testes:** Execução do `docs/QA-CHECKLIST.md` nos viewports 375px, 480px, 768px, 1024px e 1280px.
-- **Hospedagem e pipeline de deploy:** Pendente de confirmação pelo cliente.
+- **Estratégia de testes:** Execução do [QA-CHECKLIST.md](QA-CHECKLIST.md) nos viewports 375px, 480px, 768px, 1024px e 1200px.
+- **Pendências que afetam a arquitetura** (formulário `PEND-10`, links placeholder `PEND-02`, textos/Instagram `PEND-03`/`PEND-04`, hospedagem `PEND-06`): status na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável).
