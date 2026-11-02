@@ -34,6 +34,10 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 | **PEND-04** | **Sintaxe da URL do Instagram** | O HTML original possui aspas extras no `href` (`igsh=ZDNlZDc0MzIxNw==""`). Requer aprovação para saneamento sintático mantendo o mesmo destino. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
 | **PEND-05** | **Duplicata AUDIT.md na raiz** | `docs/AUDIT.md` definido como canônico oficial. Duplicata `AUDIT.md` da raiz excluída com autorização formal. | `RESOLVED` | Fase 1 (Consolidação) |
 | **PEND-06** | **Hospedagem / Deploy** | Confirmar provedor de deploy (Vercel, Node server ou estático). | `PENDING_DECISION` | Fase 6 (Entrega) |
+| **PEND-07** | **Número do WhatsApp (Legado vs. Cliente)** | Site legado usa `+55 (61) 99539-5969`; relatório do cliente cita `+55 (61) 9298-5392`. Necessário confirmar número definitivo para os botões. | `PENDING_APPROVAL` | Fase 2 (Reconstrução) |
+| **PEND-08** | **Perfil do Instagram (Legado vs. Cliente)** | Site legado usa `@nexus.ag.contato`; relatório do cliente indica `@nexusagencybr`. Necessário aprovação formal. | `PENDING_APPROVAL` | Fase 2 (Reconstrução) |
+| **PEND-09** | **Informações entre colchetes do Cliente** | Preenchimento dos números em falta (`[número]` milhões de pessoas, conversas, anos) e prazos (`[24 horas úteis]`). | `PENDING_APPROVAL` | Fase 2 (Reconstrução) |
+| **PEND-10** | **Formulário de Contato do Cliente** | Validação dos 4 novos campos (Nome, WhatsApp, Empresa, O que precisa?) e destino da mensagem. | `PENDING_APPROVAL` | Fase 2 (Reconstrução) |
 
 ## Fase 1 — Fundação técnica
 
@@ -49,18 +53,20 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 
 **Critério de saída:** aplicação mínima compila e executa sem erros. [ATENDIDO]
 
-## Fase 2 — Reconstrução visual e funcional
+## Fase 2 — Reconstrução visual e funcional (Com Integração do Cliente)
 
-- [ ] 2.1 Reproduzir layout global e navegação.
-- [ ] 2.2 Migrar cada rota e seção identificada no inventário.
-- [ ] 2.3 Migrar conteúdo e assets sem substituições.
-- [ ] 2.4 Reproduzir interações e funcionalidades atuais.
-- [ ] 2.5 Preservar botões de redes sociais sem alterações.
-- [ ] 2.6 Preservar destinos e mensagens dos botões de WhatsApp.
-- [ ] 2.7 Reproduzir responsividade.
-- [ ] 2.8 Comparar screenshots com a referência.
+- [ ] 2.1 Reproduzir layout global e navegação com base em `screenshot.png` e CSS original.
+- [ ] 2.2 Reconstruir o Hero com imagem de background `header.webp`, overlay gradiente e composição original.
+- [ ] 2.3 Reconstruir seção Sobre nós integrando o novo texto aprovado e bloco Missão, Visão e Valores.
+- [ ] 2.4 Reconstruir a seção de Serviços com os 6 novos serviços e seus bullets (eliminando textos em inglês legados).
+- [ ] 2.5 Incorporar os Pacotes Comerciais (Essencial, Crescimento, Completo) no layout sem alterar a identidade.
+- [ ] 2.6 Preservar portfólio de Projetos e cards do Banner de Diferenciais sem alterações.
+- [ ] 2.7 Reconstruir o formulário de contato com os 4 campos especificados pelo cliente.
+- [ ] 2.8 Preservar botões de redes sociais e botão flutuante de WhatsApp sem alterações de animação/estilo.
+- [ ] 2.9 Reproduzir responsividade em todos os breakpoints (sm, md, lg, xl).
+- [ ] 2.10 Validar fidelidade visual comparando com `docs/references/screenshot.png`.
 
-**Critério de saída:** site funcional e visualmente fiel, mesmo antes das animações avançadas.
+**Critério de saída:** site funcional, visualmente fiel à captura de tela de referência e com o conteúdo aprovado do cliente integrado, sem erros de compilação ou console.
 
 ## Fase 3 — Sistema de movimento
 
