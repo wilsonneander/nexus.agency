@@ -1,16 +1,17 @@
 # Technical Specification — Especificação técnica
 
-## 1. Stack alvo
+## 1. Stack alvo (Versões efetivas instaladas na Fase 1)
 
-- Next.js com App Router.
-- React.
-- TypeScript.
-- Tailwind CSS.
-- GSAP com ScrollTrigger.
-- `@gsap/react` para integração de ciclo de vida, quando compatível.
-- Lenis é opcional; só adotar se testes demonstrarem benefício real e integração estável.
+- Next.js: `15.5.28` (App Router)
+- React: `19.3.1`
+- React DOM: `19.3.1`
+- TypeScript: `5.9.3`
+- Tailwind CSS: `3.4.19` (com PostCSS `8.5.32` e Autoprefixer `10.6.2`)
+- GSAP: `3.15.0` (com ScrollTrigger)
+- `@gsap/react`: `2.1.2` (totalmente compatível com React 19)
+- Lenis: Avaliado e descartado para a versão inicial (mantido `scroll-behavior: smooth` nativo).
 
-Instalar versões estáveis e compatíveis no momento do setup. Registrar versões efetivas no `package.json` e lockfile. Não inventar números de versão neste documento.
+Registradas no `package.json` e `package-lock.json` com sucesso na Fase 1. Build inicial compilado sem erros.
 
 ## 2. Regras de implementação
 

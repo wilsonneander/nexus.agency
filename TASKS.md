@@ -32,22 +32,22 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 | **PEND-02** | **Links Placeholder** | 3 botões "Saiba Mais" do Blog e 8 links do rodapé apontam para `#`. Manter como placeholder seguro `href="#"` até haver páginas reais. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
 | **PEND-03** | **Inconsistências Textuais** | Cards 5 e 6 de serviços em inglês; Card 4 de serviços com texto duplicado. Manter fiel ao original no rebuild até aprovação formal de correção. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
 | **PEND-04** | **Sintaxe da URL do Instagram** | O HTML original possui aspas extras no `href` (`igsh=ZDNlZDc0MzIxNw==""`). Requer aprovação para saneamento sintático mantendo o mesmo destino. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
-| **PEND-05** | **Duplicata AUDIT.md na raiz** | `docs/AUDIT.md` definido como canônico oficial. Aguardando autorização para exclusão definitiva do arquivo duplicado `AUDIT.md` da raiz. | `PENDING_DECISION` | Fase 1 (Consolidação) |
+| **PEND-05** | **Duplicata AUDIT.md na raiz** | `docs/AUDIT.md` definido como canônico oficial. Duplicata `AUDIT.md` da raiz excluída com autorização formal. | `RESOLVED` | Fase 1 (Consolidação) |
 | **PEND-06** | **Hospedagem / Deploy** | Confirmar provedor de deploy (Vercel, Node server ou estático). | `PENDING_DECISION` | Fase 6 (Entrega) |
 
 ## Fase 1 — Fundação técnica
 
-- [ ] 1.1 Definir estratégia de migração e diretório do novo app.
-- [ ] 1.2 Configurar Next.js App Router.
-- [ ] 1.3 Configurar React e TypeScript.
-- [ ] 1.4 Configurar Tailwind CSS.
-- [ ] 1.5 Instalar/configurar GSAP e ScrollTrigger.
-- [ ] 1.6 Avaliar `@gsap/react`.
-- [ ] 1.7 Definir tokens e fontes existentes.
-- [ ] 1.8 Configurar lint, scripts e aliases.
-- [ ] 1.9 Confirmar build inicial.
+- [x] 1.1 Definir estratégia de migração e diretório do novo app. (Status: DONE | App Router em `src/`, assets públicos em `public/assets/`, legados preservados)
+- [x] 1.2 Configurar Next.js App Router. (Status: DONE | Next.js 15.5.28 configurado com App Router e Server Components por padrão)
+- [x] 1.3 Configurar React e TypeScript. (Status: DONE | React 19.3.1, TypeScript 5.9.3 e `@/*` path aliases em tsconfig.json)
+- [x] 1.4 Configurar Tailwind CSS. (Status: DONE | Tailwind CSS 3.4.19, PostCSS 8 e tokens customizados em tailwind.config.ts)
+- [x] 1.5 Instalar/configurar GSAP e ScrollTrigger. (Status: DONE | GSAP 3.15.0 com registro seguro em `src/animations/gsap.client.ts`)
+- [x] 1.6 Avaliar `@gsap/react`. (Status: DONE | `@gsap/react` 2.1.2 instalado e compatível com React 19)
+- [x] 1.7 Definir tokens e fontes existentes. (Status: DONE | Fonte Poppins via `next/font/google` e paleta oficial em `globals.css`)
+- [x] 1.8 Configurar lint, scripts e aliases. (Status: DONE | Scripts dev, build, start, lint configurados)
+- [x] 1.9 Confirmar build inicial. (Status: DONE | `npm run build` gerou bundle estático sem erros)
 
-**Critério de saída:** aplicação mínima compila e executa sem erros.
+**Critério de saída:** aplicação mínima compila e executa sem erros. [ATENDIDO]
 
 ## Fase 2 — Reconstrução visual e funcional
 

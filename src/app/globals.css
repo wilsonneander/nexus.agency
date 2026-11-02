@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #ffffff;
+  --primary-color-dark: #a15cf5;
+  --secondary-color: #04091d;
+  --secondary-color-light: #0f1221;
+  --secondary-color-dark: #03060f;
+  --text-light: #ffffff;
+  --white: #ffffff;
+  --span: #ad7dff;
+  --max-width: 1200px;
+  --gradient: linear-gradient(
+    to right,
+    var(--primary-color-dark),
+    var(--primary-color)
+  );
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+  background-color: var(--secondary-color);
+  color: var(--white);
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+}
+
+/* ==========================================================================
+   Botões Sociais - Preservação Inegociável da Identidade e Animação 3D (FR-07)
+   ========================================================================== */
+.item a {
+  text-decoration: none;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  border: 3px solid #f0f9fe;
+  overflow: hidden;
+  width: 2.8rem;
+  height: 2.8rem;
+  background-color: #f0f9fe;
+}
+
+.item a::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-color);
+  z-index: 0;
+  scale: 1 0;
+  transform-origin: bottom;
+  transition: scale 0.5s ease;
+}
+
+.item:hover a::before {
+  scale: 1 1;
+}
+
+.icon {
+  color: hsl(203, 92%, 8%);
+  transition: color 0.5s ease, transform 0.5s ease;
+  z-index: 2;
+}
+
+.item a:hover .icon {
+  color: #fff;
+  transform: rotateY(360deg);
+}
+
+.item:nth-child(1) {
+  --bg-color: linear-gradient(to bottom right, #f9ce34, #ee2a7b, #6228d7);
+}
+
+.item:nth-child(2) {
+  --bg-color: #0077b5;
+}
+
+.item:nth-child(3) {
+  --bg-color: #03217c;
+}
+
+/* ==========================================================================
+   Botão Flutuante de WhatsApp (FR-06)
+   ========================================================================== */
+.whatsapp-link {
+  position: fixed;
+  width: 190px;
+  height: 40px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #218e49;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 1px 1px 2px #888;
+  z-index: 1000;
+  margin-top: 5px;
+  transition: transform 0.4s;
+  animation: WaveWhatsApp 1.5s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.whatsapp-link:hover {
+  transform: scale(1.2);
+}
+
+.fa-whatsapp {
+  position: relative;
+  right: 10px;
+}
+
+.wpp {
+  font-size: 13px;
+  position: relative;
+  font-weight: 500;
+}
+
+@keyframes WaveWhatsApp {
+  0% {
+    box-shadow: 0 0 0 0 rgba(33, 142, 73, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(33, 142, 73, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(33, 142, 73, 0);
+  }
+}
