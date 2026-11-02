@@ -110,8 +110,9 @@ body {
   text-decoration: none;
 }
 
+/* hover scale gerenciado pelo GSAP (WhatsAppFloat.tsx) para animação spring */
 .whatsapp-link:hover {
-  transform: scale(1.2);
+  transform: none;
 }
 
 .fa-whatsapp {

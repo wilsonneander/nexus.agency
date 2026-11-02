@@ -1,33 +1,56 @@
 import Link from "next/link";
 import { SERVICES_DATA, SERVICES_SECTION_HEADER } from "@/data/services";
 import { PACKAGES_DATA } from "@/data/packages";
+import { ServicesClient } from "./ServicesClient";
+import { ScrollText } from "@/components/motion/ScrollText";
 
 export function ServicesSection() {
   return (
-    <section id="service" className="py-24 bg-[#04091d]">
+    <ServicesClient>
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Cabeçalho da Seção */}
+
+        {/* ── Cabeçalho ── */}
         <div className="text-center max-w-3xl mx-auto mb-20">
           <p className="text-sm font-semibold uppercase tracking-wider text-[#a15cf5] mb-2">
             Nossos Serviços
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white leading-tight mb-6">
+
+          {/* ScrollText no título principal da seção */}
+          <ScrollText
+            as="h2"
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white leading-tight mb-6"
+            start="top 80%"
+            end="bottom 35%"
+            scrub={1.2}
+          >
             {SERVICES_SECTION_HEADER.title}
-          </h2>
-          <p className="text-white/75 text-sm sm:text-base leading-relaxed font-light">
+          </ScrollText>
+
+          {/* ScrollText no subtítulo */}
+          <ScrollText
+            as="p"
+            className="text-white/75 text-sm sm:text-base leading-relaxed font-light"
+            start="top 78%"
+            end="bottom 30%"
+            scrub={1.3}
+          >
             {SERVICES_SECTION_HEADER.subtitle}
-          </p>
+          </ScrollText>
         </div>
 
-        {/* Grid dos 6 Novos Serviços com Badges Flutuantes (Visual Original Preservado) */}
+        {/* ── Grid dos 6 Serviços ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-8 mb-24">
           {SERVICES_DATA.map((service) => (
             <div
               key={service.id}
+              data-service-card
               className="group relative pt-12 pb-8 px-6 sm:px-8 bg-[#0f1221] rounded-xl border-b-2 border-transparent hover:border-[#a15cf5] transition-all duration-300 shadow-xl flex flex-col justify-between"
             >
-              {/* Badge Circular Flutuante no Topo Centralizado */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-md bg-[#0f1221] border border-[#04091d] flex items-center justify-center text-2xl text-[#a15cf5] group-hover:bg-gradient-to-r group-hover:from-[#a15cf5] group-hover:to-white group-hover:text-[#04091d] transition-all duration-300 shadow-md">
+              {/* Badge flutuante */}
+              <div
+                data-service-badge
+                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-md bg-[#0f1221] border border-[#04091d] flex items-center justify-center text-2xl text-[#a15cf5] group-hover:bg-gradient-to-r group-hover:from-[#a15cf5] group-hover:to-white group-hover:text-[#04091d] transition-all duration-300 shadow-md"
+              >
                 <i className={`fa-solid fa-${service.iconClass}`} />
               </div>
 
@@ -39,7 +62,7 @@ export function ServicesSection() {
                   {service.description}
                 </p>
 
-                {/* 4 Benefícios/Bullets Oficiais do Cliente */}
+                {/* 4 benefícios */}
                 {service.benefits && service.benefits.length > 0 && (
                   <ul className="space-y-2 border-t border-white/5 pt-4">
                     {service.benefits.map((benefit, i) => (
@@ -58,7 +81,7 @@ export function ServicesSection() {
           ))}
         </div>
 
-        {/* Novo Bloco: Pacotes Comerciais Oficiais do Cliente */}
+        {/* ── Pacotes Comerciais ── */}
         <div className="mt-16 pt-16 border-t border-white/10">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <p className="text-xs font-semibold uppercase tracking-wider text-[#ad7dff] mb-2">
@@ -76,6 +99,7 @@ export function ServicesSection() {
             {PACKAGES_DATA.map((pkg) => (
               <div
                 key={pkg.id}
+                data-package-card
                 className={`p-8 rounded-2xl flex flex-col justify-between transition-all duration-300 ${
                   pkg.highlight
                     ? "bg-[#0f1221] border-2 border-[#a15cf5] shadow-2xl shadow-[#a15cf5]/10 scale-105"
@@ -111,6 +135,6 @@ export function ServicesSection() {
           </div>
         </div>
       </div>
-    </section>
+    </ServicesClient>
   );
 }

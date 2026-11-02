@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { BLOG_DATA } from "@/data/blog";
+import { BlogClient } from "./BlogClient";
 
 export function BlogSection() {
   return (
-    <section id="blog" className="py-24 bg-[#04091d]">
+    <BlogClient>
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <p className="text-sm font-semibold uppercase tracking-wider text-[#a15cf5] mb-2">
@@ -18,6 +19,7 @@ export function BlogSection() {
           {BLOG_DATA.map((post) => (
             <article
               key={post.id}
+              data-blog-card
               className="group bg-[#0f1221] rounded-xl overflow-hidden border border-white/5 hover:border-[#a15cf5]/40 transition-all duration-300 flex flex-col justify-between shadow-xl"
             >
               <div>
@@ -53,6 +55,6 @@ export function BlogSection() {
           ))}
         </div>
       </div>
-    </section>
+    </BlogClient>
   );
 }

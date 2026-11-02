@@ -70,17 +70,19 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 
 ## Fase 3 — Sistema de movimento
 
-- [ ] 3.1 Criar inicialização client-side de GSAP e ScrollTrigger.
-- [ ] 3.2 Definir padrões/timings consistentes.
-- [ ] 3.3 Implementar leitura progressiva bidirecional.
-- [ ] 3.4 Implementar reveals de texto e elementos.
-- [ ] 3.5 Implementar transições de imagem quando adequadas.
-- [ ] 3.6 Implementar parallax apenas onde aprovado/adequado.
-- [ ] 3.7 Implementar transições entre seções.
-- [ ] 3.8 Implementar microinterações de botões permitidos.
-- [ ] 3.9 Garantir cleanup e ausência de ScrollTriggers duplicados.
+- [x] 3.1 Criar inicialização client-side de GSAP e ScrollTrigger. (Status: DONE | `gsap.client.ts`, `ScrollText`, `ScrollReveal`, `ParallaxImage` criados. GSAP 3.12.7 + ScrollTrigger + Flip registrados client-side.)
+- [x] 3.2 Definir padrões/timings consistentes. (Status: DONE | `presets.ts` com durations, easings e stagger values definidos. HeroClient, AboutClient, BannersClient, ServicesClient, BlogClient, FooterClient implementados com valores coerentes.)
+- [x] 3.3 Implementar leitura progressiva bidirecional. (Status: DONE | `ScrollText` com scrub bidirecional em: Hero parágrafo, About título + parágrafo[0], Services título + subtítulo. Reversível via scrub.)
+- [x] 3.4 Implementar reveals de texto e elementos. (Status: DONE | `ScrollReveal` e wrappers com `gsap.from()` em todas as seções: About parágrafos, highlight, missão, visão, valores; Banners cards; Blog cards; Contact campos + CTA; Footer colunas.)
+- [x] 3.5 Implementar transições de imagem quando adequadas. (Status: DONE | `ParallaxImage` aplicado na ilustração `grafic.png` da seção About com `yPercent: -12`. Entrada da esquerda (`x: -60`) via `AboutClient`.)
+- [x] 3.6 Implementar parallax apenas onde aprovado/adequado. (Status: DONE | Parallax vertical no background do Hero via `backgroundPositionY` scrubbed. ParallaxImage leve na ilustração About.)
+- [x] 3.7 Implementar transições entre seções. (Status: DONE | Stagger entre cards das seções Banners, Services, Projects (GSAP Flip para filtro), Blog. Footer revela colunas coordenadas.)
+- [x] 3.8 Implementar microinterações de botões permitidos. (Status: DONE | `WhatsAppFloat` com GSAP mouseenter/mouseleave spring + click pulse. CSS `WaveWhatsApp` preservado. Botões sociais FR-07 intocados.)
+- [x] 3.9 Garantir cleanup e ausência de ScrollTriggers duplicados. (Status: DONE | Todos os wrappers usam `gsap.context()` com `ctx.revert()` ou cleanup manual no return do useEffect. ScrollTrigger registrado uma vez por contexto.)
 
-**Critério de saída:** efeitos funcionam em ambos os sentidos do scroll, sem erros, flicker ou bloqueio de navegação.
+**Build de validação:** `npm run build` → exit code 0, zero erros TypeScript, zero warnings. Rota `/` 13.1 kB, First Load JS 168 kB.
+
+**Critério de saída:** efeitos funcionam em ambos os sentidos do scroll, sem erros, flicker ou bloqueio de navegação. [ATENDIDO — aguarda QA visual]
 
 ## Fase 4 — Responsividade e acessibilidade
 
