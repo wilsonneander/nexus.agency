@@ -1,3 +1,5 @@
+// Porta do dev server: PORT=<n> node scripts/capture_screenshots.js (padrão 3008)
+const PORT = process.env.PORT || 3008;
 const { execSync } = require('child_process');
 const path = require('path');
 
@@ -14,7 +16,7 @@ const targetDir = 'C:\\Users\\wilso\\Desktop\\Wilson\\clients\\nexus\\docs\\refe
 vps.forEach(vp => {
   const outFile = path.join(targetDir, vp.name);
   console.log(`Capturing ${vp.name}...`);
-  const cmd = `"${chromePath}" --headless=new --disable-gpu --window-size=${vp.w},${vp.h} --screenshot="${outFile}" http://localhost:3001`;
+  const cmd = `"${chromePath}" --headless=new --disable-gpu --window-size=${vp.w},${vp.h} --screenshot="${outFile}" http://localhost:${PORT}`;
   execSync(cmd, { stdio: 'inherit' });
 });
 

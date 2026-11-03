@@ -68,14 +68,14 @@ Registradas no `package.json` e `package-lock.json` com sucesso na Fase 1. Build
 - Aplicar exatamente os mesmos seletores e regras nos 3 locais identificados: Header (`.ul-icons`), Sobre nós (`.about__btns .ul-icons`) e Rodapé (`.ul-icons-3`).
 
 ### WhatsApp Oficial (Restrição Inegociável FR-06)
-- Destino oficial: `https://wa.me/5561995395969` (DDD 61).
+- Destino oficial: `https://wa.me/556192985392` — `+55 (61) 9298-5392`, número do cliente (`PEND-07` RESOLVED; o legado usava `5561995395969`). Fonte única: `SITE_CONFIG.whatsapp` em `src/lib/constants.ts`.
 - Presente em dois pontos de conversão:
   - Botão "Contato" no menu de navegação.
   - Botão flutuante inferior direito (`.whatsapp-link`) com ícone, label "Quero saber mais!" e animação contínua `@keyframes WaveWhatsApp`.
 - O código com DDD 81 encontrado no arquivo legado `main.js` não deve ser utilizado.
 
 ### Funcionalidades pendentes de decisão
-- Formulário de contato (`PEND-10`), links placeholder `href="#"` (`PEND-02`), inconsistências textuais e URL do Instagram (`PEND-03`, `PEND-04`): status e opções na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável); comparação técnica das opções do formulário em [AUDIT.md § 12.2](AUDIT.md).
+- Formulário de contato (`PEND-10`), links placeholder `href="#"` (`PEND-02`), inconsistências textuais (`PEND-03`): status e opções na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável); comparação técnica das opções do formulário em [AUDIT.md § 12.2](AUDIT.md).
 - Regra técnica enquanto abertas: placeholders não podem gerar navegação quebrada nem rota inexistente, e o conteúdo original é mantido até aprovação formal.
 
 ### Lenis (opcional)

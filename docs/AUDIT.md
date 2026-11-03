@@ -143,6 +143,8 @@ nexus/
 > [!IMPORTANT]
 > **Telefone e Destino Oficial de WhatsApp:**
 > Todos os links de WhatsApp ativos no site utilizam `https://wa.me/5561995395969` (DDD 61). No arquivo `main.js`, existia uma função morta atribuindo `https://wa.me/5581999999999` a uma classe inexistente `.whatsapp-button`. A fonte da verdade inegociável para conversão é o número real presente no HTML: **+55 61 99539-5969**.
+>
+> **Atualização (2026-11-02):** por decisão do responsável (`PEND-07`, `PEND-08`), o rebuild usa os canais do cliente — WhatsApp `+55 61 9298-5392`, Instagram `@nexusagencybr`, LinkedIn `company/nexus-ag-br`. Esta seção continua descrevendo o **legado**.
 
 ---
 
@@ -229,7 +231,7 @@ O CSS utiliza mobile-first com as seguintes quebras de layout:
    - Seção Serviços: Card 4 ("Inbound Marketing.") repete a frase `"Campanhas de tráfego pago de alta performance para aumentar o seu volume de leads, reduzir CPC, CPV, CPL e CPA."` duas vezes consecutivas.
    - Seção Serviços: Cards 5 ("SEO") e 6 ("Digital Marketing") possuem textos originais em inglês ("Our SEO strategies are tailored..."), diferindo do restante do site em português.
    - *Diretriz adotada:* **Não corrigir o conteúdo original** sem autorização explícita; o rebuild manterá fielmente os textos até aprovação formal.
-4. **Sintaxe da URL do Instagram no HTML Legado (`PEND-04`):**
+4. **Sintaxe da URL do Instagram no HTML Legado (`PEND-04`, RESOLVED — superada pela URL nova do `PEND-08`):**
    O atributo `href` no HTML legado possui aspas duplas adicionais no final: `href="https://www.instagram.com/nexus.ag.contato?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==""`. Registrada a necessidade de aprovação formal para saneamento sintático da URL sem alterar o destino.
 5. **Erro Crítico no `main.js` (Listener Inexistente):**
    O script legado tenta adicionar listener em `document.querySelector('.whatsapp-button')`. Como esse elemento não existe no HTML, isso gera `TypeError: Cannot read properties of null (reading 'addEventListener')`.
@@ -263,18 +265,18 @@ A auditoria e inventário foram realizados de forma exaustiva e minuciosa. **O c
 
 ## 12. Auditoria de Funcionalidades e Conversão do Rebuild (Fase 4)
 
-> Data: 02 de Novembro de 2026 · Estado do **rebuild** (não do legado) · Aguardando decisões de negócio (`PEND-07`, `PEND-08`, `PEND-10`, `PEND-11`, `PEND-12`).
+> Data: 02 de Novembro de 2026 · Estado do **rebuild** (não do legado) · Aguardando decisões de negócio (`PEND-10`, `PEND-11`, `PEND-12`). `PEND-07` e `PEND-08` resolvidos em 2026-11-02 a favor dos canais do cliente.
 
 
 ### 12.1 Inventário e Auditoria de Contatos
 
 | Canal | Estado Atual | Problema / Divergência Identificada | Solução Recomendada | Dependência de Aprovação | Status |
 |---|---|---|---|---|---|
-| **WhatsApp Principal** | `+55 (61) 99539-5969` configurado em `SITE_CONFIG.whatsapp.url` (`https://wa.me/5561995395969`) | O relatório do cliente cita `+55 (61) 9298-5392` como canal oficial. | Manter centralizado em `src/lib/constants.ts` e alternar com um único ajuste assim que homologado pelo cliente. | **PEND-07** | `PENDING_APPROVAL` |
+| **WhatsApp Principal** | `+55 (61) 9298-5392` em `SITE_CONFIG.whatsapp.url` (`https://wa.me/556192985392`) | Legado usava `+55 (61) 99539-5969`; responsável aprovou o número do cliente. | Centralizado em `src/lib/constants.ts`. | **PEND-07** | `RESOLVED` |
 | **WhatsApp Flutuante** | Botão `.whatsapp-link` flutuante no canto inferior direito com mensagem `"Quero saber mais!"` | URL herda de `SITE_CONFIG`. Efeito hover/click em GSAP preservando `@keyframes WaveWhatsApp`. | Preservado fielmente. | **PEND-07** | `ACTIVE_READY` |
-| **WhatsApp Nav / Mobile** | Botão "Contato" no Navbar desktop e mobile gaveta | Aponta para `wa.me/5561995395969`. Abre em nova aba com `target="_blank" rel="noopener noreferrer"`. | Preservado fielmente. | **PEND-07** | `ACTIVE_READY` |
-| **Instagram** | `https://www.instagram.com/nexus.ag.contato?...` nos ícones sociais do Header, About e Footer | O relatório do cliente indica `@nexusagencybr`. Além disso, a URL legada possui aspas extras no parâmetro de URL (`igsh=...==""`). | Atualizar para `https://www.instagram.com/nexusagencybr/` assim que aprovado. | **PEND-08** | `PENDING_APPROVAL` |
-| **LinkedIn** | `https://www.linkedin.com/in/nexusagency/` | URL estática legada ativa. | Preservado fielmente. | Nenhuma | `ACTIVE_READY` |
+| **WhatsApp Nav / Mobile** | Botão "Contato" no Navbar desktop e mobile gaveta | Aponta para `SITE_CONFIG.whatsapp.url` (`wa.me/556192985392`). Abre em nova aba com `target="_blank" rel="noopener noreferrer"`. | Preservado fielmente. | **PEND-07** | `ACTIVE_READY` |
+| **Instagram** | `https://www.instagram.com/nexusagencybr/` nos ícones sociais do Header, About e Footer | Legado usava `nexus.ag.contato` (com aspas extras na URL); responsável aprovou o perfil do cliente. | Centralizado em `SITE_CONFIG.socials`. | **PEND-08** | `RESOLVED` |
+| **LinkedIn** | `https://www.linkedin.com/company/nexus-ag-br/` | Legado usava `linkedin.com/in/nexusagency/`; responsável aprovou a página do cliente. | Centralizado em `SITE_CONFIG.socials`. | **PEND-08** | `RESOLVED` |
 | **Facebook** | `https://www.facebook.com/profile.php?id=...` | URL legada ativa com ID da página. | Preservado fielmente. | Nenhuma | `ACTIVE_READY` |
 | **E-mail Institucional** | Ausente na interface visual pública atual. | Relatório do cliente propõe `contato@nexusagencybr.com.br` para suporte e formulário. | Inserir no Footer e cabeçalho de contato assim que o domínio for oficializado. | **PEND-11** | `PENDING_APPROVAL` |
 
@@ -310,8 +312,8 @@ A auditoria e inventário foram realizados de forma exaustiva e minuciosa. **O c
 |---|---|---|---|---|
 | **Navbar** | Logo | `#home` | Âncora válida | Preservar |
 | **Navbar** | Inicio, Sobre nós, Projetos, Serviços, Blog | `#home`, `#about`, `#project`, `#service`, `#blog` | Âncoras válidas na página | Preservar |
-| **Hero** | Redes sociais flutuantes | URLs externas das redes | Válidas | Preservar (aguarda PEND-08) |
-| **About** | Redes sociais | URLs externas das redes | Válidas | Preservar (aguarda PEND-08) |
+| **Hero** | Redes sociais flutuantes | URLs externas das redes | Válidas | Preservar (`PEND-08` RESOLVED) |
+| **About** | Redes sociais | URLs externas das redes | Válidas | Preservar (`PEND-08` RESOLVED) |
 | **Services / Pacotes** | 3 Botões "Quero um diagnóstico gratuito" | `#contact` | Âncora válida para o formulário | Preservar |
 | **Blog** | 3 Botões "Saiba Mais" | `#` | **Placeholder (`href="#"`)** | Manter placeholder seguro sem navegação quebrada até que haja CMS/rotas internas de post. (**PEND-02**) |
 | **Footer** | 5 Links da coluna Serviços | `#` | **Placeholder (`href="#"`)** | Transformar em âncoras para os serviços específicos (`#service`) ou manter `#`. (**PEND-02**) |

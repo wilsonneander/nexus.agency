@@ -11,8 +11,8 @@ diff tocou. Área que não se aplica, pule.
   `globals.css`) tocados de qualquer forma: visual, ícone, posição, link,
   animação. Bloqueador sem autorização registrada.
 - **WhatsApp**: número, mensagem ou parâmetros fora de `SITE_CONFIG.whatsapp`,
-  ou valores alterados. A divergência legado × cliente é o `PEND-07` — trocar
-  sem ele `RESOLVED` é bloqueador.
+  ou valores alterados. O número aprovado é o do cliente (`PEND-07`
+  RESOLVED) — trocá-lo sem nova decisão registrada é bloqueador.
 - **Conteúdo**: texto, número, depoimento, serviço ou dado comercial sem fonte
   (legado `index.html`, `docs/CONTENT-MAPPING.md`, `client-content.pdf`, `PEND`
   resolvido). Placeholders `[número]` preenchidos por conta própria (`PEND-09`).

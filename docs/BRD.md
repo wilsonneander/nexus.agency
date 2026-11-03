@@ -105,7 +105,8 @@ Perfis específicos, segmentos de público e localização da agência devem ser
 - **Itens confirmados na auditoria:**
   - Nome oficial: Nexus Agency (confirmado).
   - Rotas: Rota única institucional `/` com navegação por âncoras (confirmado).
-  - WhatsApp do site legado: `+55 61 99539-5969` (em uso; a troca pelo número informado pelo cliente está em `PEND-07`).
+  - WhatsApp oficial: `+55 61 9298-5392`, número do cliente (`PEND-07` RESOLVED; o legado usava `+55 61 99539-5969`).
+  - Redes sociais oficiais: Instagram `@nexusagencybr` e LinkedIn `company/nexus-ag-br` (`PEND-08` RESOLVED).
   - Identidade dos botões sociais: Preservação integral com rotação 3D inalterável (confirmado).
 
-- **Pendências de decisão:** registradas **somente** na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável) — formulário de contato (`PEND-10`), links placeholder (`PEND-02`), inconsistências textuais e URL do Instagram (`PEND-03`, `PEND-04`), hospedagem/deploy (`PEND-06`) e divergências do conteúdo do cliente (`PEND-07` a `PEND-12`). Não replicar a lista aqui.
+- **Pendências de decisão:** registradas **somente** na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável) — formulário de contato (`PEND-10`), links placeholder (`PEND-02`), inconsistências textuais (`PEND-03`), hospedagem/deploy (`PEND-06`) e divergências do conteúdo do cliente (`PEND-09` a `PEND-12`). Não replicar a lista aqui.

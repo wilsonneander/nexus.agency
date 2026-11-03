@@ -161,4 +161,4 @@ Com base no relatório oficial `docs/AUDIT.md`:
 
 ### 8.1 Pendências de decisão
 
-Registradas **somente** na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável) (formulário `PEND-10`, links placeholder `PEND-02`, textos/Instagram `PEND-03`/`PEND-04`, conteúdo do cliente `PEND-07` a `PEND-12`). Diretriz enquanto abertas: o rebuild preserva o original até aprovação formal.
+Registradas **somente** na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável) (formulário `PEND-10`, links placeholder `PEND-02`, textos `PEND-03`, conteúdo do cliente `PEND-09` a `PEND-12`). Diretriz enquanto abertas: o rebuild preserva o original até aprovação formal.

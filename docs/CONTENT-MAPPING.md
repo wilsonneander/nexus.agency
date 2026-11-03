@@ -23,7 +23,7 @@
 
 | Seção | Conteúdo Atual (Legado) | Conteúdo do Cliente (Relatório Oficial) | Ação Necessária | Status |
 |---|---|---|---|---|
-| **01. Header / Topbar** | - Social Links: Instagram (`@nexus.ag.contato`), LinkedIn, Facebook.<br>- Telefone WhatsApp: `+55 (61) 99539-5969`.<br>- CTA Nav: "Contato" (`wa.me/5561995395969`). | - Canais indicados: WhatsApp `+55 (61) 9298-5392`, Instagram `@nexusagencybr`.<br>- E-mail novo: `contato@nexusagencybr.com.br`.<br>- Novo CTA sugerido: "Falar no WhatsApp" / "Quero um diagnóstico gratuito". | **AGUARDAR APROVAÇÃO** | `PENDING_APPROVAL`<br>(Divergência de WhatsApp e Instagram) |
+| **01. Header / Topbar** | - Social Links: Instagram (`@nexus.ag.contato`), LinkedIn, Facebook.<br>- Telefone WhatsApp: `+55 (61) 99539-5969`.<br>- CTA Nav: "Contato" (`wa.me/5561995395969`). | - Canais indicados: WhatsApp `+55 (61) 9298-5392`, Instagram `@nexusagencybr`.<br>- E-mail novo: `contato@nexusagencybr.com.br`.<br>- Novo CTA sugerido: "Falar no WhatsApp" / "Quero um diagnóstico gratuito". | **SUBSTITUIR** (WhatsApp, Instagram, LinkedIn — `PEND-07`/`PEND-08` RESOLVED)<br>**AGUARDAR APROVAÇÃO** (e-mail — `PEND-11`) | `APPROVED` (canais)<br>`PENDING_APPROVAL` (e-mail) |
 | **02. Hero / Entrada** (`#home`) | - Subtítulo: "Nexus Agency".<br>- Título: "Somos Nexus Agency.".<br>- Parágrafo: "Em um mundo cada vez mais conectado, uma presença digital consolidada...". | - O relatório não propôs substituição explícita para o texto do Hero (focou em Serviços, Sobre nós, Contato, Missão e Valores).<br>- Captura visual confirma a composição e background `header.webp`. | **PRESERVAR** | `APPROVED`<br>(Manter Hero original) |
 | **03. Sobre nós** (`#about`) | - Título: "Sobre nós".<br>- Texto: "A Nexus surge como uma referência inovadora no cenário do marketing digital...".<br>- Destaque: "Contando com um time experiente com passagens por grandes agências...". | - Novo Título: *"Dados que viram decisões. Decisões que viram resultado."*<br>- Novo Texto (5 parágrafos estruturados): Trajetória com +50 empresas, atuação de ponta a ponta, equipe sênior multidisciplinar.<br>- Números de Destaque (Métricas): `+50 clientes atendidos`, `[número] milhões de pessoas alcançadas`, `[número] conversas atendidas`, `[número] anos de mercado`. | **SUBSTITUIR** (textos aprovados)<br>**AGUARDAR APROVAÇÃO** (preenchimento dos colchetes `[número]`) | `APPROVED` (textos)<br>`PENDING_APPROVAL` (métricas numéricas) |
 | **04. Banner Diferenciais** | - 3 Cards: "Design", "Desenvolvimento", "Teste & QA". | - O relatório não menciona diretamente estes 3 cards, mas reforça os pilares de "Estratégia, Tecnologia e Dados".<br>- Captura de tela confirma a presença destacada dos 3 cards. | **PRESERVAR** | `APPROVED`<br>(Manter visual e cards) |
@@ -42,12 +42,12 @@
 
 > O status de cada divergência mora na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável); esta seção guarda só o detalhe de conteúdo.
 
-### Divergência 1: Número de WhatsApp Oficial (`PEND-07`)
+### Divergência 1: Número de WhatsApp Oficial (`PEND-07` — RESOLVED 2026-11-02: vale o do cliente)
 - **Site Legado:** `+55 (61) 99539-5969` (presente em todos os botões ativos de `index.html`).
 - **Relatório do Cliente:** `+55 (61) 9298-5392` (página 4 do PDF).
 - **Ação:** `AGUARDAR APROVAÇÃO`. Ambos são DDD 61 (Distrito Federal). É necessário que o responsável confirme se o número novo substitui o anterior em todos os botões ou se ambos coexistem.
 
-### Divergência 2: Perfil do Instagram (`PEND-08`)
+### Divergência 2: Perfil do Instagram (`PEND-08` — RESOLVED 2026-11-02: vale o do cliente, assim como o LinkedIn `company/nexus-ag-br`)
 - **Site Legado:** `https://www.instagram.com/nexus.ag.contato`
 - **Relatório do Cliente:** `@nexusagencybr` (`https://www.instagram.com/nexusagencybr`)
 - **Ação:** `AGUARDAR APROVAÇÃO`. Confirmar a migração para a nova conta oficial `@nexusagencybr`.

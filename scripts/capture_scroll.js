@@ -1,3 +1,5 @@
+// Porta do dev server: PORT=<n> node scripts/capture_scroll.js (padrão 3008)
+const PORT = process.env.PORT || 3008;
 const { execSync } = require('child_process');
 const path = require('path');
 
@@ -8,7 +10,7 @@ const targetDir = 'C:\\Users\\wilso\\Desktop\\Wilson\\clients\\nexus\\docs\\refe
 sections.forEach(sec => {
   const outFile = path.join(targetDir, `scroll_${sec}.png`);
   console.log(`Capturing scroll_${sec}.png with virtual-time-budget...`);
-  const cmd = `"${chromePath}" --headless=new --disable-gpu --window-size=1200,900 --virtual-time-budget=2000 --screenshot="${outFile}" "http://localhost:3001/#${sec}"`;
+  const cmd = `"${chromePath}" --headless=new --disable-gpu --window-size=1200,900 --virtual-time-budget=2000 --screenshot="${outFile}" "http://localhost:${PORT}/#${sec}"`;
   execSync(cmd, { stdio: 'inherit' });
 });
 
