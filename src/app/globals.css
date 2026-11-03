@@ -312,6 +312,140 @@ body {
   }
 }
 
+/* ==========================================================================
+   Hero — brilho roxo animado (story 7.1, PEND-14)
+   Camadas de radial-gradient (sem filter: blur, que custa repaint), animadas só
+   com transform/opacity. Cores derivadas de --primary-color-dark e --span.
+   ========================================================================== */
+.hero-glow {
+  --glow-rgb: 161 92 245;        /* --primary-color-dark */
+  --glow-light-rgb: 173 125 255; /* --span */
+  --glow-ring: clamp(240px, 62vw, 440px);
+  --glow-horizon: 62%;
+  height: clamp(260px, 52vw, 380px);
+}
+
+.hero-glow__halo,
+.hero-glow__bloom,
+.hero-glow__ring,
+.hero-glow__core,
+.hero-glow__reflection,
+.hero-glow__horizon {
+  position: absolute;
+  left: 50%;
+  top: var(--glow-horizon);
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+}
+
+/* Halo largo e difuso em volta do anel. */
+.hero-glow__halo {
+  width: clamp(640px, 160vw, 1400px);
+  aspect-ratio: 2 / 1;
+  background: radial-gradient(
+    ellipse closest-side,
+    rgb(var(--glow-rgb) / 0.42) 0%,
+    rgb(var(--glow-rgb) / 0.2) 40%,
+    rgb(var(--glow-rgb) / 0.07) 70%,
+    transparent 100%
+  );
+  animation: heroHaloDrift 16s ease-in-out infinite;
+}
+
+/* Anel/eclipse: só a metade de cima, acima do horizonte. */
+.hero-glow__ring,
+.hero-glow__reflection {
+  width: var(--glow-ring);
+  aspect-ratio: 1;
+  background: radial-gradient(
+    circle closest-side,
+    rgb(var(--glow-rgb) / 0.42) 0%,
+    rgb(var(--glow-rgb) / 0.28) 50%,
+    rgb(var(--glow-light-rgb) / 0.4) 70%,
+    rgb(255 255 255 / 0.78) 80%,
+    rgb(var(--glow-light-rgb) / 0.55) 85%,
+    rgb(var(--glow-rgb) / 0.28) 91%,
+    rgb(var(--glow-rgb) / 0.08) 96%,
+    transparent 100%
+  );
+}
+
+/* Bloom roxo colado ao anel, mais concentrado que o halo. */
+.hero-glow__bloom {
+  width: calc(var(--glow-ring) * 1.9);
+  aspect-ratio: 1;
+  background: radial-gradient(
+    circle closest-side,
+    rgb(var(--glow-rgb) / 0.45) 0%,
+    rgb(var(--glow-rgb) / 0.22) 45%,
+    rgb(var(--glow-rgb) / 0.06) 75%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(to bottom, #000 44%, transparent 62%);
+  mask-image: linear-gradient(to bottom, #000 44%, transparent 62%);
+  animation: heroGlowBreathe 10s ease-in-out infinite;
+}
+
+/* Núcleo claro nascendo do horizonte, dentro do anel. */
+.hero-glow__core {
+  width: calc(var(--glow-ring) * 0.8);
+  aspect-ratio: 2 / 1;
+  background: radial-gradient(
+    ellipse closest-side,
+    rgb(255 255 255 / 0.55) 0%,
+    rgb(var(--glow-light-rgb) / 0.45) 35%,
+    rgb(var(--glow-rgb) / 0.15) 70%,
+    transparent 100%
+  );
+  clip-path: inset(0 0 50% 0);
+  animation: heroGlowBreathe 7s ease-in-out infinite reverse;
+}
+
+.hero-glow__ring {
+  clip-path: inset(0 0 50% 0);
+  animation: heroGlowBreathe 10s ease-in-out infinite;
+}
+
+/* Reflexo tênue abaixo do horizonte (estático). */
+.hero-glow__reflection {
+  clip-path: inset(50% 0 0 0);
+  transform: translate(-50%, -50%) scaleY(0.55);
+  opacity: 0.22;
+  -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 78%);
+  mask-image: linear-gradient(to bottom, #000 50%, transparent 78%);
+  will-change: auto;
+}
+
+/* Linha do horizonte, onde o brilho é mais forte. */
+.hero-glow__horizon {
+  width: clamp(320px, 115vw, 1100px);
+  height: 44px;
+  background: radial-gradient(
+    ellipse closest-side,
+    rgb(255 255 255 / 0.95) 0%,
+    rgb(var(--glow-light-rgb) / 0.75) 22%,
+    rgb(var(--glow-rgb) / 0.3) 55%,
+    transparent 100%
+  );
+  animation: heroHorizonPulse 7s ease-in-out infinite;
+}
+
+@keyframes heroGlowBreathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+  50%      { transform: translate(-50%, -50%) scale(1.04); opacity: 1; }
+}
+
+@keyframes heroHaloDrift {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.85; }
+  33%      { transform: translate(-53%, -50%) scale(1.06); opacity: 1; }
+  66%      { transform: translate(-47%, -50%) scale(0.97); opacity: 0.9; }
+}
+
+@keyframes heroHorizonPulse {
+  0%, 100% { transform: translate(-50%, -50%) scaleX(0.95); opacity: 0.8; }
+  50%      { transform: translate(-50%, -50%) scaleX(1.05); opacity: 1; }
+}
+
 /* --- Respeito a prefers-reduced-motion --- */
 @media (prefers-reduced-motion: reduce) {
   .fluid-btn,
@@ -322,6 +456,15 @@ body {
     transform: none !important;
   }
   .fluid-btn--pulse {
+    animation: none !important;
+  }
+
+  /* Brilho do Hero parado e visível (story 7.1). */
+  .hero-glow__halo,
+  .hero-glow__bloom,
+  .hero-glow__ring,
+  .hero-glow__core,
+  .hero-glow__horizon {
     animation: none !important;
   }
 

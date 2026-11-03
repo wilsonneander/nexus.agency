@@ -47,6 +47,8 @@ Não assumir nomes ou quantidades de seções. Usar os nomes reais encontrados n
 
 **Aceite:** o primeiro viewport mantém a composição original e a animação não impede interação ou leitura.
 
+**Exceção autorizada (`PEND-14`, 2026-11-03):** o fundo e a composição do Hero deixam de seguir o legado. A foto `header.webp` com overlay foi trocada por um brilho roxo animado e o texto passou a ser centralizado ([story 7.1](stories/7-1-hero-background-animado.md)). O texto do Hero e a entrada em timeline continuam valendo.
+
 ### FR-03 — Leitura progressiva de textos
 - Textos elegíveis devem começar com o estado visual secundário definido a partir da identidade existente.
 - À medida que o scroll progride, palavras ou segmentos recebem destaque progressivo.

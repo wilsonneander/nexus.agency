@@ -18,6 +18,7 @@
 
 ## 3. Animações e scroll
 - [x] Hero entra sem atraso excessivo. (Validado via timeline com delays escalonados 0.15s, 0.35s, 0.55s)
+- [x] Brilho do Hero se move sem esconder nem ofuscar conteúdo. (Medido na [7.1](stories/7-1-hero-background-animado.md), `next start` sobre `94d4e2c` + árvore de trabalho: 5 animações CSS com movimento e 0 com reduced motion, nos 5 viewports; parallax do brilho volta a `0` ao rolar para cima e depois de resize 1200 → 375 → 1200; contraste mínimo do parágrafo 16:1 com o brilho no pico — [hero_glow_1200.png](references/qa/hero_glow_1200.png), [hero_glow_375.png](references/qa/hero_glow_375.png))
 - [x] Animações não ocultam conteúdo antes de inicializarem. (Sem JS: sim — story [4.4](stories/4-4-conteudo-sem-javascript.md), [nojs_375.png](references/qa/nojs_375.png) e [nojs_1200.png](references/qa/nojs_1200.png). Com JS: o Hero pisca na hidratação ([HeroClient.tsx](../src/sections/Hero/HeroClient.tsx) aplica `opacity: 0` no `useEffect`), ver 4.3/4.1.)
 - [x] Texto progressivo acompanha o scroll. (Validado: ScrollText com scrub bidirecional em Hero, About e Services)
 - [x] Texto progressivo regride corretamente ao subir. (Validado: scrub bidirecional restaura tons de leitura ao rolar para cima)

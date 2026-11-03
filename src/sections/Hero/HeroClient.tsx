@@ -5,6 +5,7 @@
  *
  * Correções aplicadas (QA 3.2):
  * B1 — ref agora é passado para a <section> via callback ref, não para div.contents
+ *      (story 7.1: o parallax de backgroundPositionY virou yPercent no [data-hero-glow])
  * B2 — gsap.set inicial no useEffect (depois do 1º paint: o Hero ainda pisca na
  *      hidratação, ver story 4.4/4.1)
  */
@@ -35,6 +36,7 @@ export function HeroClient({ children }: HeroClientProps) {
     const h4 = section.querySelector<HTMLElement>("[data-hero-sub]");
     const h1 = section.querySelector<HTMLElement>("[data-hero-title]");
     const social = section.querySelector<HTMLElement>("[data-hero-social]");
+    const glow = section.querySelector<HTMLElement>("[data-hero-glow]");
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -51,9 +53,10 @@ export function HeroClient({ children }: HeroClientProps) {
       if (h1) tl.to(h1, { opacity: 1, y: 0, duration: 0.7 }, 0.35);
       if (social) tl.to(social, { opacity: 1, x: 0, duration: 0.6 }, 0.55);
 
-      // B1 — Parallax correto: anima o <section> que tem backgroundImage
-      gsap.to(section, {
-        backgroundPositionY: "20%",
+      // Parallax do brilho (story 7.1): só o contêiner [data-hero-glow], nunca a <section>
+      // — transform nela prenderia o bloco social `fixed` ao Hero. Reverte com o scrub.
+      if (glow) gsap.to(glow, {
+        yPercent: 12,
         ease: "none",
         scrollTrigger: {
           trigger: section,

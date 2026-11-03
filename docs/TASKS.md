@@ -2,7 +2,7 @@
 
 ## ▶ Ordem de implementação
 
-> **Atualizada em:** 2026-11-03, no fechamento da 4.3 (commit sobre `b9eea51`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
+> **Atualizada em:** 2026-11-03, na criação da story 7.1 (sobre `94d4e2c`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
 
 **Próxima tarefa: 4.7 — Corrigir o card Design do Banner invisível com movimento** (`TODO`, sem story: começa pela skill `story`)
 Por quê agora: é o único conteúdo escondido conhecido depois da 4.3 (`DONE`). Sem reduced motion, o 1º card dos Banners fica em `opacity: 0` depois de rolar até ele, o que viola o QA § 9.
@@ -10,11 +10,12 @@ Por quê agora: é o único conteúdo escondido conhecido depois da 4.3 (`DONE`)
 | # | Tarefa | Depende de | Status | Por que nesta posição |
 |---|---|---|---|---|
 | 1 | **4.7** Card Design do Banner invisível com movimento | — | `TODO` | Conteúdo escondido com movimento normal (QA § 9). |
-| 2 | **4.1** Comportamento desktop/tablet/mobile | — | `TODO` | Define, por breakpoint, quais efeitos rodam; candidata a adotar `gsap.matchMedia()` (ver [story 4.3](stories/4-3-reduced-motion.md)). |
-| 3 | **4.2** Distâncias e intensidades por breakpoint | 4.1 | `TODO` | Ajusta os valores do que a 4.1 decidiu manter. |
-| 4 | **4.5** Teclado, foco e semântica | — | `TODO` | Independente das animações; pode correr em paralelo a partir da posição 2. |
-| 5 | **4.6** Contraste em todos os estados animados | 4.2 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). |
-| 6 | **6.9** Remover código de motion/About não usado | — | `TODO` | Limpeza sem risco ao QA § 9; encaixa em qualquer folga. |
+| 2 | **7.1** Hero com background roxo animado | `PEND-14` (`RESOLVED`) | `IN_PROGRESS` | Pedido do responsável; [story](stories/7-1-hero-background-animado.md) escrita. Vem antes da 4.1/4.2 porque muda o fundo e o movimento do Hero que elas vão calibrar. |
+| 3 | **4.1** Comportamento desktop/tablet/mobile | — | `TODO` | Define, por breakpoint, quais efeitos rodam; candidata a adotar `gsap.matchMedia()` (ver [story 4.3](stories/4-3-reduced-motion.md)). |
+| 4 | **4.2** Distâncias e intensidades por breakpoint | 4.1 | `TODO` | Ajusta os valores do que a 4.1 decidiu manter. |
+| 5 | **4.5** Teclado, foco e semântica | — | `TODO` | Independente das animações; pode correr em paralelo a partir da posição 2. |
+| 6 | **4.6** Contraste em todos os estados animados | 4.2 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). |
+| 7 | **6.9** Remover código de motion/About não usado | — | `TODO` | Limpeza sem risco ao QA § 9; encaixa em qualquer folga. |
 
 **Fora da fila (aguardam decisão do responsável, não implementar):** `PEND-13` pulso do WhatsApp e rotação dos ícones sociais com reduced motion, `PEND-02` links `href="#"`, `PEND-06` deploy, `PEND-09` colchetes, `PEND-10` backend do formulário, `PEND-11` e-mail, `PEND-12` LGPD. ESLint (1.8) depende de aprovação de dependências novas. Quando um desses for resolvido, a tarefa resultante entra na tabela acima na posição devida.
 
@@ -62,6 +63,7 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 | **PEND-11** | **E-mail Institucional** | Inclusão de `contato@nexusagencybr.com.br` no Footer e canais de contato. | `PENDING_APPROVAL` | Conversão (fora das Fases 0–6) |
 | **PEND-12** | **Política de Privacidade e LGPD** | Criação de rota/modal `/politica-de-privacidade` e termo de consentimento no form. | `PENDING_APPROVAL` | Conversão (fora das Fases 0–6) |
 | **PEND-13** | **Animações protegidas com reduced motion (FR-11 × FR-07)** | O FR-11 pede desativar animações decorativas com `prefers-reduced-motion: reduce`. O FR-07 protege o pulso infinito `WaveWhatsApp` do botão flutuante e a rotação 3D `rotateY(360deg)` dos `SocialIcons` no hover ("não devem mudar visual, posição, links ou animação"). Hoje os dois animam com reduced motion. Opções: (A) manter como no legado; (B) desligar só o pulso com `reduce` (é infinito e automático; a rotação depende de hover); (C) desligar os dois com `reduce`. Levantado na [4.3](stories/4-3-reduced-motion.md). | `PENDING_DECISION` | Fase 4 (Acessibilidade) |
+| **PEND-14** | **Redesign do Hero (exceção ao FR-02 e ao AGENTS.md § 4)** | O FR-02 pede reproduzir fielmente o Hero legado (foto `header.webp` + overlay, texto à esquerda no desktop). **Decisão (2026-11-03, responsável):** autorizado trocar o fundo por um brilho roxo animado no estilo de [hero-glow-reference.png](references/hero-glow-reference.png), com composição centralizada, "limpo e profissional", sem a interface de produto da referência. Vale só para fundo e composição do Hero; o texto continua o do legado. Executado na [7.1](stories/7-1-hero-background-animado.md). | `RESOLVED` | Fase 7 (Evolução visual) |
 
 ## Fase 1 — Fundação técnica
 
@@ -110,7 +112,7 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 
 ## Fase 4 — Responsividade e acessibilidade
 
-- [ ] 4.1 Definir comportamento desktop/tablet/mobile. (Status: TODO | Story: —)
+- [ ] 4.1 Definir comportamento desktop/tablet/mobile. (Status: TODO | Story: — | Achado da [7.1](stories/7-1-hero-background-animado.md): em 480px o documento tem 497 px de largura (scroll horizontal) por causa de um card fora do Hero, com `h4.text-lg font-semibold` e `p.text-white/70 text-xs`.)
 - [ ] 4.2 Ajustar distâncias e intensidades por breakpoint. (Status: TODO | Story: —)
 - [x] 4.3 Implementar reduced motion. (Status: DONE | Story: [4-3-reduced-motion.md](stories/4-3-reduced-motion.md) | Guarda síncrona `prefersReducedMotion()` nos 12 efeitos, limpeza completa (Hero, `ScrollText`, contador) e CSS de reduced motion; Hero, textos e "+50" visíveis com `reduce` em [reduced_1200.png](references/qa/reduced_1200.png) e [reduced_375.png](references/qa/reduced_375.png); pulso/rotação aguardam `PEND-13`)
 - [x] 4.4 Verificar conteúdo sem JavaScript/animação. (Status: DONE | Story: [4-4-conteudo-sem-javascript.md](stories/4-4-conteudo-sem-javascript.md) | `<noscript><style>` no `<head>` deixa os 5 `ScrollText` em branco pleno sem JS; auditoria em [nojs_375.png](references/qa/nojs_375.png) e [nojs_1200.png](references/qa/nojs_1200.png), todos os blocos visíveis)
@@ -144,6 +146,14 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 - [ ] 6.9 Remover código de motion/About não usado. (Status: TODO | Story: — | Achado da [4.4](stories/4-4-conteudo-sem-javascript.md): [MissionVisionValues.tsx](../src/sections/About/MissionVisionValues.tsx) não é importado, [capture_mvv.js](../scripts/capture_mvv.js) só o valida e [ScrollReveal.tsx](../src/components/motion/ScrollReveal.tsx) não tem uso (`grep "<ScrollReveal" src` vazio). Confirmar com quem escreveu antes de apagar.)
 
 **Critério de saída:** checklist aprovado, build concluído e nenhuma regressão crítica conhecida. [ATENDIDO]
+
+## Fase 7 — Evolução visual (pós-entrega)
+
+Mudanças de design pedidas pelo responsável depois da entrega. Cada uma depende de um `PEND-xx` que autorize a exceção à fidelidade ao legado.
+
+- [ ] 7.1 Redesenhar o Hero com background roxo animado. (Status: IN_PROGRESS | Story: [7-1-hero-background-animado.md](stories/7-1-hero-background-animado.md) | Exceção autorizada no `PEND-14`)
+
+**Critério de saída:** cada mudança aprovada visualmente pelo responsável, sem violar o [QA-CHECKLIST](QA-CHECKLIST.md) § 9.
 
 ## Coordenação de múltiplos agentes
 
