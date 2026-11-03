@@ -9,6 +9,8 @@
  * - Reversível: ao subir a página, o destaque retorna.
  * - Usa GSAP + ScrollTrigger com scrub.
  * - Respeita prefers-reduced-motion.
+ * - Sem JS: o <noscript> do <head> em `src/app/layout.tsx` força `[data-word]` para
+ *   branco pleno (story 4.4). Renomear o atributo `data-word` quebra esse fallback.
  * - B6 Correção de Acessibilidade:
  *   Utiliza texto padrão legível para leitores de tela em span sr-only sem causar leitura duplicada,
  *   ou mantém o fluxo natural renderizando palavras sem duplicar aria-label redundante no container.

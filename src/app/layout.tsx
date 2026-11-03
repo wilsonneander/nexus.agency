@@ -70,6 +70,17 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
         />
+        {/*
+          Fallback sem JS (FR-03 aceite, story 4.4): só vale com JavaScript desligado.
+          O ScrollText grava a cor inicial (22%) inline em cada [data-word] e só o GSAP
+          a ilumina; sem JS o texto ficaria ilegível. O !important é o único jeito de
+          uma folha de estilo vencer o style="" inline. Com JS, o <noscript> não se aplica.
+        */}
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: "<style>[data-word]{color:rgb(255 255 255)!important}</style>",
+          }}
+        />
       </head>
       <body className="antialiased min-h-screen flex flex-col bg-secondary text-white">
         <Navbar />

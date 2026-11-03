@@ -23,6 +23,7 @@ Registradas no `package.json` e `package-lock.json` com sucesso na Fase 1. Build
 - Evitar transformar `app/page.tsx` ou `app/layout.tsx` em Client Component sem justificativa.
 - Manter metadados e conteúdo estrutural no servidor sempre que possível.
 - Garantir que componentes animados tenham fallback visível sem JavaScript.
+- **Fallback sem JS (padrão, story [4.4](stories/4-4-conteudo-sem-javascript.md)):** quando o estado inicial de uma animação precisa estar no HTML do servidor (para não piscar na hidratação) e esse estado é ilegível, o estado final sem JS vem de um único `<noscript><style>` no `<head>` de [layout.tsx](../src/app/layout.tsx), que seleciona o elemento por atributo `data-*`. Ele só vale com JS desligado, então não altera nada com JS. `!important` só onde a regra disputa com `style=""` inline. Hoje cobre `[data-word]` do `ScrollText`. Renderizado com `dangerouslySetInnerHTML` no `<noscript>`, para o React não escapar o CSS. Evidência: [scripts/capture_nojs.js](../scripts/capture_nojs.js).
 
 ### GSAP
 - Registrar plugins uma única vez em módulo client-side apropriado.
@@ -45,7 +46,7 @@ Registradas no `package.json` e `package-lock.json` com sucesso na Fase 1. Build
 - A animação deve usar uma propriedade visual compatível com o design (cor, opacidade ou ambas).
 - Definir progresso de cada palavra por cálculo determinístico e reversível.
 - Testar textos curtos, longos, multilinha, acentos e pontuação.
-- Garantir fallback legível com reduced motion e sem JS.
+- Garantir fallback legível com reduced motion e sem JS. Sem JS: ver o padrão de fallback em [§ Next.js / React](#nextjs--react).
 
 ### Tailwind / CSS
 - Tokens globais reais extraídos do projeto Nexus Agency:

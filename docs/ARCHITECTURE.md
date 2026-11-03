@@ -164,6 +164,7 @@ Com base no relatório oficial `docs/AUDIT.md`:
   - Reveals suaves nos cards de Banner, Serviços e Blog.
   - Botão WhatsApp com animação contínua `@keyframes WaveWhatsApp` em CSS e transição de escala.
   - Botões de Redes Sociais: **preservação integral** da rotação 3D (`rotateY(360deg)`) e expansão de cor de fundo sem alterações.
+- **Fallback sem JS:** um único `<noscript><style>` no `<head>` de [layout.tsx](../src/app/layout.tsx), selecionando `data-*`, dá o estado final legível sem JS (story [4.4](stories/4-4-conteudo-sem-javascript.md)). Regra completa em [TECHNICAL-SPEC.md § Next.js / React](TECHNICAL-SPEC.md#nextjs--react).
 - **Avaliação de Lenis:** Descartado para a versão inicial. O scroll nativo (`scroll-behavior: smooth`) e o ScrollTrigger padrão atendem perfeitamente à proposta sem os riscos de conflito em mobile/touch.
 - **Estratégia de testes:** Execução do [QA-CHECKLIST.md](QA-CHECKLIST.md) nos viewports 375px, 480px, 768px, 1024px e 1200px.
 - **Pendências que afetam a arquitetura** (formulário `PEND-10`, links placeholder `PEND-02`, textos `PEND-03` (RESOLVED), hospedagem `PEND-06`): status na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável).

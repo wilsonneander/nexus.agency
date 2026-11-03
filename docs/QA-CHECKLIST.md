@@ -18,7 +18,7 @@
 
 ## 3. Animações e scroll
 - [x] Hero entra sem atraso excessivo. (Validado via timeline com delays escalonados 0.15s, 0.35s, 0.55s)
-- [x] Animações não ocultam conteúdo antes de inicializarem. (Validado com eliminação de FOUC e opacidades seguras)
+- [x] Animações não ocultam conteúdo antes de inicializarem. (Sem JS: sim — story [4.4](stories/4-4-conteudo-sem-javascript.md), [nojs_375.png](references/qa/nojs_375.png) e [nojs_1200.png](references/qa/nojs_1200.png). Com JS: o Hero pisca na hidratação ([HeroClient.tsx](../src/sections/Hero/HeroClient.tsx) aplica `opacity: 0` no `useEffect`), ver 4.3/4.1.)
 - [x] Texto progressivo acompanha o scroll. (Validado: ScrollText com scrub bidirecional em Hero, About e Services)
 - [x] Texto progressivo regride corretamente ao subir. (Validado: scrub bidirecional restaura tons de leitura ao rolar para cima)
 - [x] Palavras e pontuação não piscam nem saltam. (Validado: regex `(\s+)` preserva espaços e tokens literais)
@@ -52,7 +52,7 @@ Em cada viewport:
 - [x] Foco é visível. (Validado: outline e bordas ativas)
 - [x] Semântica de headings, links e botões é adequada. (Validado: h1-h4, form e buttons com tipagem semântica)
 - [x] Leitores de tela não recebem texto duplicado ou fragmentado indevidamente. (Validado: remoção de aria-labels duplicados)
-- [x] Contraste é suficiente nos estados inicial e animado. (Validado: estado inicial com 22% de opacidade sobre fundo preto e 100% ao iluminar)
+- [x] Contraste é suficiente nos estados inicial e animado. (Validado: estado inicial com 22% de opacidade sobre fundo preto e 100% ao iluminar) — Sem JS, o `ScrollText` sai em branco pleno ([4.4](stories/4-4-conteudo-sem-javascript.md)). Com JS, o estado inicial em 22% dá ≈ 1,9:1 sobre `#04091d` e será reavaliado na 4.6; a evidência sem JS não confirma este item.
 
 ## 6. Performance e estabilidade
 - [ ] Imagens têm dimensões/proporções definidas.
@@ -68,7 +68,7 @@ Em cada viewport:
 - [x] Title e description estão corretos. (Title: "Nexus | Agency", description institucional)
 - [x] Metadados sociais e favicon foram preservados/configurados. (OpenGraph, Twitter Cards, icon2.png)
 - [x] Estrutura semântica está correta. (H1 único no Hero, H2 e H3 nas seções e cards)
-- [x] Conteúdo principal está presente no HTML renderizado. (SSR / SSG completo)
+- [x] Conteúdo principal está presente no HTML renderizado. (SSR / SSG completo; com JS desligado todo texto e imagem aparece e é legível — [4.4](stories/4-4-conteudo-sem-javascript.md), [nojs_1200.png](references/qa/nojs_1200.png))
 - [x] Lint passa. (Zero warnings/errors)
 - [x] Testes existentes passam. (Validações de renderização, IDs e scripts headless)
 - [x] Build de produção passa. (Exit code 0, rotas /, /robots.txt, /sitemap.xml estáticas)

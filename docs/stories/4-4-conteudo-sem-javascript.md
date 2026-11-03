@@ -6,7 +6,7 @@ baseline_commit: 5012764118ea4639ac2b7c05adfcdddf5ac9936f
 
 |                 |                                                                                         |
 | --------------- | --------------------------------------------------------------------------------------- |
-| **Status**      | TODO                                                                                    |
+| **Status**      | DONE                                                                                    |
 | **Fase**        | Fase 4 — Responsividade e acessibilidade                                                |
 | **Área**        | a11y, motion                                                                            |
 | **Seções**      | Hero, About (título, 1º parágrafo, Missão/Visão/Valores), Services; verificação em todas |
@@ -222,21 +222,20 @@ branco, que não é token de marca. Se o revisor preferir, troque por
 
 ## Tasks
 
-- [ ] Auditar a página sem JS antes da correção e capturar o "antes" (AC #5, AC #8)
-  - [ ] Criar `scripts/capture_nojs.js` (checagem de porta com `exit(1)`, alturas fixas)
-  - [ ] Capturar `nojs_375_antes.png` e `nojs_1200_antes.png`
-  - [ ] Capturar com JS o "antes" em 375/480/768/1024/1200 (`*_antes.png`)
-- [ ] Prova de conceito: `<noscript><style>` no `<head>`, depois `npm run build` e conferir
-      em `.next/server/app/index.html` que o CSS sai sem escape. Se sair escapado ou for
-      descartado, parar e reabrir a decisão antes de seguir (AC #1, AC #3, AC #8)
-- [ ] Fallback `<noscript>` completo no `<head>` do `layout.tsx` (AC #1, AC #3)
-- [ ] `data-mvv-panel` nos 3 painéis do `MissionVisionValues` (AC #3)
-- [ ] Comentário no `ScrollText` apontando o fallback (AC #1)
-- [ ] Conferir que com JS nada mudou: ScrollText e accordion (AC #2, AC #4)
-- [ ] Medir o envio do formulário sem JS e anotar no `PEND-10` (AC #6)
-- [ ] Capturar o "depois" e preencher a tabela da auditoria no _Execução_ (AC #5)
-- [ ] Atualizar TECHNICAL-SPEC / ARCHITECTURE / CLAUDE.md com o padrão (DoD)
-- [ ] Validação final e carimbo (AC #7, AC #8)
+- [x] Auditar a página sem JS antes da correção e capturar o "antes" (AC #5, AC #8)
+  - [x] Criar [scripts/capture_nojs.js](../../scripts/capture_nojs.js) (checagem de porta com `exit(1)`, teto de altura fixo)
+  - [x] Capturar `nojs_375_antes.png` e `nojs_1200_antes.png` (fora do repositório, ver _Execução_)
+  - [x] Capturar com JS o "antes" em 375/480/768/1024/1200 (`js_<w>_antes.png`, fora do repositório)
+- [x] Prova de conceito: `<noscript><style>` no `<head>`, depois `npm run build` e conferir
+      em `.next/server/app/index.html` que o CSS sai sem escape (AC #1, AC #8)
+- [x] Fallback `<noscript>` completo no `<head>` do `layout.tsx` (AC #1)
+- [x] ~~`data-mvv-panel` nos 3 painéis do `MissionVisionValues` (AC #3)~~ — não se aplica: o componente não é usado (ver _Execução_)
+- [x] Comentário no `ScrollText` apontando o fallback (AC #1)
+- [x] Conferir que com JS nada mudou: ScrollText e accordion (AC #2, AC #4) — capturas com JS idênticas antes/depois; scroll para baixo/cima e recarga com o Hero medidos por sonda CDP no fechamento (ver _Execução_); accordion sem diff (não renderiza)
+- [x] Medir o envio do formulário sem JS e anotar no `PEND-10` (AC #6)
+- [x] Capturar o "depois" e preencher a tabela da auditoria no _Execução_ (AC #5)
+- [x] Atualizar TECHNICAL-SPEC / ARCHITECTURE / CLAUDE.md com o padrão (DoD)
+- [x] Validação final e carimbo (AC #7, AC #8)
 
 ## Validações exigidas
 
@@ -273,20 +272,58 @@ branco, que não é token de marca. Se o revisor preferir, troque por
 
 ## Definition of Done
 
-- [ ] Todo AC verificado, cada um com a evidência.
-- [ ] `npx tsc --noEmit` verde.
-- [ ] `npm run build` verde, sem warning de hidratação/SSR.
-- [ ] Validação visual/movimento feita nos viewports afetados (evidência em `docs/references/qa/`).
-- [ ] Itens tocados do `QA-CHECKLIST.md` atualizados com a evidência.
-- [ ] `PEND-xx` consumido marcado `RESOLVED`, se houver (nenhum: o `PEND-10` só recebe uma observação e segue aberto).
-- [ ] Docs afetados (TECHNICAL-SPEC, ARCHITECTURE, CLAUDE.md) atualizados.
-- [ ] Status movido na story **e** no `TASKS.md`, com a validação carimbada (comando + SHA) no Change Log.
+- [x] Todo AC verificado, cada um com a evidência (AC #3 e #4 cumpridos pelo estado atual: o accordion não é usado, ver _Execução_).
+- [x] `npx tsc --noEmit` verde.
+- [x] `npm run build` verde, sem warning de hidratação/SSR.
+- [x] Validação visual/movimento feita nos viewports afetados (evidência em `docs/references/qa/`).
+- [x] Itens tocados do `QA-CHECKLIST.md` atualizados com a evidência.
+- [x] `PEND-xx` consumido marcado `RESOLVED`, se houver (nenhum: o `PEND-10` só recebe uma observação e segue aberto).
+- [x] Docs afetados (TECHNICAL-SPEC, ARCHITECTURE, CLAUDE.md) atualizados.
+- [x] Status movido na story **e** no `TASKS.md`, com a validação carimbada (comando + SHA) no Change Log.
 
 ## Execução
 
-**Arquivos tocados:** <preenchido ao implementar.>
+**Arquivos tocados:** [src/app/layout.tsx](../../src/app/layout.tsx) (`<noscript>` no `<head>`), [src/components/motion/ScrollText.tsx](../../src/components/motion/ScrollText.tsx) (só comentário), [scripts/capture_nojs.js](../../scripts/capture_nojs.js) (novo), [docs/references/qa/nojs_375.png](../references/qa/nojs_375.png) e [nojs_1200.png](../references/qa/nojs_1200.png) (evidência final), [TASKS.md](../TASKS.md), [QA-CHECKLIST.md](../QA-CHECKLIST.md), [TECHNICAL-SPEC.md](../TECHNICAL-SPEC.md), [ARCHITECTURE.md](../ARCHITECTURE.md), [CLAUDE.md](../../CLAUDE.md).
 
-**O que divergiu do plano:** <e para onde foi. "Nada." quando não divergiu.>
+**Medição (AC #1).** O script lê a cor computada da 1ª `[data-word]` de cada um dos 5 textos:
+
+| Texto | Sem JS, antes | Sem JS, depois | Com JS, depois (topo da página) |
+| --- | --- | --- | --- |
+| Hero, parágrafo | `rgba(255, 255, 255, 0.22)` | `rgb(255, 255, 255)` | `rgb(255, 255, 255)` / `0.99` (scrub já em andamento acima da dobra, igual ao antes) |
+| About, título | `0.22` | `rgb(255, 255, 255)` | `0.22` |
+| About, 1º parágrafo | `0.22` | `rgb(255, 255, 255)` | `0.22` |
+| Services, título | `0.22` | `rgb(255, 255, 255)` | `0.22` |
+| Services, subtítulo | `0.22` | `rgb(255, 255, 255)` | `0.22` |
+
+**Auditoria sem JS (AC #5).** `node scripts/capture_nojs.js` contra `npm run start` (build de produção) na porta 3008. Viewport de 900 px de altura; a captura cobre o documento inteiro, com teto fixo de 17000 px (375) e 9000 px (1200): `375x14684` e `1200x8015`. O Footer aparece inteiro nas duas.
+
+| Bloco | Visível e legível sem JS | Evidência |
+| --- | --- | --- |
+| Navbar | sim (menu mobile: funcional sem JS **não**, igual ao legado; menu desktop e âncoras funcionam) | `nojs_375.png` topo (ícone do menu), `nojs_1200.png` topo |
+| Hero (h4, h1, parágrafo, ícones sociais do topo) | sim | parágrafo em branco pleno, antes 22% |
+| About (título, parágrafos, destaque, +50, ícones sociais) | sim | título e 1º parágrafo em branco pleno |
+| Missão / Visão / Valores | sim (já era: renderização estática, ver abaixo) | cards abertos com o texto completo nos dois viewports |
+| Banners (Design, Desenvolvimento, Teste & QA) | sim | os 3 cards |
+| Projects | sim (filtro: funcional sem JS **não**, igual ao legado) | os 6 projetos (filtro `all`) |
+| Services (título, subtítulo, 6 serviços, pacotes) | sim | título e subtítulo em branco pleno |
+| Blog | sim | os 3 posts |
+| Contact | sim | 4 campos e CTA |
+| Footer (colunas e ícones sociais) | sim | inteiro nas duas capturas |
+| `WhatsAppFloat` | sim | botão "Quero saber mais!" (fixo, aparece na 1ª dobra) |
+
+Ícones sociais nos 3 locais (topo/Hero, About, Footer) aparecem. Poppins, RemixIcon e FontAwesome carregam sem JS.
+
+**Formulário sem JS (AC #6).** `curl -X POST` com os 4 campos em `/` (`npm run start`): `200`, `text/html`, `x-nextjs-cache: HIT` (a home pré-renderizada). Anotado no `PEND-10`; formulário não mudou.
+
+**O que divergiu do plano:**
+
+- **Missão/Visão/Valores já aparecem sem JS: o problema 2 do _Contexto_ não existe na página.** [MissionVisionValues.tsx](../../src/sections/About/MissionVisionValues.tsx) não é importado em lugar nenhum, nem no baseline `5012764` (`git grep MissionVisionValues 5012764` só acha a própria definição). O About renderiza Missão, Visão e Valores como cards estáticos sempre abertos em [About/index.tsx](../../src/sections/About/index.tsx) (`data-about-mv`, `data-about-value`). Por isso não acrescentei `data-mvv-panel` nem a regra correspondente no `<noscript>`: seria CSS para um componente que não renderiza. O AC #3 está cumprido pelo estado atual (evidência nas capturas); o AC #4 fica sem diff. O componente morto e o [scripts/capture_mvv.js](../../scripts/capture_mvv.js), que o valida, ficam para limpeza (fora de escopo, como o `ScrollReveal`).
+- **O script usa CDP, não `--screenshot`.** Com `--blink-settings=scriptEnabled=false` o Chrome headless sai com código 0 sem gravar o PNG. O script sobe o Chrome com `--remote-debugging-port` e o dirige pelo `WebSocket` nativo do Node 24 (`Emulation.setScriptExecutionDisabled`), sem dependência nova. Ganho: ele também mede a cor computada.
+- **Altura da janela.** Uma janela de 14000 px infla o `min-h-screen` do Hero. O script usa viewport de 900 px, captura o documento inteiro e falha (`exit 1`) se o documento passar do teto fixo.
+- **`JS=1` no mesmo script** captura com JS em 375/480/768/1024/1200 para a não regressão (AC #8), em vez das capturas do `capture_sections.js`, que cortam em 900 px.
+- **Capturas "antes" fora do repositório**, pela regra nova do [CLAUDE.md](../../CLAUDE.md) (higiene do repositório): `nojs_*_antes.png` e `js_<w>[_antes].png` ficaram na pasta temporária da sessão. As capturas com JS antes e depois são visualmente idênticas nos 5 viewports.
+- **AC #2 medido por sonda CDP, não a olho** (no fechamento, build de produção, 1200 px, script pontual fora do repositório). Desde a carga, um `requestAnimationFrame` registrou a cor da 1ª palavra do parágrafo do Hero em 224 quadros: alfa entre 0,22 e 0,99, e **nenhum quadro em branco seguido de queda** (sem flash). Rolando até `#about`, Hero e About ficam em `rgb(255, 255, 255)` e Services em 0,22. Até `#service`, Services ilumina (1ª palavra em 1, última em 0,66, ainda em andamento). De volta ao topo, About e Services voltam a 0,22. O teste de teclado do accordion (AC #4) não se aplica: o componente não renderiza.
+- **Fechamento (review):** com `JS=1` ou `SUFFIX=…`, o `capture_nojs.js` agora grava na pasta temporária (ou em `OUT_DIR`), para uma rodada de não regressão não sujar `docs/references/qa/`. A sonda morta de `[data-mvv-panel]` saiu. A limpeza do código morto (`MissionVisionValues`, `capture_mvv.js`, `ScrollReveal`) virou a tarefa 6.9 do [TASKS.md](../TASKS.md).
 
 ## Change Log
 
@@ -294,3 +331,5 @@ branco, que não é token de marca. Se o revisor preferir, troque por
 | --- | --- | --- |
 | 2026-11-02 | TODO | Story criada sobre `5012764`. A medição desfaz a suspeita da Ordem de implementação (os `gsap.from` não escondem nada sem JS) e encontra dois problemas reais: `ScrollText` a 22% e MVV fechado sem JS. |
 | 2026-11-02 | TODO | Validada (`validate-story`, 0 commits após `5012764`, contexto confere). O AC #4 passa a medir o diff em vez de comparar com uma captura estática. O AC #5 ganha checagem de porta, alturas fixas e o Footer visível como prova de captura. O AC #8 passa a exigir os 6 IDs `true` e um baseline `*_antes.png` com JS. A prova de conceito do `<noscript>` no build sobe para a 2ª task. O plano limita o `!important` do MVV a `grid-template-rows`/`opacity`. Fica definido o destino do `[x]` do QA § 3. |
+| 2026-11-02 | IN_PROGRESS | Implementada sobre `e79da34` (árvore de trabalho, sem commit). `<noscript><style>[data-word]{…!important}</style></noscript>` no `<head>` via `dangerouslySetInnerHTML`. MVV sem mudança: o componente accordion não é usado e a página já mostra os cards abertos. Validação: `npx tsc --noEmit` ok; `rm -rf .next && npm run build` ok, sem warning, `<noscript><style>` sem escape em `.next/server/app/index.html`; `node scripts/check_ids.js` (`npm run start`, 3008) → 6× `true`; `node scripts/capture_nojs.js` → 5 textos em `rgb(255, 255, 255)`, Footer inteiro; `JS=1 node scripts/capture_nojs.js` idêntico ao antes nos 5 viewports; `git diff --stat` sem `SocialIcons*`, `WhatsAppFloat.tsx`, `constants.ts`. Falta: teste manual de scroll/recarga no navegador (AC #2). |
+| 2026-11-02 | DONE | Fechada (`close-story`). Validado na árvore de trabalho sobre `e79da34` e entregue num único commit. `npx tsc --noEmit` ok. `rm -rf .next && npm run build` ok, sem warning, `<noscript><style>[data-word]{color:rgb(255 255 255)!important}</style></noscript>` sem escape no HTML. `npm run start` na 3008, depois de encerrar um servidor antigo que ocupava a porta, para não medir build velho. `node scripts/check_ids.js` → 6× `true`. `node scripts/capture_nojs.js` → 5 textos em `rgb(255, 255, 255)`, `375x14684` e `1200x8015`, com Footer inteiro (capturas abertas). `JS=1` → pasta temporária, visual igual ao antes. Sonda CDP do AC #2: sem flash e reversível. `curl -X POST /` → `200`, `x-nextjs-cache: HIT`. Ajustes do review: destino das capturas do script, sonda MVV removida, tarefa 6.9 de limpeza. Fora de escopo, no mesmo commit: regra de higiene do repositório no `CLAUDE.md`. |

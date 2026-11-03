@@ -2,19 +2,19 @@
 
 ## ▶ Ordem de implementação
 
-> **Atualizada em:** 2026-11-02, sobre `5012764`. Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
+> **Atualizada em:** 2026-11-02, no fechamento da 4.4 (commit sobre `e79da34`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
 
-**Próxima tarefa: 4.4 — Verificar conteúdo sem JavaScript/animação** (`TODO`, [story](stories/4-4-conteudo-sem-javascript.md), validada)
-Por quê primeiro: sem JS, o `ScrollText` deixa os 5 textos de leitura progressiva em 22% de branco (≈ 1,9:1), e os cards Missão/Visão/Valores ficam fechados sem poder abrir. As duas coisas violam o QA § 9 ("animação esconder conteúdo"). A suspeita anterior sobre os `gsap.from()` de Footer/Banners/Contact não se confirmou: eles rodam só no `useEffect`. A 4.4 também é a base das seguintes, porque fixa o padrão de fallback sem JS que a 4.3 e a 4.6 reaproveitam.
+**Próxima tarefa: 4.3 — Implementar reduced motion** (`TODO`, sem story: começa pela skill `story`)
+Por quê agora: a 4.4 (`DONE`) fixou o fallback sem JS. Com JS, ainda há conteúdo que depende de movimento. O `ScrollText` fica em 22% até o `useEffect` rodar, mesmo com reduced motion, e o Hero pisca na hidratação ([HeroClient.tsx](../src/sections/Hero/HeroClient.tsx) aplica `opacity: 0` no `useEffect`). As duas coisas foram registradas na [story 4.4](stories/4-4-conteudo-sem-javascript.md) e são o ponto de partida da medição.
 
 | # | Tarefa | Depende de | Status | Por que nesta posição |
 |---|---|---|---|---|
-| 1 | **4.4** Conteúdo sem JS/animação | — | `TODO` | Risco ativo ao QA § 9 (ScrollText em 22% e MVV fechado sem JS); fixa o padrão de fallback sem JS. |
-| 2 | **4.3** Reduced motion | 4.4 | `TODO` | Mesmo eixo da 4.4 (conteúdo visível sem movimento); `useReducedMotion()` já existe — medir lacunas por seção. |
-| 3 | **4.1** Comportamento desktop/tablet/mobile | 4.4, 4.3 | `TODO` | Define, por breakpoint, quais efeitos rodam; precisa saber o que já é seguro desligar. |
-| 4 | **4.2** Distâncias e intensidades por breakpoint | 4.1 | `TODO` | Ajusta os valores do que a 4.1 decidiu manter. |
-| 5 | **4.5** Teclado, foco e semântica | — | `TODO` | Independente das animações; pode correr em paralelo a partir da posição 3. |
-| 6 | **4.6** Contraste em todos os estados animados | 4.2, 4.3, 4.4 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). |
+| 1 | **4.3** Reduced motion | — | `TODO` | Mesmo eixo da 4.4 (conteúdo visível sem movimento); `useReducedMotion()` já existe — medir lacunas por seção, a partir dos achados da 4.4. |
+| 2 | **4.1** Comportamento desktop/tablet/mobile | 4.3 | `TODO` | Define, por breakpoint, quais efeitos rodam; precisa saber o que já é seguro desligar. |
+| 3 | **4.2** Distâncias e intensidades por breakpoint | 4.1 | `TODO` | Ajusta os valores do que a 4.1 decidiu manter. |
+| 4 | **4.5** Teclado, foco e semântica | — | `TODO` | Independente das animações; pode correr em paralelo a partir da posição 2. |
+| 5 | **4.6** Contraste em todos os estados animados | 4.2, 4.3 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). |
+| 6 | **6.9** Remover código de motion/About não usado | — | `TODO` | Limpeza sem risco ao QA § 9; encaixa em qualquer folga. |
 
 **Fora da fila (aguardam decisão do responsável, não implementar):** `PEND-02` links `href="#"`, `PEND-06` deploy, `PEND-09` colchetes, `PEND-10` backend do formulário, `PEND-11` e-mail, `PEND-12` LGPD. ESLint (1.8) depende de aprovação de dependências novas. Quando um desses for resolvido, a tarefa resultante entra na tabela acima na posição devida.
 
@@ -58,7 +58,7 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 | **PEND-07** | **Número do WhatsApp (Legado vs. Cliente)** | Site legado usa `+55 (61) 99539-5969`; relatório do cliente cita `+55 (61) 9298-5392`. **Decisão (2026-11-02, responsável):** vale o número do cliente, `+55 (61) 9298-5392` (`https://wa.me/556192985392`), já em `SITE_CONFIG.whatsapp`. | `RESOLVED` | — |
 | **PEND-08** | **Perfil do Instagram (Legado vs. Cliente)** | Site legado usa `@nexus.ag.contato`; relatório do cliente indica `@nexusagencybr`. **Decisão (2026-11-02, responsável):** valem os perfis do cliente — Instagram `https://www.instagram.com/nexusagencybr/` e LinkedIn `https://www.linkedin.com/company/nexus-ag-br/` (legado: `linkedin.com/in/nexusagency`), já em `SITE_CONFIG.socials`. Facebook inalterado. | `RESOLVED` | — |
 | **PEND-09** | **Informações entre colchetes do Cliente** | Preenchimento dos números em falta (`[número]` milhões de pessoas, conversas, anos) e prazos (`[24 horas úteis]`). | `PENDING_APPROVAL` | Conversão (fora das Fases 0–6) |
-| **PEND-10** | **Formulário de Contato (sem backend)** | Hoje `action="/"` + `preventDefault`, nada é enviado. Opções: (A) Route Handler/Server Action com e-mail (Resend); (B) Redirecionamento com mensagem para o WhatsApp; (C) CRM/plataforma externa; (D) Mock front-end com feedback. Comparação em [AUDIT.md § 12.2](AUDIT.md). | `PENDING_APPROVAL` | Conversão (fora das Fases 0–6) |
+| **PEND-10** | **Formulário de Contato (sem backend)** | Hoje `action="/"` + `preventDefault`, nada é enviado. Opções: (A) Route Handler/Server Action com e-mail (Resend); (B) Redirecionamento com mensagem para o WhatsApp; (C) CRM/plataforma externa; (D) Mock front-end com feedback. Comparação em [AUDIT.md § 12.2](AUDIT.md). **Sem JS** (medido na [4.4](stories/4-4-conteudo-sem-javascript.md), `npm run start`, 2026-11-02): o `preventDefault` não roda, o navegador faz `POST /` com os 4 campos e recebe `200` com a home pré-renderizada (`x-nextjs-cache: HIT`). Os dados são descartados e a página volta ao topo, sem aviso. | `PENDING_APPROVAL` | Conversão (fora das Fases 0–6) |
 | **PEND-11** | **E-mail Institucional** | Inclusão de `contato@nexusagencybr.com.br` no Footer e canais de contato. | `PENDING_APPROVAL` | Conversão (fora das Fases 0–6) |
 | **PEND-12** | **Política de Privacidade e LGPD** | Criação de rota/modal `/politica-de-privacidade` e termo de consentimento no form. | `PENDING_APPROVAL` | Conversão (fora das Fases 0–6) |
 
@@ -96,7 +96,7 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 - [x] 3.1 Criar inicialização client-side de GSAP e ScrollTrigger. (Status: DONE | `gsap.client.ts`, `ScrollText`, `ScrollReveal`, `ParallaxImage` criados. GSAP 3.15.0 (instalado; `package.json` declara `^3.12.7`) + ScrollTrigger + Flip registrados client-side.)
 - [x] 3.2 Definir padrões/timings consistentes. (Status: DONE | `presets.ts` com durations, easings e stagger values definidos. HeroClient, AboutClient, BannersClient, ServicesClient, BlogClient, FooterClient implementados com valores coerentes.)
 - [x] 3.3 Implementar leitura progressiva bidirecional. (Status: DONE | `ScrollText` com scrub bidirecional em: Hero parágrafo, About título + parágrafo[0], Services título + subtítulo. Reversível via scrub.)
-- [x] 3.4 Implementar reveals de texto e elementos. (Status: DONE | `ScrollReveal` e wrappers com `gsap.from()` em todas as seções: About parágrafos, highlight, missão, visão, valores; Banners cards; Blog cards; Contact campos + CTA; Footer colunas. Os reveals usam `gsap.from()` — conferir na 4.4 se nada fica invisível antes da hidratação/sem JS.)
+- [x] 3.4 Implementar reveals de texto e elementos. (Status: DONE | `ScrollReveal` e wrappers com `gsap.from()` em todas as seções: About parágrafos, highlight, missão, visão, valores; Banners cards; Blog cards; Contact campos + CTA; Footer colunas. Os reveals usam `gsap.from()` dentro de `useEffect`; a 4.4 conferiu que sem JS e antes da hidratação nada fica invisível por causa deles.)
 - [x] 3.5 Implementar transições de imagem quando adequadas. (Status: DONE | `ParallaxImage` aplicado na ilustração `grafic.png` da seção About com `yPercent: -12`. Entrada da esquerda (`x: -60`) via `AboutClient`.)
 - [x] 3.6 Implementar parallax apenas onde aprovado/adequado. (Status: DONE | Parallax vertical no background do Hero via `backgroundPositionY` scrubbed. ParallaxImage leve na ilustração About.)
 - [x] 3.7 Implementar transições entre seções. (Status: DONE | Stagger entre cards das seções Banners, Services, Projects (GSAP Flip para filtro), Blog. Footer revela colunas coordenadas.)
@@ -112,7 +112,7 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 - [ ] 4.1 Definir comportamento desktop/tablet/mobile. (Status: TODO | Story: —)
 - [ ] 4.2 Ajustar distâncias e intensidades por breakpoint. (Status: TODO | Story: —)
 - [ ] 4.3 Implementar reduced motion. (Status: TODO | Story: — | Já existe `useReducedMotion()` em todos os wrappers com GSAP — a story deve medir o que falta, não reimplementar)
-- [ ] 4.4 Verificar conteúdo sem JavaScript/animação. (Status: TODO | Story: docs/stories/4-4-conteudo-sem-javascript.md)
+- [x] 4.4 Verificar conteúdo sem JavaScript/animação. (Status: DONE | Story: [4-4-conteudo-sem-javascript.md](stories/4-4-conteudo-sem-javascript.md) | `<noscript><style>` no `<head>` deixa os 5 `ScrollText` em branco pleno sem JS; auditoria em [nojs_375.png](references/qa/nojs_375.png) e [nojs_1200.png](references/qa/nojs_1200.png), todos os blocos visíveis)
 - [ ] 4.5 Testar teclado, foco e semântica. (Status: TODO | Story: —)
 - [ ] 4.6 Verificar contraste em todos os estados animados. (Status: TODO | Story: — | Lighthouse Accessibility 94 na 5.6)
 
@@ -139,6 +139,7 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 - [x] 6.6 Executar lint, testes disponíveis e build de produção. (Status: DONE | Build limpo, exit code 0; sem testes automatizados e sem lint configurado — ver 1.8)
 - [x] 6.7 Corrigir erros e regressões. (Status: DONE | Padronização Fluid Button dos botões de contato e filtros concluída)
 - [x] 6.8 Registrar resumo de entrega e limitações conhecidas. (Status: DONE | Relatório final apresentado)
+- [ ] 6.9 Remover código de motion/About não usado. (Status: TODO | Story: — | Achado da [4.4](stories/4-4-conteudo-sem-javascript.md): [MissionVisionValues.tsx](../src/sections/About/MissionVisionValues.tsx) não é importado, [capture_mvv.js](../scripts/capture_mvv.js) só o valida e [ScrollReveal.tsx](../src/components/motion/ScrollReveal.tsx) não tem uso (`grep "<ScrollReveal" src` vazio). Confirmar com quem escreveu antes de apagar.)
 
 **Critério de saída:** checklist aprovado, build concluído e nenhuma regressão crítica conhecida. [ATENDIDO]
 
