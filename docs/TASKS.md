@@ -2,7 +2,7 @@
 
 ## ▶ Ordem de implementação
 
-> **Atualizada em:** 2026-11-03, no fechamento da 7.2 (sobre `2544f6f`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
+> **Atualizada em:** 2026-11-03, no fechamento da 7.3 (`PEND-02` resolvido; sobre `108825a`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
 
 **Próxima tarefa: 4.1 — Definir comportamento desktop/tablet/mobile** (`TODO`, sem story: começa pela skill `story`)
 Por quê agora: com a 7.2 `DONE` não há conteúdo escondido conhecido; a 4.1 define por breakpoint quais efeitos rodam, destrava a 4.2 e é dona do scroll horizontal em 480px (504 px, card dos Banners).
@@ -15,7 +15,7 @@ Por quê agora: com a 7.2 `DONE` não há conteúdo escondido conhecido; a 4.1 d
 | 4 | **4.6** Contraste em todos os estados animados | 4.2 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). Os cards de vidro já foram medidos na [7.2](stories/7-2-cards-glassmorphism.md) (`#a15cf5` ≥ 4,60:1). |
 | 5 | **6.9** Remover código de motion/About não usado | — | `TODO` | Limpeza sem risco ao QA § 9; encaixa em qualquer folga. |
 
-**Fora da fila (aguardam decisão do responsável, não implementar):** `PEND-13` pulso do WhatsApp e rotação dos ícones sociais com reduced motion, `PEND-02` links `href="#"`, `PEND-06` deploy, `PEND-09` colchetes, `PEND-10` backend do formulário, `PEND-11` e-mail, `PEND-12` LGPD. ESLint (1.8) depende de aprovação de dependências novas. Quando um desses for resolvido, a tarefa resultante entra na tabela acima na posição devida.
+**Fora da fila (aguardam decisão do responsável, não implementar):** `PEND-13` pulso do WhatsApp e rotação dos ícones sociais com reduced motion, `PEND-06` deploy, `PEND-09` colchetes, `PEND-10` backend do formulário, `PEND-11` e-mail, `PEND-12` LGPD. ESLint (1.8) depende de aprovação de dependências novas. Quando um desses for resolvido, a tarefa resultante entra na tabela acima na posição devida.
 
 ## Regras de execução
 - Trabalhar em fases sequenciais.
@@ -49,7 +49,7 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 | ID | Item | Descrição / Opções | Status | Impacto na Fase |
 |---|---|---|---|---|
 | **PEND-01** | **Formulário de Contato sem Backend** | Mesma decisão de `PEND-10` — acompanhar lá (ID mantido para histórico; não reaproveitar). | `CONSOLIDADA em PEND-10` | — |
-| **PEND-02** | **Links Placeholder** | 3 botões "Saiba Mais" do Blog e 8 links do rodapé apontam para `#`. Manter como placeholder seguro `href="#"` até haver páginas reais. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
+| **PEND-02** | **Links Placeholder** | 3 botões "Saiba Mais" do Blog e 8 links do rodapé apontavam para `#`. **Decisão do responsável (2026-11-03):** coluna Serviços do rodapé com 5 rótulos novos (Planejamento estratégico, Gestão de tráfego pago, Criação e Desenvolvimento, Chatbots e automação de atendimento, Relatórios e análise de resultados), cada um levando ao card do serviço na LP; Suporte com Contato (`#contact`) e Política e privacidade mantida em `href="#"` até o `PEND-12`; seção Blog removida junto com o link "Blog" da navbar e "Blogs" do rodapé. Implementado na [story 7.3](stories/7-3-links-rodape-remover-blog.md). | `RESOLVED` | Fase 7 (Evolução pós-entrega) |
 | **PEND-03** | **Inconsistências Textuais** | Cards 5 e 6 de serviços em inglês; Card 4 de serviços com texto duplicado. Superada pelo conteúdo aprovado do cliente: a seção Serviços é `SUBSTITUIR`/`APPROVED` no [CONTENT-MAPPING.md](CONTENT-MAPPING.md) (linha 06, "resolve inconsistências de inglês e repetições") e os 6 serviços novos, em PT, estão em `src/data/services.ts` (tarefa 2.4). Resolvida em 2026-11-02. | `RESOLVED` | — |
 | **PEND-04** | **Sintaxe da URL do Instagram** | O HTML original possui aspas extras no `href` (`igsh=ZDNlZDc0MzIxNw==""`). Superada pelo `PEND-08`: o rebuild usa a URL nova `https://www.instagram.com/nexusagencybr/`, sem as aspas. | `RESOLVED` | — |
 | **PEND-05** | **Duplicata AUDIT.md na raiz** | `docs/AUDIT.md` definido como canônico oficial. Duplicata `AUDIT.md` da raiz excluída com autorização formal. | `RESOLVED` | Fase 1 (Consolidação) |
@@ -152,8 +152,9 @@ Mudanças de design pedidas pelo responsável depois da entrega. Cada uma depend
 
 - [x] 7.1 Redesenhar o Hero com background roxo animado. (Status: DONE | Story: [7-1-hero-background-animado.md](stories/7-1-hero-background-animado.md) | Exceção autorizada no `PEND-14`; brilho em camadas CSS, parado com reduced motion, contraste mínimo de 15:1, 0 Layout/Paint extra no trace; [hero_glow_1200.png](references/qa/hero_glow_1200.png), [hero_glow_375.png](references/qa/hero_glow_375.png); aprovado pelo responsável)
 - [x] 7.2 Padronizar os cards com visual de vidro e bordas iluminadas. (Status: DONE | Story: [7-2-cards-glassmorphism.md](stories/7-2-cards-glassmorphism.md) | Exceção autorizada no `PEND-15`; padrão único `glass-card`/`glass-icon`/`glass-ambient` em 31 cards de About, Banners, Serviços, Pacotes, Blog e Projetos; borda no `::after` (480px igual ao baseline), contraste ≥ 4,60:1, 0 card escondido nos 5 viewports e com reduced motion, trace na faixa do baseline; barra do destaque do About e espaço entre linhas dos Serviços ajustados a pedido; [cards_glass_1200.png](references/qa/cards_glass_1200.png), [cards_glass_375.png](references/qa/cards_glass_375.png); aprovado pelo responsável)
+- [x] 7.3 Apontar os links do rodapé para a LP e remover o Blog. (Status: DONE | Story: [7-3-links-rodape-remover-blog.md](stories/7-3-links-rodape-remover-blog.md) | `PEND-02` RESOLVED; 5 serviços → cards (`#<SERVICES_DATA.id>`, `scroll-mt-32`), Contato → `#contact`, Privacidade em `#` até o `PEND-12`; Blog, `blog.ts`, `BlogPostItem` e `public/assets/blog-*.jpg` removidos; colunas do rodapé redistribuídas para o rótulo mais longo caber em 768–1200px; [footer_links_1200.png](references/qa/footer_links_1200.png), [footer_links_375.png](references/qa/footer_links_375.png))
 
-**Critério de saída:** cada mudança aprovada visualmente pelo responsável, sem violar o [QA-CHECKLIST](QA-CHECKLIST.md) § 9. [ATENDIDO para a 7.1 e a 7.2]
+**Critério de saída:** cada mudança aprovada visualmente pelo responsável, sem violar o [QA-CHECKLIST](QA-CHECKLIST.md) § 9. [ATENDIDO para a 7.1 e a 7.2; 7.3 validada, aguardando aprovação visual do rodapé pelo responsável]
 
 ## Coordenação de múltiplos agentes
 

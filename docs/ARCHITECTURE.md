@@ -49,7 +49,6 @@ nexus/
 │   │   ├── Banners/              # Banner horizontal de diferenciais (BannersClient)
 │   │   ├── Projects/             # Grid de portfólio (#project) com GSAP Flip
 │   │   ├── Services/             # Grid de 6 serviços (#service) + 3 Pacotes com ServicesClient
-│   │   ├── Blog/                 # Grid de artigos (#blog) com BlogClient
 │   │   └── Contact/              # Formulário (#contact) com validação e animações
 │   │
 │   ├── animations/
@@ -66,8 +65,7 @@ nexus/
 │   │
 │   ├── data/
 │   │   ├── projects.ts           # 6 projetos e suas categorias (Fast Food, Tecnologia, Viagens)
-│   │   ├── services.ts           # 6 serviços originais
-│   │   └── blog.ts               # 3 artigos de blog originais
+│   │   └── services.ts           # 6 serviços originais
 │   │
 │   └── types/
 │       └── index.ts              # Tipagens de dados, filtros e props
@@ -143,7 +141,7 @@ Dados reais do site, como listas de serviços ou projetos, quando for útil sepa
 ## 7. Decisões arquiteturais registradas na auditoria
 
 Com base no relatório oficial `docs/AUDIT.md`:
-- **Número de rotas:** 1 rota principal (`/` - Single Page Application institucional) com navegação interna por âncoras (`#home`, `#about`, `#project`, `#service`, `#blog`, `#contact`).
+- **Número de rotas:** 1 rota principal (`/` - Single Page Application institucional) com navegação interna por âncoras (`#home`, `#about`, `#project`, `#service`, `#contact`; o Blog foi removido na [story 7.3](stories/7-3-links-rodape-remover-blog.md)).
 - **Seções por rota (ordem exata):**
   1. Header com Topbar de Redes Sociais e Navbar
   2. Hero (`#home`)
@@ -152,7 +150,7 @@ Com base no relatório oficial `docs/AUDIT.md`:
   5. Projetos / Criação e Desenvolvimento (`#project`)
   6. Nossos Serviços (`#service`)
   7. *(Inativo/Comentado)* Testimonials (`#client`) — mantido fora do bundle ativo para fidelidade
-  8. Blog (`#blog`)
+  8. *(Removido na [story 7.3](stories/7-3-links-rodape-remover-blog.md), `PEND-02`)* Blog (`#blog`)
   9. Contato / Formulário (`#contact`)
   10. Rodapé (Footer) com 3 colunas e redes sociais
   11. Botão Flutuante de WhatsApp fixo
@@ -161,7 +159,7 @@ Com base no relatório oficial `docs/AUDIT.md`:
   - Carregar a fonte `Poppins` via `next/font/google` com pesos 400, 500, 600, 700.
 - **Estratégia de animações por seção:**
   - Leitura progressiva com ScrollTrigger e `scrub` aplicada exclusivamente no Hero e Sobre nós.
-  - Reveals suaves nos cards de Banner, Serviços e Blog.
+  - Reveals suaves nos cards de Banner e Serviços.
   - Botão WhatsApp com animação contínua `@keyframes WaveWhatsApp` em CSS e transição de escala.
   - Botões de Redes Sociais: **preservação integral** da rotação 3D (`rotateY(360deg)`) e expansão de cor de fundo sem alterações.
 - **Fallback sem JS:** um único `<noscript><style>` no `<head>` de [layout.tsx](../src/app/layout.tsx), selecionando `data-*`, dá o estado final legível sem JS (story [4.4](stories/4-4-conteudo-sem-javascript.md)). Regra completa em [TECHNICAL-SPEC.md § Next.js / React](TECHNICAL-SPEC.md#nextjs--react).

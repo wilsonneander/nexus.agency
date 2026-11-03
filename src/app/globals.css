@@ -496,7 +496,7 @@ body {
   transition: box-shadow 0.3s ease;
 }
 
-/* Borda iluminada por cima do conteúdo: nos cards de imagem (Blog/Projetos) um
+/* Borda iluminada por cima do conteúdo: nos cards de imagem (Projetos) um
    inset no próprio card ficaria debaixo da foto. */
 .glass-card::after {
   content: "";

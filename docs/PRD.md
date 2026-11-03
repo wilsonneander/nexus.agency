@@ -144,9 +144,9 @@ Para efeitos vinculados ao scroll:
 
 Com base no relatório oficial `docs/AUDIT.md`:
 - **Quantas rotas existem?**
-  1 rota única (`/` - Single Page Application) com navegação interna por âncoras (`#home`, `#about`, `#project`, `#service`, `#blog`, `#contact`).
+  1 rota única (`/` - Single Page Application) com navegação interna por âncoras (`#home`, `#about`, `#project`, `#service`, `#contact`).
 - **Quais são as seções e sua ordem?**
-  10 seções ativas: Header/Nav, Hero (`#home`), Sobre nós (`#about`), Banner de Diferenciais, Projetos (`#project`), Serviços (`#service`), Blog (`#blog`), Contato (`#contact`), Rodapé e Botão Flutuante de WhatsApp. A seção `#client` (depoimentos) está comentada no código original e foi mantida inativa.
+  9 seções ativas: Header/Nav, Hero (`#home`), Sobre nós (`#about`), Banner de Diferenciais, Projetos (`#project`), Serviços (`#service`), Contato (`#contact`), Rodapé e Botão Flutuante de WhatsApp. O Blog (`#blog`) do legado foi removido por decisão do responsável (`PEND-02`, [story 7.3](stories/7-3-links-rodape-remover-blog.md)). A seção `#client` (depoimentos) está comentada no código original e foi mantida inativa.
 - **Quais textos são adequados para leitura progressiva?**
   O parágrafo institucional do Hero (`.header__content p`) e os dois blocos textuais da seção Sobre nós (`.about__content p` e `.about__content h4`).
 - **Quais animações/interações já existem e precisam ser preservadas?**

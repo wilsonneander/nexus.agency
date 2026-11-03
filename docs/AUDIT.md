@@ -311,15 +311,15 @@ A auditoria e inventário foram realizados de forma exaustiva e minuciosa. **O c
 | Local | Elemento / Texto | Destino (`href`) | Diagnóstico | Ação Recomendada |
 |---|---|---|---|---|
 | **Navbar** | Logo | `#home` | Âncora válida | Preservar |
-| **Navbar** | Inicio, Sobre nós, Projetos, Serviços, Blog | `#home`, `#about`, `#project`, `#service`, `#blog` | Âncoras válidas na página | Preservar |
+| **Navbar** | Inicio, Sobre nós, Projetos, Serviços | `#home`, `#about`, `#project`, `#service` | Âncoras válidas na página | Preservar ("Blog" removido — `PEND-02` RESOLVED) |
 | **Hero** | Redes sociais flutuantes | URLs externas das redes | Válidas | Preservar (`PEND-08` RESOLVED) |
 | **About** | Redes sociais | URLs externas das redes | Válidas | Preservar (`PEND-08` RESOLVED) |
 | **Services / Pacotes** | 3 Botões "Quero um diagnóstico gratuito" | `#contact` | Âncora válida para o formulário | Preservar |
-| **Blog** | 3 Botões "Saiba Mais" | `#` | **Placeholder (`href="#"`)** | Manter placeholder seguro sem navegação quebrada até que haja CMS/rotas internas de post. (**PEND-02**) |
-| **Footer** | 5 Links da coluna Serviços | `#` | **Placeholder (`href="#"`)** | Transformar em âncoras para os serviços específicos (`#service`) ou manter `#`. (**PEND-02**) |
-| **Footer** | Link "Contato" | `#` | **Placeholder (`href="#"`)** | Alterar para `#contact` (formulário). |
-| **Footer** | Link "Blogs" | `#` | **Placeholder (`href="#"`)** | Alterar para `#blog` (seção existente). |
-| **Footer** | Link "Politica e Privacidade" | `#` | **Placeholder (`href="#"`)** | Requer página ou modal dedicado para conformidade LGPD. (**PEND-12**) |
+| **Blog** | 3 Botões "Saiba Mais" | — | **Seção removida** | Resolvido no `PEND-02` ([story 7.3](stories/7-3-links-rodape-remover-blog.md)). |
+| **Footer** | 5 Links da coluna Serviços (rótulos do cliente) | `#planejamento-estrategico`, `#gestao-trafego-pago`, `#criacao-sites-landing-pages`, `#chatbots-automacao`, `#relatorios-analise` | Âncoras para os cards de Serviços | Resolvido no `PEND-02` ([story 7.3](stories/7-3-links-rodape-remover-blog.md)). |
+| **Footer** | Link "Contato" | `#contact` | Âncora válida para o formulário | Resolvido no `PEND-02`. |
+| **Footer** | Link "Blogs" | — | **Removido** com a seção Blog | Resolvido no `PEND-02`. |
+| **Footer** | Link "Politica e privacidade" | `#` | **Placeholder (`href="#"`)** — mantido por decisão do responsável no `PEND-02` | Requer página ou modal dedicado para conformidade LGPD. (**PEND-12**) |
 
 ---
 

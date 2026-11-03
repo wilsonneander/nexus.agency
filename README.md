@@ -60,13 +60,13 @@ As regras completas e inegociáveis estão em [AGENTS.md](AGENTS.md) — leia an
 ├── public/assets/                             # cópia dos assets legados servida pelo Next
 ├── src/
 │   ├── app/            # layout.tsx, page.tsx, globals.css, robots.ts, sitemap.ts
-│   ├── sections/       # Hero, About, Banners, Projects, Services, Blog, Contact
+│   ├── sections/       # Hero, About, Banners, Projects, Services, Contact
 │   ├── components/
 │   │   ├── layout/     # Navbar, Footer
 │   │   ├── motion/     # ScrollText, ScrollReveal, ParallaxImage
 │   │   └── ui/         # Button, FluidButton, RollingText, SocialIcons, WhatsAppFloat
 │   ├── animations/     # gsap.client.ts (registro de plugins), presets.ts (timings/easings)
-│   ├── data/           # conteúdo tipado (about, blog, packages, projects, services)
+│   ├── data/           # conteúdo tipado (about, packages, projects, services)
 │   ├── hooks/          # useReducedMotion
 │   ├── lib/            # constants.ts (SITE_CONFIG), utils.ts (cn)
 │   └── types/          # tipos do conteúdo
@@ -77,8 +77,8 @@ As regras completas e inegociáveis estão em [AGENTS.md](AGENTS.md) — leia an
 
 ## Arquitetura
 
-- **Página única.** [src/app/page.tsx](src/app/page.tsx) compõe as seções em ordem fixa: Hero → About → Banners → Projects → Services → Blog → Contact. [src/app/layout.tsx](src/app/layout.tsx) monta Navbar, Footer e `WhatsAppFloat`, carrega Poppins via `next/font` e RemixIcon/FontAwesome via CDN (os ícones originais usam essas classes).
-- **Navegação por âncoras** (`#home`, `#about`, `#project`, `#service`, `#blog`). Os IDs das seções precisam bater com `SITE_CONFIG.navLinks`.
+- **Página única.** [src/app/page.tsx](src/app/page.tsx) compõe as seções em ordem fixa: Hero → About → Banners → Projects → Services → Contact. [src/app/layout.tsx](src/app/layout.tsx) monta Navbar, Footer e `WhatsAppFloat`, carrega Poppins via `next/font` e RemixIcon/FontAwesome via CDN (os ícones originais usam essas classes).
+- **Navegação por âncoras** (`#home`, `#about`, `#project`, `#service`; mais `#contact` para os CTAs e âncoras nos cards de serviço para o rodapé). Os IDs das seções precisam bater com `SITE_CONFIG.navLinks`.
 - **Padrão Server + Client por seção** (`src/sections/<Nome>/`):
   - `index.tsx` — Server Component com markup e conteúdo.
   - `<Nome>Client.tsx` (`"use client"`) — envolve o markup e aplica as animações GSAP selecionando elementos por atributos `data-*` (ex.: `data-hero-sub`).

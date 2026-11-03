@@ -10,7 +10,6 @@ const shots = [
   { name: 'val_values_all_cards.png', w: 1200, h: 900, url: `http://localhost:${PORT}/#about` },
   { name: 'val_projects_all_cards.png', w: 1200, h: 900, url: `http://localhost:${PORT}/#project` },
   { name: 'val_packages_all_cards.png', w: 1200, h: 900, url: `http://localhost:${PORT}/#service` },
-  { name: 'val_blog_all_cards.png', w: 1200, h: 900, url: `http://localhost:${PORT}/#blog` },
   { name: 'val_footer_circular.png', w: 1200, h: 900, url: `http://localhost:${PORT}/#contact` }
 ];
 

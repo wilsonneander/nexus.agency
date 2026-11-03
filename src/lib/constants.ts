@@ -20,6 +20,5 @@ export const SITE_CONFIG = {
     { label: "Sobre nós", href: "#about" },
     { label: "Projetos", href: "#project" },
     { label: "Serviços", href: "#service" },
-    { label: "Blog", href: "#blog" },
   ],
 } as const;

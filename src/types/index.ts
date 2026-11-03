@@ -30,14 +30,6 @@ export type CommercialPackage = {
   highlight?: boolean;
 };
 
-export type BlogPostItem = {
-  id: string;
-  tag: string;
-  title: string;
-  image: string;
-  href: string;
-};
-
 export type SocialLink = {
   platform: "instagram" | "linkedin" | "facebook";
   url: string;

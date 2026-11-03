@@ -9,12 +9,12 @@
 - [ ] Screenshots foram comparados em viewports equivalentes.
 
 ## 2. Funcionalidade
-- [x] Navegação e âncoras funcionam. (Mapeamento validado para #home, #about, #service, #project, #contact)
+- [x] Navegação e âncoras funcionam. (Mapeamento validado para #home, #about, #service, #project, #contact; links do rodapé para os 5 cards de serviço e #contact validados com clique em 375 e 1200px na [story 7.3](stories/7-3-links-rodape-remover-blog.md), [footer_links_1200.png](references/qa/footer_links_1200.png), [footer_links_375.png](references/qa/footer_links_375.png))
 - [x] Links externos abrem os destinos corretos em nova aba (target="_blank" rel="noopener noreferrer").
 - [x] Botões de WhatsApp mantêm telefone, mensagem e parâmetros configurados de forma centralizada.
 - [x] Botões de redes sociais permanecem inalterados e funcionais.
 - [x] Formulário estruturado com 4 campos do cliente e validação nativa de preenchimento.
-- [x] Links placeholder catalogados na auditoria de funcionalidades ([AUDIT.md § 12.3](AUDIT.md)).
+- [x] Links placeholder catalogados na auditoria de funcionalidades ([AUDIT.md § 12.3](AUDIT.md)). Após o `PEND-02` resta só "Politica e privacidade" (`href="#"`, aguarda `PEND-12`).
 
 ## 3. Animações e scroll
 - [x] Hero entra sem atraso excessivo. (Validado via timeline com delays escalonados 0.15s, 0.35s, 0.55s)

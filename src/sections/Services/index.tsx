@@ -44,8 +44,9 @@ export function ServicesSection() {
           {SERVICES_DATA.map((service) => (
             <div
               key={service.id}
+              id={service.id}
               data-service-card
-              className="glass-card group pt-12 pb-8 px-6 sm:px-8 rounded-2xl flex flex-col justify-between"
+              className="scroll-mt-32 glass-card group pt-12 pb-8 px-6 sm:px-8 rounded-2xl flex flex-col justify-between"
             >
               {/* Badge flutuante */}
               <div
