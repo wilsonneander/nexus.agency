@@ -2,7 +2,7 @@
 
 ## ▶ Ordem de implementação
 
-> **Atualizada em:** 2026-11-03, na criação da story 7.1 (sobre `94d4e2c`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
+> **Atualizada em:** 2026-11-03, no fechamento da 7.1 (sobre `02bf2e4`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
 
 **Próxima tarefa: 4.7 — Corrigir o card Design do Banner invisível com movimento** (`TODO`, sem story: começa pela skill `story`)
 Por quê agora: é o único conteúdo escondido conhecido depois da 4.3 (`DONE`). Sem reduced motion, o 1º card dos Banners fica em `opacity: 0` depois de rolar até ele, o que viola o QA § 9.
@@ -10,12 +10,11 @@ Por quê agora: é o único conteúdo escondido conhecido depois da 4.3 (`DONE`)
 | # | Tarefa | Depende de | Status | Por que nesta posição |
 |---|---|---|---|---|
 | 1 | **4.7** Card Design do Banner invisível com movimento | — | `TODO` | Conteúdo escondido com movimento normal (QA § 9). |
-| 2 | **7.1** Hero com background roxo animado | `PEND-14` (`RESOLVED`) | `IN_PROGRESS` | Pedido do responsável; [story](stories/7-1-hero-background-animado.md) escrita. Vem antes da 4.1/4.2 porque muda o fundo e o movimento do Hero que elas vão calibrar. |
-| 3 | **4.1** Comportamento desktop/tablet/mobile | — | `TODO` | Define, por breakpoint, quais efeitos rodam; candidata a adotar `gsap.matchMedia()` (ver [story 4.3](stories/4-3-reduced-motion.md)). |
-| 4 | **4.2** Distâncias e intensidades por breakpoint | 4.1 | `TODO` | Ajusta os valores do que a 4.1 decidiu manter. |
-| 5 | **4.5** Teclado, foco e semântica | — | `TODO` | Independente das animações; pode correr em paralelo a partir da posição 2. |
-| 6 | **4.6** Contraste em todos os estados animados | 4.2 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). |
-| 7 | **6.9** Remover código de motion/About não usado | — | `TODO` | Limpeza sem risco ao QA § 9; encaixa em qualquer folga. |
+| 2 | **4.1** Comportamento desktop/tablet/mobile | — | `TODO` | Define, por breakpoint, quais efeitos rodam; candidata a adotar `gsap.matchMedia()` (ver [story 4.3](stories/4-3-reduced-motion.md)). |
+| 3 | **4.2** Distâncias e intensidades por breakpoint | 4.1 | `TODO` | Ajusta os valores do que a 4.1 decidiu manter. |
+| 4 | **4.5** Teclado, foco e semântica | — | `TODO` | Independente das animações; pode correr em paralelo a partir da posição 2. |
+| 5 | **4.6** Contraste em todos os estados animados | 4.2 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). |
+| 6 | **6.9** Remover código de motion/About não usado | — | `TODO` | Limpeza sem risco ao QA § 9; encaixa em qualquer folga. |
 
 **Fora da fila (aguardam decisão do responsável, não implementar):** `PEND-13` pulso do WhatsApp e rotação dos ícones sociais com reduced motion, `PEND-02` links `href="#"`, `PEND-06` deploy, `PEND-09` colchetes, `PEND-10` backend do formulário, `PEND-11` e-mail, `PEND-12` LGPD. ESLint (1.8) depende de aprovação de dependências novas. Quando um desses for resolvido, a tarefa resultante entra na tabela acima na posição devida.
 
@@ -151,9 +150,9 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 
 Mudanças de design pedidas pelo responsável depois da entrega. Cada uma depende de um `PEND-xx` que autorize a exceção à fidelidade ao legado.
 
-- [ ] 7.1 Redesenhar o Hero com background roxo animado. (Status: IN_PROGRESS | Story: [7-1-hero-background-animado.md](stories/7-1-hero-background-animado.md) | Exceção autorizada no `PEND-14`)
+- [x] 7.1 Redesenhar o Hero com background roxo animado. (Status: DONE | Story: [7-1-hero-background-animado.md](stories/7-1-hero-background-animado.md) | Exceção autorizada no `PEND-14`; brilho em camadas CSS, parado com reduced motion, contraste mínimo de 15:1, 0 Layout/Paint extra no trace; [hero_glow_1200.png](references/qa/hero_glow_1200.png), [hero_glow_375.png](references/qa/hero_glow_375.png); aprovado pelo responsável)
 
-**Critério de saída:** cada mudança aprovada visualmente pelo responsável, sem violar o [QA-CHECKLIST](QA-CHECKLIST.md) § 9.
+**Critério de saída:** cada mudança aprovada visualmente pelo responsável, sem violar o [QA-CHECKLIST](QA-CHECKLIST.md) § 9. [ATENDIDO para a 7.1]
 
 ## Coordenação de múltiplos agentes
 

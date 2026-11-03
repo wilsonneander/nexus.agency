@@ -6,7 +6,7 @@ baseline_commit: 94d4e2c1f7830117c397a8104f892ab67d5cc446
 
 |                 |                                                                                         |
 | --------------- | --------------------------------------------------------------------------------------- |
-| **Status**      | IN_PROGRESS                                                                                 |
+| **Status**      | DONE                                                                                        |
 | **Fase**        | Fase 7 — Evolução visual (pós-entrega)                                                  |
 | **Área**        | layout/UI, motion                                                                       |
 | **Seções**      | Hero (`#home`)                                                                          |
@@ -129,7 +129,7 @@ pelo texto idêntico a `index.html:61-69` (`grep` ou leitura do HTML servido).
 ### AC #2 — O brilho se move devagar e continuamente
 
 Com movimento normal, o brilho "respira" (escala/opacidade) e o halo deriva em
-loop de pelo menos 8 s por ciclo, sem saltos no reinício do ciclo. Verifica-se
+loop lento (ciclos de 5 a 12 s, revisados a pedido do responsável em 2026-11-03), sem saltos no reinício do ciclo. Verifica-se
 com duas capturas a ~3 s de intervalo mostrando o brilho em estados diferentes
 e com o painel _Performance_ do DevTools: só `transform`/`opacity` nas camadas
 animadas, sem _Layout_ nem _Paint_ por quadro.
@@ -277,14 +277,14 @@ nova.
 
 ## Definition of Done
 
-- [ ] Todo AC verificado, cada um com a evidência. (Falta o painel _Performance_ do AC #2 em navegador real; ver Change Log.)
+- [x] Todo AC verificado, cada um com a evidência.
 - [x] `npx tsc --noEmit` verde.
 - [x] `npm run build` verde, sem warning de hidratação/SSR.
 - [x] Validação visual/movimento feita nos viewports afetados (evidência em `docs/references/qa/`).
 - [x] Itens tocados do `QA-CHECKLIST.md` atualizados com a evidência.
 - [x] `PEND-14` já `RESOLVED`; nada mais a consumir.
 - [x] Docs afetados (PRD FR-02, CLAUDE.md; AUDIT § 2 descreve o legado e não muda) atualizados.
-- [ ] Status movido na story **e** no `TASKS.md`, com a validação carimbada (comando + SHA) no Change Log.
+- [x] Status movido na story **e** no `TASKS.md`, com a validação carimbada (comando + SHA) no Change Log.
 
 ## Execução
 
@@ -308,3 +308,4 @@ nova.
 | 2026-11-03 | IN_PROGRESS | Iniciada sobre `94d4e2c`, com o aval do responsável ("continue"). O responsável confirmou que o nome é "Nexus Agency": o texto do legado fica como está. |
 | 2026-11-03 | IN_PROGRESS | Implementada; validação na árvore de trabalho sobre `94d4e2c`. `npx tsc --noEmit` → OK. `npm run build` → exit 0, `/` 13.6 kB / 178 kB, sem warning. `npx next start -p 3008` + `node scripts/check_ids.js` → 6 IDs presentes. Sonda CDP temporária (fora do repositório) em 375/480/768/1024/1200: sem a foto `header.webp`, `h1` com opacidade 1, `scrollWidth === innerWidth` no Hero, 5 animações CSS com movimento e 0 com `reduce` (AC #2, #4); `yPercent` do brilho 22–30 px depois de rolar 600 px e `0` de volta ao topo e depois de resize 1200 → 375 → 1200 (AC #6, #7); fim do parágrafo acima do topo do anel em todas as larguras. Contraste (AC #3), com o texto oculto e o brilho forçado ao pico: pior fundo atrás do parágrafo `rgb(36,25,73)` em 480px, 16:1 contra o branco; `h1` 19.8:1. Sem JS (`OUT_DIR=<temp> node scripts/capture_nojs.js`): os 5 `[data-word]` em `rgb(255,255,255)` e o Hero com brilho e texto (AC #5). Emenda com o About sem linha visível, e bloco social `fixed` acima do About (captura rolada). `git diff 94d4e2c -- SocialIcons* WhatsAppFloat* constants.ts` vazio (AC #8). **Não verificado:** o painel _Performance_ do AC #2 (Layout/Paint por quadro) em navegador real; as camadas animam só `transform`/`opacity` pelo código. **Achado fora do escopo:** em 480px o documento tem 497 px de largura por causa de um card fora do Hero (`h4.text-lg.font-semibold` + `p.text-white/70 text-xs`); com o brilho escondido continua 497, então não vem desta story. Candidato à 4.1. |
 | 2026-11-03 | IN_PROGRESS | Pedido do responsável depois do commit `d9b5a48`: "background se mexendo um pouco mais". Ciclos de 7–16 s para 5–12 s; anel com escala até 1.07 e opacidade de 0.78 a 1; bloom em keyframe próprio (`heroBloomPulse`, escala de 0.92 a 1.14); halo derivando também na vertical (±7% x, ±4% y, escala de 0.95 a 1.12); horizonte com `scaleX` de 0.86 a 1.1; reflexo passa a oscilar a opacidade (`heroReflectionFlicker`) e entrou no bloco de reduced motion. Revalidação sobre `d9b5a48` + árvore de trabalho: `tsc` OK, `build` exit 0; sonda CDP com 6 animações com movimento e 0 com `reduce` nos 5 viewports, parallax volta a `0` ao subir e depois de resize; contraste com o brilho no novo pico: pior fundo do parágrafo `rgb(42,29,81)` em 480px, 15:1. |
+| 2026-11-03 | DONE | Fechada sobre `02bf2e4`; o responsável aprovou o visual ("está ótimo"). Revalidação nesse commit: `npx tsc --noEmit` OK; `npm run build` exit 0, `/` 13.6 kB / 178 kB, sem warning. AC #2 completado com trace CDP de 4 s (`devtools.timeline`) a 1200px, página parada no topo: com o brilho, 0 `Layout` e 480 `Paint`; com o brilho escondido, 0 `Layout` e os mesmos 480 `Paint`. O brilho não acrescenta Layout nem Paint ao main thread; os paints que já existiam não vêm do Hero. Review (`review-mr`, `94d4e2c..02bf2e4`): sem bloqueador; o texto do AC #2 ("pelo menos 8 s por ciclo") foi atualizado para os ciclos de 5 a 12 s pedidos pelo responsável. Ficam como estão: as vars `--glow-rgb`/`--glow-light-rgb` repetem `--primary-color-dark`/`--span` em RGB (o comentário diz a origem) e, em 480px no pico da animação, o anel fica a 2 px do parágrafo, com contraste de 15:1. |
