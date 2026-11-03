@@ -324,5 +324,21 @@ body {
   .fluid-btn--pulse {
     animation: none !important;
   }
+
+  /* FR-11: sem "suavização" na navegação por âncoras (story 4.3). */
+  html,
+  body {
+    scroll-behavior: auto;
+  }
+
+  /* Leitura progressiva (ScrollText) no estado final com reduced motion (story 4.3):
+     - antes da hidratação, o servidor grava 22% inline e não conhece a preferência;
+     - ao ligar a preferência com a página aberta, o ctx.revert() do ScrollText devolve
+       o inline anterior ao gsap.set (22%), e é esta regra que mantém o branco.
+     Com reduced motion o GSAP não toca as palavras, então o !important só disputa com
+     o style="" inline. Mesmo seletor e valor do <noscript> da story 4.4, em layout.tsx. */
+  [data-word] {
+    color: rgb(255 255 255) !important;
+  }
 }
 

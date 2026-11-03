@@ -12,7 +12,7 @@
 import { useRef, useEffect, ReactNode, ElementType } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -54,7 +54,7 @@ export function ScrollReveal({
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (reducedMotion) return;
+    if (reducedMotion || prefersReducedMotion()) return;
     if (!containerRef.current) return;
 
     gsap.registerPlugin(ScrollTrigger);

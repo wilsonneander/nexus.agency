@@ -43,11 +43,11 @@ Em cada viewport:
 - [x] Texto permanece legível. (Validado com contraste Poppins claro sobre dark background)
 - [x] Botões são alcançáveis e utilizáveis. (Validado: WhatsApp flutuante e botões com área de toque mínima)
 - [x] Efeitos não dependem de hover. (Validado: em mobile eventos de scroll acionam o reveal)
-- [x] Scroll e navegação permanecem naturais. (Validado: scroll-behavior suave e sem sequestro)
+- [x] Scroll e navegação permanecem naturais. (Validado: scroll-behavior suave e sem sequestro; com reduced motion, `auto` — [4.3](stories/4-3-reduced-motion.md), FR-11)
 
 ## 5. Acessibilidade
-- [x] `prefers-reduced-motion` é respeitado. (Validado: hook `useReducedMotion` desativa animações no GSAP)
-- [x] Conteúdo continua visível com movimento reduzido. (Validado: fallbacks exibem opacidade 100% e cores plenas)
+- [x] `prefers-reduced-motion` é respeitado. (Medido na [4.3](stories/4-3-reduced-motion.md), Chrome com `prefers-reduced-motion: reduce` emulado, 1200 e 375px: nenhum efeito GSAP roda — inclusive na 1ª passada de efeitos — e a rolagem fica `auto`. Pendente: o pulso do WhatsApp e a rotação dos ícones sociais seguem animando, `PEND-13`.)
+- [x] Conteúdo continua visível com movimento reduzido. (Medido na [4.3](stories/4-3-reduced-motion.md): Hero com opacidade 1 desde o 1º quadro, 5 textos de leitura progressiva em branco desde o 1º quadro, contador "+50", nenhum `opacity`/`transform` residual depois de rolar a página inteira nos dois sentidos — [reduced_1200.png](references/qa/reduced_1200.png), [reduced_375.png](references/qa/reduced_375.png). Antes da 4.3 o Hero ficava invisível.)
 - [x] Navegação por teclado funciona. (Validado: links e formulário acessíveis via tab)
 - [x] Foco é visível. (Validado: outline e bordas ativas)
 - [x] Semântica de headings, links e botões é adequada. (Validado: h1-h4, form e buttons com tipagem semântica)

@@ -3,7 +3,7 @@
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
 import { FluidButton } from "@/components/ui/FluidButton";
 
 export function ContactSection() {
@@ -18,7 +18,7 @@ export function ContactSection() {
   ];
 
   useEffect(() => {
-    if (reduced) return;
+    if (reduced || prefersReducedMotion()) return;
     if (!sectionRef.current) return;
 
     gsap.registerPlugin(ScrollTrigger);

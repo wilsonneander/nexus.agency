@@ -19,7 +19,7 @@ import { Flip } from "gsap/Flip";
 import { flushSync } from "react-dom";
 import { PROJECTS_DATA, PROJECT_FILTERS } from "@/data/projects";
 import { ProjectCategory } from "@/types";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
 import { FluidButton } from "@/components/ui/FluidButton";
 
 export function ProjectsSection() {
@@ -36,7 +36,7 @@ export function ProjectsSection() {
 
   // ScrollReveal inicial dos cards (garantido com fromTo para que o primeiro card nunca desapareça)
   useEffect(() => {
-    if (reduced || hasRevealedRef.current) return;
+    if (reduced || prefersReducedMotion() || hasRevealedRef.current) return;
     if (!gridRef.current) return;
 
     gsap.registerPlugin(ScrollTrigger, Flip);
@@ -75,7 +75,7 @@ export function ProjectsSection() {
   // Flip animation ao trocar filtro — flushSync assegura DOM atualizado antes do Flip.from
   const handleFilter = useCallback(
     (filter: string) => {
-      if (reduced || !gridRef.current) {
+      if (reduced || prefersReducedMotion() || !gridRef.current) {
         setActiveFilter(filter as ProjectCategory);
         return;
       }

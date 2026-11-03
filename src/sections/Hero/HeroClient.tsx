@@ -5,13 +5,14 @@
  *
  * Correções aplicadas (QA 3.2):
  * B1 — ref agora é passado para a <section> via callback ref, não para div.contents
- * B2 — gsap.set inicial aplicado ANTES do primeiro frame para eliminar FOUC
+ * B2 — gsap.set inicial no useEffect (depois do 1º paint: o Hero ainda pisca na
+ *      hidratação, ver story 4.4/4.1)
  */
 
 import { useRef, useEffect, ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface HeroClientProps {
   children: ReactNode;
@@ -24,6 +25,7 @@ export function HeroClient({ children }: HeroClientProps) {
   const reduced = useReducedMotion();
 
   useEffect(() => {
+    if (reduced || prefersReducedMotion()) return;
     if (!wrapperRef.current) return;
 
     // Encontra o <section id="home"> que está como filho direto do wrapper
@@ -34,18 +36,15 @@ export function HeroClient({ children }: HeroClientProps) {
     const h1 = section.querySelector<HTMLElement>("[data-hero-title]");
     const social = section.querySelector<HTMLElement>("[data-hero-social]");
 
-    if (!reduced) {
-      // B2 — Ocultar imediatamente antes do 1º paint animado para evitar FOUC
-      if (h4) gsap.set(h4, { opacity: 0, y: 20 });
-      if (h1) gsap.set(h1, { opacity: 0, y: 30 });
-      if (social) gsap.set(social, { opacity: 0, x: 20 });
-    }
-
-    if (reduced) return;
-
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
+      // Estado inicial da entrada. Dentro do contexto, para o ctx.revert() devolver o
+      // estado visível do servidor (fora dele, o Hero sumia com reduced motion — story 4.3).
+      if (h4) gsap.set(h4, { opacity: 0, y: 20 });
+      if (h1) gsap.set(h1, { opacity: 0, y: 30 });
+      if (social) gsap.set(social, { opacity: 0, x: 20 });
+
       // Entrada sequencial dos elementos do hero
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
       if (h4) tl.to(h4, { opacity: 1, y: 0, duration: 0.6 }, 0.15);

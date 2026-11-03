@@ -2,21 +2,21 @@
 
 ## ▶ Ordem de implementação
 
-> **Atualizada em:** 2026-11-02, no fechamento da 4.4 (commit sobre `e79da34`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
+> **Atualizada em:** 2026-11-03, no fechamento da 4.3 (commit sobre `b9eea51`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
 
-**Próxima tarefa: 4.3 — Implementar reduced motion** (`TODO`, sem story: começa pela skill `story`)
-Por quê agora: a 4.4 (`DONE`) fixou o fallback sem JS. Com JS, ainda há conteúdo que depende de movimento. O `ScrollText` fica em 22% até o `useEffect` rodar, mesmo com reduced motion, e o Hero pisca na hidratação ([HeroClient.tsx](../src/sections/Hero/HeroClient.tsx) aplica `opacity: 0` no `useEffect`). As duas coisas foram registradas na [story 4.4](stories/4-4-conteudo-sem-javascript.md) e são o ponto de partida da medição.
+**Próxima tarefa: 4.7 — Corrigir o card Design do Banner invisível com movimento** (`TODO`, sem story: começa pela skill `story`)
+Por quê agora: é o único conteúdo escondido conhecido depois da 4.3 (`DONE`). Sem reduced motion, o 1º card dos Banners fica em `opacity: 0` depois de rolar até ele, o que viola o QA § 9.
 
 | # | Tarefa | Depende de | Status | Por que nesta posição |
 |---|---|---|---|---|
-| 1 | **4.3** Reduced motion | — | `TODO` | Mesmo eixo da 4.4 (conteúdo visível sem movimento); `useReducedMotion()` já existe — medir lacunas por seção, a partir dos achados da 4.4. |
-| 2 | **4.1** Comportamento desktop/tablet/mobile | 4.3 | `TODO` | Define, por breakpoint, quais efeitos rodam; precisa saber o que já é seguro desligar. |
+| 1 | **4.7** Card Design do Banner invisível com movimento | — | `TODO` | Conteúdo escondido com movimento normal (QA § 9). |
+| 2 | **4.1** Comportamento desktop/tablet/mobile | — | `TODO` | Define, por breakpoint, quais efeitos rodam; candidata a adotar `gsap.matchMedia()` (ver [story 4.3](stories/4-3-reduced-motion.md)). |
 | 3 | **4.2** Distâncias e intensidades por breakpoint | 4.1 | `TODO` | Ajusta os valores do que a 4.1 decidiu manter. |
 | 4 | **4.5** Teclado, foco e semântica | — | `TODO` | Independente das animações; pode correr em paralelo a partir da posição 2. |
-| 5 | **4.6** Contraste em todos os estados animados | 4.2, 4.3 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). |
+| 5 | **4.6** Contraste em todos os estados animados | 4.2 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). |
 | 6 | **6.9** Remover código de motion/About não usado | — | `TODO` | Limpeza sem risco ao QA § 9; encaixa em qualquer folga. |
 
-**Fora da fila (aguardam decisão do responsável, não implementar):** `PEND-02` links `href="#"`, `PEND-06` deploy, `PEND-09` colchetes, `PEND-10` backend do formulário, `PEND-11` e-mail, `PEND-12` LGPD. ESLint (1.8) depende de aprovação de dependências novas. Quando um desses for resolvido, a tarefa resultante entra na tabela acima na posição devida.
+**Fora da fila (aguardam decisão do responsável, não implementar):** `PEND-13` pulso do WhatsApp e rotação dos ícones sociais com reduced motion, `PEND-02` links `href="#"`, `PEND-06` deploy, `PEND-09` colchetes, `PEND-10` backend do formulário, `PEND-11` e-mail, `PEND-12` LGPD. ESLint (1.8) depende de aprovação de dependências novas. Quando um desses for resolvido, a tarefa resultante entra na tabela acima na posição devida.
 
 ## Regras de execução
 - Trabalhar em fases sequenciais.
@@ -61,6 +61,7 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 | **PEND-10** | **Formulário de Contato (sem backend)** | Hoje `action="/"` + `preventDefault`, nada é enviado. Opções: (A) Route Handler/Server Action com e-mail (Resend); (B) Redirecionamento com mensagem para o WhatsApp; (C) CRM/plataforma externa; (D) Mock front-end com feedback. Comparação em [AUDIT.md § 12.2](AUDIT.md). **Sem JS** (medido na [4.4](stories/4-4-conteudo-sem-javascript.md), `npm run start`, 2026-11-02): o `preventDefault` não roda, o navegador faz `POST /` com os 4 campos e recebe `200` com a home pré-renderizada (`x-nextjs-cache: HIT`). Os dados são descartados e a página volta ao topo, sem aviso. | `PENDING_APPROVAL` | Conversão (fora das Fases 0–6) |
 | **PEND-11** | **E-mail Institucional** | Inclusão de `contato@nexusagencybr.com.br` no Footer e canais de contato. | `PENDING_APPROVAL` | Conversão (fora das Fases 0–6) |
 | **PEND-12** | **Política de Privacidade e LGPD** | Criação de rota/modal `/politica-de-privacidade` e termo de consentimento no form. | `PENDING_APPROVAL` | Conversão (fora das Fases 0–6) |
+| **PEND-13** | **Animações protegidas com reduced motion (FR-11 × FR-07)** | O FR-11 pede desativar animações decorativas com `prefers-reduced-motion: reduce`. O FR-07 protege o pulso infinito `WaveWhatsApp` do botão flutuante e a rotação 3D `rotateY(360deg)` dos `SocialIcons` no hover ("não devem mudar visual, posição, links ou animação"). Hoje os dois animam com reduced motion. Opções: (A) manter como no legado; (B) desligar só o pulso com `reduce` (é infinito e automático; a rotação depende de hover); (C) desligar os dois com `reduce`. Levantado na [4.3](stories/4-3-reduced-motion.md). | `PENDING_DECISION` | Fase 4 (Acessibilidade) |
 
 ## Fase 1 — Fundação técnica
 
@@ -111,10 +112,11 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 
 - [ ] 4.1 Definir comportamento desktop/tablet/mobile. (Status: TODO | Story: —)
 - [ ] 4.2 Ajustar distâncias e intensidades por breakpoint. (Status: TODO | Story: —)
-- [ ] 4.3 Implementar reduced motion. (Status: TODO | Story: — | Já existe `useReducedMotion()` em todos os wrappers com GSAP — a story deve medir o que falta, não reimplementar)
+- [x] 4.3 Implementar reduced motion. (Status: DONE | Story: [4-3-reduced-motion.md](stories/4-3-reduced-motion.md) | Guarda síncrona `prefersReducedMotion()` nos 12 efeitos, limpeza completa (Hero, `ScrollText`, contador) e CSS de reduced motion; Hero, textos e "+50" visíveis com `reduce` em [reduced_1200.png](references/qa/reduced_1200.png) e [reduced_375.png](references/qa/reduced_375.png); pulso/rotação aguardam `PEND-13`)
 - [x] 4.4 Verificar conteúdo sem JavaScript/animação. (Status: DONE | Story: [4-4-conteudo-sem-javascript.md](stories/4-4-conteudo-sem-javascript.md) | `<noscript><style>` no `<head>` deixa os 5 `ScrollText` em branco pleno sem JS; auditoria em [nojs_375.png](references/qa/nojs_375.png) e [nojs_1200.png](references/qa/nojs_1200.png), todos os blocos visíveis)
 - [ ] 4.5 Testar teclado, foco e semântica. (Status: TODO | Story: —)
 - [ ] 4.6 Verificar contraste em todos os estados animados. (Status: TODO | Story: — | Lighthouse Accessibility 94 na 5.6)
+- [ ] 4.7 Corrigir o card Design do Banner invisível com movimento. (Status: TODO | Story: — | Achado da [4.3](stories/4-3-reduced-motion.md): sem reduced motion, depois de rolar até os Banners, o 1º card fica em `opacity: 0` e os outros dois em `1`. Suspeita: `transition-all` em [Banners/index.tsx](../src/sections/Banners/index.tsx) disputando com o `gsap.from` de [BannersClient.tsx](../src/sections/Banners/BannersClient.tsx).)
 
 **Critério de saída:** experiência utilizável em todos os dispositivos e sem dependência de movimento.
 

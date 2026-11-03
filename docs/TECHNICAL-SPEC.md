@@ -37,6 +37,10 @@ Registradas no `package.json` e `package-lock.json` com sucesso na Fase 1. Build
 - Usar `gsap.utils.toArray()` somente dentro do escopo correto.
 - Preferir `scrub` para animações que devem acompanhar e reverter com o scroll.
 - Evitar `pin` salvo necessidade narrativa demonstrada.
+- **Reduced motion (story [4.3](stories/4-3-reduced-motion.md)):**
+  - Todo efeito de animação começa com `if (reduced || prefersReducedMotion()) return;`. `useReducedMotion()` começa em `false` (o servidor não conhece a preferência), então só o leitor síncrono `prefersReducedMotion()`, de [useReducedMotion.ts](../src/hooks/useReducedMotion.ts), impede a 1ª passada animada. Não use esse leitor no render (quebra a hidratação).
+  - A limpeza devolve **tudo** ao estado do servidor. Todo `gsap.set` fica dentro do `gsap.context()`, e a limpeza é `ctx.revert()`, nunca `kill()`, que deixa valores inline no meio do caminho. O que o GSAP não reverte (ex.: `textContent` escrito num `onUpdate`) é guardado e restaurado à mão.
+  - Estado inicial gravado no servidor, como os 22% do `ScrollText`, ganha fallback por CSS em `@media (prefers-reduced-motion: reduce)` no [globals.css](../src/app/globals.css), além do `<noscript>` da 4.4.
 
 ### Leitura progressiva
 - Criar componente ou utilitário reutilizável, por exemplo `ScrollText`.

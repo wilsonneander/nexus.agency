@@ -20,7 +20,7 @@ import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { SITE_CONFIG } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface WhatsAppFloatProps {
   className?: string;
@@ -31,7 +31,7 @@ export function WhatsAppFloat({ className }: WhatsAppFloatProps) {
   const reduced = useReducedMotion();
 
   useEffect(() => {
-    if (reduced) return;
+    if (reduced || prefersReducedMotion()) return;
     const el = linkRef.current;
     if (!el) return;
 

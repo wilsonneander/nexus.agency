@@ -11,14 +11,14 @@
 import { useRef, useEffect, ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
 
 export function BlogClient({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
 
   useEffect(() => {
-    if (reduced) return;
+    if (reduced || prefersReducedMotion()) return;
     if (!ref.current) return;
 
     gsap.registerPlugin(ScrollTrigger);

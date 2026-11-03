@@ -11,7 +11,7 @@
 import { useRef, useEffect, ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface AboutClientProps {
   children: ReactNode;
@@ -22,10 +22,15 @@ export function AboutClient({ children }: AboutClientProps) {
   const reduced = useReducedMotion();
 
   useEffect(() => {
-    if (reduced) return;
+    if (reduced || prefersReducedMotion()) return;
     if (!sectionRef.current) return;
 
     gsap.registerPlugin(ScrollTrigger);
+
+    // O contador escreve textContent no onUpdate, que o ctx.revert() não desfaz:
+    // guarda o texto do servidor ("50") para restaurar na limpeza (story 4.3).
+    const metricEl = sectionRef.current.querySelector("[data-about-metric-number]");
+    const metricText = metricEl?.textContent ?? null;
 
     const ctx = gsap.context(() => {
       const section = sectionRef.current!;
@@ -98,7 +103,6 @@ export function AboutClient({ children }: AboutClientProps) {
       }
 
       // Métrica +50 — counter
-      const metricEl = section.querySelector("[data-about-metric-number]");
       if (metricEl) {
         const counter = { val: 0 };
         gsap.to(counter, {
@@ -165,7 +169,10 @@ export function AboutClient({ children }: AboutClientProps) {
       }
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      if (metricEl && metricText !== null) metricEl.textContent = metricText;
+    };
   }, [reduced]);
 
   return (
