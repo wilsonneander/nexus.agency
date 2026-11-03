@@ -50,14 +50,14 @@ export function AboutSection() {
             {/* Destaque institucional */}
             <div
               data-about-highlight
-              className="p-6 bg-[#0f1221] border-l-2 border-[#a15cf5] rounded-md text-white/90 text-sm sm:text-base leading-relaxed"
+              className="glass-card p-6 rounded-2xl border-l-2 border-primary-dark text-white/90 text-sm sm:text-base leading-relaxed"
             >
               <p className="mb-2 font-medium">{ABOUT_DATA.paragraphs[3]}</p>
               <p className="text-white/70 text-sm">{ABOUT_DATA.paragraphs[4]}</p>
             </div>
 
             {/* Métrica +50 — B3: número em span separado para não quebrar bg-clip-text */}
-            <div className="flex items-center gap-6 p-4 bg-[#0f1221] rounded-lg border border-white/5">
+            <div className="glass-card flex items-center gap-6 p-4 rounded-2xl">
               <div className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#a15cf5] to-white">
                 <span data-about-metric-value>+</span>
                 <span data-about-metric-number>50</span>
@@ -80,12 +80,12 @@ export function AboutSection() {
         </div>
 
         {/* ── Missão e Visão ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className="glass-ambient grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <div
             data-about-mv
-            className="p-8 bg-[#0f1221] rounded-xl border border-white/5 hover:border-[#a15cf5]/40 transition-colors"
+            className="glass-card group p-8 rounded-2xl"
           >
-            <div className="w-12 h-12 rounded-lg bg-[#a15cf5]/10 flex items-center justify-center text-[#a15cf5] text-2xl mb-4">
+            <div className="glass-icon w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4">
               <i className="fa-solid fa-bullseye" />
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">Nossa Missão</h3>
@@ -96,9 +96,9 @@ export function AboutSection() {
 
           <div
             data-about-mv
-            className="p-8 bg-[#0f1221] rounded-xl border border-white/5 hover:border-[#a15cf5]/40 transition-colors"
+            className="glass-card group p-8 rounded-2xl"
           >
-            <div className="w-12 h-12 rounded-lg bg-[#a15cf5]/10 flex items-center justify-center text-[#a15cf5] text-2xl mb-4">
+            <div className="glass-icon w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4">
               <i className="fa-solid fa-eye" />
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">Nossa Visão</h3>
@@ -113,12 +113,12 @@ export function AboutSection() {
           <h3 className="text-2xl sm:text-3xl font-semibold text-center text-white mb-10">
             Nossos Valores
           </h3>
-          <div data-about-values-grid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div data-about-values-grid className="glass-ambient grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {ABOUT_DATA.values.map((val, index) => (
               <div
                 key={val.title}
                 data-about-value
-                className="p-6 bg-[#0f1221] rounded-lg border border-white/5 hover:border-[#a15cf5]/50 transition-all duration-300 flex flex-col justify-between"
+                className="glass-card p-6 rounded-2xl flex flex-col justify-between"
               >
                 <div>
                   <div className="text-xs font-mono text-[#ad7dff] mb-2">

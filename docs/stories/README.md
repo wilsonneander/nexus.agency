@@ -15,3 +15,4 @@ a partir de [`.claude/skills/story/TEMPLATE.md`](../../.claude/skills/story/TEMP
 | 4.4 | [Verificar conteúdo sem JavaScript/animação](4-4-conteudo-sem-javascript.md) | Fase 4 |
 | 4.7 | [Corrigir o card Design do Banner invisível com movimento](4-7-card-design-banner-invisivel.md) | Fase 4 |
 | 7.1 | [Redesenhar o Hero com background roxo animado](7-1-hero-background-animado.md) | Fase 7 |
+| 7.2 | [Padronizar os cards com visual de vidro e bordas iluminadas](7-2-cards-glassmorphism.md) | Fase 7 |

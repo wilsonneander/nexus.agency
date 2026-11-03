@@ -17,6 +17,13 @@
     var(--primary-color-dark),
     var(--primary-color)
   );
+
+  /* Cards de vidro (story 7.2, PEND-15). Canais RGB para compor alfa. */
+  --glass-tint-rgb: 18 12 42;      /* roxo-escuro do preenchimento (mantém #a15cf5 em ≥ 4,5:1) */
+  --glass-edge-rgb: 214 190 255;   /* lilás claro da borda iluminada */
+  --glass-halo-rgb: 161 92 245;    /* --primary-color-dark */
+  --glass-icon-from: #a15cf5;      /* --primary-color-dark */
+  --glass-icon-to: #d63fd1;        /* magenta da referência cards-glass-reference.png */
 }
 
 html,
@@ -456,6 +463,115 @@ body {
 @keyframes heroReflectionFlicker {
   0%, 100% { opacity: 0.14; }
   50%      { opacity: 0.3; }
+}
+
+/* ==========================================================================
+   Cards de vidro — padrão único dos cards (story 7.2, PEND-15)
+   .glass-card    fundo translúcido + blur, borda clara com realce no topo, halo roxo.
+   .glass-icon    recipiente do ícone em gradiente roxo→magenta, glifo branco.
+   .glass-ambient brilho estático atrás da grade, para o blur ter o que desfocar.
+   Borda = anel inset no ::after, não `border`: não ocupa layout (o card dos
+   Banners já estoura em 480px — 4.1 — e 1px de borda alargava o documento).
+   Halo só com blur, sem spread, pelo mesmo motivo.
+   Transição só de sombra: transform/opacity dos cards são do GSAP.
+   ========================================================================== */
+.glass-card {
+  --glass-edge: 0.16;      /* anel de 1px */
+  --glass-edge-top: 0.3;   /* realce da aresta de cima */
+  --glass-halo: 0.4;       /* halo roxo externo */
+  --glass-halo-blur: 26px;
+  position: relative;
+  background:
+    linear-gradient(
+      180deg,
+      rgb(var(--glass-tint-rgb) / 0.7) 0%,
+      rgb(var(--glass-tint-rgb) / 0.5) 100%
+    );
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  box-shadow:
+    inset 0 0 24px 0 rgb(var(--glass-halo-rgb) / 0.1),
+    0 0 var(--glass-halo-blur) -6px rgb(var(--glass-halo-rgb) / var(--glass-halo)),
+    0 18px 40px -20px rgb(0 0 0 / 0.7);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Borda iluminada por cima do conteúdo: nos cards de imagem (Blog/Projetos) um
+   inset no próprio card ficaria debaixo da foto. */
+.glass-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--glass-edge-rgb) / var(--glass-edge)),
+    inset 0 1px 0 0 rgb(var(--glass-edge-rgb) / var(--glass-edge-top));
+  transition: box-shadow 0.3s ease;
+}
+
+.glass-card--featured {
+  --glass-edge: 0.45;
+  --glass-edge-top: 0.6;
+  --glass-halo: 0.6;
+  --glass-halo-blur: 40px;
+}
+
+@media (hover: hover) {
+  .glass-card:hover {
+    --glass-edge: 0.38;
+    --glass-edge-top: 0.5;
+    --glass-halo: 0.6;
+    --glass-halo-blur: 36px;
+  }
+}
+
+/* Sem backdrop-filter, um pouco mais opaco para o card não ficar lavado. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-card {
+    background:
+      linear-gradient(
+        180deg,
+        rgb(var(--glass-tint-rgb) / 0.9) 0%,
+        rgb(var(--glass-tint-rgb) / 0.75) 100%
+      );
+  }
+}
+
+/* z-index: o selo dos Serviços (absolute) cruza a aresta do card e fica acima do ::after. */
+.glass-icon {
+  z-index: 1;
+  color: var(--white);
+  background-image: linear-gradient(135deg, var(--glass-icon-from) 0%, var(--glass-icon-to) 100%);
+  box-shadow:
+    inset 0 1px 0 0 rgb(255 255 255 / 0.35),
+    0 0 18px -2px rgb(var(--glass-halo-rgb) / 0.65);
+  transition: box-shadow 0.3s ease;
+}
+
+@media (hover: hover) {
+  .group:hover .glass-icon {
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 0.45),
+      0 0 26px 0 rgb(var(--glass-halo-rgb) / 0.85);
+  }
+}
+
+/* inset 0: o brilho não sai da grade e não cria largura extra no documento. */
+.glass-ambient {
+  position: relative;
+  isolation: isolate;
+}
+
+.glass-ambient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 55% at 20% 30%, rgb(var(--glass-halo-rgb) / 0.14) 0%, transparent 70%),
+    radial-gradient(40% 55% at 80% 70%, rgb(var(--glass-halo-rgb) / 0.12) 0%, transparent 70%);
 }
 
 /* --- Respeito a prefers-reduced-motion --- */

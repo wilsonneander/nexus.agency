@@ -138,14 +138,14 @@ export function ProjectsSection() {
         {/* Grid de Projetos */}
         <div
           ref={gridRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          className="glass-ambient grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           {filteredProjects.map((project) => (
             <div
               key={project.id}
               data-project-card
               data-flip-id={project.id}
-              className="group relative rounded-xl overflow-hidden bg-[#0f1221] border border-white/5 hover:border-[#a15cf5]/40 transition-all duration-300 shadow-xl"
+              className="glass-card group rounded-2xl overflow-hidden"
             >
               <div className="aspect-[4/3] w-full overflow-hidden">
                 <Image

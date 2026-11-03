@@ -19,6 +19,7 @@
 ## 3. Animações e scroll
 - [x] Hero entra sem atraso excessivo. (Validado via timeline com delays escalonados 0.15s, 0.35s, 0.55s)
 - [x] Brilho do Hero se move sem esconder nem ofuscar conteúdo. (Medido na [7.1](stories/7-1-hero-background-animado.md), `next start` sobre `d9b5a48` + árvore de trabalho: 6 animações CSS com movimento e 0 com reduced motion, nos 5 viewports; parallax do brilho volta a `0` ao rolar para cima e depois de resize 1200 → 375 → 1200; contraste mínimo do parágrafo 15:1 com o brilho no pico — [hero_glow_1200.png](references/qa/hero_glow_1200.png), [hero_glow_375.png](references/qa/hero_glow_375.png))
+- [x] Cards de vidro não mudam as entradas nem escondem conteúdo. (Medido na [7.2](stories/7-2-cards-glassmorphism.md), `next start` sobre árvore de trabalho de `2544f6f`: 31 cards e 11 ícones nos 5 viewports, todos opacos ao entrar na tela rolando para baixo e para cima; Flip dos Projetos sem card piscando; reduced motion com os 31 opacos; sem JS com o visual de vidro — [cards_glass_1200.png](references/qa/cards_glass_1200.png), [cards_glass_375.png](references/qa/cards_glass_375.png))
 - [x] Animações não ocultam conteúdo antes de inicializarem. (Sem JS: sim — story [4.4](stories/4-4-conteudo-sem-javascript.md), [nojs_375.png](references/qa/nojs_375.png) e [nojs_1200.png](references/qa/nojs_1200.png). Com JS: o Hero pisca na hidratação ([HeroClient.tsx](../src/sections/Hero/HeroClient.tsx) aplica `opacity: 0` no `useEffect`), ver 4.3/4.1. Depois de rolar: o card Design dos Banners ficava em `opacity: 0`, corrigido na [4.7](stories/4-7-card-design-banner-invisivel.md) — [banners_design_1200.png](references/qa/banners_design_1200.png), [banners_design_375.png](references/qa/banners_design_375.png).)
 - [x] Texto progressivo acompanha o scroll. (Validado: ScrollText com scrub bidirecional em Hero, About e Services)
 - [x] Texto progressivo regride corretamente ao subir. (Validado: scrub bidirecional restaura tons de leitura ao rolar para cima)
@@ -53,7 +54,7 @@ Em cada viewport:
 - [x] Foco é visível. (Validado: outline e bordas ativas)
 - [x] Semântica de headings, links e botões é adequada. (Validado: h1-h4, form e buttons com tipagem semântica)
 - [x] Leitores de tela não recebem texto duplicado ou fragmentado indevidamente. (Validado: remoção de aria-labels duplicados)
-- [x] Contraste é suficiente nos estados inicial e animado. (Validado: estado inicial com 22% de opacidade sobre fundo preto e 100% ao iluminar) — Sem JS, o `ScrollText` sai em branco pleno ([4.4](stories/4-4-conteudo-sem-javascript.md)). Com JS, o estado inicial em 22% dá ≈ 1,9:1 sobre `#04091d` e será reavaliado na 4.6; a evidência sem JS não confirma este item.
+- [x] Contraste é suficiente nos estados inicial e animado. (Validado: estado inicial com 22% de opacidade sobre fundo preto e 100% ao iluminar) — Sem JS, o `ScrollText` sai em branco pleno ([4.4](stories/4-4-conteudo-sem-javascript.md)). Com JS, o estado inicial em 22% dá ≈ 1,9:1 sobre `#04091d` e será reavaliado na 4.6; a evidência sem JS não confirma este item. Cards de vidro ([7.2](stories/7-2-cards-glassmorphism.md)), medido em pixel no fundo mais claro de cada tipo de card em 1200px: `#a15cf5` ≥ 4,60:1 (baseline 4,75), `white/70` ≥ 9,14:1, `white/60` ≥ 6,99:1.
 
 ## 6. Performance e estabilidade
 - [ ] Imagens têm dimensões/proporções definidas.

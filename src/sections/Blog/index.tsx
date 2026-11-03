@@ -15,12 +15,12 @@ export function BlogSection() {
           </h2>
         </div>
 
-        <div data-blog-grid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div data-blog-grid className="glass-ambient grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {BLOG_DATA.map((post) => (
             <article
               key={post.id}
               data-blog-card
-              className="group bg-[#0f1221] rounded-xl overflow-hidden border border-white/5 hover:border-[#a15cf5]/40 transition-all duration-300 flex flex-col justify-between shadow-xl"
+              className="glass-card group rounded-2xl overflow-hidden flex flex-col justify-between"
             >
               <div>
                 <div className="aspect-[16/10] w-full overflow-hidden">

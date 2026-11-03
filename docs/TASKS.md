@@ -2,17 +2,17 @@
 
 ## ▶ Ordem de implementação
 
-> **Atualizada em:** 2026-11-03, no fechamento da 4.7 (sobre `ff8618e`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
+> **Atualizada em:** 2026-11-03, no fechamento da 7.2 (sobre `2544f6f`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
 
 **Próxima tarefa: 4.1 — Definir comportamento desktop/tablet/mobile** (`TODO`, sem story: começa pela skill `story`)
-Por quê agora: depois da 4.7 não há conteúdo escondido conhecido; a 4.1 define por breakpoint quais efeitos rodam e destrava a 4.2.
+Por quê agora: com a 7.2 `DONE` não há conteúdo escondido conhecido; a 4.1 define por breakpoint quais efeitos rodam, destrava a 4.2 e é dona do scroll horizontal em 480px (504 px, card dos Banners).
 
 | # | Tarefa | Depende de | Status | Por que nesta posição |
 |---|---|---|---|---|
 | 1 | **4.1** Comportamento desktop/tablet/mobile | — | `TODO` | Define, por breakpoint, quais efeitos rodam; candidata a adotar `gsap.matchMedia()` (ver [story 4.3](stories/4-3-reduced-motion.md)). |
 | 2 | **4.2** Distâncias e intensidades por breakpoint | 4.1 | `TODO` | Ajusta os valores do que a 4.1 decidiu manter. |
 | 3 | **4.5** Teclado, foco e semântica | — | `TODO` | Independente das animações; pode correr em paralelo a partir da posição 1. |
-| 4 | **4.6** Contraste em todos os estados animados | 4.2 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). |
+| 4 | **4.6** Contraste em todos os estados animados | 4.2 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). Os cards de vidro já foram medidos na [7.2](stories/7-2-cards-glassmorphism.md) (`#a15cf5` ≥ 4,60:1). |
 | 5 | **6.9** Remover código de motion/About não usado | — | `TODO` | Limpeza sem risco ao QA § 9; encaixa em qualquer folga. |
 
 **Fora da fila (aguardam decisão do responsável, não implementar):** `PEND-13` pulso do WhatsApp e rotação dos ícones sociais com reduced motion, `PEND-02` links `href="#"`, `PEND-06` deploy, `PEND-09` colchetes, `PEND-10` backend do formulário, `PEND-11` e-mail, `PEND-12` LGPD. ESLint (1.8) depende de aprovação de dependências novas. Quando um desses for resolvido, a tarefa resultante entra na tabela acima na posição devida.
@@ -62,6 +62,7 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 | **PEND-12** | **Política de Privacidade e LGPD** | Criação de rota/modal `/politica-de-privacidade` e termo de consentimento no form. | `PENDING_APPROVAL` | Conversão (fora das Fases 0–6) |
 | **PEND-13** | **Animações protegidas com reduced motion (FR-11 × FR-07)** | O FR-11 pede desativar animações decorativas com `prefers-reduced-motion: reduce`. O FR-07 protege o pulso infinito `WaveWhatsApp` do botão flutuante e a rotação 3D `rotateY(360deg)` dos `SocialIcons` no hover ("não devem mudar visual, posição, links ou animação"). Hoje os dois animam com reduced motion. Opções: (A) manter como no legado; (B) desligar só o pulso com `reduce` (é infinito e automático; a rotação depende de hover); (C) desligar os dois com `reduce`. Levantado na [4.3](stories/4-3-reduced-motion.md). | `PENDING_DECISION` | Fase 4 (Acessibilidade) |
 | **PEND-14** | **Redesign do Hero (exceção ao FR-02 e ao AGENTS.md § 4)** | O FR-02 pede reproduzir fielmente o Hero legado (foto `header.webp` + overlay, texto à esquerda no desktop). **Decisão (2026-11-03, responsável):** autorizado trocar o fundo por um brilho roxo animado no estilo de [hero-glow-reference.png](references/hero-glow-reference.png), com composição centralizada, "limpo e profissional", sem a interface de produto da referência. Vale só para fundo e composição do Hero; o texto continua o do legado. Executado na [7.1](stories/7-1-hero-background-animado.md). | `RESOLVED` | Fase 7 (Evolução visual) |
+| **PEND-15** | **Cards com visual de vidro (exceção ao FR-01 e ao AGENTS.md § 4)** | O legado usa cards opacos `#0f1221`, com `border-bottom` roxa no hover e ícones que só ganham gradiente no hover (`styles.css:486-512`, `:567-597`). **Decisão (2026-11-03, responsável):** autorizado um padrão único de card de vidro (blur, borda iluminada, halo roxo), com ícones em cores vivas, no estilo de [cards-glass-reference.png](references/cards-glass-reference.png), em todos os cards de About, Banners, Serviços, Pacotes, Blog e Projetos. Vale só para o estilo dos cards; texto, ordem, imagens e links continuam os do legado/cliente. Executado na [7.2](stories/7-2-cards-glassmorphism.md). | `RESOLVED` | Fase 7 (Evolução visual) |
 
 ## Fase 1 — Fundação técnica
 
@@ -150,8 +151,9 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 Mudanças de design pedidas pelo responsável depois da entrega. Cada uma depende de um `PEND-xx` que autorize a exceção à fidelidade ao legado.
 
 - [x] 7.1 Redesenhar o Hero com background roxo animado. (Status: DONE | Story: [7-1-hero-background-animado.md](stories/7-1-hero-background-animado.md) | Exceção autorizada no `PEND-14`; brilho em camadas CSS, parado com reduced motion, contraste mínimo de 15:1, 0 Layout/Paint extra no trace; [hero_glow_1200.png](references/qa/hero_glow_1200.png), [hero_glow_375.png](references/qa/hero_glow_375.png); aprovado pelo responsável)
+- [x] 7.2 Padronizar os cards com visual de vidro e bordas iluminadas. (Status: DONE | Story: [7-2-cards-glassmorphism.md](stories/7-2-cards-glassmorphism.md) | Exceção autorizada no `PEND-15`; padrão único `glass-card`/`glass-icon`/`glass-ambient` em 31 cards de About, Banners, Serviços, Pacotes, Blog e Projetos; borda no `::after` (480px igual ao baseline), contraste ≥ 4,60:1, 0 card escondido nos 5 viewports e com reduced motion, trace na faixa do baseline; barra do destaque do About e espaço entre linhas dos Serviços ajustados a pedido; [cards_glass_1200.png](references/qa/cards_glass_1200.png), [cards_glass_375.png](references/qa/cards_glass_375.png); aprovado pelo responsável)
 
-**Critério de saída:** cada mudança aprovada visualmente pelo responsável, sem violar o [QA-CHECKLIST](QA-CHECKLIST.md) § 9. [ATENDIDO para a 7.1]
+**Critério de saída:** cada mudança aprovada visualmente pelo responsável, sem violar o [QA-CHECKLIST](QA-CHECKLIST.md) § 9. [ATENDIDO para a 7.1 e a 7.2]
 
 ## Coordenação de múltiplos agentes
 

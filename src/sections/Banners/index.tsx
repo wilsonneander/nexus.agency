@@ -25,16 +25,16 @@ export function BannersSection() {
   return (
     <BannersClient>
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="glass-ambient grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {cards.map((card) => (
             <div
               key={card.title}
               data-banner-card
-              className="group p-6 bg-[#0f1221] rounded-lg border-b-2 border-transparent hover:border-[#a15cf5] transition-all duration-300 flex items-start gap-5 shadow-lg"
+              className="glass-card group p-6 rounded-2xl flex items-start gap-5"
             >
               <div
                 data-banner-icon
-                className="flex-shrink-0 w-12 h-12 rounded-full bg-[#03060f] text-white flex items-center justify-center text-xl group-hover:bg-gradient-to-r group-hover:from-[#a15cf5] group-hover:to-white group-hover:text-[#04091d] transition-all duration-300"
+                className="glass-icon flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-xl"
               >
                 <i className={card.icon} />
               </div>

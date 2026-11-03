@@ -3,6 +3,7 @@ import { PACKAGES_DATA } from "@/data/packages";
 import { ServicesClient } from "./ServicesClient";
 import { ScrollText } from "@/components/motion/ScrollText";
 import { FluidLink } from "@/components/ui/FluidButton";
+import { cn } from "@/lib/utils";
 
 export function ServicesSection() {
   return (
@@ -39,17 +40,17 @@ export function ServicesSection() {
         </div>
 
         {/* ── Grid dos 6 Serviços ── */}
-        <div data-services-grid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-8 mb-24">
+        <div data-services-grid className="glass-ambient grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 lg:gap-x-8 gap-y-14 mb-24">
           {SERVICES_DATA.map((service) => (
             <div
               key={service.id}
               data-service-card
-              className="group relative pt-12 pb-8 px-6 sm:px-8 bg-[#0f1221] rounded-xl border-b-2 border-transparent hover:border-[#a15cf5] transition-all duration-300 shadow-xl flex flex-col justify-between"
+              className="glass-card group pt-12 pb-8 px-6 sm:px-8 rounded-2xl flex flex-col justify-between"
             >
               {/* Badge flutuante */}
               <div
                 data-service-badge
-                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-md bg-[#0f1221] border border-[#04091d] flex items-center justify-center text-2xl text-[#a15cf5] group-hover:bg-gradient-to-r group-hover:from-[#a15cf5] group-hover:to-white group-hover:text-[#04091d] transition-all duration-300 shadow-md"
+                className="glass-icon absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-xl flex items-center justify-center text-2xl"
               >
                 <i className={`fa-solid fa-${service.iconClass}`} />
               </div>
@@ -95,16 +96,15 @@ export function ServicesSection() {
             </p>
           </div>
 
-          <div data-packages-grid className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div data-packages-grid className="glass-ambient grid grid-cols-1 md:grid-cols-3 gap-8">
             {PACKAGES_DATA.map((pkg) => (
               <div
                 key={pkg.id}
                 data-package-card
-                className={`p-8 rounded-2xl flex flex-col justify-between transition-all duration-300 ${
-                  pkg.highlight
-                    ? "bg-[#0f1221] border-2 border-[#a15cf5] shadow-2xl shadow-[#a15cf5]/10 scale-105"
-                    : "bg-[#0f1221] border border-white/5 hover:border-[#a15cf5]/40"
-                }`}
+                className={cn(
+                  "glass-card p-8 rounded-2xl flex flex-col justify-between",
+                  pkg.highlight && "glass-card--featured scale-105"
+                )}
               >
                 <div>
                   {pkg.highlight && (
