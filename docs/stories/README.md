@@ -11,4 +11,4 @@ a partir de [`.claude/skills/story/TEMPLATE.md`](../../.claude/skills/story/TEMP
 
 | ID | Story | Fase |
 | --- | --- | --- |
-| — | Nenhuma story escrita ainda. As tarefas da Fase 4 (4.1–4.6) são as próximas candidatas. | — |
+| 4.4 | [Verificar conteúdo sem JavaScript/animação](4-4-conteudo-sem-javascript.md) | Fase 4 |

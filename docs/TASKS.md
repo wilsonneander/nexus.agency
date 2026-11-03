@@ -2,14 +2,14 @@
 
 ## ▶ Ordem de implementação
 
-> **Atualizada em:** 2026-11-02, sobre `e8c5fc2`. Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
+> **Atualizada em:** 2026-11-02, sobre `5012764`. Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
 
-**Próxima tarefa: 4.4 — Verificar conteúdo sem JavaScript/animação** (`TODO`, sem story)
-Por quê primeiro: `gsap.from()` ainda é usado em `FooterClient.tsx`, `BannersClient.tsx` e `Contact/index.tsx` — se o estado inicial for aplicado antes do ScrollTrigger disparar (ou sem JS), o conteúdo fica invisível, o que viola o QA § 9 ("animação esconder conteúdo"). É também a base das tarefas seguintes: define o padrão "HTML do servidor = estado final visível" que a 4.3 e a 4.6 reaproveitam.
+**Próxima tarefa: 4.4 — Verificar conteúdo sem JavaScript/animação** (`TODO`, [story](stories/4-4-conteudo-sem-javascript.md), validada)
+Por quê primeiro: sem JS, o `ScrollText` deixa os 5 textos de leitura progressiva em 22% de branco (≈ 1,9:1), e os cards Missão/Visão/Valores ficam fechados sem poder abrir. As duas coisas violam o QA § 9 ("animação esconder conteúdo"). A suspeita anterior sobre os `gsap.from()` de Footer/Banners/Contact não se confirmou: eles rodam só no `useEffect`. A 4.4 também é a base das seguintes, porque fixa o padrão de fallback sem JS que a 4.3 e a 4.6 reaproveitam.
 
 | # | Tarefa | Depende de | Status | Por que nesta posição |
 |---|---|---|---|---|
-| 1 | **4.4** Conteúdo sem JS/animação | — | `TODO` | Risco ativo ao QA § 9; fixa o padrão de estado inicial visível. |
+| 1 | **4.4** Conteúdo sem JS/animação | — | `TODO` | Risco ativo ao QA § 9 (ScrollText em 22% e MVV fechado sem JS); fixa o padrão de fallback sem JS. |
 | 2 | **4.3** Reduced motion | 4.4 | `TODO` | Mesmo eixo da 4.4 (conteúdo visível sem movimento); `useReducedMotion()` já existe — medir lacunas por seção. |
 | 3 | **4.1** Comportamento desktop/tablet/mobile | 4.4, 4.3 | `TODO` | Define, por breakpoint, quais efeitos rodam; precisa saber o que já é seguro desligar. |
 | 4 | **4.2** Distâncias e intensidades por breakpoint | 4.1 | `TODO` | Ajusta os valores do que a 4.1 decidiu manter. |
@@ -112,7 +112,7 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 - [ ] 4.1 Definir comportamento desktop/tablet/mobile. (Status: TODO | Story: —)
 - [ ] 4.2 Ajustar distâncias e intensidades por breakpoint. (Status: TODO | Story: —)
 - [ ] 4.3 Implementar reduced motion. (Status: TODO | Story: — | Já existe `useReducedMotion()` em todos os wrappers com GSAP — a story deve medir o que falta, não reimplementar)
-- [ ] 4.4 Verificar conteúdo sem JavaScript/animação. (Status: TODO | Story: —)
+- [ ] 4.4 Verificar conteúdo sem JavaScript/animação. (Status: TODO | Story: docs/stories/4-4-conteudo-sem-javascript.md)
 - [ ] 4.5 Testar teclado, foco e semântica. (Status: TODO | Story: —)
 - [ ] 4.6 Verificar contraste em todos os estados animados. (Status: TODO | Story: — | Lighthouse Accessibility 94 na 5.6)
 
