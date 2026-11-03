@@ -166,4 +166,4 @@ Com base no relatório oficial `docs/AUDIT.md`:
   - Botões de Redes Sociais: **preservação integral** da rotação 3D (`rotateY(360deg)`) e expansão de cor de fundo sem alterações.
 - **Avaliação de Lenis:** Descartado para a versão inicial. O scroll nativo (`scroll-behavior: smooth`) e o ScrollTrigger padrão atendem perfeitamente à proposta sem os riscos de conflito em mobile/touch.
 - **Estratégia de testes:** Execução do [QA-CHECKLIST.md](QA-CHECKLIST.md) nos viewports 375px, 480px, 768px, 1024px e 1200px.
-- **Pendências que afetam a arquitetura** (formulário `PEND-10`, links placeholder `PEND-02`, textos `PEND-03`, hospedagem `PEND-06`): status na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável).
+- **Pendências que afetam a arquitetura** (formulário `PEND-10`, links placeholder `PEND-02`, textos `PEND-03` (RESOLVED), hospedagem `PEND-06`): status na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável).

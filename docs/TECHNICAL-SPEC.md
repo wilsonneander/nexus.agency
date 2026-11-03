@@ -75,7 +75,7 @@ Registradas no `package.json` e `package-lock.json` com sucesso na Fase 1. Build
 - O código com DDD 81 encontrado no arquivo legado `main.js` não deve ser utilizado.
 
 ### Funcionalidades pendentes de decisão
-- Formulário de contato (`PEND-10`), links placeholder `href="#"` (`PEND-02`), inconsistências textuais (`PEND-03`): status e opções na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável); comparação técnica das opções do formulário em [AUDIT.md § 12.2](AUDIT.md).
+- Formulário de contato (`PEND-10`), links placeholder `href="#"` (`PEND-02`), inconsistências textuais (`PEND-03`, RESOLVED): status e opções na tabela PEND-xx do [TASKS.md](TASKS.md#pendências-de-decisão-registradas-para-alinhamento-com-responsável); comparação técnica das opções do formulário em [AUDIT.md § 12.2](AUDIT.md).
 - Regra técnica enquanto abertas: placeholders não podem gerar navegação quebrada nem rota inexistente, e o conteúdo original é mantido até aprovação formal.
 
 ### Lenis (opcional)

@@ -227,10 +227,10 @@ O CSS utiliza mobile-first com as seguintes quebras de layout:
    - 3 botões "Saiba Mais" nos cards de Blog possuem `href="#"`.
    - 8 links no rodapé (5 em "Serviços" e 3 em "Suporte") possuem `href="#"`.
    Registrados como placeholders que devem ser mantidos sem quebrar a navegação até o fornecimento de páginas de destino.
-3. **Inconsistências Textuais Originais (Submetidas para Aprovação — `PEND-03`):**
+3. **Inconsistências Textuais Originais (`PEND-03`, RESOLVED — superada pelos 6 serviços do conteúdo aprovado do cliente; ver [CONTENT-MAPPING.md](CONTENT-MAPPING.md)):**
    - Seção Serviços: Card 4 ("Inbound Marketing.") repete a frase `"Campanhas de tráfego pago de alta performance para aumentar o seu volume de leads, reduzir CPC, CPV, CPL e CPA."` duas vezes consecutivas.
    - Seção Serviços: Cards 5 ("SEO") e 6 ("Digital Marketing") possuem textos originais em inglês ("Our SEO strategies are tailored..."), diferindo do restante do site em português.
-   - *Diretriz adotada:* **Não corrigir o conteúdo original** sem autorização explícita; o rebuild manterá fielmente os textos até aprovação formal.
+   - *Diretriz adotada:* **Não corrigir o conteúdo original** sem autorização explícita. A autorização veio com o conteúdo do cliente: o rebuild substitui a seção inteira (`src/data/services.ts`); o legado segue intacto.
 4. **Sintaxe da URL do Instagram no HTML Legado (`PEND-04`, RESOLVED — superada pela URL nova do `PEND-08`):**
    O atributo `href` no HTML legado possui aspas duplas adicionais no final: `href="https://www.instagram.com/nexus.ag.contato?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==""`. Registrada a necessidade de aprovação formal para saneamento sintático da URL sem alterar o destino.
 5. **Erro Crítico no `main.js` (Listener Inexistente):**

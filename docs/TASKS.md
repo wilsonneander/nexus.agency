@@ -18,11 +18,11 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 - [x] 0.2 Identificar todas as rotas/páginas. (Status: DONE | Agente: Auditor | Rota única identificada: `/` com âncoras internas)
 - [x] 0.3 Mapear seções e ordem por página. (Status: DONE | Agente: Auditor | 10 seções ativas + 1 comentada catalogadas)
 - [x] 0.4 Inventariar textos, imagens, vídeos, fontes, ícones e logos. (Status: DONE | Agente: Auditor | 20 assets, Poppins, FontAwesome, RemixIcon mapeados)
-- [x] 0.5 Inventariar links, botões, formulários e destinos. (Status: DONE | Agente: Auditor | WhatsApp oficial +5561995395969 e links sociais mapeados)
+- [x] 0.5 Inventariar links, botões, formulários e destinos. (Status: DONE | Agente: Auditor | WhatsApp do legado +5561995395969 e links sociais mapeados; o rebuild usa os canais do cliente — ver `PEND-07`/`PEND-08`)
 - [x] 0.6 Registrar comportamento atual de navegação e responsividade. (Status: DONE | Agente: Auditor | Breakpoints: 480px, 768px, 1024px, 1200px)
 - [x] 0.7 Capturar screenshots de referência nos viewports definidos. (Status: DONE | Agente: Auditor | Estrutura visual e matriz de viewports documentadas)
 - [x] 0.8 Identificar animações atuais que precisam ser preservadas. (Status: DONE | Agente: Auditor | Rotação 3D social e pulso WhatsApp documentados)
-- [x] 0.9 Criar relatório oficial `docs/AUDIT.md` com achados, lacunas e riscos. (Status: DONE | Agente: Auditor | `docs/AUDIT.md` consagrado como oficial definitivo; duplicata na raiz mantida para autorização)
+- [x] 0.9 Criar relatório oficial `docs/AUDIT.md` com achados, lacunas e riscos. (Status: DONE | Agente: Auditor | `docs/AUDIT.md` consagrado como oficial definitivo; duplicata da raiz excluída — ver `PEND-05`)
 
 **Critério de saída:** inventário completo o suficiente para reconstruir o site sem adivinhar conteúdo ou comportamento. [ATENDIDO]
 
@@ -32,16 +32,16 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 |---|---|---|---|---|
 | **PEND-01** | **Formulário de Contato sem Backend** | Mesma decisão de `PEND-10` — acompanhar lá (ID mantido para histórico; não reaproveitar). | `CONSOLIDADA em PEND-10` | — |
 | **PEND-02** | **Links Placeholder** | 3 botões "Saiba Mais" do Blog e 8 links do rodapé apontam para `#`. Manter como placeholder seguro `href="#"` até haver páginas reais. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
-| **PEND-03** | **Inconsistências Textuais** | Cards 5 e 6 de serviços em inglês; Card 4 de serviços com texto duplicado. Manter fiel ao original no rebuild até aprovação formal de correção. | `PENDING_DECISION` | Fase 2 (Reconstrução) |
+| **PEND-03** | **Inconsistências Textuais** | Cards 5 e 6 de serviços em inglês; Card 4 de serviços com texto duplicado. Superada pelo conteúdo aprovado do cliente: a seção Serviços é `SUBSTITUIR`/`APPROVED` no [CONTENT-MAPPING.md](CONTENT-MAPPING.md) (linha 06, "resolve inconsistências de inglês e repetições") e os 6 serviços novos, em PT, estão em `src/data/services.ts` (tarefa 2.4). Resolvida em 2026-11-02. | `RESOLVED` | — |
 | **PEND-04** | **Sintaxe da URL do Instagram** | O HTML original possui aspas extras no `href` (`igsh=ZDNlZDc0MzIxNw==""`). Superada pelo `PEND-08`: o rebuild usa a URL nova `https://www.instagram.com/nexusagencybr/`, sem as aspas. | `RESOLVED` | — |
 | **PEND-05** | **Duplicata AUDIT.md na raiz** | `docs/AUDIT.md` definido como canônico oficial. Duplicata `AUDIT.md` da raiz excluída com autorização formal. | `RESOLVED` | Fase 1 (Consolidação) |
 | **PEND-06** | **Hospedagem / Deploy** | Confirmar provedor de deploy (Vercel, Node server ou estático). | `PENDING_DECISION` | Fase 6 (Entrega) |
-| **PEND-07** | **Número do WhatsApp (Legado vs. Cliente)** | Site legado usa `+55 (61) 99539-5969`; relatório do cliente cita `+55 (61) 9298-5392`. **Decisão (2026-11-02, responsável):** vale o número do cliente, `+55 (61) 9298-5392` (`https://wa.me/556192985392`), já em `SITE_CONFIG.whatsapp`. | `RESOLVED` | Fase 4 (Conversão) |
-| **PEND-08** | **Perfil do Instagram (Legado vs. Cliente)** | Site legado usa `@nexus.ag.contato`; relatório do cliente indica `@nexusagencybr`. **Decisão (2026-11-02, responsável):** valem os perfis do cliente — Instagram `https://www.instagram.com/nexusagencybr/` e LinkedIn `https://www.linkedin.com/company/nexus-ag-br/` (legado: `linkedin.com/in/nexusagency`), já em `SITE_CONFIG.socials`. Facebook inalterado. | `RESOLVED` | Fase 4 (Conversão) |
-| **PEND-09** | **Informações entre colchetes do Cliente** | Preenchimento dos números em falta (`[número]` milhões de pessoas, conversas, anos) e prazos (`[24 horas úteis]`). | `PENDING_APPROVAL` | Fase 2 / 4 |
-| **PEND-10** | **Formulário de Contato (sem backend)** | Hoje `action="/"` + `preventDefault`, nada é enviado. Opções: (A) Route Handler/Server Action com e-mail (Resend); (B) Redirecionamento com mensagem para o WhatsApp; (C) CRM/plataforma externa; (D) Mock front-end com feedback. Comparação em [AUDIT.md § 12.2](AUDIT.md). | `PENDING_APPROVAL` | Fase 4 (Conversão) |
-| **PEND-11** | **E-mail Institucional** | Inclusão de `contato@nexusagencybr.com.br` no Footer e canais de contato. | `PENDING_APPROVAL` | Fase 4 (Conversão) |
-| **PEND-12** | **Política de Privacidade e LGPD** | Criação de rota/modal `/politica-de-privacidade` e termo de consentimento no form. | `PENDING_APPROVAL` | Fase 4 (Conversão) |
+| **PEND-07** | **Número do WhatsApp (Legado vs. Cliente)** | Site legado usa `+55 (61) 99539-5969`; relatório do cliente cita `+55 (61) 9298-5392`. **Decisão (2026-11-02, responsável):** vale o número do cliente, `+55 (61) 9298-5392` (`https://wa.me/556192985392`), já em `SITE_CONFIG.whatsapp`. | `RESOLVED` | — |
+| **PEND-08** | **Perfil do Instagram (Legado vs. Cliente)** | Site legado usa `@nexus.ag.contato`; relatório do cliente indica `@nexusagencybr`. **Decisão (2026-11-02, responsável):** valem os perfis do cliente — Instagram `https://www.instagram.com/nexusagencybr/` e LinkedIn `https://www.linkedin.com/company/nexus-ag-br/` (legado: `linkedin.com/in/nexusagency`), já em `SITE_CONFIG.socials`. Facebook inalterado. | `RESOLVED` | — |
+| **PEND-09** | **Informações entre colchetes do Cliente** | Preenchimento dos números em falta (`[número]` milhões de pessoas, conversas, anos) e prazos (`[24 horas úteis]`). | `PENDING_APPROVAL` | Conversão (fora das Fases 0–6) |
+| **PEND-10** | **Formulário de Contato (sem backend)** | Hoje `action="/"` + `preventDefault`, nada é enviado. Opções: (A) Route Handler/Server Action com e-mail (Resend); (B) Redirecionamento com mensagem para o WhatsApp; (C) CRM/plataforma externa; (D) Mock front-end com feedback. Comparação em [AUDIT.md § 12.2](AUDIT.md). | `PENDING_APPROVAL` | Conversão (fora das Fases 0–6) |
+| **PEND-11** | **E-mail Institucional** | Inclusão de `contato@nexusagencybr.com.br` no Footer e canais de contato. | `PENDING_APPROVAL` | Conversão (fora das Fases 0–6) |
+| **PEND-12** | **Política de Privacidade e LGPD** | Criação de rota/modal `/politica-de-privacidade` e termo de consentimento no form. | `PENDING_APPROVAL` | Conversão (fora das Fases 0–6) |
 
 ## Fase 1 — Fundação técnica
 
@@ -52,7 +52,7 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 - [x] 1.5 Instalar/configurar GSAP e ScrollTrigger. (Status: DONE | GSAP 3.15.0 com registro seguro em `src/animations/gsap.client.ts`)
 - [x] 1.6 Avaliar `@gsap/react`. (Status: DONE | `@gsap/react` 2.1.2 instalado e compatível com React 19)
 - [x] 1.7 Definir tokens e fontes existentes. (Status: DONE | Fonte Poppins via `next/font/google` e paleta oficial em `globals.css`)
-- [x] 1.8 Configurar lint, scripts e aliases. (Status: DONE | Scripts dev, build, start, lint configurados)
+- [x] 1.8 Configurar lint, scripts e aliases. (Status: DONE | Scripts dev, build, start e lint existem; **ESLint não está configurado** — `npm run lint` (`next lint`) pede configuração interativa. Configurar exige dependências novas (`eslint`, `eslint-config-next`) e aprovação)
 - [x] 1.9 Confirmar build inicial. (Status: DONE | `npm run build` gerou bundle estático sem erros)
 
 **Critério de saída:** aplicação mínima compila e executa sem erros. [ATENDIDO]
@@ -74,28 +74,28 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 
 ## Fase 3 — Sistema de movimento
 
-- [x] 3.1 Criar inicialização client-side de GSAP e ScrollTrigger. (Status: DONE | `gsap.client.ts`, `ScrollText`, `ScrollReveal`, `ParallaxImage` criados. GSAP 3.12.7 + ScrollTrigger + Flip registrados client-side.)
+- [x] 3.1 Criar inicialização client-side de GSAP e ScrollTrigger. (Status: DONE | `gsap.client.ts`, `ScrollText`, `ScrollReveal`, `ParallaxImage` criados. GSAP 3.15.0 (instalado; `package.json` declara `^3.12.7`) + ScrollTrigger + Flip registrados client-side.)
 - [x] 3.2 Definir padrões/timings consistentes. (Status: DONE | `presets.ts` com durations, easings e stagger values definidos. HeroClient, AboutClient, BannersClient, ServicesClient, BlogClient, FooterClient implementados com valores coerentes.)
 - [x] 3.3 Implementar leitura progressiva bidirecional. (Status: DONE | `ScrollText` com scrub bidirecional em: Hero parágrafo, About título + parágrafo[0], Services título + subtítulo. Reversível via scrub.)
-- [x] 3.4 Implementar reveals de texto e elementos. (Status: DONE | `ScrollReveal` e wrappers com `gsap.from()` em todas as seções: About parágrafos, highlight, missão, visão, valores; Banners cards; Blog cards; Contact campos + CTA; Footer colunas.)
+- [x] 3.4 Implementar reveals de texto e elementos. (Status: DONE | `ScrollReveal` e wrappers com `gsap.from()` em todas as seções: About parágrafos, highlight, missão, visão, valores; Banners cards; Blog cards; Contact campos + CTA; Footer colunas. Os reveals usam `gsap.from()` — conferir na 4.4 se nada fica invisível antes da hidratação/sem JS.)
 - [x] 3.5 Implementar transições de imagem quando adequadas. (Status: DONE | `ParallaxImage` aplicado na ilustração `grafic.png` da seção About com `yPercent: -12`. Entrada da esquerda (`x: -60`) via `AboutClient`.)
 - [x] 3.6 Implementar parallax apenas onde aprovado/adequado. (Status: DONE | Parallax vertical no background do Hero via `backgroundPositionY` scrubbed. ParallaxImage leve na ilustração About.)
 - [x] 3.7 Implementar transições entre seções. (Status: DONE | Stagger entre cards das seções Banners, Services, Projects (GSAP Flip para filtro), Blog. Footer revela colunas coordenadas.)
 - [x] 3.8 Implementar microinterações de botões permitidos. (Status: DONE | `WhatsAppFloat` com GSAP mouseenter/mouseleave spring + click pulse. CSS `WaveWhatsApp` preservado. Botões sociais FR-07 intocados.)
 - [x] 3.9 Garantir cleanup e ausência de ScrollTriggers duplicados. (Status: DONE | Todos os wrappers usam `gsap.context()` com `ctx.revert()` ou cleanup manual no return do useEffect. ScrollTrigger registrado uma vez por contexto.)
 
-**Build de validação:** `npm run build` → exit code 0, zero erros TypeScript, zero warnings. Rota `/` 13.1 kB, First Load JS 168 kB.
+**Build de validação (2026-11-02, `89ba586`):** `npm run build` → exit code 0, zero erros TypeScript. Rota `/` 13.5 kB, First Load JS 178 kB (shared 103 kB).
 
-**Critério de saída:** efeitos funcionam em ambos os sentidos do scroll, sem erros, flicker ou bloqueio de navegação. [ATENDIDO — aguarda QA visual]
+**Critério de saída:** efeitos funcionam em ambos os sentidos do scroll, sem erros, flicker ou bloqueio de navegação. [ATENDIDO — QA visual feito na Fase 6]
 
 ## Fase 4 — Responsividade e acessibilidade
 
-- [ ] 4.1 Definir comportamento desktop/tablet/mobile.
-- [ ] 4.2 Ajustar distâncias e intensidades por breakpoint.
-- [ ] 4.3 Implementar reduced motion.
-- [ ] 4.4 Verificar conteúdo sem JavaScript/animação.
-- [ ] 4.5 Testar teclado, foco e semântica.
-- [ ] 4.6 Verificar contraste em todos os estados animados.
+- [ ] 4.1 Definir comportamento desktop/tablet/mobile. (Status: TODO | Story: —)
+- [ ] 4.2 Ajustar distâncias e intensidades por breakpoint. (Status: TODO | Story: —)
+- [ ] 4.3 Implementar reduced motion. (Status: TODO | Story: — | Já existe `useReducedMotion()` em todos os wrappers com GSAP — a story deve medir o que falta, não reimplementar)
+- [ ] 4.4 Verificar conteúdo sem JavaScript/animação. (Status: TODO | Story: —)
+- [ ] 4.5 Testar teclado, foco e semântica. (Status: TODO | Story: —)
+- [ ] 4.6 Verificar contraste em todos os estados animados. (Status: TODO | Story: — | Lighthouse Accessibility 94 na 5.6)
 
 **Critério de saída:** experiência utilizável em todos os dispositivos e sem dependência de movimento.
 
@@ -115,9 +115,9 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 - [x] 6.1 Executar checklist completo em `QA-CHECKLIST.md`. (Status: DONE | Todos os itens checados)
 - [x] 6.2 Testar links, WhatsApp e redes sociais. (Status: DONE | Links de contato e destinos preservados)
 - [x] 6.3 Testar scroll para baixo e para cima. (Status: DONE | Scrub bidirecional validado)
-- [x] 6.4 Testar reduced motion. (Status: DONE | Fallback seguro ativo)
+- [x] 6.4 Testar reduced motion. (Status: DONE | Fallback seguro ativo; verificação completa por seção fica na 4.3)
 - [x] 6.5 Testar viewports definidos. (Status: DONE | 375px a 1200px capturados e validados)
-- [x] 6.6 Executar lint, testes disponíveis e build de produção. (Status: DONE | Build limpo, exit code 0)
+- [x] 6.6 Executar lint, testes disponíveis e build de produção. (Status: DONE | Build limpo, exit code 0; sem testes automatizados e sem lint configurado — ver 1.8)
 - [x] 6.7 Corrigir erros e regressões. (Status: DONE | Padronização Fluid Button dos botões de contato e filtros concluída)
 - [x] 6.8 Registrar resumo de entrega e limitações conhecidas. (Status: DONE | Relatório final apresentado)
 
