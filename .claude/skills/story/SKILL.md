@@ -107,7 +107,10 @@ verificação é `IN_PROGRESS`, não `DONE`.
    `ARCHITECTURE.md` (§ _Decisões arquiteturais registradas_) muda no mesmo
    passo, e o [CLAUDE.md](../../../CLAUDE.md) se ele descrever aquilo.
 
-**Toda transição deixa linha no Change Log.**
+**Toda transição deixa linha no Change Log** — e atualiza a § _Ordem de
+implementação_ no topo do `TASKS.md` (status na tabela, "Próxima tarefa",
+data e SHA; `DONE` sai da tabela, `BLOCKED` desce com o motivo, tarefa nova
+entra na posição pela dependência e prioridade).
 
 ## As regras que separam uma story boa de um bilhete
 

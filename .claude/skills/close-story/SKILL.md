@@ -82,7 +82,9 @@ Mover só um é o erro mais comum:
    (comandos, resultado, SHA).
 2. **`TASKS.md`** — `[x]` na linha da tarefa, no formato das existentes
    (`(Status: DONE | <evidência curta>)`); `PEND-xx` consumido como
-   `RESOLVED`; critério de saída da fase marcado se a fase fechou.
+   `RESOLVED`; critério de saída da fase marcado se a fase fechou; a
+   § _Ordem de implementação_ do topo atualizada (a tarefa sai da tabela,
+   "Próxima tarefa" aponta a seguinte, data e SHA renovados).
 3. **`QA-CHECKLIST.md`** — os itens que a tarefa validou, com a evidência
    (`docs/references/qa/<arquivo>.png`, comando).
 

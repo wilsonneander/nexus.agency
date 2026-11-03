@@ -1,5 +1,23 @@
 # TASKS — Plano de execução
 
+## ▶ Ordem de implementação
+
+> **Atualizada em:** 2026-11-02, sobre `e8c5fc2`. Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
+
+**Próxima tarefa: 4.4 — Verificar conteúdo sem JavaScript/animação** (`TODO`, sem story)
+Por quê primeiro: `gsap.from()` ainda é usado em `FooterClient.tsx`, `BannersClient.tsx` e `Contact/index.tsx` — se o estado inicial for aplicado antes do ScrollTrigger disparar (ou sem JS), o conteúdo fica invisível, o que viola o QA § 9 ("animação esconder conteúdo"). É também a base das tarefas seguintes: define o padrão "HTML do servidor = estado final visível" que a 4.3 e a 4.6 reaproveitam.
+
+| # | Tarefa | Depende de | Status | Por que nesta posição |
+|---|---|---|---|---|
+| 1 | **4.4** Conteúdo sem JS/animação | — | `TODO` | Risco ativo ao QA § 9; fixa o padrão de estado inicial visível. |
+| 2 | **4.3** Reduced motion | 4.4 | `TODO` | Mesmo eixo da 4.4 (conteúdo visível sem movimento); `useReducedMotion()` já existe — medir lacunas por seção. |
+| 3 | **4.1** Comportamento desktop/tablet/mobile | 4.4, 4.3 | `TODO` | Define, por breakpoint, quais efeitos rodam; precisa saber o que já é seguro desligar. |
+| 4 | **4.2** Distâncias e intensidades por breakpoint | 4.1 | `TODO` | Ajusta os valores do que a 4.1 decidiu manter. |
+| 5 | **4.5** Teclado, foco e semântica | — | `TODO` | Independente das animações; pode correr em paralelo a partir da posição 3. |
+| 6 | **4.6** Contraste em todos os estados animados | 4.2, 4.3, 4.4 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). |
+
+**Fora da fila (aguardam decisão do responsável, não implementar):** `PEND-02` links `href="#"`, `PEND-06` deploy, `PEND-09` colchetes, `PEND-10` backend do formulário, `PEND-11` e-mail, `PEND-12` LGPD. ESLint (1.8) depende de aprovação de dependências novas. Quando um desses for resolvido, a tarefa resultante entra na tabela acima na posição devida.
+
 ## Regras de execução
 - Trabalhar em fases sequenciais.
 - Não iniciar a fase seguinte enquanto os critérios de conclusão da fase atual não forem atendidos.
@@ -7,6 +25,7 @@
 - Antes de editar, cada agente deve ler `AGENTS.md` e os documentos relevantes.
 - Atualizar este arquivo com status, responsável/agente e evidências.
 - Não marcar como concluído apenas porque o código foi escrito: validar o comportamento.
+- **Manter a § _Ordem de implementação_ atualizada** no mesmo passo de qualquer mudança de status, tarefa nova ou `PEND-xx` resolvido: status na tabela, "Próxima tarefa", data e SHA do cabeçalho. Tarefa `DONE` sai da tabela; `BLOCKED` desce e cita o motivo.
 
 Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 
