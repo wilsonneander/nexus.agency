@@ -2,19 +2,18 @@
 
 ## ▶ Ordem de implementação
 
-> **Atualizada em:** 2026-11-03, no fechamento da 7.1 (sobre `02bf2e4`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
+> **Atualizada em:** 2026-11-03, no fechamento da 4.7 (sobre `ff8618e`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
 
-**Próxima tarefa: 4.7 — Corrigir o card Design do Banner invisível com movimento** (`TODO`, sem story: começa pela skill `story`)
-Por quê agora: é o único conteúdo escondido conhecido depois da 4.3 (`DONE`). Sem reduced motion, o 1º card dos Banners fica em `opacity: 0` depois de rolar até ele, o que viola o QA § 9.
+**Próxima tarefa: 4.1 — Definir comportamento desktop/tablet/mobile** (`TODO`, sem story: começa pela skill `story`)
+Por quê agora: depois da 4.7 não há conteúdo escondido conhecido; a 4.1 define por breakpoint quais efeitos rodam e destrava a 4.2.
 
 | # | Tarefa | Depende de | Status | Por que nesta posição |
 |---|---|---|---|---|
-| 1 | **4.7** Card Design do Banner invisível com movimento | — | `TODO` | Conteúdo escondido com movimento normal (QA § 9). |
-| 2 | **4.1** Comportamento desktop/tablet/mobile | — | `TODO` | Define, por breakpoint, quais efeitos rodam; candidata a adotar `gsap.matchMedia()` (ver [story 4.3](stories/4-3-reduced-motion.md)). |
-| 3 | **4.2** Distâncias e intensidades por breakpoint | 4.1 | `TODO` | Ajusta os valores do que a 4.1 decidiu manter. |
-| 4 | **4.5** Teclado, foco e semântica | — | `TODO` | Independente das animações; pode correr em paralelo a partir da posição 2. |
-| 5 | **4.6** Contraste em todos os estados animados | 4.2 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). |
-| 6 | **6.9** Remover código de motion/About não usado | — | `TODO` | Limpeza sem risco ao QA § 9; encaixa em qualquer folga. |
+| 1 | **4.1** Comportamento desktop/tablet/mobile | — | `TODO` | Define, por breakpoint, quais efeitos rodam; candidata a adotar `gsap.matchMedia()` (ver [story 4.3](stories/4-3-reduced-motion.md)). |
+| 2 | **4.2** Distâncias e intensidades por breakpoint | 4.1 | `TODO` | Ajusta os valores do que a 4.1 decidiu manter. |
+| 3 | **4.5** Teclado, foco e semântica | — | `TODO` | Independente das animações; pode correr em paralelo a partir da posição 1. |
+| 4 | **4.6** Contraste em todos os estados animados | 4.2 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). |
+| 5 | **6.9** Remover código de motion/About não usado | — | `TODO` | Limpeza sem risco ao QA § 9; encaixa em qualquer folga. |
 
 **Fora da fila (aguardam decisão do responsável, não implementar):** `PEND-13` pulso do WhatsApp e rotação dos ícones sociais com reduced motion, `PEND-02` links `href="#"`, `PEND-06` deploy, `PEND-09` colchetes, `PEND-10` backend do formulário, `PEND-11` e-mail, `PEND-12` LGPD. ESLint (1.8) depende de aprovação de dependências novas. Quando um desses for resolvido, a tarefa resultante entra na tabela acima na posição devida.
 
@@ -111,13 +110,13 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 
 ## Fase 4 — Responsividade e acessibilidade
 
-- [ ] 4.1 Definir comportamento desktop/tablet/mobile. (Status: TODO | Story: — | Achado da [7.1](stories/7-1-hero-background-animado.md): em 480px o documento tem 497 px de largura (scroll horizontal) por causa de um card fora do Hero, com `h4.text-lg font-semibold` e `p.text-white/70 text-xs`.)
+- [ ] 4.1 Definir comportamento desktop/tablet/mobile. (Status: TODO | Story: — | Achado da [7.1](stories/7-1-hero-background-animado.md): em 480px o documento tem 497 px de largura (scroll horizontal) por causa de um card fora do Hero, com `h4.text-lg font-semibold` e `p.text-white/70 text-xs`. Achado do review da [4.7](stories/4-7-card-design-banner-invisivel.md), já existente no baseline: antes de o trigger dos Banners disparar, só o 1º card recebe o estado inicial do stagger; o 2º e o 3º ficam visíveis até a seção entrar a 88% da tela e então somem e entram animados (piscar curto na borda de baixo).)
 - [ ] 4.2 Ajustar distâncias e intensidades por breakpoint. (Status: TODO | Story: —)
 - [x] 4.3 Implementar reduced motion. (Status: DONE | Story: [4-3-reduced-motion.md](stories/4-3-reduced-motion.md) | Guarda síncrona `prefersReducedMotion()` nos 12 efeitos, limpeza completa (Hero, `ScrollText`, contador) e CSS de reduced motion; Hero, textos e "+50" visíveis com `reduce` em [reduced_1200.png](references/qa/reduced_1200.png) e [reduced_375.png](references/qa/reduced_375.png); pulso/rotação aguardam `PEND-13`)
 - [x] 4.4 Verificar conteúdo sem JavaScript/animação. (Status: DONE | Story: [4-4-conteudo-sem-javascript.md](stories/4-4-conteudo-sem-javascript.md) | `<noscript><style>` no `<head>` deixa os 5 `ScrollText` em branco pleno sem JS; auditoria em [nojs_375.png](references/qa/nojs_375.png) e [nojs_1200.png](references/qa/nojs_1200.png), todos os blocos visíveis)
 - [ ] 4.5 Testar teclado, foco e semântica. (Status: TODO | Story: —)
 - [ ] 4.6 Verificar contraste em todos os estados animados. (Status: TODO | Story: — | Lighthouse Accessibility 94 na 5.6)
-- [ ] 4.7 Corrigir o card Design do Banner invisível com movimento. (Status: TODO | Story: — | Achado da [4.3](stories/4-3-reduced-motion.md): sem reduced motion, depois de rolar até os Banners, o 1º card fica em `opacity: 0` e os outros dois em `1`. Suspeita: `transition-all` em [Banners/index.tsx](../src/sections/Banners/index.tsx) disputando com o `gsap.from` de [BannersClient.tsx](../src/sections/Banners/BannersClient.tsx).)
+- [x] 4.7 Corrigir o card Design do Banner invisível com movimento. (Status: DONE | Story: [4-7-card-design-banner-invisivel.md](stories/4-7-card-design-banner-invisivel.md) | Achado da [4.3](stories/4-3-reduced-motion.md). Causa medida: o `gsap.from` com stagger + ScrollTrigger de [BannersClient.tsx](../src/sections/Banners/BannersClient.tsx) gravava o estado inicial do 1º card como destino; a suspeita do `transition-all` não se confirmou. Conserto: `fromTo` com destino explícito; 3 cards visíveis nos 5 viewports, nos dois sentidos do scroll e recarregando abaixo da seção; [banners_design_1200.png](references/qa/banners_design_1200.png), [banners_design_375.png](references/qa/banners_design_375.png))
 
 **Critério de saída:** experiência utilizável em todos os dispositivos e sem dependência de movimento.
 

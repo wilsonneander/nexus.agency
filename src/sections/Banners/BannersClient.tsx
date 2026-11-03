@@ -27,9 +27,12 @@ export function BannersClient({ children }: { children: ReactNode }) {
       const cards = ref.current!.querySelectorAll("[data-banner-card]");
       if (!cards.length) return;
 
-      gsap.from(cards, {
-        y: 50,
-        opacity: 0,
+      // fromTo, não from: com stagger + ScrollTrigger, o refresh do `from` gravava
+      // o estado inicial do 1º card como destino e ele ficava em opacity 0 (4.7).
+      // O destino explícito é o estado do HTML do servidor.
+      gsap.fromTo(cards, { y: 50, opacity: 0 }, {
+        y: 0,
+        opacity: 1,
         duration: 0.65,
         stagger: 0.15,
         ease: "power3.out",
@@ -44,9 +47,9 @@ export function BannersClient({ children }: { children: ReactNode }) {
       // Pulse entrance dos ícones
       const icons = ref.current!.querySelectorAll("[data-banner-icon]");
       if (icons.length) {
-        gsap.from(icons, {
-          scale: 0.5,
-          opacity: 0,
+        gsap.fromTo(icons, { scale: 0.5, opacity: 0 }, {
+          scale: 1,
+          opacity: 1,
           duration: 0.45,
           stagger: 0.15,
           ease: "back.out(2)",

@@ -13,4 +13,5 @@ a partir de [`.claude/skills/story/TEMPLATE.md`](../../.claude/skills/story/TEMP
 | --- | --- | --- |
 | 4.3 | [Implementar reduced motion](4-3-reduced-motion.md) | Fase 4 |
 | 4.4 | [Verificar conteúdo sem JavaScript/animação](4-4-conteudo-sem-javascript.md) | Fase 4 |
+| 4.7 | [Corrigir o card Design do Banner invisível com movimento](4-7-card-design-banner-invisivel.md) | Fase 4 |
 | 7.1 | [Redesenhar o Hero com background roxo animado](7-1-hero-background-animado.md) | Fase 7 |
