@@ -349,7 +349,7 @@ body {
     rgb(var(--glow-rgb) / 0.07) 70%,
     transparent 100%
   );
-  animation: heroHaloDrift 16s ease-in-out infinite;
+  animation: heroHaloDrift 12s ease-in-out infinite;
 }
 
 /* Anel/eclipse: só a metade de cima, acima do horizonte. */
@@ -383,7 +383,7 @@ body {
   );
   -webkit-mask-image: linear-gradient(to bottom, #000 44%, transparent 62%);
   mask-image: linear-gradient(to bottom, #000 44%, transparent 62%);
-  animation: heroGlowBreathe 10s ease-in-out infinite;
+  animation: heroBloomPulse 6s ease-in-out infinite;
 }
 
 /* Núcleo claro nascendo do horizonte, dentro do anel. */
@@ -398,22 +398,23 @@ body {
     transparent 100%
   );
   clip-path: inset(0 0 50% 0);
-  animation: heroGlowBreathe 7s ease-in-out infinite reverse;
+  animation: heroGlowBreathe 5s ease-in-out infinite reverse;
 }
 
 .hero-glow__ring {
   clip-path: inset(0 0 50% 0);
-  animation: heroGlowBreathe 10s ease-in-out infinite;
+  animation: heroGlowBreathe 8s ease-in-out infinite;
 }
 
-/* Reflexo tênue abaixo do horizonte (estático). */
+/* Reflexo tênue abaixo do horizonte (só a opacidade oscila). */
 .hero-glow__reflection {
   clip-path: inset(50% 0 0 0);
   transform: translate(-50%, -50%) scaleY(0.55);
   opacity: 0.22;
   -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 78%);
   mask-image: linear-gradient(to bottom, #000 50%, transparent 78%);
-  will-change: auto;
+  will-change: opacity;
+  animation: heroReflectionFlicker 8s ease-in-out infinite;
 }
 
 /* Linha do horizonte, onde o brilho é mais forte. */
@@ -427,23 +428,34 @@ body {
     rgb(var(--glow-rgb) / 0.3) 55%,
     transparent 100%
   );
-  animation: heroHorizonPulse 7s ease-in-out infinite;
+  animation: heroHorizonPulse 5s ease-in-out infinite;
 }
 
 @keyframes heroGlowBreathe {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
-  50%      { transform: translate(-50%, -50%) scale(1.04); opacity: 1; }
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.78; }
+  50%      { transform: translate(-50%, -50%) scale(1.07); opacity: 1; }
+}
+
+@keyframes heroBloomPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(0.92); opacity: 0.7; }
+  50%      { transform: translate(-50%, -50%) scale(1.14); opacity: 1; }
 }
 
 @keyframes heroHaloDrift {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.85; }
-  33%      { transform: translate(-53%, -50%) scale(1.06); opacity: 1; }
-  66%      { transform: translate(-47%, -50%) scale(0.97); opacity: 0.9; }
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  25%      { transform: translate(-57%, -46%) scale(1.12); opacity: 1; }
+  50%      { transform: translate(-50%, -53%) scale(0.95); opacity: 0.85; }
+  75%      { transform: translate(-43%, -47%) scale(1.08); opacity: 1; }
 }
 
 @keyframes heroHorizonPulse {
-  0%, 100% { transform: translate(-50%, -50%) scaleX(0.95); opacity: 0.8; }
-  50%      { transform: translate(-50%, -50%) scaleX(1.05); opacity: 1; }
+  0%, 100% { transform: translate(-50%, -50%) scaleX(0.86); opacity: 0.7; }
+  50%      { transform: translate(-50%, -50%) scaleX(1.1); opacity: 1; }
+}
+
+@keyframes heroReflectionFlicker {
+  0%, 100% { opacity: 0.14; }
+  50%      { opacity: 0.3; }
 }
 
 /* --- Respeito a prefers-reduced-motion --- */
@@ -464,6 +476,7 @@ body {
   .hero-glow__bloom,
   .hero-glow__ring,
   .hero-glow__core,
+  .hero-glow__reflection,
   .hero-glow__horizon {
     animation: none !important;
   }
