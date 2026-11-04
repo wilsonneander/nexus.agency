@@ -19,8 +19,8 @@ export function Footer() {
     <FooterClient>
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12">
 
-        {/* Coluna 1 */}
-        <div data-footer-col className="md:col-span-12 lg:col-span-4 xl:col-span-5 flex flex-col gap-5">
+        {/* Coluna 1 — em linha própria até 1199px: as 4 colunas só cabem lado a lado a partir de 1200px */}
+        <div data-footer-col className="md:col-span-12 xl:col-span-2 flex flex-col gap-5">
           <Link href="#home">
             <Image
               src="/assets/logo.png"
@@ -30,11 +30,6 @@ export function Footer() {
               className="h-auto w-32 object-contain"
             />
           </Link>
-          <p className="text-white/70 max-w-md text-xs sm:text-sm leading-relaxed font-light">
-            Nosso compromisso com a excelência. Trabalhamos com dedicação para entregar produtos de
-            alta qualidade e desempenho, projetados para atender às suas necessidades e impulsionar o
-            crescimento do seu negócio, garantindo soluções que fazem a diferença no mercado.
-          </p>
           <div className="pt-2">
             <SocialIcons variant="footer" className="flex-row gap-3" />
           </div>
@@ -50,13 +45,20 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Coluna 3 — Suporte (4/4/4 entre 1024 e 1199px para o e-mail caber em uma linha) */}
+        {/* Coluna 3 — Suporte (larga o bastante para o e-mail em uma linha) */}
         <div data-footer-col className="md:col-span-6 lg:col-span-4 xl:col-span-3 flex flex-col gap-3">
           <h4 className="font-semibold text-base text-white mb-2">Suporte</h4>
           <div><RollingLink href="#contact" className="text-xs sm:text-sm font-light">Contato</RollingLink></div>
           <div><RollingLink href={`mailto:${SITE_CONFIG.email}`} className="whitespace-nowrap text-xs sm:text-sm font-light">{SITE_CONFIG.email}</RollingLink></div>
           {/* Sem destino até existir a política de privacidade (PEND-12) */}
           <div><RollingLink href="#" className="text-xs sm:text-sm font-light">Politica e privacidade</RollingLink></div>
+        </div>
+
+        {/* Coluna 4 — Canais (texto informativo, sem link) */}
+        <div data-footer-col className="md:col-span-6 lg:col-span-4 xl:col-span-3 flex flex-col gap-3">
+          <h4 className="font-semibold text-base text-white mb-2">Canais</h4>
+          <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-light">{SITE_CONFIG.serviceArea}</p>
+          <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-light">{SITE_CONFIG.businessHours}</p>
         </div>
       </div>
     </FooterClient>
