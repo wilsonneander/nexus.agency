@@ -265,7 +265,7 @@ A auditoria e inventário foram realizados de forma exaustiva e minuciosa. **O c
 
 ## 12. Auditoria de Funcionalidades e Conversão do Rebuild (Fase 4)
 
-> Data: 02 de Novembro de 2026 · Estado do **rebuild** (não do legado) · Aguardando decisões de negócio (`PEND-10`, `PEND-11`, `PEND-12`). `PEND-07` e `PEND-08` resolvidos em 2026-11-02 a favor dos canais do cliente.
+> Data: 02 de Novembro de 2026 · Estado do **rebuild** (não do legado) · Aguardando decisões de negócio (`PEND-10`, `PEND-12`); `PEND-11` resolvido em 2026-11-03. `PEND-07` e `PEND-08` resolvidos em 2026-11-02 a favor dos canais do cliente.
 
 
 ### 12.1 Inventário e Auditoria de Contatos
@@ -278,7 +278,7 @@ A auditoria e inventário foram realizados de forma exaustiva e minuciosa. **O c
 | **Instagram** | `https://www.instagram.com/nexusagencybr/` nos ícones sociais do Header, About e Footer | Legado usava `nexus.ag.contato` (com aspas extras na URL); responsável aprovou o perfil do cliente. | Centralizado em `SITE_CONFIG.socials`. | **PEND-08** | `RESOLVED` |
 | **LinkedIn** | `https://www.linkedin.com/company/nexus-ag-br/` | Legado usava `linkedin.com/in/nexusagency/`; responsável aprovou a página do cliente. | Centralizado em `SITE_CONFIG.socials`. | **PEND-08** | `RESOLVED` |
 | **Facebook** | `https://www.facebook.com/profile.php?id=...` | URL legada ativa com ID da página. | Preservado fielmente. | Nenhuma | `ACTIVE_READY` |
-| **E-mail Institucional** | Ausente na interface visual pública atual. | Relatório do cliente propõe `contato@nexusagencybr.com.br` para suporte e formulário. | Inserir no Footer e cabeçalho de contato assim que o domínio for oficializado. | **PEND-11** | `PENDING_APPROVAL` |
+| **E-mail Institucional** | Ausente na interface visual pública atual. | Relatório do cliente propõe `contato@nexusagencybr.com.br` para suporte e formulário. | `mailto:` na coluna Suporte do rodapé, via `SITE_CONFIG.email` ([story 7.4](stories/7-4-email-institucional-rodape.md)); fora da seção Contato por decisão do responsável. | **PEND-11** | `RESOLVED` |
 
 ---
 

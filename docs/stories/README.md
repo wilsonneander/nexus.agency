@@ -17,3 +17,4 @@ a partir de [`.claude/skills/story/TEMPLATE.md`](../../.claude/skills/story/TEMP
 | 7.1 | [Redesenhar o Hero com background roxo animado](7-1-hero-background-animado.md) | Fase 7 |
 | 7.2 | [Padronizar os cards com visual de vidro e bordas iluminadas](7-2-cards-glassmorphism.md) | Fase 7 |
 | 7.3 | [Apontar os links do rodapé para a LP e remover o Blog](7-3-links-rodape-remover-blog.md) | Fase 7 |
+| 7.4 | [Incluir o e-mail institucional no rodapé](7-4-email-institucional-rodape.md) | Fase 7 |

@@ -10,6 +10,8 @@ export const SITE_CONFIG = {
     url: "https://wa.me/556192985392",
     defaultMessage: "Quero saber mais!",
   },
+  // E-mail institucional do cliente (PEND-11 RESOLVED em 2026-11-03)
+  email: "contato@nexusagencybr.com.br",
   socials: {
     instagram: "https://www.instagram.com/nexusagencybr/",
     linkedin: "https://www.linkedin.com/company/nexus-ag-br/posts/?feedView=all",
