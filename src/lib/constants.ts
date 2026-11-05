@@ -3,7 +3,9 @@ export const SITE_CONFIG = {
   title: "Nexus | Agency",
   description:
     "Nossa agência de soluções digitais combina expertise em marketing digital e tecnologia para oferecer soluções personalizadas que fortalecem sua marca e geram resultados concretos.",
-  url: "https://nexusagency.com.br", // URL base de referência
+  // Domínio oficial (confirmado pelo responsável em 2026-11-05); fonte única para
+  // canonical, OpenGraph, robots e sitemap.
+  url: "https://nexusagencybr.com.br",
   whatsapp: {
     number: "556192985392",
     displayNumber: "+55 (61) 9298-5392",

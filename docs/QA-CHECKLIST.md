@@ -70,6 +70,7 @@ Em cada viewport:
 ## 7. SEO e build
 - [x] Title e description estão corretos. (Title: "Nexus | Agency", description institucional)
 - [x] Metadados sociais e favicon foram preservados/configurados. (OpenGraph, Twitter Cards, icon2.png)
+- [x] Canonical, `og:url`, `og:image`, `twitter:image`, `robots.txt` e `sitemap.xml` usam o domínio oficial `https://nexusagencybr.com.br`, lido de `SITE_CONFIG.url`. ([8.1](stories/8-1-dominio-oficial.md); conferido no `.next/server/app/` do build)
 - [x] Estrutura semântica está correta. (H1 único no Hero, H2 e H3 nas seções e cards)
 - [x] Conteúdo principal está presente no HTML renderizado. (SSR / SSG completo; com JS desligado todo texto e imagem aparece e é legível — [4.4](stories/4-4-conteudo-sem-javascript.md), [nojs_1200.png](references/qa/nojs_1200.png))
 - [x] Lint passa. (Zero warnings/errors)

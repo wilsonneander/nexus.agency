@@ -18,6 +18,7 @@ arquivos que ficam na raiz porque ferramentas os leem de lá:
 | Critérios de aceite e de liberação | [QA-CHECKLIST.md](QA-CHECKLIST.md) | citam a seção |
 | Inventário do site legado + auditoria de funcionalidades/conversão | [AUDIT.md](AUDIT.md) | citam a seção |
 | Conteúdo do cliente vs. legado | [CONTENT-MAPPING.md](CONTENT-MAPPING.md) | citam a linha da matriz |
+| Revisão de código de 2026-11-05 (leveza, SEO, Cloudflare Pages) — achados ainda não convertidos em tarefas | [CODE-REVIEW-2026-11-05.md](CODE-REVIEW-2026-11-05.md) | viram tarefas/`PEND-xx` no TASKS.md |
 | Detalhe de uma tarefa (contexto, ACs, Change Log) | [stories/](stories/README.md) | — |
 | Como um fluxo funciona de ponta a ponta | [tdds/](tdds/README.md) | — |
 | Evidências visuais | [references/](references/) — `screenshot.png` (legado), `client-content.pdf`, `qa/` (capturas) | — |
