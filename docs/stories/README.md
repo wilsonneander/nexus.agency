@@ -31,3 +31,4 @@ a partir de [`.claude/skills/story/TEMPLATE.md`](../../.claude/skills/story/TEMP
 | 8.3 | [Trocar as fontes de ícones de CDN por SVG inline](8-3-icones-svg.md) | Fase 8 |
 | 8.4 | [Completar metadados de compartilhamento e dados estruturados](8-4-metadados-dados-estruturados.md) | Fase 8 |
 | 8.5 | [Simplificar o sistema de motion e os estilos](8-5-simplificar-motion-estilos.md) | Fase 8 |
+| 8.6 | [Conferir o primeiro deploy no Cloudflare Pages](8-6-conferir-primeiro-deploy-pages.md) | Fase 8 |
