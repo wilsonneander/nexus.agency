@@ -2,7 +2,7 @@
 
 ## ▶ Ordem de implementação
 
-> **Atualizada em:** 2026-11-03, na implementação da 7.5 (`PEND-09` parcial; sobre `d83dbea`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
+> **Atualizada em:** 2026-11-05, no fechamento da 7.5 (`PEND-09` parcial; sobre `9197540`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
 
 **Próxima tarefa: 4.1 — Definir comportamento desktop/tablet/mobile** (`TODO`, sem story: começa pela skill `story`)
 Por quê agora: com a 7.2 `DONE` não há conteúdo escondido conhecido; a 4.1 define por breakpoint quais efeitos rodam, destrava a 4.2 e é dona do scroll horizontal em 480px (504 px, card dos Banners).
@@ -14,8 +14,6 @@ Por quê agora: com a 7.2 `DONE` não há conteúdo escondido conhecido; a 4.1 d
 | 3 | **4.5** Teclado, foco e semântica | — | `TODO` | Independente das animações; pode correr em paralelo a partir da posição 1. |
 | 4 | **4.6** Contraste em todos os estados animados | 4.2 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). Os cards de vidro já foram medidos na [7.2](stories/7-2-cards-glassmorphism.md) (`#a15cf5` ≥ 4,60:1). |
 | 5 | **6.9** Remover código de motion/About não usado | — | `TODO` | Limpeza sem risco ao QA § 9; encaixa em qualquer folga. |
-
-**Em revisão:** 7.5 coluna Canais no rodapé (`IN_PROGRESS`, implementada e validada; falta `review-mr` e aprovação visual do responsável).
 
 **Fora da fila (aguardam decisão do responsável, não implementar):** `PEND-13` pulso do WhatsApp e rotação dos ícones sociais com reduced motion, `PEND-06` deploy, `PEND-09` colchetes restantes, `PEND-10` backend do formulário, `PEND-12` LGPD. ESLint (1.8) depende de aprovação de dependências novas. Quando um desses for resolvido, a tarefa resultante entra na tabela acima na posição devida.
 
@@ -156,9 +154,9 @@ Mudanças de design pedidas pelo responsável depois da entrega. Cada uma depend
 - [x] 7.2 Padronizar os cards com visual de vidro e bordas iluminadas. (Status: DONE | Story: [7-2-cards-glassmorphism.md](stories/7-2-cards-glassmorphism.md) | Exceção autorizada no `PEND-15`; padrão único `glass-card`/`glass-icon`/`glass-ambient` em 31 cards de About, Banners, Serviços, Pacotes, Blog e Projetos; borda no `::after` (480px igual ao baseline), contraste ≥ 4,60:1, 0 card escondido nos 5 viewports e com reduced motion, trace na faixa do baseline; barra do destaque do About e espaço entre linhas dos Serviços ajustados a pedido; [cards_glass_1200.png](references/qa/cards_glass_1200.png), [cards_glass_375.png](references/qa/cards_glass_375.png); aprovado pelo responsável)
 - [x] 7.3 Apontar os links do rodapé para a LP e remover o Blog. (Status: DONE | Story: [7-3-links-rodape-remover-blog.md](stories/7-3-links-rodape-remover-blog.md) | `PEND-02` RESOLVED; 5 serviços → cards (`#<SERVICES_DATA.id>`, `scroll-mt-32`), Contato → `#contact`, Privacidade em `#` até o `PEND-12`; Blog, `blog.ts`, `BlogPostItem` e `public/assets/blog-*.jpg` removidos; colunas do rodapé redistribuídas para o rótulo mais longo caber em 768–1200px; [footer_links_1200.png](references/qa/footer_links_1200.png), [footer_links_375.png](references/qa/footer_links_375.png))
 - [x] 7.4 Incluir o e-mail institucional no rodapé. (Status: DONE | Story: [7-4-email-institucional-rodape.md](stories/7-4-email-institucional-rodape.md) | `PEND-11` RESOLVED; `mailto:contato@nexusagencybr.com.br` na coluna Suporte, via `SITE_CONFIG.email`; colunas 4/4/4 entre 1024 e 1199px para o endereço caber; 0 link cortado nos 5 viewports; [footer_email_1200.png](references/qa/footer_email_1200.png), [footer_email_375.png](references/qa/footer_email_375.png); revisada e revalidada no build de produção)
-- [ ] 7.5 Adicionar a coluna Canais ao rodapé e remover o texto debaixo da logo. (Status: IN_PROGRESS | Story: [7-5-coluna-canais-rodape.md](stories/7-5-coluna-canais-rodape.md) | `PEND-09` parcial (horário e área de atendimento); parágrafo institucional removido a pedido; grade 2/4/3/3 em ≥ 1200px e logo em linha própria abaixo disso; 0 link cortado nos 5 viewports; [footer_canais_1200.png](references/qa/footer_canais_1200.png), [footer_canais_1024.png](references/qa/footer_canais_1024.png), [footer_canais_375.png](references/qa/footer_canais_375.png); aguarda `review-mr`)
+- [x] 7.5 Adicionar a coluna Canais ao rodapé e remover o texto debaixo da logo. (Status: DONE | Story: [7-5-coluna-canais-rodape.md](stories/7-5-coluna-canais-rodape.md) | `PEND-09` parcial (horário e área de atendimento); parágrafo institucional removido a pedido; grade 2/4/3/3 em ≥ 1200px e logo em linha própria abaixo disso; 0 link cortado nos 5 viewports; [footer_canais_1200.png](references/qa/footer_canais_1200.png), [footer_canais_1024.png](references/qa/footer_canais_1024.png), [footer_canais_375.png](references/qa/footer_canais_375.png); revisada e revalidada no build de produção, 4 colunas com `opacity` 1 nos dois sentidos do scroll)
 
-**Critério de saída:** cada mudança aprovada visualmente pelo responsável, sem violar o [QA-CHECKLIST](QA-CHECKLIST.md) § 9. [ATENDIDO para a 7.1 e a 7.2; 7.3 e 7.4 validadas, aguardando aprovação visual do rodapé pelo responsável]
+**Critério de saída:** cada mudança aprovada visualmente pelo responsável, sem violar o [QA-CHECKLIST](QA-CHECKLIST.md) § 9. [ATENDIDO para a 7.1 e a 7.2; 7.3, 7.4 e 7.5 validadas, aguardando aprovação visual do rodapé pelo responsável]
 
 ## Coordenação de múltiplos agentes
 

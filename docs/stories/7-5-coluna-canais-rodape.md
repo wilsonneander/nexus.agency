@@ -6,7 +6,7 @@ baseline_commit: d83dbea
 
 |                 |                                                                                         |
 | --------------- | --------------------------------------------------------------------------------------- |
-| **Status**      | IN_PROGRESS                                                                             |
+| **Status**      | DONE                                                                                    |
 | **Fase**        | Fase 7 — Evolução visual (pós-entrega)                                                  |
 | **Área**        | conteúdo, layout/UI                                                                     |
 | **Seções**      | Footer                                                                                  |
@@ -112,7 +112,7 @@ nova; texto visível sem JS (HTML do servidor); nenhuma dependência nova.
 - [x] Validação visual feita nos viewports afetados ([footer_canais_1200.png](../references/qa/footer_canais_1200.png), [footer_canais_1024.png](../references/qa/footer_canais_1024.png), [footer_canais_375.png](../references/qa/footer_canais_375.png)).
 - [x] Itens tocados do [QA-CHECKLIST.md](../QA-CHECKLIST.md) atualizados com a evidência.
 - [x] `PEND-09` atualizado (horário e área resolvidos; demais colchetes abertos).
-- [ ] Revisão (`review-mr`) e status `DONE` na story **e** no `TASKS.md`.
+- [x] Revisão (`review-mr`) e status `DONE` na story **e** no `TASKS.md`.
 
 ## Change Log
 
@@ -120,3 +120,4 @@ nova; texto visível sem JS (HTML do servidor); nenhuma dependência nova.
 | --- | --- | --- |
 | 2026-11-03 | IN_PROGRESS | Story criada sobre `d83dbea` a partir dos pedidos do responsável: coluna Canais (horário e área de atendimento, `PEND-09` parcial) e remoção do texto debaixo da logo. |
 | 2026-11-03 | IN_PROGRESS | Implementada (árvore de trabalho sobre `d83dbea`). Validação no build de produção limpo (`rm -rf .next && npm run build` + `next start`): `npx tsc --noEmit` ✓, `npm run build` ✓ (`/` 13,5 kB); `check_ids.js` 11/11; HTML com "Canais" e "100% online", sem "Nosso compromisso"; sonda de encaixe em 375/480/768/1024/1200 → 0/8 links cortados ou fora da coluna, sem scroll horizontal, colunas com `opacity` 1 após o reveal; capturas de 375, 1024 e 1200 conferidas. Reduced motion e sem JS não reexercitados (nenhuma animação mudou; a coluna nova usa o mesmo `data-footer-col` e é HTML do servidor). |
+| 2026-11-05 | DONE | Revisada (`review-mr`: sem bloqueadores nem escopo extra; remoção do parágrafo e grade de 4 colunas pedidas pelo responsável) e revalidada no commit `9197540`, build de produção limpo (`rm -rf .next && npm run build` + `next start`): `npx tsc --noEmit` ✓, `npm run build` ✓ (`/` 13,5 kB); `check_ids.js` 11/11; HTML sem "Nosso compromisso"; sonda em 375/480/768/1024/1200 descendo, subindo e descendo de novo → as 4 colunas do rodapé com `opacity` 1 (o reveal `gsap.from` com stagger do `FooterClient` não repete o bug do 1º card da [4.7](4-7-card-design-banner-invisivel.md)), 0/8 links cortados, textos da coluna Canais exatos, sem scroll horizontal; recarregando no fim da página → idem. |
