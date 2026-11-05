@@ -59,13 +59,13 @@ Em cada viewport:
 - [x] Contraste é suficiente nos estados inicial e animado. (Validado: estado inicial com 22% de opacidade sobre fundo preto e 100% ao iluminar) — Sem JS, o `ScrollText` sai em branco pleno ([4.4](stories/4-4-conteudo-sem-javascript.md)). Com JS, o estado inicial em 22% dá ≈ 1,9:1 sobre `#04091d` e será reavaliado na 4.6; a evidência sem JS não confirma este item. Cards de vidro ([7.2](stories/7-2-cards-glassmorphism.md)), medido em pixel no fundo mais claro de cada tipo de card em 1200px: `#a15cf5` ≥ 4,60:1 (baseline 4,75), `white/70` ≥ 9,14:1, `white/60` ≥ 6,99:1.
 
 ## 6. Performance e estabilidade
-- [ ] Imagens têm dimensões/proporções definidas.
+- [x] Imagens têm dimensões/proporções definidas. (`next/image` com `width`/`height` e card `aspect-[4/3]`; Projetos em WebP ≤ 70 KB, 700px de altura — [8.2](stories/8-2-deploy-estatico-cloudflare-pages.md))
 - [ ] Não há layout shift significativo causado por mídia/fontes.
 - [ ] Animações priorizam transform/opacity quando possível.
 - [ ] Não há loops ou listeners desnecessários.
-- [ ] Não há erros no console.
+- [x] Não há erros no console. (`out/` servido estático, 375 e 1200px, rolagem até os Projetos + filtro Fast Food → Viagens → Todos: zero erro/warning via CDP — [8.2](stories/8-2-deploy-estatico-cloudflare-pages.md))
 - [ ] Não há warnings críticos de hidratação.
-- [ ] Não há falhas de carregamento de assets.
+- [x] Não há falhas de carregamento de assets. (as 6 imagens dos Projetos com `naturalWidth > 0` em todos os filtros; `/robots.txt`, `/sitemap.xml`, `/assets/projects/*.webp` → 200 no `out/` — [8.2](stories/8-2-deploy-estatico-cloudflare-pages.md))
 - [ ] Bundle não carrega dependências de animação desnecessariamente em rotas/partes estáticas.
 
 ## 7. SEO e build
@@ -76,7 +76,7 @@ Em cada viewport:
 - [x] Conteúdo principal está presente no HTML renderizado. (SSR / SSG completo; com JS desligado todo texto e imagem aparece e é legível — [4.4](stories/4-4-conteudo-sem-javascript.md), `nojs_1200.png`)
 - [x] Lint passa. (Zero warnings/errors)
 - [x] Testes existentes passam. (Validações de renderização, IDs e scripts headless)
-- [x] Build de produção passa. (Exit code 0, rotas /, /robots.txt, /sitemap.xml estáticas)
+- [x] Build de produção passa. (Exit code 0, rotas /, /robots.txt, /sitemap.xml estáticas; desde a [8.2](stories/8-2-deploy-estatico-cloudflare-pages.md) é export estático: gera `out/` com só `public/` + o compilado, sem `docs/`, `scripts/` nem o legado)
 
 ## 8. Registro de defeitos
 

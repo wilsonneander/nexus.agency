@@ -14,20 +14,20 @@
 ```text
 nexus/
 ├── public/
-│   ├── assets/                   # 20 assets visuais originais (imagens, logo, favicon)
+│   ├── _headers                  # cache e cabeçalhos de segurança do Cloudflare Pages (story 8.2)
+│   ├── assets/                   # só o que o site usa (story 8.2)
 │   │   ├── logo.png
 │   │   ├── icon2.png (favicon)
-│   │   ├── header.webp
-│   │   ├── grafic.png
-│   │   └── ...
+│   │   ├── header.webp (OpenGraph)
+│   │   └── projects/*.webp       # imagens dos Projetos pré-otimizadas
 │
 ├── src/
 │   ├── app/
 │   │   ├── layout.tsx            # RootLayout (metadados OpenGraph/Twitter, fonte Poppins, links sociais)
 │   │   ├── page.tsx              # Rota única '/' compondo as seções na ordem original
 │   │   ├── globals.css           # Variáveis CSS e tokens de estilo legados
-│   │   ├── robots.ts             # Geração dinâmica de robots.txt
-│   │   └── sitemap.ts            # Geração dinâmica de sitemap.xml
+│   │   ├── robots.ts             # robots.txt gerado no build (`force-static`)
+│   │   └── sitemap.ts            # sitemap.xml gerado no build (`force-static`)
 │   │
 │   ├── components/
 │   │   ├── layout/
@@ -156,7 +156,8 @@ Com base no relatório oficial `docs/AUDIT.md`:
   10. Rodapé (Footer) com 3 colunas e redes sociais
   11. Botão Flutuante de WhatsApp fixo
 - **Estratégia de assets e fontes:**
-  - Manter todos os 20 assets em `public/assets/`, servidos pelo `next/image` para otimização automática.
+  - **Export estático** (story [8.2](stories/8-2-deploy-estatico-cloudflare-pages.md), `PEND-06`): `output: "export"` em [next.config.ts](../next.config.ts); `npm run build` gera `out/`, publicada no Cloudflare Pages. Sem servidor, sem rota dinâmica nem API; o formulário posta direto no Formspree. Só `public/` e o que o Next compila entram em `out/` — `docs/`, `scripts/`, o legado da raiz e os arquivos de agente nunca vão para o deploy.
+  - **Imagens pré-otimizadas**: sem otimizador do Next (`images.unoptimized`), o `next/image` serve o arquivo apontado. Os Projetos usam WebP de 700px de altura em `public/assets/projects/` (2× do maior card); `public/assets/` guarda só o que o site referencia.
   - Carregar a fonte `Poppins` via `next/font/google` com pesos 400, 500, 600, 700.
 - **Estratégia de animações por seção:**
   - Leitura progressiva com ScrollTrigger e `scrub` aplicada exclusivamente no Hero e Sobre nós.

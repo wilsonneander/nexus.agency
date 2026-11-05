@@ -30,7 +30,7 @@ A tarefa nasceu na [4.4](4-4-conteudo-sem-javascript.md) (`MissionVisionValues` 
 | tipos `NavItem`, `SocialLink`; campos `ProjectItem.title`, `ProjectItem.categoryLabel`, `ABOUT_DATA.metric.value` | nenhum leitor (a métrica "+50" está fixa no JSX) |
 | `sectionRef` em [HeroClient](../../src/sections/Hero/HeroClient.tsx) (prop) e em [Projects](../../src/sections/Projects/index.tsx) | declarado, nunca lido |
 | `@gsap/react` no [package.json](../../package.json) | `grep -rn "@gsap/react\|useGSAP" src` vazio |
-| `public/assets/grafic.png`, `icon.png`, `project-1…6.jpg` | não referenciados em `src/`; vão para o deploy (~400 KB) |
+| ~~`public/assets/grafic.png`, `icon.png`, `project-1…6.jpg`~~ | **já removidos na [8.2](8-2-deploy-estatico-cloudflare-pages.md)** (iam para o deploy); nada a fazer aqui |
 | `font-light` (22 usos) | o Poppins só carrega 400–700 ([layout.tsx](../../src/app/layout.tsx), igual ao legado `styles.css:1`); a classe renderiza 400 |
 | `"./src/pages/**"` no [tailwind.config.ts](../../tailwind.config.ts) | a pasta não existe |
 | Scripts de captura pontuais em [scripts/](../../scripts/) com caminho fixo do Windows (`C:\Users\wilso\...`) | `capture_fluid.js`, `capture_validation.js`, `capture_mvv.js` não rodam fora daquela máquina e só validaram stories fechadas |
@@ -134,3 +134,4 @@ Ver tabela do Contexto, arquivo a arquivo. Em [About/index.tsx](../../src/sectio
 | Data | Status | O que mudou |
 | --- | --- | --- |
 | 2026-11-05 | TODO | Story criada sobre `3a87d86`; escopo ampliado com a [revisão de código](../CODE-REVIEW-2026-11-05.md) § 3 (o título do TASKS foi mantido). |
+| 2026-11-05 | TODO | Os assets sem uso de `public/assets/` saíram na [8.2](8-2-deploy-estatico-cloudflare-pages.md), que limpou o que vai para `out/`; item riscado aqui. |

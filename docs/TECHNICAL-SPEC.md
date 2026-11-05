@@ -98,7 +98,9 @@ Registradas no `package.json` e `package-lock.json` com sucesso na Fase 1. Build
 - Não usar `will-change` permanentemente em muitos elementos.
 - Não manter `requestAnimationFrame` ou ticker próprio se GSAP já controla a animação.
 - Limitar quantidade de elementos animados simultaneamente.
-- Usar `next/image` quando apropriado e configurar dimensões/`sizes`.
+- Usar `next/image` com dimensões definidas. O site é export estático (`output: "export"`, `images.unoptimized`, story [8.2](stories/8-2-deploy-estatico-cloudflare-pages.md)): não há otimizador, então imagem nova entra **já otimizada** em `public/assets/` (WebP, ~2× a maior largura exibida, ≤ 150 KB), convertida uma vez fora do `package.json`.
+- Nada que exija servidor: rota dinâmica, API route, `headers()`/`cookies()`, ISR ou otimizador de imagem quebram o `next build`. Rotas de metadados (`robots.ts`, `sitemap.ts`) levam `export const dynamic = "force-static"`.
+- Cache e cabeçalhos de segurança do Cloudflare Pages em [public/_headers](../public/_headers): `/_next/static/*` com `immutable` (nome com hash); `/assets/*` com 1 dia + `stale-while-revalidate` (nome sem hash).
 - Definir dimensões de mídia para reduzir CLS.
 - Lazy-load mídia abaixo da dobra.
 - Evitar carregar bibliotecas de animação no bundle inicial quando não forem necessárias.

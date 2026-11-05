@@ -16,19 +16,20 @@ O objetivo é reproduzir fielmente o site atual — marca, conteúdo, estrutura,
 - [Movimento (GSAP)](#movimento-gsap)
 - [Estilo](#estilo)
 - [Validação e QA](#validação-e-qa)
+- [Deploy (Cloudflare Pages)](#deploy-cloudflare-pages)
 - [Documentação](#documentação)
 - [Fluxo de trabalho](#fluxo-de-trabalho)
 - [Pendências em aberto](#pendências-em-aberto)
 
 ## Início rápido
 
-Requisitos: Node.js 18.18+ e npm.
+Requisitos: Node.js 22 (ver [.node-version](.node-version); mínimo 18.18) e npm.
 
 ```bash
 npm install
 npm run dev          # servidor de desenvolvimento (http://localhost:3000)
 npm run build        # build de produção — principal validação (inclui type-check)
-npm run start        # serve o build
+npm run start        # serve a pasta out/ gerada pelo build (npx serve out)
 npx tsc --noEmit     # type-check isolado
 ```
 
@@ -57,7 +58,7 @@ As regras completas e inegociáveis estão em [AGENTS.md](AGENTS.md) — leia an
 ```
 .
 ├── index.html, styles.css, main.js, assets/   # site legado (referência — não editar)
-├── public/assets/                             # cópia dos assets legados servida pelo Next
+├── public/                                    # vai para o deploy: assets/ (só o que o site usa) e _headers
 ├── src/
 │   ├── app/            # layout.tsx, page.tsx, globals.css, robots.ts, sitemap.ts
 │   ├── sections/       # Hero, About, Banners, Projects, Services, Contact
@@ -132,6 +133,47 @@ node scripts/check_ids.js          # verifica âncoras/IDs
 | `check_ids.js` | Âncoras e IDs vs. navegação |
 
 As imagens vão para uma pasta temporária fora do repositório (`OUT_DIR`, padrão `<tmp>/nexus-qa`) e nunca são commitadas. O plano de testes e os critérios de aceite estão em [docs/QA-CHECKLIST.md](docs/QA-CHECKLIST.md).
+
+## Deploy (Cloudflare Pages)
+
+O site é um **export estático** (`output: "export"` em [next.config.ts](next.config.ts)): `npm run build` gera a pasta `out/`, que é tudo o que vai para o ar. Hospedagem decidida no `PEND-06` ([docs/TASKS.md](docs/TASKS.md)).
+
+O deploy usa a **integração do Cloudflare Pages com o GitHub**: o Pages clona o repositório, roda o build na infraestrutura dele e publica `out/`. Não há GitHub Actions, Wrangler nem token no repositório.
+
+| Evento no GitHub | O que o Pages faz |
+|---|---|
+| push na `main` | build + deploy de **produção** (`nexusagencybr.com.br` e `<projeto>.pages.dev`) |
+| push em outra branch / PR | build + deploy de **preview** em `<branch>.<projeto>.pages.dev`, com o link comentado no PR |
+| push que só mexe em arquivos excluídos nos *build watch paths* | nada (sem build) |
+
+Como o trabalho é direto na `main` (ver [CLAUDE.md](CLAUDE.md)), **todo push na `main` vai para o ar**: rode `npm run build` antes de dar push. Para testar algo arriscado, suba numa branch e confira o preview.
+
+Criar o projeto (uma vez, por quem tem acesso de admin ao repositório no GitHub): Workers & Pages → Create → Pages → **Connect to Git** → autorizar o app "Cloudflare Workers and Pages" no GitHub para o repositório `wilsonneander/nexus.agency` → preencher:
+
+| Campo | Valor |
+|---|---|
+| Production branch | `main` |
+| Framework preset | `None` (não use o preset "Next.js", que espera o runtime de servidor) |
+| Build command | `npm run build` |
+| Build output directory | `out` |
+| Variável de ambiente | `NODE_VERSION` = `22` (o [.node-version](.node-version) já pede 22; a variável só garante) |
+
+Depois de criado, em Settings → Builds → **Build watch paths**, mantenha *Include* = `*` e ponha em *Exclude*: `docs/*`, `.claude/*`, `scripts/*`, `*.md`, `index.html`, `styles.css`, `main.js`, `assets/*`. Assim um commit só de documentação ou do legado não gera build nem deploy. (A exclusão só evita builds à toa: esses arquivos nunca entram em `out/` de qualquer jeito.)
+
+- **Não use Direct Upload / Wrangler neste projeto.** Um projeto do Pages ligado ao Git não passa a aceitar upload manual depois (e vice-versa); o caminho de deploy é o push.
+
+- **A pasta de saída tem de ser `out`.** Com a raiz do repositório como saída, o Pages publicaria `docs/`, `scripts/`, o legado (`index.html`, `assets/`) e os arquivos de agente. Em `out/` só entram `public/` e o que o Next compila.
+- **Cabeçalhos e cache:** [public/_headers](public/_headers) é copiado para `out/_headers` e o Pages o aplica: `/_next/static/*` fica em cache por 1 ano (`immutable`, o nome tem hash); `/assets/*` por 1 dia; toda resposta leva `X-Content-Type-Options`, `Referrer-Policy` e `Permissions-Policy`.
+- **Domínio:** em Custom domains, adicione `nexusagencybr.com.br` (o domínio canônico, `SITE_CONFIG.url`) e `www.nexusagencybr.com.br`. Para o `www` redirecionar ao apex, crie em Rules → Redirect Rules a regra a partir do modelo **"Redirect from WWW to root"** (`301`, preservando caminho e query string).
+- **Conferência depois do primeiro deploy** (no `<projeto>.pages.dev`, antes de apontar o domínio, ou no preview de uma branch):
+
+  ```bash
+  curl -sI https://<projeto>.pages.dev/ | grep -iE "x-content-type|referrer-policy|permissions-policy"
+  curl -sI https://<projeto>.pages.dev/_next/static/css/<arquivo>.css | grep -i cache-control   # ... immutable
+  ```
+
+- **Testar o build localmente:** `npm run build && npm run start` (serve `out/`). O `next start` não funciona com export estático.
+- **Imagens:** não há otimizador de imagem em produção. Imagem nova entra já em WebP, no tamanho de exibição (~2× a maior largura), em `public/assets/`.
 
 ## Documentação
 
