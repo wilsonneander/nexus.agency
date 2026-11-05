@@ -22,13 +22,13 @@ Toda a documentação mora em `docs/` — o [docs/README.md](docs/README.md) diz
 - `docs/stories/` e `docs/tdds/` — uma story por tarefa, um TDD por fluxo; cada pasta tem um `README.md` de índice para manter atualizado.
 - `docs/references/` — `screenshot.png` (referência visual do legado), `client-content.pdf`, `qa/` (capturas de validação).
 
-**Fluxo por skills** (`.claude/skills/`): `story` (`docs/stories/<id>-<slug>.md`, status espelhado no `TASKS.md`) → `validate-story` → `implement` → `review-mr` → `close-story` → `merge-request` (só com remoto; hoje não há). `tdd` documenta fluxos em `docs/tdds/`. O ID da tarefa vem do `TASKS.md` e nunca se reaproveita.
+**Fluxo por skills** (`.claude/skills/`): `story` (`docs/stories/<id>-<slug>.md`, status espelhado no `TASKS.md`) → `validate-story` → `implement` → `review-mr` → `close-story` → `merge-request` (PR no GitHub via `gh`, só quando o trabalho estiver numa branch). `tdd` documenta fluxos em `docs/tdds/`. O ID da tarefa vem do `TASKS.md` e nunca se reaproveita.
 
 **Regras de documentação e higiene do repositório:**
 - Em todo arquivo de documentação, a menção a outro arquivo é sempre um link Markdown para ele, nunca um caminho solto.
 - Screenshots e scripts que só servem para executar uma story (capturas "antes", sondas, scripts de captura pontuais) ficam numa pasta temporária fora do repositório — nunca em `scripts/` ou `docs/references/qa/` e nunca commitados. No repositório só entram evidências úteis (ex.: a captura final de validação citada pela story/QA).
 
-**Git:** trabalho direto na `main`, sem remoto; Conventional Commits em inglês (`feat:`, `fix:`, `docs:`). Commit só quando pedido.
+**Git:** trabalho direto na `main`; remoto `origin` no GitHub (`wilsonneander/nexus.agency`). Conventional Commits em inglês (`feat:`, `fix:`, `docs:`). Commit e push só quando pedido.
 
 ## Comandos
 

@@ -119,9 +119,10 @@ commit. Duas saídas, nesta preferência:
 
 - Há remoto (`git remote -v` não vazio) e o usuário pediu PR/MR → skill
   `merge-request`.
-- Não há remoto (o caso de hoje) → termine aqui com o resumo no formato do
-  AGENTS.md § 10 (**Objetivo, Arquivos, Decisões, Validação, Pendências,
-  Riscos**), citando o SHA.
+- Trabalho direto na `main` (o caso de hoje) ou sem pedido de PR/MR → termine
+  aqui com o resumo no formato do AGENTS.md § 10 (**Objetivo, Arquivos,
+  Decisões, Validação, Pendências, Riscos**), citando o SHA. Push para o
+  `origin` (GitHub) só se o usuário pedir.
 
 ## Idioma
 

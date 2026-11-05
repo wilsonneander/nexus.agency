@@ -87,7 +87,7 @@ skill `validate-story` ou o aval do usuário. Um pedido explícito ("pode fazer 
 ### Ao começar
 
 1. Confira a branch: `git rev-parse --abbrev-ref HEAD`. O repositório hoje
-   trabalha direto na `main` e não tem remoto; se o usuário pedir branch, use
+   trabalha direto na `main` (remoto `origin` no GitHub); se o usuário pedir branch, use
    `task/<id>-<slug>` criada a partir da `main`.
 2. Status para `IN_PROGRESS` na story **e** no `TASKS.md`.
 3. Change Log: `| AAAA-MM-DD | IN_PROGRESS | iniciada sobre <SHA curto> |`.

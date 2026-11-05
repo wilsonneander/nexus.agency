@@ -18,9 +18,9 @@ git rev-parse --abbrev-ref HEAD
 
 | Situação | Ferramenta |
 | --- | --- |
-| remoto `github.com` | `gh` |
+| remoto `github.com` (o estado atual: `origin` = `wilsonneander/nexus.agency`) | `gh` |
 | remoto `gitlab.com` | `glab` |
-| **sem remoto** (o estado atual do repositório) | não há PR: escreva a descrição como **relatório de entrega** na conversa (ou num arquivo, se o usuário pedir) e pare. Não crie remoto nem repositório por conta própria. |
+| **sem remoto** | não há PR: escreva a descrição como **relatório de entrega** na conversa (ou num arquivo, se o usuário pedir) e pare. Não crie remoto nem repositório por conta própria. |
 
 Se a CLI não estiver instalada ou autenticada, pare e peça ao usuário
 (`gh auth login` / `glab auth login`) — não contorne por API nem token.

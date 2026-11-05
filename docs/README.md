@@ -28,4 +28,4 @@ fonte acima e troque a cópia por um link.
 ## Fluxo de trabalho (skills em `.claude/skills/`)
 
 `story` → `validate-story` → `implement` → `review-mr` → `close-story` →
-`merge-request` (só quando houver remoto). `tdd` documenta fluxos em `tdds/`.
+`merge-request` (PR no GitHub, só quando o trabalho estiver numa branch). `tdd` documenta fluxos em `tdds/`.
