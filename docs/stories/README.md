@@ -25,6 +25,7 @@ a partir de [`.claude/skills/story/TEMPLATE.md`](../../.claude/skills/story/TEMP
 | 7.4 | [Incluir o e-mail institucional no rodapé](7-4-email-institucional-rodape.md) | Fase 7 |
 | 7.5 | [Coluna Canais no rodapé e remoção do texto institucional](7-5-coluna-canais-rodape.md) | Fase 7 |
 | 7.6 | [Enviar o formulário de contato pelo Formspree](7-6-formulario-formspree.md) | Fase 7 |
+| 7.7 | [Animar a abertura do menu mobile e a troca de filtro dos Projetos](7-7-menu-mobile-filtro-fluidos.md) | Fase 7 |
 | 8.1 | [Apontar canonical, OpenGraph, robots e sitemap para o domínio oficial](8-1-dominio-oficial.md) | Fase 8 |
 | 8.2 | [Publicar o site como estático no Cloudflare Pages](8-2-deploy-estatico-cloudflare-pages.md) | Fase 8 |
 | 8.3 | [Trocar as fontes de ícones de CDN por SVG inline](8-3-icones-svg.md) | Fase 8 |

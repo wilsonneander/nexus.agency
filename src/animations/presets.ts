@@ -31,6 +31,23 @@ export const MOTION_PRESETS = {
     /** Deslocamento único até 768px; acima, cada seção mantém o seu. */
     yNarrow: 24,
   },
+  /** Gaveta do menu mobile (story 7.7): mesma duração do legado (`transition: 0.5s`). */
+  menu: {
+    duration: 0.5,
+    ease: "power3.out",
+    stagger: 0.05,
+    /** Fechar toca a timeline ao contrário, um pouco mais rápido. */
+    closeTimeScale: 1.4,
+  },
+  /** Troca de filtro dos Projetos (story 7.7): saída, reposicionamento e entrada. */
+  filter: {
+    leaveDuration: 0.25,
+    flipDuration: 0.6,
+    enterDuration: 0.45,
+    stagger: 0.06,
+    ease: "power3.inOut",
+    scaleFrom: 0.92,
+  },
 } as const;
 
 /**
