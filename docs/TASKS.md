@@ -2,7 +2,7 @@
 
 ## ▶ Ordem de implementação
 
-> **Atualizada em:** 2026-11-05, no fechamento da story 7.6 (sobre `c87fd50` + commit da entrega). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
+> **Atualizada em:** 2026-11-05, no fechamento da story 7.7 (sobre `3a87d86` + commit da entrega). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
 
 **Próxima tarefa: 4.5 — Testar teclado, foco e semântica** (`TODO`, sem story: começa pela skill `story`)
 Por quê agora: independe das animações e é o maior risco restante da Fase 4; a 4.6 (contraste) já pode correr em seguida, porque a [4.2](stories/4-2-distancias-intensidades-por-breakpoint.md) fixou os estados animados (entrada atrelada ao scroll).
@@ -158,8 +158,9 @@ Mudanças de design pedidas pelo responsável depois da entrega. Cada uma depend
 - [x] 7.4 Incluir o e-mail institucional no rodapé. (Status: DONE | Story: [7-4-email-institucional-rodape.md](stories/7-4-email-institucional-rodape.md) | `PEND-11` RESOLVED; `mailto:contato@nexusagencybr.com.br` na coluna Suporte, via `SITE_CONFIG.email`; colunas 4/4/4 entre 1024 e 1199px para o endereço caber; 0 link cortado nos 5 viewports; [footer_email_1200.png](references/qa/footer_email_1200.png), [footer_email_375.png](references/qa/footer_email_375.png); revisada e revalidada no build de produção; aprovado visualmente pelo responsável em 2026-11-05)
 - [x] 7.5 Adicionar a coluna Canais ao rodapé e remover o texto debaixo da logo. (Status: DONE | Story: [7-5-coluna-canais-rodape.md](stories/7-5-coluna-canais-rodape.md) | `PEND-09` parcial (horário e área de atendimento); parágrafo institucional removido a pedido; grade 2/4/3/3 em ≥ 1200px e logo em linha própria abaixo disso; 0 link cortado nos 5 viewports; [footer_canais_1200.png](references/qa/footer_canais_1200.png), [footer_canais_1024.png](references/qa/footer_canais_1024.png), [footer_canais_375.png](references/qa/footer_canais_375.png); revisada e revalidada no build de produção, 4 colunas com `opacity` 1 nos dois sentidos do scroll; aprovado visualmente pelo responsável em 2026-11-05)
 - [x] 7.6 Enviar o formulário de contato pelo Formspree e mascarar o WhatsApp. (Status: DONE | Story: [7-6-formulario-formspree.md](stories/7-6-formulario-formspree.md) | `PEND-10` RESOLVED; `@formspree/react` (form `xpppnoer`), sem JS o `action` posta no Formspree; máscara `(61) 99298-5392` validada por sonda CDP em 375/1200 — [contact_whatsapp_mask_1200.png](references/qa/contact_whatsapp_mask_1200.png); textos novos no `PEND-17`; envio real não exercitado)
+- [x] 7.7 Animar a abertura do menu mobile e a troca de filtro dos Projetos. (Status: DONE | Story: [7-7-menu-mobile-filtro-fluidos.md](stories/7-7-menu-mobile-filtro-fluidos.md) | Gaveta desliza de trás da barra como o legado (`styles.css:177-197`), `inert`/`aria-expanded`; filtro com saída, Flip e entrada em sequência; validado por sonda CDP em 375/768/1200 e com reduced motion — [menu_mobile_open_375.png](references/qa/menu_mobile_open_375.png); aprovado pelo responsável em 2026-11-05)
 
-**Critério de saída:** cada mudança aprovada visualmente pelo responsável, sem violar o [QA-CHECKLIST](QA-CHECKLIST.md) § 9. [ATENDIDO — 7.1 a 7.5 aprovadas pelo responsável; rodapé (7.3–7.5) aprovado em 2026-11-05]
+**Critério de saída:** cada mudança aprovada visualmente pelo responsável, sem violar o [QA-CHECKLIST](QA-CHECKLIST.md) § 9. [ATENDIDO — 7.1 a 7.5 e 7.7 aprovadas pelo responsável; rodapé (7.3–7.5) e 7.7 aprovados em 2026-11-05]
 
 ## Coordenação de múltiplos agentes
 

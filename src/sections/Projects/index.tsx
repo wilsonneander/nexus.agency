@@ -5,7 +5,7 @@
  * - Filtros padronizados com FluidButton (variant="filter") e microinteração do botão Contato
  * - Entrada de cada card atrelada ao scroll (story 4.2), no filho [data-project-reveal]:
  *   o Flip anima o transform do [data-project-card] e os dois não podem dividir o mesmo nó
- * - GSAP Flip para transição suave entre categorias
+ * - Troca de categoria em três tempos: saída dos cards, Flip dos que ficam e entrada em sequência (story 7.7)
  *
  * PRESERVADO integralmente:
  * - Lógica de filtro React (useState)
@@ -23,6 +23,7 @@ import { ProjectCategory } from "@/types";
 import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
 import { FluidButton } from "@/components/ui/FluidButton";
 import { REVEAL_MEDIA, revealY, scrubReveal } from "@/animations/scrubReveal";
+import { MOTION_PRESETS } from "@/animations/presets";
 
 export function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>("all");
@@ -65,44 +66,81 @@ export function ProjectsSection() {
     };
   }, [setupReveal]);
 
-  // Flip animation ao trocar filtro — flushSync assegura DOM atualizado antes do Flip.from
+  // Troca de filtro em três tempos (story 7.7): os cards que saem desbotam e encolhem
+  // ainda no DOM (o React os remove no setState, então o onLeave do Flip não teria o
+  // que animar), os que ficam deslizam para a nova posição com Flip e os novos entram
+  // em sequência. Um clique no meio da troca termina a anterior na hora e começa a nova.
+  const transitionRef = useRef<gsap.core.Timeline | null>(null);
+  const flipRef = useRef<gsap.core.Timeline | null>(null);
+
+  useEffect(
+    () => () => {
+      transitionRef.current?.kill();
+      flipRef.current?.kill();
+    },
+    []
+  );
+
   const handleFilter = useCallback(
     (filter: string) => {
+      const nextFilter = filter as ProjectCategory;
       if (reduced || prefersReducedMotion() || !gridRef.current) {
-        setActiveFilter(filter as ProjectCategory);
+        setActiveFilter(nextFilter);
         return;
       }
 
       gsap.registerPlugin(Flip);
+      transitionRef.current?.progress(1);
+      flipRef.current?.progress(1);
 
-      // Captura estado ANTES da mudança de DOM
-      const state = Flip.getState("[data-project-card]");
+      const grid = gridRef.current;
+      const leaving = Array.from(grid.querySelectorAll<HTMLElement>("[data-project-card]")).filter(
+        (card) => nextFilter !== "all" && card.dataset.category !== nextFilter
+      );
+      const preset = MOTION_PRESETS.filter;
 
-      flushSync(() => setActiveFilter(filter as ProjectCategory));
+      const tl = gsap.timeline();
+      if (leaving.length) {
+        tl.to(leaving, {
+          opacity: 0,
+          scale: preset.scaleFrom,
+          duration: preset.leaveDuration,
+          ease: "power2.in",
+          overwrite: "auto",
+        });
+      }
+      tl.add(() => {
+        // Captura as posições ANTES da mudança de DOM; flushSync garante o DOM novo antes do Flip.from.
+        const state = Flip.getState(grid.querySelectorAll("[data-project-card]"));
+        flushSync(() => setActiveFilter(nextFilter));
 
-      Flip.from(state, {
-        duration: 0.45,
-        ease: "power2.inOut",
-        absolute: true,
-        onEnter: (els) =>
-          gsap.fromTo(
-            els,
-            { opacity: 0, y: 24 },
-            { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }
-          ),
-        onLeave: (els) =>
-          gsap.to(els, {
-            opacity: 0,
-            y: -12,
-            duration: 0.2,
-          }),
-        // A altura da grade mudou: refaz os triggers dos cards e recalcula os das
-        // seções abaixo, senão a entrada delas fica fora da posição.
-        onComplete: () => {
-          setupReveal();
-          ScrollTrigger.refresh();
-        },
+        flipRef.current = Flip.from(state, {
+          duration: preset.flipDuration,
+          ease: preset.ease,
+          onEnter: (els) =>
+            gsap.fromTo(
+              els,
+              { opacity: 0, scale: preset.scaleFrom, y: 24 },
+              {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                duration: preset.enterDuration,
+                ease: MOTION_PRESETS.ease.reveal,
+                stagger: preset.stagger,
+                delay: preset.flipDuration * 0.35,
+                clearProps: "opacity,transform",
+              }
+            ),
+          // A altura da grade mudou: refaz os triggers dos cards e recalcula os das
+          // seções abaixo, senão a entrada delas fica fora da posição.
+          onComplete: () => {
+            setupReveal();
+            ScrollTrigger.refresh();
+          },
+        });
       });
+      transitionRef.current = tl;
     },
     [reduced, setupReveal]
   );
@@ -143,6 +181,7 @@ export function ProjectsSection() {
             <div
               key={project.id}
               data-project-card
+              data-category={project.category}
               data-flip-id={project.id}
             >
               <div data-project-reveal className="glass-card group rounded-2xl overflow-hidden">
