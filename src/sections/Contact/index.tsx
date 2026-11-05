@@ -2,8 +2,8 @@
 
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
+import { REVEAL_MEDIA, revealY, scrubReveal } from "@/animations/scrubReveal";
 import { FluidButton } from "@/components/ui/FluidButton";
 
 export function ContactSection() {
@@ -21,66 +21,21 @@ export function ContactSection() {
     if (reduced || prefersReducedMotion()) return;
     if (!sectionRef.current) return;
 
-    gsap.registerPlugin(ScrollTrigger);
+    // Cabeçalho, campos e botão atrelados ao scroll (story 4.2); `fromTo` com destino
+    // explícito no scrubReveal, não mais `gsap.from` (padrão proibido na 4.7).
+    const mm = gsap.matchMedia();
+    mm.add(
+      REVEAL_MEDIA,
+      ({ conditions }) => {
+        const section = sectionRef.current!;
+        scrubReveal(section.querySelector("[data-contact-header]"), { y: revealY(conditions, 36) });
+        scrubReveal(section.querySelectorAll("[data-contact-field]"), { y: revealY(conditions, 24) });
+        scrubReveal(section.querySelector("[data-contact-cta]"), { scale: 0.92 });
+      },
+      sectionRef
+    );
 
-    const ctx = gsap.context(() => {
-      const section = sectionRef.current!;
-
-      // Cabeçalho
-      const header = section.querySelector("[data-contact-header]");
-      if (header) {
-        gsap.from(header, {
-          y: 36,
-          opacity: 0,
-          duration: 0.7,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: header,
-            start: "top 86%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true,
-          },
-        });
-      }
-
-      // Campos do formulário (stagger)
-      const fields = section.querySelectorAll("[data-contact-field]");
-      if (fields.length) {
-        gsap.from(fields, {
-          y: 24,
-          opacity: 0,
-          duration: 0.5,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: section.querySelector("form"),
-            start: "top 86%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true,
-          },
-        });
-      }
-
-      // CTA button
-      const cta = section.querySelector("[data-contact-cta]");
-      if (cta) {
-        gsap.from(cta, {
-          scale: 0.92,
-          opacity: 0,
-          duration: 0.5,
-          ease: "back.out(1.5)",
-          delay: 0.45,
-          scrollTrigger: {
-            trigger: section.querySelector("form"),
-            start: "top 86%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true,
-          },
-        });
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
+    return () => mm.revert();
   }, [reduced]);
 
   return (

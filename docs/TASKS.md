@@ -2,18 +2,17 @@
 
 ## ▶ Ordem de implementação
 
-> **Atualizada em:** 2026-11-05, no fechamento da story 4.1 (sobre `c71044c` + commit da entrega). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
+> **Atualizada em:** 2026-11-05, no fechamento da story 4.2 (sobre `272cf45` + commit da entrega). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9) depois.
 
-**Próxima tarefa: 4.2 — Ajustar distâncias e intensidades por breakpoint** (`TODO`, sem story: começa pela skill `story`)
-Por quê agora: a 4.1 fechou a matriz do que roda em cada faixa ([story](stories/4-1-comportamento-por-breakpoint.md#escopo)); a 4.2 ajusta os valores do que ficou e destrava a 4.6.
+**Próxima tarefa: 4.5 — Testar teclado, foco e semântica** (`TODO`, sem story: começa pela skill `story`)
+Por quê agora: independe das animações e é o maior risco restante da Fase 4; a 4.6 (contraste) já pode correr em seguida, porque a [4.2](stories/4-2-distancias-intensidades-por-breakpoint.md) fixou os estados animados (entrada atrelada ao scroll).
 
 | # | Tarefa | Depende de | Status | Por que nesta posição |
 |---|---|---|---|---|
-| 1 | **4.2** Distâncias e intensidades por breakpoint | 4.1 (`DONE`) | `TODO` | Ajusta os valores do que a 4.1 decidiu manter. |
-| 2 | **4.5** Teclado, foco e semântica | — | `TODO` | Independente das animações; pode correr em paralelo a partir da posição 1. |
-| 3 | **4.6** Contraste em todos os estados animados | 4.2 | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). Os cards de vidro já foram medidos na [7.2](stories/7-2-cards-glassmorphism.md) (`#a15cf5` ≥ 4,60:1). |
-| 4 | **4.8** Piscar do Hero na hidratação | — | `TODO` | Sem story. Só o 1º quadro depois da hidratação; separada da 4.1 por não depender de largura. |
-| 5 | **6.9** Remover código de motion/About não usado | — | `TODO` | Limpeza sem risco ao QA § 9; encaixa em qualquer folga. Inclui padronizar os `gsap.from` do rodapé e do Contato em `fromTo` e o import morto de `ParallaxImage` no About ([story 4.1](stories/4-1-comportamento-por-breakpoint.md)). |
+| 1 | **4.5** Teclado, foco e semântica | — | `TODO` | Independente das animações. |
+| 2 | **4.6** Contraste em todos os estados animados | 4.2 (`DONE`) | `TODO` | Só faz sentido medir sobre os estados finais; fecha a Fase 4 (Lighthouse a11y hoje 94). Os cards de vidro já foram medidos na [7.2](stories/7-2-cards-glassmorphism.md) (`#a15cf5` ≥ 4,60:1). |
+| 3 | **4.8** Piscar do Hero na hidratação | — | `TODO` | Sem story. Só o 1º quadro depois da hidratação; separada da 4.1 por não depender de largura. |
+| 4 | **6.9** Remover código de motion/About não usado | — | `TODO` | Limpeza sem risco ao QA § 9; encaixa em qualquer folga. Inclui o import morto de `ParallaxImage` no About ([story 4.1](stories/4-1-comportamento-por-breakpoint.md)); os `gsap.from` do rodapé e do Contato já saíram na [4.2](stories/4-2-distancias-intensidades-por-breakpoint.md). |
 
 **Fora da fila (aguardam decisão do responsável, não implementar):** `PEND-13` pulso do WhatsApp e rotação dos ícones sociais com reduced motion, `PEND-06` deploy, `PEND-09` colchetes restantes, `PEND-10` backend do formulário, `PEND-12` LGPD. ESLint (1.8) depende de aprovação de dependências novas. Quando um desses for resolvido, a tarefa resultante entra na tabela acima na posição devida.
 
@@ -113,7 +112,7 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 ## Fase 4 — Responsividade e acessibilidade
 
 - [x] 4.1 Definir comportamento desktop/tablet/mobile. (Status: DONE | Story: [4-1-comportamento-por-breakpoint.md](stories/4-1-comportamento-por-breakpoint.md) | Menu, ícones sociais fixos e Banners nos pontos exatos do legado (`width > 480/768`) com `min-[481px]:`/`min-[769px]:` — a troca global das telas foi medida e revertida no review (piorava 768/1024, `PEND-16`); sem scroll horizontal de 375 a 1200 (antes 504 px em 480); ícone dos Banners acima do texto em 481–768; parallax do Hero só acima de 768 e mola do WhatsApp só com mouse (`gsap.matchMedia()` + `MOTION_MEDIA`); Banners sem piscar (`gsap.set` explícito); [breakpoints_banners_480.png](references/qa/breakpoints_banners_480.png), [breakpoints_banners_481.png](references/qa/breakpoints_banners_481.png), [breakpoints_768.png](references/qa/breakpoints_768.png))
-- [ ] 4.2 Ajustar distâncias e intensidades por breakpoint. (Status: TODO | Story: —)
+- [x] 4.2 Ajustar distâncias e intensidades por breakpoint. (Status: DONE | Story: [4-2-distancias-intensidades-por-breakpoint.md](stories/4-2-distancias-intensidades-por-breakpoint.md) | Reveals das seções atrelados ao scroll, um trigger por elemento, em toda largura, `y` 24px até 768px (decisão do responsável). Sonda CDP nos 5 viewports e em `next start`: opacidade de cada alvo = a esperada pela posição, descendo, subindo, pulando, no resize 1200 ↔ 375, na recarga e após o filtro de Projetos (0 desvios > 0,08); fim da página inteiro; CPU 4× sem quadro > 50 ms — [scrub_reveal_375.png](references/qa/scrub_reveal_375.png), [scrub_reveal_1200.png](references/qa/scrub_reveal_1200.png))
 - [x] 4.3 Implementar reduced motion. (Status: DONE | Story: [4-3-reduced-motion.md](stories/4-3-reduced-motion.md) | Guarda síncrona `prefersReducedMotion()` nos 12 efeitos, limpeza completa (Hero, `ScrollText`, contador) e CSS de reduced motion; Hero, textos e "+50" visíveis com `reduce` em [reduced_1200.png](references/qa/reduced_1200.png) e [reduced_375.png](references/qa/reduced_375.png); pulso/rotação aguardam `PEND-13`)
 - [x] 4.4 Verificar conteúdo sem JavaScript/animação. (Status: DONE | Story: [4-4-conteudo-sem-javascript.md](stories/4-4-conteudo-sem-javascript.md) | `<noscript><style>` no `<head>` deixa os 5 `ScrollText` em branco pleno sem JS; auditoria em [nojs_375.png](references/qa/nojs_375.png) e [nojs_1200.png](references/qa/nojs_1200.png), todos os blocos visíveis)
 - [ ] 4.5 Testar teclado, foco e semântica. (Status: TODO | Story: —)

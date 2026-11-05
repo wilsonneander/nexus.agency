@@ -3,15 +3,15 @@
 /**
  * AboutClient — Wrapper client-side para animações da seção Sobre Nós.
  *
- * Correção do bug do 1º card:
- * - Uso de gsap.fromTo com immediateRender: false
- * - Trigger referenciando o container da grid ou section
+ * Animações (story 4.2): parágrafos, destaque, Missão/Visão e os 6 Valores entram
+ * atrelados ao scroll, um trigger por elemento; o contador "+50" dispara uma vez.
  */
 
 import { useRef, useEffect, ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
+import { REVEAL_MEDIA, revealY, scrubReveal } from "@/animations/scrubReveal";
 
 interface AboutClientProps {
   children: ReactNode;
@@ -33,75 +33,6 @@ export function AboutClient({ children }: AboutClientProps) {
     const metricText = metricEl?.textContent ?? null;
 
     const ctx = gsap.context(() => {
-      const section = sectionRef.current!;
-
-      // Ilustração — entrada da esquerda
-      const illustration = section.querySelector("[data-about-image]");
-      if (illustration) {
-        gsap.fromTo(
-          illustration,
-          { x: -60, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.9,
-            ease: "power3.out",
-            immediateRender: false,
-            scrollTrigger: {
-              trigger: illustration,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-              invalidateOnRefresh: true,
-            },
-          }
-        );
-      }
-
-      // Parágrafos — stagger
-      const paragraphs = section.querySelectorAll("[data-about-para]");
-      if (paragraphs.length) {
-        gsap.fromTo(
-          paragraphs,
-          { y: 30, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.65,
-            stagger: 0.15,
-            ease: "power2.out",
-            immediateRender: false,
-            scrollTrigger: {
-              trigger: paragraphs[0],
-              start: "top 88%",
-              toggleActions: "play none none reverse",
-              invalidateOnRefresh: true,
-            },
-          }
-        );
-      }
-
-      // Destaque institucional (borda roxa)
-      const highlight = section.querySelector("[data-about-highlight]");
-      if (highlight) {
-        gsap.fromTo(
-          highlight,
-          { y: 24, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.65,
-            ease: "power2.out",
-            immediateRender: false,
-            scrollTrigger: {
-              trigger: highlight,
-              start: "top 88%",
-              toggleActions: "play none none reverse",
-              invalidateOnRefresh: true,
-            },
-          }
-        );
-      }
-
       // Métrica +50 — counter
       if (metricEl) {
         const counter = { val: 0 };
@@ -120,56 +51,24 @@ export function AboutClient({ children }: AboutClientProps) {
           },
         });
       }
-
-      // Missão + Visão — fade sequencial
-      const mvCards = section.querySelectorAll("[data-about-mv]");
-      if (mvCards.length) {
-        gsap.fromTo(
-          mvCards,
-          { y: 32, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.7,
-            stagger: 0.18,
-            ease: "power2.out",
-            immediateRender: false,
-            scrollTrigger: {
-              trigger: mvCards[0],
-              start: "top 88%",
-              toggleActions: "play none none reverse",
-              invalidateOnRefresh: true,
-            },
-          }
-        );
-      }
-
-      // 6 Valores — stagger grid (Correção de desaparecimento do 1º card: fromTo + trigger no container da grid)
-      const valueCards = section.querySelectorAll("[data-about-value]");
-      const valuesGrid = section.querySelector("[data-about-values-grid]") || valueCards[0];
-      if (valueCards.length) {
-        gsap.fromTo(
-          valueCards,
-          { y: 40, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.6,
-            stagger: 0.1,
-            ease: "power2.out",
-            immediateRender: false,
-            scrollTrigger: {
-              trigger: valuesGrid,
-              start: "top 88%",
-              toggleActions: "play none none reverse",
-              invalidateOnRefresh: true,
-            },
-          }
-        );
-      }
     }, sectionRef);
 
+    // A ilustração [data-about-image] não existe na página (achado da 4.1, limpeza na 6.9).
+    const mm = gsap.matchMedia();
+    mm.add(
+      REVEAL_MEDIA,
+      ({ conditions }) => {
+        const section = sectionRef.current!;
+        scrubReveal(section.querySelectorAll("[data-about-para]"), { y: revealY(conditions, 30) });
+        scrubReveal(section.querySelector("[data-about-highlight]"), { y: revealY(conditions, 24) });
+        scrubReveal(section.querySelectorAll("[data-about-mv]"), { y: revealY(conditions, 32) });
+        scrubReveal(section.querySelectorAll("[data-about-value]"), { y: revealY(conditions, 40) });
+      },
+      sectionRef
+    );
+
     return () => {
+      mm.revert();
       ctx.revert();
       if (metricEl && metricText !== null) metricEl.textContent = metricText;
     };

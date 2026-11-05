@@ -2,8 +2,8 @@
 
 import { useRef, useEffect, ReactNode } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
+import { REVEAL_MEDIA, revealY, scrubReveal } from "@/animations/scrubReveal";
 
 export function FooterClient({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLElement>(null);
@@ -13,28 +13,20 @@ export function FooterClient({ children }: { children: ReactNode }) {
     if (reduced || prefersReducedMotion()) return;
     if (!ref.current) return;
 
-    gsap.registerPlugin(ScrollTrigger);
+    // Colunas atreladas ao scroll (story 4.2). O `clamp` no fim do trecho garante a
+    // última coluna inteira no fim da página, onde não há espaço para rolar mais.
+    const mm = gsap.matchMedia();
+    mm.add(
+      REVEAL_MEDIA,
+      ({ conditions }) => {
+        scrubReveal(ref.current!.querySelectorAll("[data-footer-col]"), {
+          y: revealY(conditions, 30),
+        });
+      },
+      ref
+    );
 
-    const ctx = gsap.context(() => {
-      const cols = ref.current!.querySelectorAll("[data-footer-col]");
-      if (!cols.length) return;
-
-      gsap.from(cols, {
-        y: 30,
-        opacity: 0,
-        duration: 0.65,
-        stagger: 0.14,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ref.current,
-          start: "top 92%",
-          toggleActions: "play none none reverse",
-          invalidateOnRefresh: true,
-        },
-      });
-    }, ref);
-
-    return () => ctx.revert();
+    return () => mm.revert();
   }, [reduced]);
 
   return (

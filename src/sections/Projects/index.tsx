@@ -3,7 +3,8 @@
 /**
  * ProjectsSection — Client Component com:
  * - Filtros padronizados com FluidButton (variant="filter") e microinteração do botão Contato
- * - ScrollReveal com fromTo e immediateRender: false (garantindo que o 1º card e todos os demais renderizem sempre)
+ * - Entrada de cada card atrelada ao scroll (story 4.2), no filho [data-project-reveal]:
+ *   o Flip anima o transform do [data-project-card] e os dois não podem dividir o mesmo nó
  * - GSAP Flip para transição suave entre categorias
  *
  * PRESERVADO integralmente:
@@ -21,56 +22,48 @@ import { PROJECTS_DATA, PROJECT_FILTERS } from "@/data/projects";
 import { ProjectCategory } from "@/types";
 import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
 import { FluidButton } from "@/components/ui/FluidButton";
+import { REVEAL_MEDIA, revealY, scrubReveal } from "@/animations/scrubReveal";
 
 export function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>("all");
   const gridRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
-  const hasRevealedRef = useRef(false);
+  const revealRef = useRef<gsap.MatchMedia | null>(null);
 
   const filteredProjects =
     activeFilter === "all"
       ? PROJECTS_DATA
       : PROJECTS_DATA.filter((p) => p.category === activeFilter);
 
-  // ScrollReveal inicial dos cards (garantido com fromTo para que o primeiro card nunca desapareça)
-  useEffect(() => {
-    if (reduced || prefersReducedMotion() || hasRevealedRef.current) return;
-    if (!gridRef.current) return;
+  // Entrada atrelada ao scroll, um trigger por card. Refeita depois de cada filtro
+  // (cards novos e posições novas), por isso fica numa função guardada no ref.
+  const setupReveal = useCallback(() => {
+    revealRef.current?.revert();
+    revealRef.current = null;
+    if (reduced || prefersReducedMotion() || !gridRef.current) return;
 
-    gsap.registerPlugin(ScrollTrigger, Flip);
-
-    const cards = gridRef.current.querySelectorAll("[data-project-card]");
-    if (!cards.length) return;
-
-    const anim = gsap.fromTo(
-      cards,
-      { y: 48, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power3.out",
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: gridRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-          invalidateOnRefresh: true,
-          onEnter: () => {
-            hasRevealedRef.current = true;
-          },
-        },
-      }
+    const mm = gsap.matchMedia();
+    mm.add(
+      REVEAL_MEDIA,
+      ({ conditions }) => {
+        scrubReveal(gridRef.current!.querySelectorAll("[data-project-reveal]"), {
+          y: revealY(conditions, 48),
+        });
+      },
+      gridRef
     );
-
-    return () => {
-      anim.scrollTrigger?.kill();
-      anim.kill();
-    };
+    revealRef.current = mm;
   }, [reduced]);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger, Flip);
+    setupReveal();
+    return () => {
+      revealRef.current?.revert();
+      revealRef.current = null;
+    };
+  }, [setupReveal]);
 
   // Flip animation ao trocar filtro — flushSync assegura DOM atualizado antes do Flip.from
   const handleFilter = useCallback(
@@ -103,9 +96,15 @@ export function ProjectsSection() {
             y: -12,
             duration: 0.2,
           }),
+        // A altura da grade mudou: refaz os triggers dos cards e recalcula os das
+        // seções abaixo, senão a entrada delas fica fora da posição.
+        onComplete: () => {
+          setupReveal();
+          ScrollTrigger.refresh();
+        },
       });
     },
-    [reduced]
+    [reduced, setupReveal]
   );
 
   return (
@@ -145,16 +144,17 @@ export function ProjectsSection() {
               key={project.id}
               data-project-card
               data-flip-id={project.id}
-              className="glass-card group rounded-2xl overflow-hidden"
             >
-              <div className="aspect-[4/3] w-full overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={project.alt}
-                  width={500}
-                  height={380}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+              <div data-project-reveal className="glass-card group rounded-2xl overflow-hidden">
+                <div className="aspect-[4/3] w-full overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.alt}
+                    width={500}
+                    height={380}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
               </div>
             </div>
           ))}

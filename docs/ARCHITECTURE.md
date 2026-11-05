@@ -53,7 +53,8 @@ nexus/
 │   │
 │   ├── animations/
 │   │   ├── gsap.client.ts        # Registro e configuração do GSAP e ScrollTrigger
-│   │   └── presets.ts            # Presets de stagger, timelines e easing
+│   │   ├── presets.ts            # Presets de stagger, timelines e easing; MOTION_MEDIA
+│   │   └── scrubReveal.ts        # Entrada por elemento atrelada ao scroll (story 4.2)
 │   │
 │   ├── hooks/
 │   │   ├── useReducedMotion.ts   # Detecção e respeito a prefers-reduced-motion
@@ -159,7 +160,7 @@ Com base no relatório oficial `docs/AUDIT.md`:
   - Carregar a fonte `Poppins` via `next/font/google` com pesos 400, 500, 600, 700.
 - **Estratégia de animações por seção:**
   - Leitura progressiva com ScrollTrigger e `scrub` aplicada exclusivamente no Hero e Sobre nós.
-  - Reveals suaves nos cards de Banner e Serviços.
+  - Reveals das seções (About, Banners, Projetos, Serviços, Contato, rodapé) **atrelados ao scroll, por elemento** (story [4.2](stories/4-2-distancias-intensidades-por-breakpoint.md), decisão do responsável): descendo entra, subindo desfaz, em toda largura, com deslocamento menor até 768px. Substituiu as entradas disparadas por grupo com `stagger`, que animavam fora da tela com a grade em 1 coluna. Regra em [TECHNICAL-SPEC.md](TECHNICAL-SPEC.md#tailwind--css).
   - Botão WhatsApp com animação contínua `@keyframes WaveWhatsApp` em CSS e transição de escala (a mola de hover GSAP só com mouse, `MOTION_MEDIA.finePointer`).
   - **Por faixa** (story [4.1](stories/4-1-comportamento-por-breakpoint.md)): menu, ícones sociais fixos e Banners viram nos pontos exatos do legado (`> 480/768`, com `min-[481px]:`/`min-[769px]:`; as telas do Tailwind não mudam); parallax só acima de 768px via `gsap.matchMedia()`; todo o resto roda igual em toda largura.
   - Botões de Redes Sociais: **preservação integral** da rotação 3D (`rotateY(360deg)`) e expansão de cor de fundo sem alterações.
