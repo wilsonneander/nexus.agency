@@ -4,11 +4,17 @@ import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
 import { REVEAL_MEDIA, revealY, scrubReveal } from "@/animations/scrubReveal";
+import { useForm, ValidationError } from "@formspree/react";
 import { FluidButton } from "@/components/ui/FluidButton";
+import { SITE_CONFIG } from "@/lib/constants";
+
+const fieldErrorClass = "mt-1 text-xs text-red-400";
 
 export function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  // Envio pelo Formspree (PEND-10): o handleSubmit faz o preventDefault e envia por fetch.
+  const [formState, handleSubmit] = useForm(SITE_CONFIG.formspree.formId);
 
   const needsOptions = [
     { id: "trafego", label: "Tráfego pago" },
@@ -56,11 +62,22 @@ export function ContactSection() {
           </p>
         </div>
 
-        {/* Formulário */}
+        {/* Formulário — sem JS, o action envia direto ao Formspree (PEND-10) */}
+        {formState.succeeded ? (
+          <div
+            role="status"
+            className="max-w-xl mx-auto bg-[#0f1221]/50 p-6 sm:p-10 rounded-2xl border border-white/5 shadow-2xl text-center"
+          >
+            <p className="text-white text-base sm:text-lg font-semibold mb-2">Mensagem enviada!</p>
+            <p className="text-white/75 text-sm sm:text-base font-light">
+              Recebemos seus dados e entraremos em contato em breve.
+            </p>
+          </div>
+        ) : (
         <form
-          action="/"
+          action={SITE_CONFIG.formspree.endpoint}
           method="POST"
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmit}
           className="max-w-xl mx-auto flex flex-col gap-6 bg-[#0f1221]/50 p-6 sm:p-10 rounded-2xl border border-white/5 shadow-2xl"
         >
           <div data-contact-field>
@@ -75,6 +92,7 @@ export function ContactSection() {
               placeholder="Seu nome completo"
               className="w-full py-3 px-1 bg-transparent border-b-2 border-[#a15cf5] text-white placeholder-white/40 focus:outline-none focus:border-[#ad7dff] transition-colors text-sm"
             />
+            <ValidationError field="name" prefix="Nome" errors={formState.errors} className={fieldErrorClass} />
           </div>
 
           <div data-contact-field>
@@ -89,6 +107,7 @@ export function ContactSection() {
               placeholder="(DDD) 99999-9999"
               className="w-full py-3 px-1 bg-transparent border-b-2 border-[#a15cf5] text-white placeholder-white/40 focus:outline-none focus:border-[#ad7dff] transition-colors text-sm"
             />
+            <ValidationError field="whatsapp" prefix="WhatsApp" errors={formState.errors} className={fieldErrorClass} />
           </div>
 
           <div data-contact-field>
@@ -103,6 +122,7 @@ export function ContactSection() {
               placeholder="Nome da sua empresa"
               className="w-full py-3 px-1 bg-transparent border-b-2 border-[#a15cf5] text-white placeholder-white/40 focus:outline-none focus:border-[#ad7dff] transition-colors text-sm"
             />
+            <ValidationError field="company" prefix="Empresa" errors={formState.errors} className={fieldErrorClass} />
           </div>
 
           <div data-contact-field className="pt-2">
@@ -125,7 +145,15 @@ export function ContactSection() {
                 </label>
               ))}
             </div>
+            <ValidationError field="need" prefix="Necessidade" errors={formState.errors} className={fieldErrorClass} />
           </div>
+
+          {/* Erro geral do envio (rede, formulário inválido no Formspree) */}
+          {formState.errors && formState.errors.getFormErrors().length > 0 && (
+            <p role="alert" className="text-sm text-red-400 text-center">
+              Não foi possível enviar agora. Tente novamente ou fale conosco pelo WhatsApp.
+            </p>
+          )}
 
           {/* Botão de Envio com FluidButton e Pulse Sutil */}
           <div data-contact-cta className="flex justify-center pt-4">
@@ -133,12 +161,15 @@ export function ContactSection() {
               type="submit"
               variant="primary"
               pulse
+              disabled={formState.submitting}
+              aria-busy={formState.submitting}
               className="px-10 py-4 text-base font-bold tracking-wide shadow-lg shadow-[#a15cf5]/20"
             >
-              Diagnóstico Gratuito
+              {formState.submitting ? "Enviando..." : "Diagnóstico Gratuito"}
             </FluidButton>
           </div>
         </form>
+        )}
       </div>
     </section>
   );

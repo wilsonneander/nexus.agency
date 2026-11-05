@@ -12,6 +12,11 @@ export const SITE_CONFIG = {
   },
   // E-mail institucional do cliente (PEND-11 RESOLVED em 2026-11-03)
   email: "contato@nexusagencybr.com.br",
+  // Formulário de contato (#contact) enviado pelo Formspree (PEND-10, 2026-11-05)
+  formspree: {
+    formId: "xpppnoer",
+    endpoint: "https://formspree.io/f/xpppnoer",
+  },
   // Canais do rodapé do cliente (PEND-09 resolvido para estes dois itens em 2026-11-03)
   serviceArea: "Atendimento em todo o Brasil, 100% online",
   businessHours: "Horário: segunda a sexta, das 9h às 18h",
