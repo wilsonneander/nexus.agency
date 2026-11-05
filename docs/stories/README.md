@@ -21,3 +21,4 @@ a partir de [`.claude/skills/story/TEMPLATE.md`](../../.claude/skills/story/TEMP
 | 7.3 | [Apontar os links do rodapé para a LP e remover o Blog](7-3-links-rodape-remover-blog.md) | Fase 7 |
 | 7.4 | [Incluir o e-mail institucional no rodapé](7-4-email-institucional-rodape.md) | Fase 7 |
 | 7.5 | [Coluna Canais no rodapé e remoção do texto institucional](7-5-coluna-canais-rodape.md) | Fase 7 |
+| 7.6 | [Enviar o formulário de contato pelo Formspree](7-6-formulario-formspree.md) | Fase 7 |

@@ -1,12 +1,13 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
 import { REVEAL_MEDIA, revealY, scrubReveal } from "@/animations/scrubReveal";
 import { useForm, ValidationError } from "@formspree/react";
 import { FluidButton } from "@/components/ui/FluidButton";
 import { SITE_CONFIG } from "@/lib/constants";
+import { formatPhoneBR } from "@/lib/utils";
 
 const fieldErrorClass = "mt-1 text-xs text-red-400";
 
@@ -15,6 +16,7 @@ export function ContactSection() {
   const reduced = useReducedMotion();
   // Envio pelo Formspree (PEND-10): o handleSubmit faz o preventDefault e envia por fetch.
   const [formState, handleSubmit] = useForm(SITE_CONFIG.formspree.formId);
+  const [whatsapp, setWhatsapp] = useState("");
 
   const needsOptions = [
     { id: "trafego", label: "Tráfego pago" },
@@ -104,6 +106,13 @@ export function ContactSection() {
               id="whatsapp"
               name="whatsapp"
               required
+              inputMode="tel"
+              autoComplete="tel-national"
+              // Sem JS a máscara não roda: também aceita só os dígitos (DDD + número).
+              pattern="\(\d{2}\) \d{4,5}-\d{4}|\d{10,11}"
+              title="Informe o DDD e o número, ex.: (61) 99999-9999"
+              value={whatsapp}
+              onChange={(e) => setWhatsapp(formatPhoneBR(e.target.value))}
               placeholder="(DDD) 99999-9999"
               className="w-full py-3 px-1 bg-transparent border-b-2 border-[#a15cf5] text-white placeholder-white/40 focus:outline-none focus:border-[#ad7dff] transition-colors text-sm"
             />

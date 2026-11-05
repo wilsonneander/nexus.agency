@@ -13,7 +13,7 @@
 - [x] Links externos abrem os destinos corretos em nova aba (target="_blank" rel="noopener noreferrer").
 - [x] Botões de WhatsApp mantêm telefone, mensagem e parâmetros configurados de forma centralizada.
 - [x] Botões de redes sociais permanecem inalterados e funcionais.
-- [x] Formulário estruturado com 4 campos do cliente e validação nativa de preenchimento.
+- [x] Formulário estruturado com 4 campos do cliente e validação nativa de preenchimento. Envio pelo Formspree e máscara do WhatsApp na [story 7.6](stories/7-6-formulario-formspree.md) ([contact_whatsapp_mask_1200.png](references/qa/contact_whatsapp_mask_1200.png)); envio real não exercitado.
 - [x] Links placeholder catalogados na auditoria de funcionalidades ([AUDIT.md § 12.3](AUDIT.md)). Após o `PEND-02` resta só "Politica e privacidade" (`href="#"`, aguarda `PEND-12`).
 
 ## 3. Animações e scroll
