@@ -6,7 +6,7 @@ baseline_commit: 3a87d8651cce981791692b61f5c127889090347e
 
 |                 |                                                                                         |
 | --------------- | --------------------------------------------------------------------------------------- |
-| **Status**      | IN_PROGRESS                                                                             |
+| **Status**      | DONE                                                                                    |
 | **Fase**        | Fase 8 — Leveza, SEO e deploy no Cloudflare Pages                                       |
 | **Área**        | performance/SEO                                                                         |
 | **Seções**      | global                                                                                  |
@@ -74,7 +74,7 @@ No HTML de `/` gerado pelo build, `link[rel=canonical]`, `og:url`, `og:image` e 
 - [x] Trocar `SITE_CONFIG.url` (AC #1)
 - [x] `robots.ts` e `sitemap.ts` lendo `SITE_CONFIG.url` (AC #2, AC #3)
 - [x] Validar build e saída gerada (AC #4)
-- [ ] Revisão (`review-mr`) e commit
+- [x] Revisão (`review-mr`) e commit
 
 ## Validações exigidas
 
@@ -95,10 +95,10 @@ No HTML de `/` gerado pelo build, `link[rel=canonical]`, `og:url`, `og:image` e 
 - [x] `npx tsc --noEmit` verde.
 - [x] `npm run build` verde, sem warning de hidratação/SSR.
 - [x] Validação visual: não se aplica (sem mudança visual).
-- [ ] Itens tocados do `QA-CHECKLIST.md` (§ 7) atualizados com a evidência.
+- [x] Itens tocados do `QA-CHECKLIST.md` (§ 7) atualizados com a evidência.
 - [x] `PEND-xx` consumido: nenhum (decisão registrada aqui e na revisão).
 - [x] Docs afetados: [CODE-REVIEW-2026-11-05.md](../CODE-REVIEW-2026-11-05.md) § 1.3 marcado como resolvido.
-- [ ] Status movido na story **e** no `TASKS.md`, com a validação carimbada (comando + SHA) no Change Log.
+- [x] Status movido na story **e** no `TASKS.md`, com a validação carimbada (comando + SHA) no Change Log.
 
 ## Execução
 
@@ -112,3 +112,4 @@ No HTML de `/` gerado pelo build, `link[rel=canonical]`, `og:url`, `og:image` e 
 | --- | --- | --- |
 | 2026-11-05 | IN_PROGRESS | Story criada sobre `3a87d86`, com a mudança já aplicada na árvore de trabalho. |
 | 2026-11-05 | IN_PROGRESS | Validado na árvore de trabalho sobre `3a87d86`: `npx tsc --noEmit` ok; `npm run build` ok (`/` 187 kB First Load JS); canonical e `og:url` = `https://nexusagencybr.com.br`; `robots.txt` e `sitemap.xml` no domínio novo; `grep nexusagency.com.br src` vazio. Falta review e commit. |
+| 2026-11-05 | DONE | Código commitado em `77cacf6`. Revalidado sobre o mesmo conteúdo: `npx tsc --noEmit` ok; `npm run build` ok (`/` 187 kB First Load JS); no `.next/server/app/index.html`, canonical, `og:url`, `og:image` e `twitter:image` em `https://nexusagencybr.com.br`; `robots.txt.body` com `Sitemap: https://nexusagencybr.com.br/sitemap.xml`; `sitemap.xml.body` com `<loc>https://nexusagencybr.com.br</loc>`; `grep -rn "nexusagency\.com\.br" src` vazio. Review: diff de 3 arquivos, sem achados; nada visual, nada do § 9 tocado. QA-CHECKLIST § 7 atualizado. |

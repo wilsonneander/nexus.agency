@@ -2,21 +2,20 @@
 
 ## ▶ Ordem de implementação
 
-> **Atualizada em:** 2026-11-05, na criação das stories da [revisão de código](CODE-REVIEW-2026-11-05.md) (sobre `3a87d86`). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9 e ao deploy) depois.
+> **Atualizada em:** 2026-11-05, no fechamento da 8.1 (sobre `77cacf6`; stories da [revisão de código](CODE-REVIEW-2026-11-05.md)). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9 e ao deploy) depois.
 
-**Próxima tarefa: 8.1 — Domínio oficial** (`IN_PROGRESS`, [story](stories/8-1-dominio-oficial.md)): já aplicada e validada; falta review e commit. Em seguida, **8.2 — Deploy estático no Cloudflare Pages**.
+**Próxima tarefa: 8.2 — Deploy estático no Cloudflare Pages** ([story](stories/8-2-deploy-estatico-cloudflare-pages.md)); a 8.1 (domínio oficial) está `DONE`. Em seguida, **4.5 — Teclado, foco e semântica**.
 Por quê nesta ordem: o site vai para o Cloudflare Pages (`PEND-06` resolvido), e hoje o build não é publicável lá; o domínio e o export destravam o deploy. A acessibilidade (4.5) vem logo depois por ser o maior risco restante da Fase 4.
 
 | # | Tarefa | Depende de | Status | Por que nesta posição |
 |---|---|---|---|---|
-| 1 | **8.1** [Domínio oficial](stories/8-1-dominio-oficial.md) | — | `IN_PROGRESS` | Já implementada e validada; só falta fechar. |
-| 2 | **8.2** [Deploy estático no Cloudflare Pages](stories/8-2-deploy-estatico-cloudflare-pages.md) | 8.1 | `TODO` | Sem ela não há deploy; também tira ~3,5 MB de imagens. |
-| 3 | **4.5** [Teclado, foco e semântica](stories/4-5-teclado-foco-semantica.md) | — | `TODO` | Nenhum CTA tem foco visível hoje; maior risco de a11y. |
-| 4 | **8.4** [Metadados e dados estruturados](stories/8-4-metadados-dados-estruturados.md) | 8.1; `PEND-19` só no AC #4 | `TODO` | SEO; o grosso independe de decisão. |
-| 5 | **6.9** [Remover código não usado](stories/6-9-remover-codigo-nao-usado.md) | — | `TODO` | Limpeza sem risco; precisa vir antes da 8.5. |
-| 6 | **4.8** [Piscar do Hero na hidratação](stories/4-8-piscar-hero-hidratacao.md) | — | `TODO` | Só o Hero; independe das outras. |
-| 7 | **8.5** [Simplificar motion e estilos](stories/8-5-simplificar-motion-estilos.md) | 6.9 | `TODO` | Refactor grande; vem depois da limpeza e da 4.8 (ambas tocam motion). |
-| 8 | **4.6** Contraste em todos os estados animados | 4.2 (`DONE`) | `TODO` | Sem story. Inclui o achado 2.8 da revisão (`ScrollText` em 22% reprova contraste no Lighthouse); mudar o tom do FR-03 exige decisão. |
+| 1 | **8.2** [Deploy estático no Cloudflare Pages](stories/8-2-deploy-estatico-cloudflare-pages.md) | 8.1 (`DONE`) | `TODO` | Sem ela não há deploy; também tira ~3,5 MB de imagens. |
+| 2 | **4.5** [Teclado, foco e semântica](stories/4-5-teclado-foco-semantica.md) | — | `TODO` | Nenhum CTA tem foco visível hoje; maior risco de a11y. |
+| 3 | **8.4** [Metadados e dados estruturados](stories/8-4-metadados-dados-estruturados.md) | 8.1 (`DONE`); `PEND-19` só no AC #4 | `TODO` | SEO; o grosso independe de decisão. |
+| 4 | **6.9** [Remover código não usado](stories/6-9-remover-codigo-nao-usado.md) | — | `TODO` | Limpeza sem risco; precisa vir antes da 8.5. |
+| 5 | **4.8** [Piscar do Hero na hidratação](stories/4-8-piscar-hero-hidratacao.md) | — | `TODO` | Só o Hero; independe das outras. |
+| 6 | **8.5** [Simplificar motion e estilos](stories/8-5-simplificar-motion-estilos.md) | 6.9 | `TODO` | Refactor grande; vem depois da limpeza e da 4.8 (ambas tocam motion). |
+| 7 | **4.6** Contraste em todos os estados animados | 4.2 (`DONE`) | `TODO` | Sem story. Inclui o achado 2.8 da revisão (`ScrollText` em 22% reprova contraste no Lighthouse); mudar o tom do FR-03 exige decisão. |
 
 **Fora da fila (aguardam decisão do responsável, não implementar):** `PEND-13` pulso do WhatsApp e rotação dos ícones sociais com reduced motion, `PEND-09` colchetes restantes, `PEND-12` LGPD, `PEND-17` textos do formulário, `PEND-18` ícones em SVG ([8.3](stories/8-3-icones-svg.md) `BLOCKED`), `PEND-19` textos de SEO e ajustes de texto/regra. ESLint (1.8) depende de aprovação de dependências novas. Quando um desses for resolvido, a tarefa resultante entra na tabela acima na posição devida.
 
@@ -171,7 +170,7 @@ Mudanças de design pedidas pelo responsável depois da entrega. Cada uma depend
 
 Achados da [revisão de código de 2026-11-05](CODE-REVIEW-2026-11-05.md) para publicar o site no Cloudflare Pages (`PEND-06`), leve e completo em SEO. Sem mudança visual, salvo o que um `PEND-xx` autorizar. Os achados de acessibilidade e limpeza foram para tarefas já existentes ([4.5](stories/4-5-teclado-foco-semantica.md), [4.8](stories/4-8-piscar-hero-hidratacao.md), [6.9](stories/6-9-remover-codigo-nao-usado.md), 4.6).
 
-- [ ] 8.1 Apontar canonical, OpenGraph, robots e sitemap para o domínio oficial. (Status: IN_PROGRESS | Story: [8-1-dominio-oficial.md](stories/8-1-dominio-oficial.md) | `nexusagencybr.com.br` confirmado pelo responsável em 2026-11-05; aplicado e validado (`tsc` e build ok, saída conferida); falta review e commit)
+- [x] 8.1 Apontar canonical, OpenGraph, robots e sitemap para o domínio oficial. (Status: DONE | Story: [8-1-dominio-oficial.md](stories/8-1-dominio-oficial.md) | `nexusagencybr.com.br` confirmado pelo responsável em 2026-11-05; `SITE_CONFIG.url` como fonte única; `tsc` e build ok em `77cacf6`, canonical/OG/robots/sitemap conferidos no build)
 - [ ] 8.2 Publicar o site como estático no Cloudflare Pages. (Status: TODO | Story: [8-2-deploy-estatico-cloudflare-pages.md](stories/8-2-deploy-estatico-cloudflare-pages.md) | `output: "export"`, imagens dos Projetos pré-otimizadas, `_headers`, `_gotcha`)
 - [ ] 8.3 Trocar as fontes de ícones de CDN por SVG inline. (Status: BLOCKED | Story: [8-3-icones-svg.md](stories/8-3-icones-svg.md) | Aguarda `PEND-18`)
 - [ ] 8.4 Completar metadados de compartilhamento e dados estruturados. (Status: TODO | Story: [8-4-metadados-dados-estruturados.md](stories/8-4-metadados-dados-estruturados.md) | JSON-LD, OG coerente, ícones; título/descrição/imagem OG aguardam `PEND-19`)
