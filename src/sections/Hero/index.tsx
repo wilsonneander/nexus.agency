@@ -47,7 +47,7 @@ export function HeroSection() {
 
             {/* ScrollText — Leitura progressiva do parágrafo hero */}
             <ScrollText
-              className="max-w-2xl mx-auto text-white/80 text-sm sm:text-base leading-relaxed text-center font-light"
+              className="max-w-2xl mx-auto text-white/80 text-sm sm:text-base leading-relaxed text-center"
               start="top 78%"
               end="bottom 20%"
               scrub={1.5}

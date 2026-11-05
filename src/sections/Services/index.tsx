@@ -30,7 +30,7 @@ export function ServicesSection() {
           {/* ScrollText no subtítulo */}
           <ScrollText
             as="p"
-            className="text-white/75 text-sm sm:text-base leading-relaxed font-light"
+            className="text-white/75 text-sm sm:text-base leading-relaxed"
             start="top 78%"
             end="bottom 30%"
             scrub={1.3}
@@ -60,7 +60,7 @@ export function ServicesSection() {
                 <h3 className="text-xl font-semibold text-white text-center mb-4 mt-2">
                   {service.title}
                 </h3>
-                <p className="text-white/75 text-xs sm:text-sm leading-relaxed font-light mb-6 text-center">
+                <p className="text-white/75 text-xs sm:text-sm leading-relaxed mb-6 text-center">
                   {service.description}
                 </p>
 
@@ -70,7 +70,7 @@ export function ServicesSection() {
                     {service.benefits.map((benefit, i) => (
                       <li
                         key={i}
-                        className="flex items-start gap-2.5 text-xs sm:text-sm text-white/80 font-light"
+                        className="flex items-start gap-2.5 text-xs sm:text-sm text-white/80"
                       >
                         <i className="fa-solid fa-check text-[#a15cf5] text-xs mt-1 flex-shrink-0" />
                         <span>{benefit}</span>
@@ -92,7 +92,7 @@ export function ServicesSection() {
             <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-4">
               Pacotes para o seu Momento
             </h3>
-            <p className="text-white/70 text-sm font-light">
+            <p className="text-white/70 text-sm">
               Escolha a estrutura ideal para transformar o investimento em resultados reais e mensuráveis.
             </p>
           </div>
@@ -115,7 +115,7 @@ export function ServicesSection() {
                   )}
                   <h4 className="text-2xl font-bold text-white mb-2">{pkg.name}</h4>
                   <p className="text-sm font-medium text-[#ad7dff] mb-4">{pkg.includes}</p>
-                  <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-light mb-8">
+                  <p className="text-xs sm:text-sm text-white/70 leading-relaxed mb-8">
                     <span className="font-semibold text-white">Para quem é: </span>
                     {pkg.targetAudience}
                   </p>

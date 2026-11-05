@@ -2,7 +2,7 @@
 
 ## ▶ Ordem de implementação
 
-> **Atualizada em:** 2026-11-05, com a story da 8.4 validada sobre `d7214b1` (AC de título/descrição/imagem OG desmembrado para a nova 8.8, `PEND-19`); antes, com a story da 8.6 escrita e validada sobre `d7214b1` (e o `PEND-20`, domínio); antes, no fechamento da 8.2 (sobre `b05d958`), com as tarefas novas 8.6 e 8.7 (CSP). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9 e ao deploy) depois.
+> **Atualizada em:** 2026-11-05, no fechamento da 6.9 (sobre `4425108`); antes, com a story da 8.4 validada sobre `d7214b1` (AC de título/descrição/imagem OG desmembrado para a nova 8.8, `PEND-19`); antes, com a story da 8.6 escrita e validada sobre `d7214b1` (e o `PEND-20`, domínio); antes, no fechamento da 8.2 (sobre `b05d958`), com as tarefas novas 8.6 e 8.7 (CSP). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9 e ao deploy) depois.
 
 **Próxima tarefa: 4.5 — Teclado, foco e semântica** ([story](stories/4-5-teclado-foco-semantica.md)). Em paralelo, com o responsável: **8.6 — conferir o primeiro deploy no Pages** ([story](stories/8-6-conferir-primeiro-deploy-pages.md); operação no painel + `curl`, não é código).
 Por quê nesta ordem: o export estático (8.2) e o domínio (8.1) estão `DONE`, o build já é publicável no Pages; falta só conferir no ar (8.6). A acessibilidade (4.5) é o maior risco restante da Fase 4.
@@ -12,11 +12,10 @@ Por quê nesta ordem: o export estático (8.2) e o domínio (8.1) estão `DONE`,
 | 1 | **8.6** [Conferir o primeiro deploy no Pages](stories/8-6-conferir-primeiro-deploy-pages.md) | 8.2 (`DONE`); projeto criado no painel pelo responsável | `TODO` | Responsável cria o projeto e informa a URL `<projeto>.pages.dev` (em `d7214b1` não há deploy do repositório; `nexus-agency.pages.dev` é outro site). Depois: `curl` de conteúdo/cabeçalhos/cache, console e envio real ao Formspree. Domínio no `PEND-20`. |
 | 2 | **4.5** [Teclado, foco e semântica](stories/4-5-teclado-foco-semantica.md) | — | `TODO` | Nenhum CTA tem foco visível hoje; maior risco de a11y. |
 | 3 | **8.4** [Metadados e dados estruturados](stories/8-4-metadados-dados-estruturados.md) | 8.1, 8.2 (`DONE`) | `TODO` | SEO; independe de decisão (a parte do `PEND-19` foi para a 8.8). |
-| 4 | **6.9** [Remover código não usado](stories/6-9-remover-codigo-nao-usado.md) | — | `TODO` | Limpeza sem risco; precisa vir antes da 8.5. |
-| 5 | **4.8** [Piscar do Hero na hidratação](stories/4-8-piscar-hero-hidratacao.md) | — | `TODO` | Só o Hero; independe das outras. |
-| 6 | **8.5** [Simplificar motion e estilos](stories/8-5-simplificar-motion-estilos.md) | 6.9 | `TODO` | Refactor grande; vem depois da limpeza e da 4.8 (ambas tocam motion). |
-| 7 | **4.6** Contraste em todos os estados animados | 4.2 (`DONE`) | `TODO` | Sem story. Inclui o achado 2.8 da revisão (`ScrollText` em 22% reprova contraste no Lighthouse); mudar o tom do FR-03 exige decisão. |
-| 8 | **8.7** Content-Security-Policy no `_headers` | 8.3 (`BLOCKED`, `PEND-18`) | `TODO` | Sem story. Cortada da 8.2: o Next exporta scripts inline e as CDNs de ícones ainda estão em uso; uma CSP útil precisa de hashes ou de esperar a 8.3. Testar no preview antes da `main`. |
+| 4 | **4.8** [Piscar do Hero na hidratação](stories/4-8-piscar-hero-hidratacao.md) | — | `TODO` | Só o Hero; independe das outras. |
+| 5 | **8.5** [Simplificar motion e estilos](stories/8-5-simplificar-motion-estilos.md) | 6.9 (`DONE`) | `TODO` | Refactor grande; vem depois da 4.8 (ambas tocam motion). |
+| 6 | **4.6** Contraste em todos os estados animados | 4.2 (`DONE`) | `TODO` | Sem story. Inclui o achado 2.8 da revisão (`ScrollText` em 22% reprova contraste no Lighthouse); mudar o tom do FR-03 exige decisão. |
+| 7 | **8.7** Content-Security-Policy no `_headers` | 8.3 (`BLOCKED`, `PEND-18`) | `TODO` | Sem story. Cortada da 8.2: o Next exporta scripts inline e as CDNs de ícones ainda estão em uso; uma CSP útil precisa de hashes ou de esperar a 8.3. Testar no preview antes da `main`. |
 
 **Fora da fila (aguardam decisão do responsável, não implementar):** `PEND-13` pulso do WhatsApp e rotação dos ícones sociais com reduced motion, `PEND-09` colchetes restantes, `PEND-12` LGPD, `PEND-17` textos do formulário, `PEND-18` ícones em SVG ([8.3](stories/8-3-icones-svg.md) `BLOCKED`), `PEND-19` textos de SEO e ajustes de texto/regra (8.8 — título, descrição e imagem OG), `PEND-20` registro/DNS do domínio. ESLint (1.8) depende de aprovação de dependências novas. Quando um desses for resolvido, a tarefa resultante entra na tabela acima na posição devida.
 
@@ -151,7 +150,7 @@ Status permitidos: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`.
 - [x] 6.6 Executar lint, testes disponíveis e build de produção. (Status: DONE | Build limpo, exit code 0; sem testes automatizados e sem lint configurado — ver 1.8)
 - [x] 6.7 Corrigir erros e regressões. (Status: DONE | Padronização Fluid Button dos botões de contato e filtros concluída)
 - [x] 6.8 Registrar resumo de entrega e limitações conhecidas. (Status: DONE | Relatório final apresentado)
-- [ ] 6.9 Remover código de motion/About não usado. (Status: TODO | Story: [6-9-remover-codigo-nao-usado.md](stories/6-9-remover-codigo-nao-usado.md) | Achado da [4.4](stories/4-4-conteudo-sem-javascript.md), ampliado com a [revisão](CODE-REVIEW-2026-11-05.md) § 3: componentes, presets, tipos, `@gsap/react`, assets, `font-light` e scripts com caminho do Windows sem uso)
+- [x] 6.9 Remover código de motion/About não usado. (Status: DONE | Story: [6-9-remover-codigo-nao-usado.md](stories/6-9-remover-codigo-nao-usado.md) | Componentes, presets, tipos, `@gsap/react`, `font-light` e scripts pontuais removidos; métrica lida de `ABOUT_DATA.metric`; scripts com `CHROME_PATH`; `tsc`, build (187 kB), `check_ids` e capturas sem diferença sobre `4425108`)
 
 **Critério de saída:** checklist aprovado, build concluído e nenhuma regressão crítica conhecida. [ATENDIDO]
 

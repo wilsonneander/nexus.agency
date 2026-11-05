@@ -4,7 +4,7 @@
  * AboutClient — Wrapper client-side para animações da seção Sobre Nós.
  *
  * Animações (story 4.2): parágrafos, destaque, Missão/Visão e os 6 Valores entram
- * atrelados ao scroll, um trigger por elemento; o contador "+50" dispara uma vez.
+ * atrelados ao scroll, um trigger por elemento; o contador da métrica dispara uma vez.
  */
 
 import { useRef, useEffect, ReactNode } from "react";
@@ -28,16 +28,18 @@ export function AboutClient({ children }: AboutClientProps) {
     gsap.registerPlugin(ScrollTrigger);
 
     // O contador escreve textContent no onUpdate, que o ctx.revert() não desfaz:
-    // guarda o texto do servidor ("50") para restaurar na limpeza (story 4.3).
+    // guarda o texto do servidor (ABOUT_DATA.metric.value) para restaurar na limpeza
+    // (story 4.3) e usa o mesmo número como destino (story 6.9).
     const metricEl = sectionRef.current.querySelector("[data-about-metric-number]");
     const metricText = metricEl?.textContent ?? null;
+    const metricTarget = Number(metricText);
 
     const ctx = gsap.context(() => {
-      // Métrica +50 — counter
-      if (metricEl) {
+      // Contador da métrica
+      if (metricEl && Number.isFinite(metricTarget)) {
         const counter = { val: 0 };
         gsap.to(counter, {
-          val: 50,
+          val: metricTarget,
           duration: 1.4,
           ease: "power2.out",
           onUpdate: () => {
@@ -53,7 +55,6 @@ export function AboutClient({ children }: AboutClientProps) {
       }
     }, sectionRef);
 
-    // A ilustração [data-about-image] não existe na página (achado da 4.1, limpeza na 6.9).
     const mm = gsap.matchMedia();
     mm.add(
       REVEAL_MEDIA,

@@ -64,9 +64,9 @@ As regras completas e inegociáveis estão em [AGENTS.md](AGENTS.md) — leia an
 │   ├── sections/       # Hero, About, Banners, Projects, Services, Contact
 │   ├── components/
 │   │   ├── layout/     # Navbar, Footer
-│   │   ├── motion/     # ScrollText, ScrollReveal, ParallaxImage
-│   │   └── ui/         # Button, FluidButton, RollingText, SocialIcons, WhatsAppFloat
-│   ├── animations/     # gsap.client.ts (registro de plugins), presets.ts (timings/easings)
+│   │   ├── motion/     # ScrollText
+│   │   └── ui/         # FluidButton, RollingText, SocialIcons, WhatsAppFloat
+│   ├── animations/     # presets.ts (timings/easings, MOTION_MEDIA), scrubReveal.ts (reveals)
 │   ├── data/           # conteúdo tipado (about, packages, projects, services)
 │   ├── hooks/          # useReducedMotion
 │   ├── lib/            # constants.ts (SITE_CONFIG), utils.ts (cn)
@@ -93,8 +93,6 @@ Componentes em `src/components/motion/`:
 | Componente | Uso |
 |---|---|
 | `ScrollText` | Leitura progressiva (FR-03): divide o texto em palavras e anima a cor de muted → branco com `scrub`, reversível. Somente nos textos aprovados: parágrafo do Hero, título + 1º parágrafo do About, título + subtítulo de Services. Nunca inicia invisível. |
-| `ScrollReveal` | Reveals genéricos de entrada. |
-| `ParallaxImage` | Parallax de imagens. |
 
 Toda animação deve:
 
@@ -114,7 +112,7 @@ Toda animação deve:
 
 ## Validação e QA
 
-A validação visual usa scripts em `scripts/` que chamam o Chrome headless (caminhos absolutos do Windows) contra o dev server na porta **3008**:
+A validação visual usa scripts em `scripts/` que chamam o Chrome headless (caminho padrão do sistema; sobrescreva com a variável `CHROME_PATH`, ver [scripts/chrome-path.js](scripts/chrome-path.js)) contra o dev server na porta **3008**:
 
 ```bash
 npx next dev -p 3008
@@ -127,9 +125,7 @@ node scripts/check_ids.js          # verifica âncoras/IDs
 | `capture_sections.js` | Captura cada seção |
 | `capture_screenshots.js` | Capturas de página inteira |
 | `capture_scroll.js` | Estados de animação ao longo do scroll |
-| `capture_validation.js` | Capturas para validação de tarefas |
-| `capture_fluid.js` | Botões fluidos |
-| `capture_mvv.js` | Missão, Visão e Valores |
+| `capture_nojs.js` | Página inteira sem JS (ou com JS, `JS=1`) em vários viewports |
 | `check_ids.js` | Âncoras e IDs vs. navegação |
 
 As imagens vão para uma pasta temporária fora do repositório (`OUT_DIR`, padrão `<tmp>/nexus-qa`) e nunca são commitadas. O plano de testes e os critérios de aceite estão em [docs/QA-CHECKLIST.md](docs/QA-CHECKLIST.md).

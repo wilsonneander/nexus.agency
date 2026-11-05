@@ -1,8 +1,7 @@
 import { ABOUT_DATA } from "@/data/about";
-import { SocialIcons, SocialAboutIcons } from "@/components/ui/SocialIcons";
+import { SocialIcons } from "@/components/ui/SocialIcons";
 import { AboutClient } from "./AboutClient";
 import { ScrollText } from "@/components/motion/ScrollText";
-import { ParallaxImage } from "@/components/motion/ParallaxImage";
 
 
 export function AboutSection() {
@@ -33,7 +32,7 @@ export function AboutSection() {
               </ScrollText>
             </div>
 
-            <div className="space-y-4 text-white/80 text-sm sm:text-base leading-relaxed font-light">
+            <div className="space-y-4 text-white/80 text-sm sm:text-base leading-relaxed">
               {/* Primeiro parágrafo com ScrollText */}
               <ScrollText
                 as="p"
@@ -56,11 +55,11 @@ export function AboutSection() {
               <p className="text-white/70 text-sm">{ABOUT_DATA.paragraphs[4]}</p>
             </div>
 
-            {/* Métrica +50 — B3: número em span separado para não quebrar bg-clip-text */}
+            {/* Métrica — B3: número em span separado para não quebrar bg-clip-text */}
             <div className="glass-card flex items-center gap-6 p-4 rounded-2xl">
               <div className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#a15cf5] to-white">
-                <span data-about-metric-value>+</span>
-                <span data-about-metric-number>50</span>
+                <span data-about-metric-value>{ABOUT_DATA.metric.prefix}</span>
+                <span data-about-metric-number>{ABOUT_DATA.metric.value}</span>
               </div>
               <div>
                 <p className="text-base font-semibold text-white uppercase tracking-wide">
@@ -74,7 +73,7 @@ export function AboutSection() {
 
             {/* Redes Sociais */}
             <div className="flex items-center gap-4 pt-2">
-              <SocialAboutIcons variant="about" className="flex-row" />
+              <SocialIcons variant="footer" className="flex-row" />
             </div>
           </div>
         </div>
@@ -89,7 +88,7 @@ export function AboutSection() {
               <i className="fa-solid fa-bullseye" />
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">Nossa Missão</h3>
-            <p className="text-white/75 text-sm leading-relaxed font-light">
+            <p className="text-white/75 text-sm leading-relaxed">
               {ABOUT_DATA.mission}
             </p>
           </div>
@@ -102,7 +101,7 @@ export function AboutSection() {
               <i className="fa-solid fa-eye" />
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">Nossa Visão</h3>
-            <p className="text-white/75 text-sm leading-relaxed font-light">
+            <p className="text-white/75 text-sm leading-relaxed">
               {ABOUT_DATA.vision}
             </p>
           </div>
@@ -127,7 +126,7 @@ export function AboutSection() {
                   <h4 className="text-base font-semibold text-white mb-2">
                     {val.title}
                   </h4>
-                  <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-light">
+                  <p className="text-white/70 text-xs sm:text-sm leading-relaxed">
                     {val.description}
                   </p>
                 </div>

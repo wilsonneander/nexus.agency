@@ -58,7 +58,7 @@ export function ContactSection() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-4">
             Vamos conversar sobre o seu crescimento?
           </h2>
-          <p className="text-white/75 text-sm sm:text-base leading-relaxed font-light">
+          <p className="text-white/75 text-sm sm:text-base leading-relaxed">
             Conte um pouco sobre o seu negócio. Nossa equipe responde com um diagnóstico inicial e os
             próximos passos, sem compromisso.
           </p>
@@ -71,7 +71,7 @@ export function ContactSection() {
             className="max-w-xl mx-auto bg-[#0f1221]/50 p-6 sm:p-10 rounded-2xl border border-white/5 shadow-2xl text-center"
           >
             <p className="text-white text-base sm:text-lg font-semibold mb-2">Mensagem enviada!</p>
-            <p className="text-white/75 text-sm sm:text-base font-light">
+            <p className="text-white/75 text-sm sm:text-base">
               Recebemos seus dados e entraremos em contato em breve.
             </p>
           </div>

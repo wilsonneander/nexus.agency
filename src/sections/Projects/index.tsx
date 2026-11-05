@@ -28,7 +28,6 @@ import { MOTION_PRESETS } from "@/animations/presets";
 export function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>("all");
   const gridRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
   const revealRef = useRef<gsap.MatchMedia | null>(null);
 
@@ -146,7 +145,7 @@ export function ProjectsSection() {
   );
 
   return (
-    <section ref={sectionRef} id="project" className="py-24 bg-[#04091d]">
+    <section id="project" className="py-24 bg-[#04091d]">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-center text-white mb-10">
           Criação e Desenvolvimento

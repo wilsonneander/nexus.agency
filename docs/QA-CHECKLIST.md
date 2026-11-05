@@ -28,7 +28,7 @@
 - [x] Palavras e pontuação não piscam nem saltam. (Validado: regex `(\s+)` preserva espaços e tokens literais)
 - [x] Textos multilinha e com acentos funcionam. (Validado com texto em português institucional)
 - [x] Transições não causam sobreposição ou corte. (Validado: overflow controlado e espaçamentos preservados)
-- [x] Imagens mantêm proporção durante os reveals. (Validado: ParallaxImage com dimensões e aspect ratio)
+- [x] Imagens mantêm proporção durante os reveals. (Validado: imagens com `width`/`height` no `next/image`; o `ParallaxImage` foi removido sem uso na [6.9](stories/6-9-remover-codigo-nao-usado.md))
 - [x] Não há pins desnecessários ou scroll bloqueado. (Validado: zero `pin` na aplicação)
 - [x] Não existem ScrollTriggers duplicados após navegação/re-render. (Validado: uso estrito de `ctx.revert()` e cancelamento de tweens)
 - [x] Resize e refresh não quebram as posições. (Validado: `invalidateOnRefresh: true` em todos os triggers)

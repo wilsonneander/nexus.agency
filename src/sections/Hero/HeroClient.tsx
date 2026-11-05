@@ -18,8 +18,6 @@ import { MOTION_MEDIA } from "@/animations/presets";
 
 interface HeroClientProps {
   children: ReactNode;
-  /** Callback ref que o Hero/index.tsx passa para o <section> interno */
-  sectionRef?: React.RefObject<HTMLElement | null>;
 }
 
 export function HeroClient({ children }: HeroClientProps) {

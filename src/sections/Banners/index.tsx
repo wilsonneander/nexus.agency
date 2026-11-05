@@ -43,7 +43,7 @@ export function BannersSection() {
               </div>
               <div className="min-w-0">
                 <h4 className="text-lg font-semibold text-white mb-2">{card.title}</h4>
-                <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-light">
+                <p className="text-white/70 text-xs sm:text-sm leading-relaxed">
                   {card.description}
                 </p>
               </div>

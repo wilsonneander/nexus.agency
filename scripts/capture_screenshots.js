@@ -3,7 +3,7 @@ const PORT = process.env.PORT || 3008;
 const { execSync } = require('child_process');
 const path = require('path');
 
-const chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+const chromePath = require('./chrome-path');
 const vps = [
   { name: 'mobile_375.png', w: 375, h: 812 },
   { name: 'mobile_480.png', w: 480, h: 854 },

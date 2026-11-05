@@ -25,7 +25,7 @@ const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
 
-const chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+const chromePath = require('./chrome-path');
 const targetDir =
   process.env.OUT_DIR || fs.mkdtempSync(path.join(os.tmpdir(), 'nexus-qa-'));
 const url = `http://localhost:${PORT}/`;

@@ -35,25 +35,21 @@ nexus/
 │   │   │   ├── Footer.tsx        # Rodapé com 3 colunas e links institucionais
 │   │   │   └── FooterClient.tsx  # Wrapper animado do rodapé
 │   │   ├── ui/
-│   │   │   ├── Button.tsx        # Botão com gradiente roxo padrão
 │   │   │   ├── SocialIcons.tsx   # Ícones com rotação 3D inalterável (Header, About, Footer)
 │   │   │   └── WhatsAppFloat.tsx # Botão flutuante WhatsApp (WaveWhatsApp + GSAP spring)
 │   │   └── motion/
-│   │       ├── ScrollText.tsx    # Leitura progressiva bidirecional (GSAP scrub)
-│   │       ├── ScrollReveal.tsx  # Revelações e transições escalonadas
-│   │       └── ParallaxImage.tsx # Paralaxe suave vertical com next/image
+│   │       └── ScrollText.tsx    # Leitura progressiva bidirecional (GSAP scrub)
 │   │
 │   ├── sections/
 │   │   ├── Hero/                 # Dobra de entrada (#home) com HeroClient e ScrollText
-│   │   ├── About/                # Seção Sobre nós (#about) com AboutClient, Parallax e Métrica
+│   │   ├── About/                # Seção Sobre nós (#about) com AboutClient e Métrica
 │   │   ├── Banners/              # Banner horizontal de diferenciais (BannersClient)
 │   │   ├── Projects/             # Grid de portfólio (#project) com GSAP Flip
 │   │   ├── Services/             # Grid de 6 serviços (#service) + 3 Pacotes com ServicesClient
 │   │   └── Contact/              # Formulário (#contact) com validação e animações
 │   │
 │   ├── animations/
-│   │   ├── gsap.client.ts        # Registro e configuração do GSAP e ScrollTrigger
-│   │   ├── presets.ts            # Presets de stagger, timelines e easing; MOTION_MEDIA
+│   │   ├── presets.ts            # Easings, scrubReveal, menu, filtro; MOTION_MEDIA
 │   │   └── scrubReveal.ts        # Entrada por elemento atrelada ao scroll (story 4.2)
 │   │
 │   ├── hooks/

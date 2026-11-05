@@ -1,15 +1,8 @@
-export type NavItem = {
-  label: string;
-  href: string;
-};
-
 export type ProjectCategory = "all" | ".web" | ".game" | ".design";
 
 export type ProjectItem = {
   id: string;
-  title: string;
   category: ProjectCategory;
-  categoryLabel: string;
   image: string;
   alt: string;
 };
@@ -28,11 +21,4 @@ export type CommercialPackage = {
   includes: string;
   targetAudience: string;
   highlight?: boolean;
-};
-
-export type SocialLink = {
-  platform: "instagram" | "linkedin" | "facebook";
-  url: string;
-  iconClass: string;
-  label: string;
 };

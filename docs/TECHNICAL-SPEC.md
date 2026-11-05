@@ -8,7 +8,6 @@
 - TypeScript: `5.9.3`
 - Tailwind CSS: `3.4.19` (com PostCSS `8.5.32` e Autoprefixer `10.6.2`)
 - GSAP: `3.12.7` (com ScrollTrigger e Flip)
-- `@gsap/react`: `2.1.2` (totalmente compatível com React 19)
 - SEO & Metadata: Next.js Metadata API com OpenGraph, Twitter, canonical, `robots.ts` e `sitemap.ts`.
 - Lenis: Avaliado e descartado para a versão inicial (mantido `scroll-behavior: smooth` nativo).
 

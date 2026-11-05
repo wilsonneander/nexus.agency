@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Implementa uma story ou qualquer mudança no site Nexus Agency já no padrão do projeto — reaproveitando a seção Server + wrapper Client, os componentes de motion (ScrollText, ScrollReveal, ParallaxImage), os botões Fluid, os presets e os dados em src/data, preservando a fidelidade ao site legado e as restrições do AGENTS.md, e escrevendo desde a primeira linha o que o review-mr vai cobrar. Decide sozinho pelo precedente e só pergunta o que é decisão de negócio, conteúdo, identidade ou escopo. Use SEMPRE que for pedido para implementar, desenvolver, construir, codar, fazer ou corrigir algo. Gatilhos - "implementa a 4.1", "pode implementar essa story", "faz a seção X", "anima o bloco Y", "ajusta o mobile do Hero", "corrige esse bug", "começa a tarefa", "faz isso funcionar".
+description: Implementa uma story ou qualquer mudança no site Nexus Agency já no padrão do projeto — reaproveitando a seção Server + wrapper Client, os componentes de motion (ScrollText, scrubReveal), os botões Fluid, os presets e os dados em src/data, preservando a fidelidade ao site legado e as restrições do AGENTS.md, e escrevendo desde a primeira linha o que o review-mr vai cobrar. Decide sozinho pelo precedente e só pergunta o que é decisão de negócio, conteúdo, identidade ou escopo. Use SEMPRE que for pedido para implementar, desenvolver, construir, codar, fazer ou corrigir algo. Gatilhos - "implementa a 4.1", "pode implementar essa story", "faz a seção X", "anima o bloco Y", "ajusta o mobile do Hero", "corrige esse bug", "começa a tarefa", "faz isso funcionar".
 ---
 
 # Implementar no padrão do projeto
@@ -64,8 +64,8 @@ Confira que o arquivo ainda existe — o mapa envelhece.
 | Animação de elementos da seção | no wrapper client: `useEffect` → `if (reduced) return` → `gsap.registerPlugin(ScrollTrigger)` → `gsap.context(() => …, ref)` → `return () => ctx.revert()`. Selecione por `data-<secao>-<parte>` dentro do `ref`. Ver `AboutClient.tsx`. |
 | Entrada que não pode piscar | `gsap.fromTo(el, {from}, {to, immediateRender: false, scrollTrigger: {…, invalidateOnRefresh: true}})` — é a correção do "bug do 1º card" em `AboutClient.tsx`. |
 | Leitura progressiva (FR-03) | `ScrollText` (`components/motion/ScrollText.tsx`), passando a string; **só** nos textos aprovados no PRD/TASKS. |
-| Reveal genérico / stagger | `ScrollReveal` com `staggerChildren` e filhos `[data-stagger]`. |
-| Parallax leve | `ParallaxImage` (`yPercent` pequeno) — só onde aprovado. |
+| Reveal de entrada | `scrubReveal` de `src/animations/scrubReveal.ts`, um trigger por elemento, dentro de `gsap.matchMedia()` com `REVEAL_MEDIA` + `revealY` (ver `AboutClient.tsx`). Sem `stagger` em grupo. |
+| Parallax leve | só o do brilho do Hero (`[data-hero-glow]`, `MOTION_MEDIA.desktop`) — parallax novo precisa de aprovação. |
 | Reordenar/filtrar cards | GSAP `Flip` como em `sections/Projects/index.tsx` (`flushSync` antes do `Flip.from`). |
 | Timings e easings | `MOTION_PRESETS` de `src/animations/presets.ts`. Valor novo entra lá se for reutilizado. |
 | Reduced motion | `useReducedMotion()` de `src/hooks/useReducedMotion.ts` — retorna cedo e o conteúdo fica no estado final visível. |
