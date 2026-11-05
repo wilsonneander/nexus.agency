@@ -160,7 +160,8 @@ Com base no relatório oficial `docs/AUDIT.md`:
 - **Estratégia de animações por seção:**
   - Leitura progressiva com ScrollTrigger e `scrub` aplicada exclusivamente no Hero e Sobre nós.
   - Reveals suaves nos cards de Banner e Serviços.
-  - Botão WhatsApp com animação contínua `@keyframes WaveWhatsApp` em CSS e transição de escala.
+  - Botão WhatsApp com animação contínua `@keyframes WaveWhatsApp` em CSS e transição de escala (a mola de hover GSAP só com mouse, `MOTION_MEDIA.finePointer`).
+  - **Por faixa** (story [4.1](stories/4-1-comportamento-por-breakpoint.md)): menu, ícones sociais fixos e Banners viram nos pontos exatos do legado (`> 480/768`, com `min-[481px]:`/`min-[769px]:`; as telas do Tailwind não mudam); parallax só acima de 768px via `gsap.matchMedia()`; todo o resto roda igual em toda largura.
   - Botões de Redes Sociais: **preservação integral** da rotação 3D (`rotateY(360deg)`) e expansão de cor de fundo sem alterações.
 - **Fallback sem JS:** um único `<noscript><style>` no `<head>` de [layout.tsx](../src/app/layout.tsx), selecionando `data-*`, dá o estado final legível sem JS (story [4.4](stories/4-4-conteudo-sem-javascript.md)). Regra completa em [TECHNICAL-SPEC.md § Next.js / React](TECHNICAL-SPEC.md#nextjs--react).
 - **Avaliação de Lenis:** Descartado para a versão inicial. O scroll nativo (`scroll-behavior: smooth`) e o ScrollTrigger padrão atendem perfeitamente à proposta sem os riscos de conflito em mobile/touch.

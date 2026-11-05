@@ -58,7 +58,8 @@ Registradas no `package.json` e `package-lock.json` com sucesso na Fase 1. Build
   - Cores de destaque: `--primary-color: #ffffff`, `--primary-color-dark: #a15cf5` (roxo principal), `--span: #ad7dff` (lavanda/lilás claro), `--gradient: linear-gradient(to right, #a15cf5, #ffffff)`.
   - Cores funcionais: WhatsApp `#218e49`.
   - Tipografia: Fonte `Poppins` (Google Fonts) nos pesos 400, 500, 600 e 700.
-  - Breakpoints: 480px (mobile largo/phablet), 768px (tablet/desktop médio), 1024px (desktop) e max-width 1200px.
+  - Breakpoints: 480px (mobile largo/phablet), 768px (tablet/desktop médio), 1024px (desktop) e max-width 1200px. As telas do [tailwind.config.ts](../tailwind.config.ts) são `min-width` (incluem o valor) e o legado vira **acima** dele (`@media (width > 480px)`). As grades do rebuild foram montadas sobre as telas atuais e não correspondem uma a uma às do legado, então as telas **não mudam**: onde a classe corresponde ao legado (menu horizontal/hambúrguer, ícones sociais fixos, grade dos Banners), o ponto exato usa `min-[481px]:`/`min-[769px]:` (story [4.1](stories/4-1-comportamento-por-breakpoint.md), `PEND-16`). Trocar as telas globalmente foi medido e descartado: piorava Projetos/Serviços em 1024 e Serviços/Pacotes/rodapé em 768.
+  - Efeito que muda por faixa usa `gsap.matchMedia()` com as consultas de `MOTION_MEDIA` em [presets.ts](../src/animations/presets.ts) (`desktop` = `min-width: 769px`, o ponto do menu; `finePointer` para hover só com mouse), depois da guarda síncrona de reduced motion da 4.3. Matriz por faixa na [story 4.1](stories/4-1-comportamento-por-breakpoint.md#escopo).
 - Tailwind para layout e estilo utilitário cotidiano.
 - CSS Modules ou CSS escopado para animações complexas que demandem especificidade idêntica ao original (como a rotação 3D dos ícones sociais e o pulso contínuo do WhatsApp).
 - Não criar estilos globais que vazem entre componentes.

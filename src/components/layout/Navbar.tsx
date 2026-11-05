@@ -26,7 +26,8 @@ export function Navbar() {
         </Link>
 
         {/* Links Desktop com animação de circulação vertical */}
-        <ul className="hidden md:flex items-center gap-8 text-[15px] font-normal text-white">
+        {/* Menu horizontal acima de 768px, como o legado (`width > 768px`; story 4.1) */}
+        <ul className="hidden min-[769px]:flex items-center gap-8 text-[15px] font-normal text-white">
           {SITE_CONFIG.navLinks.map((item) => (
             <li key={item.href}>
               <RollingLink
@@ -53,7 +54,7 @@ export function Navbar() {
         {/* Botão Mobile */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-white text-2xl p-2 focus:outline-none"
+          className="min-[769px]:hidden text-white text-2xl p-2 focus:outline-none"
           aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
         >
           <i className={isOpen ? "ri-close-line" : "ri-menu-3-line"} />
@@ -62,7 +63,7 @@ export function Navbar() {
 
       {/* Gaveta Mobile */}
       {isOpen && (
-        <div className="md:hidden bg-[#0f1221] px-6 py-6 border-b border-[#a15cf5]/20 flex flex-col gap-4 text-base">
+        <div className="min-[769px]:hidden bg-[#0f1221] px-6 py-6 border-b border-[#a15cf5]/20 flex flex-col gap-4 text-base">
           {SITE_CONFIG.navLinks.map((item) => (
             <Link
               key={item.href}

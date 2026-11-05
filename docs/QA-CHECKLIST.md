@@ -40,11 +40,11 @@ Testar ao menos:
 - [x] Smartphone estreito (375px). (Evidência: `mobile_375.png`)
 
 Em cada viewport:
-- [x] Sem overflow horizontal involuntário. (Validado: max-width 1200px centralizado e padding responsivo)
+- [x] Sem overflow horizontal involuntário. (Medido na [4.1](stories/4-1-comportamento-por-breakpoint.md), `next start`, Chrome headless com `mobile: false`: `scrollWidth === innerWidth` em 375, 479, 480, 481, 500, 520, 540, 560, 767, 768, 769, 1024, 1025 e 1200. Antes, 504 px em 480 e até 524 px na faixa 481–550 — o legado também transborda ali, 516 px em 481. Menu, ícones sociais fixos e Banners nos pontos exatos do legado, e ícone dos Banners acima do texto na faixa de 2 colunas; as demais grades seguem como antes — [breakpoints_banners_480.png](references/qa/breakpoints_banners_480.png), [breakpoints_banners_481.png](references/qa/breakpoints_banners_481.png), [breakpoints_768.png](references/qa/breakpoints_768.png))
 - [x] Conteúdo não fica cortado. (Validado nos 5 viewports)
 - [x] Texto permanece legível. (Validado com contraste Poppins claro sobre dark background)
 - [x] Botões são alcançáveis e utilizáveis. (Validado: WhatsApp flutuante e botões com área de toque mínima)
-- [x] Efeitos não dependem de hover. (Validado: em mobile eventos de scroll acionam o reveal)
+- [x] Efeitos não dependem de hover. (Validado: em mobile eventos de scroll acionam o reveal. Na [4.1](stories/4-1-comportamento-por-breakpoint.md), a mola de hover do WhatsApp só liga com `(hover: hover) and (pointer: fine)`: com toque emulado, o `mouseenter` emulado não escala o botão, só o feedback de clique roda e ele termina em `scale(1)`)
 - [x] Scroll e navegação permanecem naturais. (Validado: scroll-behavior suave e sem sequestro; com reduced motion, `auto` — [4.3](stories/4-3-reduced-motion.md), FR-11)
 
 ## 5. Acessibilidade

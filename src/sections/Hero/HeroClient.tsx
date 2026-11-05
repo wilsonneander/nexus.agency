@@ -14,6 +14,7 @@ import { useRef, useEffect, ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
+import { MOTION_MEDIA } from "@/animations/presets";
 
 interface HeroClientProps {
   children: ReactNode;
@@ -53,22 +54,32 @@ export function HeroClient({ children }: HeroClientProps) {
       if (h1) tl.to(h1, { opacity: 1, y: 0, duration: 0.7 }, 0.35);
       if (social) tl.to(social, { opacity: 1, x: 0, duration: 0.6 }, 0.55);
 
-      // Parallax do brilho (story 7.1): só o contêiner [data-hero-glow], nunca a <section>
-      // — transform nela prenderia o bloco social `fixed` ao Hero. Reverte com o scrub.
-      if (glow) gsap.to(glow, {
-        yPercent: 12,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-          invalidateOnRefresh: true,
-        },
-      });
     }, wrapperRef);
 
-    return () => ctx.revert();
+    // Parallax do brilho (story 7.1): só o contêiner [data-hero-glow], nunca a <section>
+    // — transform nela prenderia o bloco social `fixed` ao Hero. Reverte com o scrub.
+    // Só acima de 768px (story 4.1); o matchMedia desfaz e refaz ao cruzar a faixa.
+    const mm = gsap.matchMedia();
+    if (glow) {
+      mm.add(MOTION_MEDIA.desktop, () => {
+        gsap.to(glow, {
+          yPercent: 12,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        });
+      });
+    }
+
+    return () => {
+      mm.revert();
+      ctx.revert();
+    };
   }, [reduced]);
 
   return (

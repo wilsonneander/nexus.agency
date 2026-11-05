@@ -25,7 +25,7 @@ export function HeroSection() {
         {/* Redes Sociais Verticais — desktop (FR-07 inviolável) */}
         <div
           data-hero-social
-          className="hidden md:flex fixed right-0 top-1/2 -translate-y-1/2 z-40"
+          className="hidden min-[769px]:flex fixed right-0 top-1/2 -translate-y-1/2 z-40"
         >
           <SocialIcons variant="header" />
         </div>

@@ -10,7 +10,7 @@
  * - Ícone fa-whatsapp
  *
  * ADICIONA (Fase 3 — FR-05 micro-interações):
- * - GSAP scale spring no mouseenter/mouseleave
+ * - GSAP scale spring no mouseenter/mouseleave (só com mouse — story 4.1)
  * - GSAP click feedback (scale pulse)
  *
  * Não altera o CSS original. GSAP complementa, não substitui.
@@ -21,6 +21,7 @@ import { gsap } from "gsap";
 import { SITE_CONFIG } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
+import { MOTION_MEDIA } from "@/animations/presets";
 
 interface WhatsAppFloatProps {
   className?: string;
@@ -60,13 +61,21 @@ export function WhatsAppFloat({ className }: WhatsAppFloatProps) {
         .to(el, { scale: 1, duration: 0.35, ease: "elastic.out(1, 0.5)" });
     };
 
-    el.addEventListener("mouseenter", onEnter);
-    el.addEventListener("mouseleave", onLeave);
+    // Mola de hover só com mouse (story 4.1, FR-10): em toque o navegador emula
+    // mouseenter/mouseleave e a mola brigava com o feedback de clique.
+    const mm = gsap.matchMedia();
+    mm.add(MOTION_MEDIA.finePointer, () => {
+      el.addEventListener("mouseenter", onEnter);
+      el.addEventListener("mouseleave", onLeave);
+      return () => {
+        el.removeEventListener("mouseenter", onEnter);
+        el.removeEventListener("mouseleave", onLeave);
+      };
+    });
     el.addEventListener("click", onClick);
 
     return () => {
-      el.removeEventListener("mouseenter", onEnter);
-      el.removeEventListener("mouseleave", onLeave);
+      mm.revert();
       el.removeEventListener("click", onClick);
       gsap.killTweensOf(el);
     };

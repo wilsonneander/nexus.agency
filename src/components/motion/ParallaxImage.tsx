@@ -9,6 +9,7 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
+import { MOTION_MEDIA } from "@/animations/presets";
 
 interface ParallaxImageProps {
   src: string;
@@ -44,21 +45,25 @@ export function ParallaxImage({
     if (!containerRef.current) return;
     gsap.registerPlugin(ScrollTrigger);
     
-    const ctx = gsap.context(() => {
-      gsap.to(containerRef.current, {
+    const container = containerRef.current;
+    // Só acima de 768px (story 4.1): no layout de uma coluna o parallax é peso sem ganho.
+    // O matchMedia desfaz o transform ao cruzar a faixa num resize.
+    const mm = gsap.matchMedia();
+    mm.add(MOTION_MEDIA.desktop, () => {
+      gsap.to(container, {
         yPercent,
         ease: "none",
         scrollTrigger: {
-          trigger: containerRef.current,
+          trigger: container,
           start,
           end,
           scrub: true,
           invalidateOnRefresh: true,
         },
       });
-    }, containerRef);
+    });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, [reduced, yPercent, start, end]);
 
   return (

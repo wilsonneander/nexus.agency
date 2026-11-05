@@ -30,7 +30,11 @@ export function BannersClient({ children }: { children: ReactNode }) {
       // fromTo, não from: com stagger + ScrollTrigger, o refresh do `from` gravava
       // o estado inicial do 1º card como destino e ele ficava em opacity 0 (4.7).
       // O destino explícito é o estado do HTML do servidor.
-      gsap.fromTo(cards, { y: 50, opacity: 0 }, {
+      // O `set` explícito: com stagger, o immediateRender do fromTo só desenha o tempo 0
+      // da timeline interna — só o 1º card começava escondido e os outros piscavam (4.1).
+      const cardFrom = { y: 50, opacity: 0 };
+      gsap.set(cards, cardFrom);
+      gsap.fromTo(cards, cardFrom, {
         y: 0,
         opacity: 1,
         duration: 0.65,
@@ -47,7 +51,9 @@ export function BannersClient({ children }: { children: ReactNode }) {
       // Pulse entrance dos ícones
       const icons = ref.current!.querySelectorAll("[data-banner-icon]");
       if (icons.length) {
-        gsap.fromTo(icons, { scale: 0.5, opacity: 0 }, {
+        const iconFrom = { scale: 0.5, opacity: 0 };
+        gsap.set(icons, iconFrom);
+        gsap.fromTo(icons, iconFrom, {
           scale: 1,
           opacity: 1,
           duration: 0.45,

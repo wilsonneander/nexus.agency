@@ -8,6 +8,10 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    // `min-width`, que inclui o valor; o legado vira ACIMA dele (`width > 480px`). Onde a
+    // classe do rebuild corresponde à do legado (menu, ícones sociais fixos, Banners), o
+    // ponto exato usa `min-[481px]:`/`min-[769px]:` (story 4.1, PEND-16) — não mude estas
+    // telas: as outras grades foram montadas sobre elas.
     screens: {
       sm: "480px",
       md: "768px",
