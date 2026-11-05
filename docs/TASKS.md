@@ -2,20 +2,21 @@
 
 ## ▶ Ordem de implementação
 
-> **Atualizada em:** 2026-11-05, no fechamento da 8.1 (sobre `77cacf6`) e da 7.7 (sobre `3a87d86`, mesclada depois; stories da [revisão de código](CODE-REVIEW-2026-11-05.md)). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9 e ao deploy) depois.
+> **Atualizada em:** 2026-11-05, no fechamento da 8.2 (sobre `b05d958`), com as tarefas novas 8.6 (conferência do primeiro deploy) e 8.7 (CSP). Esta seção é mantida a cada mudança de status (story criada, iniciada, bloqueada, concluída), tarefa nova ou `PEND-xx` resolvido. A ordem é por **dependência** primeiro e **prioridade** (risco ao [critério de liberação](QA-CHECKLIST.md) § 9 e ao deploy) depois.
 
-**Em andamento: 8.2 — Deploy estático no Cloudflare Pages** ([story](stories/8-2-deploy-estatico-cloudflare-pages.md)): implementada, falta a revisão e a conferência dos cabeçalhos no preview do Pages; a 8.1 (domínio oficial) está `DONE`. Em seguida, **4.5 — Teclado, foco e semântica**.
-Por quê nesta ordem: o site vai para o Cloudflare Pages (`PEND-06` resolvido), e hoje o build não é publicável lá; o domínio e o export destravam o deploy. A acessibilidade (4.5) vem logo depois por ser o maior risco restante da Fase 4.
+**Próxima tarefa: 4.5 — Teclado, foco e semântica** ([story](stories/4-5-teclado-foco-semantica.md)). Em paralelo, com o responsável: **8.6 — conferir o primeiro deploy no Pages** (operação no painel + `curl -I`, não é código).
+Por quê nesta ordem: o export estático (8.2) e o domínio (8.1) estão `DONE`, o build já é publicável no Pages; falta só conferir no ar (8.6). A acessibilidade (4.5) é o maior risco restante da Fase 4.
 
 | # | Tarefa | Depende de | Status | Por que nesta posição |
 |---|---|---|---|---|
-| 1 | **8.2** [Deploy estático no Cloudflare Pages](stories/8-2-deploy-estatico-cloudflare-pages.md) | 8.1 (`DONE`) | `IN_PROGRESS` | Sem ela não há deploy; também tira ~3,5 MB de imagens. |
+| 1 | **8.6** Conferir o primeiro deploy no Pages | 8.2 (`DONE`); projeto criado no painel | `TODO` | Sem story. Responsável: `curl -I` em `/` e `/_next/static/*` (cabeçalhos e `immutable`) e um envio real ao Formspree no preview — metades dos ACs #3/#4 da 8.2 que só fecham no ar. |
 | 2 | **4.5** [Teclado, foco e semântica](stories/4-5-teclado-foco-semantica.md) | — | `TODO` | Nenhum CTA tem foco visível hoje; maior risco de a11y. |
 | 3 | **8.4** [Metadados e dados estruturados](stories/8-4-metadados-dados-estruturados.md) | 8.1 (`DONE`); `PEND-19` só no AC #4 | `TODO` | SEO; o grosso independe de decisão. |
 | 4 | **6.9** [Remover código não usado](stories/6-9-remover-codigo-nao-usado.md) | — | `TODO` | Limpeza sem risco; precisa vir antes da 8.5. |
 | 5 | **4.8** [Piscar do Hero na hidratação](stories/4-8-piscar-hero-hidratacao.md) | — | `TODO` | Só o Hero; independe das outras. |
 | 6 | **8.5** [Simplificar motion e estilos](stories/8-5-simplificar-motion-estilos.md) | 6.9 | `TODO` | Refactor grande; vem depois da limpeza e da 4.8 (ambas tocam motion). |
 | 7 | **4.6** Contraste em todos os estados animados | 4.2 (`DONE`) | `TODO` | Sem story. Inclui o achado 2.8 da revisão (`ScrollText` em 22% reprova contraste no Lighthouse); mudar o tom do FR-03 exige decisão. |
+| 8 | **8.7** Content-Security-Policy no `_headers` | 8.3 (`BLOCKED`, `PEND-18`) | `TODO` | Sem story. Cortada da 8.2: o Next exporta scripts inline e as CDNs de ícones ainda estão em uso; uma CSP útil precisa de hashes ou de esperar a 8.3. Testar no preview antes da `main`. |
 
 **Fora da fila (aguardam decisão do responsável, não implementar):** `PEND-13` pulso do WhatsApp e rotação dos ícones sociais com reduced motion, `PEND-09` colchetes restantes, `PEND-12` LGPD, `PEND-17` textos do formulário, `PEND-18` ícones em SVG ([8.3](stories/8-3-icones-svg.md) `BLOCKED`), `PEND-19` textos de SEO e ajustes de texto/regra. ESLint (1.8) depende de aprovação de dependências novas. Quando um desses for resolvido, a tarefa resultante entra na tabela acima na posição devida.
 
@@ -172,10 +173,12 @@ Mudanças de design pedidas pelo responsável depois da entrega. Cada uma depend
 Achados da [revisão de código de 2026-11-05](CODE-REVIEW-2026-11-05.md) para publicar o site no Cloudflare Pages (`PEND-06`), leve e completo em SEO. Sem mudança visual, salvo o que um `PEND-xx` autorizar. Os achados de acessibilidade e limpeza foram para tarefas já existentes ([4.5](stories/4-5-teclado-foco-semantica.md), [4.8](stories/4-8-piscar-hero-hidratacao.md), [6.9](stories/6-9-remover-codigo-nao-usado.md), 4.6).
 
 - [x] 8.1 Apontar canonical, OpenGraph, robots e sitemap para o domínio oficial. (Status: DONE | Story: [8-1-dominio-oficial.md](stories/8-1-dominio-oficial.md) | `nexusagencybr.com.br` confirmado pelo responsável em 2026-11-05; `SITE_CONFIG.url` como fonte única; `tsc` e build ok em `77cacf6`, canonical/OG/robots/sitemap conferidos no build)
-- [ ] 8.2 Publicar o site como estático no Cloudflare Pages. (Status: IN_PROGRESS | Story: [8-2-deploy-estatico-cloudflare-pages.md](stories/8-2-deploy-estatico-cloudflare-pages.md) | `output: "export"`, imagens dos Projetos pré-otimizadas, `_headers`, `_gotcha`)
+- [x] 8.2 Publicar o site como estático no Cloudflare Pages. (Status: DONE | Story: [8-2-deploy-estatico-cloudflare-pages.md](stories/8-2-deploy-estatico-cloudflare-pages.md) | `output: "export"`, Projetos em WebP 700px/43–70 KB, `_headers`, `_gotcha`; `tsc`, build, `out/` servido na 3008, `check_ids` e CDP 375/1200 sem erro em `b05d958`; conferência no ar na 8.6, CSP na 8.7)
 - [ ] 8.3 Trocar as fontes de ícones de CDN por SVG inline. (Status: BLOCKED | Story: [8-3-icones-svg.md](stories/8-3-icones-svg.md) | Aguarda `PEND-18`)
 - [ ] 8.4 Completar metadados de compartilhamento e dados estruturados. (Status: TODO | Story: [8-4-metadados-dados-estruturados.md](stories/8-4-metadados-dados-estruturados.md) | JSON-LD, OG coerente, ícones; título/descrição/imagem OG aguardam `PEND-19`)
 - [ ] 8.5 Simplificar o sistema de motion e os estilos. (Status: TODO | Story: [8-5-simplificar-motion-estilos.md](stories/8-5-simplificar-motion-estilos.md) | Um reveal só, reduced motion via `gsap.matchMedia`, `ScrollText` sem inline, hex → tokens; depende da 6.9)
+- [ ] 8.6 Conferir o primeiro deploy no Cloudflare Pages. (Status: TODO | Sem story | Responsável, depois de criar o projeto pelo Connect to Git: `curl -I` em `/` (`x-content-type-options`, `referrer-policy`) e em `/_next/static/*` (`immutable`); envio real do formulário ao Formspree no preview — restos dos ACs #3/#4 da [8.2](stories/8-2-deploy-estatico-cloudflare-pages.md))
+- [ ] 8.7 Content-Security-Policy no `public/_headers`. (Status: TODO | Sem story | Cortada da [8.2](stories/8-2-deploy-estatico-cloudflare-pages.md): scripts inline do Next (`self.__next_f`), `<noscript><style>` e CDNs de ícones; de preferência depois da [8.3](stories/8-3-icones-svg.md); testar no preview)
 
 **Critério de saída:** `out/` publicado no Cloudflare Pages no domínio oficial, Lighthouse SEO 100, sem regressão visual e sem violar o [QA-CHECKLIST](QA-CHECKLIST.md) § 9.
 

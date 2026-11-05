@@ -6,7 +6,7 @@ baseline_commit: 3a87d8651cce981791692b61f5c127889090347e
 
 |                 |                                                                                         |
 | --------------- | --------------------------------------------------------------------------------------- |
-| **Status**      | IN_PROGRESS                                                                             |
+| **Status**      | DONE                                                                                    |
 | **Fase**        | Fase 8 — Leveza, SEO e deploy no Cloudflare Pages                                       |
 | **Área**        | performance/SEO                                                                         |
 | **Seções**      | global, Projects                                                                        |
@@ -93,7 +93,7 @@ Com JS: o formulário renderiza e hidrata sem erro de console; o envio real ao F
 - [x] Export estático (AC #1)
 - [x] Converter e trocar as imagens dos Projetos; limpar `public/` (AC #2)
 - [x] `_headers` (AC #3, metade local)
-- [ ] Conferir cabeçalhos no preview do Pages (AC #3, metade do deploy — responsável)
+- [ ] Conferir cabeçalhos no preview do Pages (AC #3, metade do deploy — responsável) → movida para a 8.6 ([TASKS.md](../TASKS.md))
 - [x] `_gotcha` no formulário (AC #4)
 - [x] README, TECHNICAL-SPEC, ARCHITECTURE, CLAUDE.md
 - [x] Validação e capturas (AC #5)
@@ -119,14 +119,14 @@ Com JS: o formulário renderiza e hidrata sem erro de console; o envio real ao F
 
 ## Definition of Done
 
-- [ ] Todo AC verificado, cada um com a evidência.
-- [ ] `npx tsc --noEmit` verde.
-- [ ] `npm run build` verde, sem warning de hidratação/SSR.
-- [ ] Validação visual/movimento feita nos viewports afetados (capturas conferidas numa pasta temporária fora do repositório, sem commitar).
-- [ ] Itens tocados do `QA-CHECKLIST.md` atualizados com a evidência.
+- [ ] Todo AC verificado, cada um com a evidência. — exceto a metade do AC #3 que depende do Pages no ar e o envio real do AC #4, movidos para a 8.6.
+- [x] `npx tsc --noEmit` verde.
+- [x] `npm run build` verde, sem warning de hidratação/SSR.
+- [x] Validação visual/movimento feita nos viewports afetados (capturas conferidas numa pasta temporária fora do repositório, sem commitar).
+- [x] Itens tocados do `QA-CHECKLIST.md` atualizados com a evidência.
 - [x] `PEND-06` marcado `RESOLVED` (2026-11-05).
-- [ ] Docs afetados (TECHNICAL-SPEC, ARCHITECTURE, CLAUDE.md, README) atualizados.
-- [ ] Status movido na story **e** no `TASKS.md`, com a validação carimbada (comando + SHA) no Change Log.
+- [x] Docs afetados (TECHNICAL-SPEC, ARCHITECTURE, CLAUDE.md, README) atualizados.
+- [x] Status movido na story **e** no `TASKS.md`, com a validação carimbada (comando + SHA) no Change Log.
 
 ## Execução
 
@@ -141,7 +141,7 @@ Com JS: o formulário renderiza e hidrata sem erro de console; o envio real ao F
 - **CSP cortada** (como previsto em "Se for preciso cortar"): o Next exporta scripts inline (`self.__next_f`), o `<noscript><style>` e as três folhas de CDN; uma CSP útil exigiria `'unsafe-inline'` ou hashes por build. Vira tarefa própria, de preferência depois da [8.3](8-3-icones-svg.md) (que tira as CDNs).
 - Assets sem uso de `public/assets/` (`grafic.png`, `icon.png`, `project-1…6.jpg`) removidos aqui, a pedido do responsável ("verificar o que não deve ir pro build"); riscados na [6.9](6-9-remover-codigo-nao-usado.md).
 - `npm run start` agora é `npx serve out` (o `next start` não funciona com export). Acrescentado `.node-version` (22) para o build do Pages.
-- Parte do código (next.config, `_headers`, imagens, `projects.ts`, `_gotcha`) entrou por engano no commit `0d61b92` ("docs: remove image evidence from repo"), feito por outra sessão em paralelo com a árvore de trabalho desta story; o restante está na árvore de trabalho.
+- Parte do código (next.config, `_headers`, imagens, `projects.ts`, `_gotcha`) entrou por engano no commit `0d61b92` ("docs: remove image evidence from repo"), feito por outra sessão em paralelo com a árvore de trabalho desta story; o restante entrou em `b05d958`. O histórico já estava no `origin` e não foi reescrito.
 
 ## Change Log
 
@@ -150,3 +150,4 @@ Com JS: o formulário renderiza e hidrata sem erro de console; o envio real ao F
 | 2026-11-05 | TODO | Story criada sobre `3a87d86`, a partir da [revisão de código](../CODE-REVIEW-2026-11-05.md) §§ 1.1–1.2. `PEND-06` resolvido pelo responsável: Cloudflare Pages. |
 | 2026-11-05 | IN_PROGRESS | Validada (8.1 já `DONE`; ACs #1/#3/#4/#5 reescritos: conteúdo de `out/`, metade do AC #3 que depende do preview, envio real do formulário pelo responsável, capturas fora do repositório) e implementada sobre `0d61b92` (árvore de trabalho). Validação: `npx tsc --noEmit` ✓; `npm run build` ✓ (exit 0, 4 rotas `○ Static`, `out/` = 2,5 MB; fora de `_next/` só `404.html`, `_headers`, `assets/{header.webp,icon2.png,logo.png,projects/*.webp}`, `index.html`, `index.txt`, `robots.txt`, `sitemap.xml`); `out/` servido na 3008 (`python3 -m http.server -d out`): `/`, `/robots.txt`, `/sitemap.xml`, `/assets/projects/hotel.webp` → 200, rota inexistente → 404; `node scripts/check_ids.js` → 10 IDs presentes, `#blog` ausente; captura CDP antes (dev server) × depois (`out/`) em 375 e 1200 com rolagem até `#project`: cards idênticos; filtro Fast Food → Viagens → Todos = 2/2/6 cards, opacidade 1, todas as imagens carregadas, zero erro de console. Não verificado aqui: cabeçalhos no Pages (precisa do preview) e envio real ao Formspree. |
 | 2026-11-05 | IN_PROGRESS | Responsável decidiu o deploy pela integração do Pages com o GitHub: Decisões e AC #3 ajustados; README com o fluxo (push na `main` = produção, branch = preview), criação do projeto pelo Connect to Git e *build watch paths* excluindo docs/legado. |
+| 2026-11-05 | DONE | Revisada e fechada sobre `b05d958` (código da story em `0d61b92` + `b05d958`; nada mudou no código depois). Validação rodada em `b05d958`: `npx tsc --noEmit` ✓; `npm run build` ✓ (4 rotas `○ Static`, `out/` = 2,5 MB; fora de `_next/` só `404.html`, `_headers`, `assets/{header.webp,icon2.png,logo.png,projects/*.webp}`, `index.html`, `index.txt`, `robots.txt`, `sitemap.xml`); imagens dos Projetos 1103–1164×700, 43–70 KB; `out/` servido na 3008 (`python3 -m http.server`): `/`, `/robots.txt`, `/sitemap.xml`, `/assets/projects/hotel.webp` → 200, rota inexistente → 404; `node scripts/check_ids.js` → 10 IDs presentes, `#blog` ausente; `_gotcha` no HTML com `class="hidden"`, `tabindex="-1"`, `aria-hidden`, `autoComplete="off"`; sonda CDP no Chrome headless em 375 e 1200 (rolagem até `#project`, filtro Fast Food → Viagens → Todos = 2/2/6 cards com opacidade 1, 6 imagens com `naturalWidth > 0`, rolagem de volta e até o fim): zero erro/warning de console; rodapé com opacidade 1 no fim da página. Capturas conferidas fora do repositório. Fica para a **8.6** (responsável, depois do primeiro deploy): `curl -I` dos cabeçalhos no Pages e envio real ao Formspree. A CSP cortada vira a **8.7**. |
