@@ -81,7 +81,7 @@ nexus/
 │   ├── CONTENT-MAPPING.md        # conteúdo do cliente vs. legado
 │   ├── stories/                  # uma story por tarefa (skill `story`)
 │   ├── tdds/                     # um TDD por fluxo (skill `tdd`)
-│   └── references/               # screenshot.png, client-content.pdf, qa/
+│   └── references/               # client-content.pdf, qa/lighthouse.report.json
 │
 ├── AGENTS.md, CLAUDE.md, README.md  # ficam na raiz: lidos automaticamente por agentes e pelo GitHub
 ├── package.json

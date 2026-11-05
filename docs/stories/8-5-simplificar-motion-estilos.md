@@ -68,7 +68,7 @@ Com `prefers-reduced-motion: reduce` desde o carregamento: tudo visível, nenhum
 
 ### AC #3 — Sem JS / antes da hidratação
 
-Com JS desligado, todos os blocos visíveis e o `ScrollText` em branco pleno (`node scripts/capture_nojs.js`), igual a [nojs_1200.png](../references/qa/nojs_1200.png).
+Com JS desligado, todos os blocos visíveis e o `ScrollText` em branco pleno (`node scripts/capture_nojs.js`), igual à auditoria sem JS da [story 4.4](4-4-conteudo-sem-javascript.md).
 
 ### AC #4 — Menos código no cliente
 
@@ -128,7 +128,7 @@ Capturas em 375/768/1200 iguais ao baseline (cores, incluindo a troca de hex por
 - [ ] Todo AC verificado, cada um com a evidência.
 - [ ] `npx tsc --noEmit` verde.
 - [ ] `npm run build` verde, sem warning de hidratação/SSR.
-- [ ] Validação visual/movimento feita nos viewports afetados (evidência em `docs/references/qa/`).
+- [ ] Validação visual/movimento feita nos viewports afetados (capturas conferidas numa pasta temporária fora do repositório, sem commitar).
 - [ ] Itens tocados do `QA-CHECKLIST.md` atualizados com a evidência.
 - [ ] `PEND-xx` consumido: nenhum (abre um se a medição do vidro pedir).
 - [ ] Docs afetados (TECHNICAL-SPEC, ARCHITECTURE, CLAUDE.md) atualizados.

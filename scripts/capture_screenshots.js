@@ -11,7 +11,7 @@ const vps = [
   { name: 'laptop_1024.png', w: 1024, h: 768 }
 ];
 
-const targetDir = 'C:\\Users\\wilso\\Desktop\\Wilson\\clients\\nexus\\docs\\references\\qa';
+const targetDir = process.env.OUT_DIR || require('fs').mkdtempSync(require('path').join(require('os').tmpdir(), 'nexus-qa-'));
 
 vps.forEach(vp => {
   const outFile = path.join(targetDir, vp.name);

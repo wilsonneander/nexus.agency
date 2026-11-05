@@ -21,7 +21,7 @@ arquivos que ficam na raiz porque ferramentas os leem de lá:
 | Revisão de código de 2026-11-05 (leveza, SEO, Cloudflare Pages) — achados ainda não convertidos em tarefas | [CODE-REVIEW-2026-11-05.md](CODE-REVIEW-2026-11-05.md) | viram tarefas/`PEND-xx` no TASKS.md |
 | Detalhe de uma tarefa (contexto, ACs, Change Log) | [stories/](stories/README.md) | — |
 | Como um fluxo funciona de ponta a ponta | [tdds/](tdds/README.md) | — |
-| Evidências visuais | [references/](references/) — `screenshot.png` (legado), `client-content.pdf`, `qa/` (capturas) | — |
+| Evidências visuais | [references/](references/) — `client-content.pdf` e `qa/lighthouse.report.json`; capturas de tela não são guardadas no repositório | — |
 
 Se uma informação aparecer em dois lugares, um deles está errado: mantenha a
 fonte acima e troque a cópia por um link.

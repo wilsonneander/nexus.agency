@@ -31,3 +31,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Evidências visuais nunca entram no repositório (decisão de 2026-11-05)
+docs/references/**/*.png
+docs/references/**/*.jp*g
+docs/references/**/*.webp
+docs/references/**/*.gif

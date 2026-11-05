@@ -29,7 +29,7 @@ parallax de `backgroundPositionY` em
 
 O responsável pediu um Hero **mais limpo e profissional**, com o nome da agência
 e um **background roxo em movimento** no estilo da referência
-[hero-glow-reference.png](../references/hero-glow-reference.png): fundo quase
+`hero-glow-reference.png`: fundo quase
 preto, um brilho roxo em forma de anel/eclipse subindo do horizonte, um halo
 largo e suave ao redor, e o título centralizado em cima. Da referência entra
 **só o fundo**: o selo "New: …", a interface do produto (busca, notas,
@@ -123,7 +123,7 @@ Em 1200px, o Hero mostra, centralizados, "Nexus Agency" (`h4`), "Somos Nexus
 **Agency.**" (`h1`, "Agency." em `span` lilás) e o parágrafo do legado, sobre
 fundo escuro sem a foto `header.webp`, com o brilho roxo visível na metade
 inferior. Verifica-se por screenshot comparado com
-[hero-glow-reference.png](../references/hero-glow-reference.png) (só o fundo) e
+`hero-glow-reference.png` (só o fundo) e
 pelo texto idêntico a `index.html:61-69` (`grep` ou leitura do HTML servido).
 
 ### AC #2 — O brilho se move devagar e continuamente
@@ -147,7 +147,7 @@ Com `prefers-reduced-motion: reduce`, o fundo aparece **estático** (brilho
 visível, nenhuma animação CSS ou GSAP nas camadas), o texto aparece de
 imediato e nada fica invisível. Verifica-se com
 `--force-prefers-reduced-motion` no Chrome headless (como em
-[reduced_1200.png](../references/qa/reduced_1200.png)) e conferindo
+`reduced_1200.png`) e conferindo
 `getAnimations()` vazio nas camadas.
 
 ### AC #5 — Sem JavaScript e antes da hidratação
@@ -243,7 +243,7 @@ nova.
 | tipos | sempre | `npx tsc --noEmit` |
 | build | sempre | `npm run build` (exit 0, sem warning de hidratação) |
 | âncoras | `#home` mantido | `npx next dev -p 3008` + `node scripts/check_ids.js` |
-| visual | 375/480/768/1024/1200 | Chrome headless → `docs/references/qa/hero_glow_<vw>.png`; comparar fundo com [hero-glow-reference.png](../references/hero-glow-reference.png) |
+| visual | 375/480/768/1024/1200 | Chrome headless → `docs/references/qa/hero_glow_<vw>.png`; comparar fundo com `hero-glow-reference.png` |
 | movimento | loop, scroll ↓↑, resize | duas capturas espaçadas; `scripts/capture_scroll.js`; DevTools _Performance_ |
 | movimento | reduced motion | `--force-prefers-reduced-motion`; `getAnimations()` vazio |
 | sem JS | conteúdo e brilho visíveis | `node scripts/capture_nojs.js` |
@@ -292,7 +292,7 @@ nova.
 - [src/sections/Hero/index.tsx](../../src/sections/Hero/index.tsx): sai o `backgroundImage`; a `section` passa a `relative overflow-hidden flex flex-col bg-secondary`, com o texto centralizado (`relative z-10`) e, abaixo dele, o palco `aria-hidden` `[data-hero-glow]` com 6 camadas (halo, bloom, reflexo, anel, núcleo, horizonte) mais o degradê de fusão com o About. `text-[#ad7dff]` virou `text-accent-span`.
 - [src/app/globals.css](../../src/app/globals.css): bloco "Hero — brilho roxo animado" (`.hero-glow`, `.hero-glow__*`, `@keyframes heroGlowBreathe`/`heroHaloDrift`/`heroHorizonPulse`) e as camadas animadas no bloco `prefers-reduced-motion: reduce`.
 - [src/sections/Hero/HeroClient.tsx](../../src/sections/Hero/HeroClient.tsx): o tween de `backgroundPositionY` virou `yPercent: 12` no `[data-hero-glow]`, no mesmo `gsap.context()`.
-- Docs: [PRD.md](../PRD.md) (nota de exceção no FR-02), [CLAUDE.md](../../CLAUDE.md) (parallax e fundo do Hero), [QA-CHECKLIST.md](../QA-CHECKLIST.md) § 3; evidência em [hero_glow_1200.png](../references/qa/hero_glow_1200.png) e [hero_glow_375.png](../references/qa/hero_glow_375.png).
+- Docs: [PRD.md](../PRD.md) (nota de exceção no FR-02), [CLAUDE.md](../../CLAUDE.md) (parallax e fundo do Hero), [QA-CHECKLIST.md](../QA-CHECKLIST.md) § 3; evidência em `hero_glow_1200.png` e `hero_glow_375.png`.
 
 **O que divergiu do plano:**
 - **O palco do brilho está no fluxo, não em `absolute inset-0 -z-10`.** Com o brilho absoluto, a altura do texto (muito maior em 375px) faria o anel passar atrás do parágrafo. No fluxo, abaixo do texto, isso não acontece em nenhuma altura de viewport.
@@ -304,7 +304,7 @@ nova.
 
 | Data | Status | O que mudou |
 | --- | --- | --- |
-| 2026-11-03 | TODO | Story criada sobre `94d4e2c`, a pedido do responsável (referência visual em [hero-glow-reference.png](../references/hero-glow-reference.png)); exceção ao FR-02 registrada como `PEND-14`. |
+| 2026-11-03 | TODO | Story criada sobre `94d4e2c`, a pedido do responsável (referência visual em `hero-glow-reference.png`); exceção ao FR-02 registrada como `PEND-14`. |
 | 2026-11-03 | IN_PROGRESS | Iniciada sobre `94d4e2c`, com o aval do responsável ("continue"). O responsável confirmou que o nome é "Nexus Agency": o texto do legado fica como está. |
 | 2026-11-03 | IN_PROGRESS | Implementada; validação na árvore de trabalho sobre `94d4e2c`. `npx tsc --noEmit` → OK. `npm run build` → exit 0, `/` 13.6 kB / 178 kB, sem warning. `npx next start -p 3008` + `node scripts/check_ids.js` → 6 IDs presentes. Sonda CDP temporária (fora do repositório) em 375/480/768/1024/1200: sem a foto `header.webp`, `h1` com opacidade 1, `scrollWidth === innerWidth` no Hero, 5 animações CSS com movimento e 0 com `reduce` (AC #2, #4); `yPercent` do brilho 22–30 px depois de rolar 600 px e `0` de volta ao topo e depois de resize 1200 → 375 → 1200 (AC #6, #7); fim do parágrafo acima do topo do anel em todas as larguras. Contraste (AC #3), com o texto oculto e o brilho forçado ao pico: pior fundo atrás do parágrafo `rgb(36,25,73)` em 480px, 16:1 contra o branco; `h1` 19.8:1. Sem JS (`OUT_DIR=<temp> node scripts/capture_nojs.js`): os 5 `[data-word]` em `rgb(255,255,255)` e o Hero com brilho e texto (AC #5). Emenda com o About sem linha visível, e bloco social `fixed` acima do About (captura rolada). `git diff 94d4e2c -- SocialIcons* WhatsAppFloat* constants.ts` vazio (AC #8). **Não verificado:** o painel _Performance_ do AC #2 (Layout/Paint por quadro) em navegador real; as camadas animam só `transform`/`opacity` pelo código. **Achado fora do escopo:** em 480px o documento tem 497 px de largura por causa de um card fora do Hero (`h4.text-lg.font-semibold` + `p.text-white/70 text-xs`); com o brilho escondido continua 497, então não vem desta story. Candidato à 4.1. |
 | 2026-11-03 | IN_PROGRESS | Pedido do responsável depois do commit `d9b5a48`: "background se mexendo um pouco mais". Ciclos de 7–16 s para 5–12 s; anel com escala até 1.07 e opacidade de 0.78 a 1; bloom em keyframe próprio (`heroBloomPulse`, escala de 0.92 a 1.14); halo derivando também na vertical (±7% x, ±4% y, escala de 0.95 a 1.12); horizonte com `scaleX` de 0.86 a 1.1; reflexo passa a oscilar a opacidade (`heroReflectionFlicker`) e entrou no bloco de reduced motion. Revalidação sobre `d9b5a48` + árvore de trabalho: `tsc` OK, `build` exit 0; sonda CDP com 6 animações com movimento e 0 com `reduce` nos 5 viewports, parallax volta a `0` ao subir e depois de resize; contraste com o brilho no novo pico: pior fundo do parágrafo `rgb(42,29,81)` em 480px, 15:1. |

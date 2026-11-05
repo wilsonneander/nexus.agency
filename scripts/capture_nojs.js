@@ -4,7 +4,7 @@
 //      JS=1 node scripts/capture_nojs.js                → mesma captura COM JS em
 //                                                         375/480/768/1024/1200 (js_<w>.png)
 //      OUT_DIR=<pasta> …                                → grava em outra pasta
-// Destino: só a evidência final (sem JS, sem SUFFIX) vai para docs/references/qa/.
+// Destino: sempre uma pasta temporária fora do repositório (imagens nunca são commitadas).
 // Capturas "antes" e de não regressão com JS vão para a pasta temporária do sistema
 // (regra de higiene do repositório no CLAUDE.md) — o caminho é impresso no fim.
 //
@@ -27,10 +27,7 @@ const { spawn } = require('child_process');
 
 const chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const targetDir =
-  process.env.OUT_DIR ||
-  (WITH_JS || SUFFIX
-    ? fs.mkdtempSync(path.join(os.tmpdir(), 'nexus-capture-'))
-    : 'C:\\Users\\wilso\\Desktop\\Wilson\\clients\\nexus\\docs\\references\\qa');
+  process.env.OUT_DIR || fs.mkdtempSync(path.join(os.tmpdir(), 'nexus-qa-'));
 const url = `http://localhost:${PORT}/`;
 
 // Teto da captura por largura; o script falha se o documento passar disso.

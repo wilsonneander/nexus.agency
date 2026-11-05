@@ -117,7 +117,7 @@ os 5 textos de leitura progressiva continuam em `rgb(255, 255, 255)`.
 | reduced motion | Banners | sonda CDP com `prefers-reduced-motion: reduce` emulado |
 | sem JS | página | `OUT_DIR=<temp> node scripts/capture_nojs.js` |
 | âncoras | página | `node scripts/check_ids.js` |
-| visual | 1200 / 375 | [banners_design_1200.png](../references/qa/banners_design_1200.png), [banners_design_375.png](../references/qa/banners_design_375.png) |
+| visual | 1200 / 375 | `banners_design_1200.png`, `banners_design_375.png` |
 
 ## Riscos e armadilhas
 
@@ -142,7 +142,7 @@ os 5 textos de leitura progressiva continuam em `rgb(255, 255, 255)`.
 **Arquivos tocados:**
 - [BannersClient.tsx](../../src/sections/Banners/BannersClient.tsx): `from` → `fromTo` nos cards e ícones, com um comentário explicando o porquê.
 - Docs: [TASKS.md](../TASKS.md), [QA-CHECKLIST.md](../QA-CHECKLIST.md), [README.md](README.md), [CLAUDE.md](../../CLAUDE.md).
-- Evidência: [banners_design_1200.png](../references/qa/banners_design_1200.png), [banners_design_375.png](../references/qa/banners_design_375.png).
+- Evidência: `banners_design_1200.png`, `banners_design_375.png`.
 
 **Medição depois** (`next start`, 3008, sobre `ff8618e` + árvore de trabalho):
 

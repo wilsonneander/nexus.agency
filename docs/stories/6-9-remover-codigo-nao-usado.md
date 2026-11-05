@@ -117,7 +117,7 @@ Ver tabela do Contexto, arquivo a arquivo. Em [About/index.tsx](../../src/sectio
 - [ ] Todo AC verificado, cada um com a evidência.
 - [ ] `npx tsc --noEmit` verde.
 - [ ] `npm run build` verde, sem warning de hidratação/SSR.
-- [ ] Validação visual/movimento feita nos viewports afetados (evidência em `docs/references/qa/`).
+- [ ] Validação visual/movimento feita nos viewports afetados (capturas conferidas numa pasta temporária fora do repositório, sem commitar).
 - [ ] Itens tocados do `QA-CHECKLIST.md` atualizados com a evidência.
 - [ ] `PEND-xx` consumido: nenhum.
 - [ ] Docs afetados (ARCHITECTURE, CLAUDE.md) atualizados.

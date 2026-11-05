@@ -67,7 +67,7 @@ seguir). O cabeçalho diz qual, e carrega `baseline_commit:`.
   fora do ar. O que o sistema faz e o que o usuário vê.
 - **Invariantes dizem onde são garantidas e como se verificam**: "o texto é
   sempre legível — cor inicial `rgba(255,255,255,0.22)` em `ScrollText`,
-  conferido em `docs/references/qa/…`"; "nenhum ScrollTrigger sobrevive ao
+  conferido por sonda em 375/1200"; "nenhum ScrollTrigger sobrevive ao
   unmount — `ctx.revert()` em `<arquivo>`".
 - **Contratos são copiados, não parafraseados** — props do componente, forma
   do dado em `src/data/*`, `SITE_CONFIG`, atributos `data-*` que o wrapper

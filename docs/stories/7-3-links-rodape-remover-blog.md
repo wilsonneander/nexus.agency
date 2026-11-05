@@ -154,7 +154,7 @@ intocados; nenhuma dependência nova.
 - [x] Todo AC verificado, cada um com a evidência.
 - [x] `npx tsc --noEmit` verde.
 - [x] `npm run build` verde, sem warning de hidratação/SSR.
-- [x] Validação visual feita nos viewports afetados ([footer_links_1200.png](../references/qa/footer_links_1200.png), [footer_links_375.png](../references/qa/footer_links_375.png)).
+- [x] Validação visual feita nos viewports afetados (`footer_links_1200.png`, `footer_links_375.png`).
 - [x] Itens tocados do [QA-CHECKLIST.md](../QA-CHECKLIST.md) atualizados com a evidência.
 - [x] `PEND-02` marcado `RESOLVED`.
 - [x] Docs afetados ([CLAUDE.md](../../CLAUDE.md), [README.md](../../README.md), [ARCHITECTURE.md](../ARCHITECTURE.md), [PRD.md](../PRD.md), [AUDIT.md](../AUDIT.md) § 12, [CONTENT-MAPPING.md](../CONTENT-MAPPING.md)) atualizados.

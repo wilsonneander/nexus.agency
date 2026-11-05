@@ -305,7 +305,7 @@ motion no efeito da microinteração GSAP: nenhuma classe, link ou CSS do
 - Só a guarda: [BannersClient.tsx](../../src/sections/Banners/BannersClient.tsx), [ServicesClient.tsx](../../src/sections/Services/ServicesClient.tsx), [BlogClient.tsx](../../src/sections/Blog/BlogClient.tsx), [FooterClient.tsx](../../src/components/layout/FooterClient.tsx), [Contact/index.tsx](../../src/sections/Contact/index.tsx), [Projects/index.tsx](../../src/sections/Projects/index.tsx) (reveal e `handleFilter`), [ParallaxImage.tsx](../../src/components/motion/ParallaxImage.tsx), [ScrollReveal.tsx](../../src/components/motion/ScrollReveal.tsx) e [WhatsAppFloat.tsx](../../src/components/ui/WhatsAppFloat.tsx).
 - [globals.css](../../src/app/globals.css): `scroll-behavior: auto` e `[data-word]` branco, no bloco de reduced motion que já existia.
 - Docs: [TASKS.md](../TASKS.md), [QA-CHECKLIST.md](../QA-CHECKLIST.md), [TECHNICAL-SPEC.md](../TECHNICAL-SPEC.md), [CLAUDE.md](../../CLAUDE.md), [stories/README.md](README.md).
-- Evidência: [reduced_1200.png](../references/qa/reduced_1200.png) e [reduced_375.png](../references/qa/reduced_375.png).
+- Evidência: `reduced_1200.png` e `reduced_375.png`.
 
 **Medição com reduced motion** (`npm run start`, 3008, `200` confirmado; sonda CDP com `matchMedia('(prefers-reduced-motion: reduce)').matches === true` na saída):
 

@@ -4,7 +4,7 @@ const { execSync } = require('child_process');
 const path = require('path');
 
 const chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const targetDir = 'C:\\Users\\wilso\\Desktop\\Wilson\\clients\\nexus\\docs\\references\\qa';
+const targetDir = process.env.OUT_DIR || require('fs').mkdtempSync(require('path').join(require('os').tmpdir(), 'nexus-qa-'));
 
 const shots = [
   { name: 'val_values_all_cards.png', w: 1200, h: 900, url: `http://localhost:${PORT}/#about` },

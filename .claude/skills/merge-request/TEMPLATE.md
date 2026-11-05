@@ -15,7 +15,7 @@ costura e a decisão que amarra tudo.>
 
 ## Fidelidade ao legado
 
-- Comparado com: <`index.html:<linhas>`, `docs/references/screenshot.png`, `docs/CONTENT-MAPPING.md`>.
+- Comparado com: <`index.html:<linhas>`, legado rodando localmente, `docs/CONTENT-MAPPING.md`>.
 - Conteúdo, cores, fontes e ordem das seções: <inalterados | alterados conforme PEND-xx>.
 - Botões sociais (FR-07) e WhatsApp (FR-06): **não alterados**. <ou: alterados conforme PEND-xx, resolvido em AAAA-MM-DD>
 
@@ -46,7 +46,7 @@ $ node scripts/check_ids.js   <saída, ou "não aplicável">
 
 ## Evidências
 
-- `docs/references/qa/<arquivo>.png` — <o que mostra>
+- <o que foi conferido visualmente e como (sonda, viewport); capturas não são commitadas — se precisar mostrar, anexe ao PR>
 
 ## Como conferir na mão
 

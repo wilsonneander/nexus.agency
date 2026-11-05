@@ -69,7 +69,8 @@ se aplica leva "Nada.".
   registrada na TECHNICAL-SPEC/ARCHITECTURE.
 - **Validação** — saída real dos comandos e o SHA; viewports conferidos;
   reduced motion; scroll nos dois sentidos. O que não foi verificado é dito.
-- **Evidências** — caminhos dos screenshots em `docs/references/qa/`.
+- **Evidências** — o que foi conferido e como; screenshots não são commitados
+  (se precisar mostrar, anexe ao PR).
 - **Como conferir na mão** — passos numerados do zero, cada um com resultado
   observável, incluindo ao menos um caminho infeliz (reduced motion, 375px,
   rolar para cima).

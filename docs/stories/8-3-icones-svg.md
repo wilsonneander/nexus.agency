@@ -68,7 +68,7 @@ Os SVGs são decorativos (`aria-hidden="true"`, `focusable="false"`); os nomes a
 
 ### AC #5 — Nada regride, e a validação é carimbada
 
-`npx tsc --noEmit` e `npm run build` verdes; Lighthouse Performance de `/` em mobile não piora (esperado: FCP menor); nenhum item do QA-CHECKLIST § 9 violado; capturas em `docs/references/qa/`; SHA no Change Log.
+`npx tsc --noEmit` e `npm run build` verdes; Lighthouse Performance de `/` em mobile não piora (esperado: FCP menor); nenhum item do QA-CHECKLIST § 9 violado; capturas conferidas fora do repositório (não commitadas); SHA no Change Log.
 
 ## Plano técnico
 
@@ -108,7 +108,7 @@ Os SVGs são decorativos (`aria-hidden="true"`, `focusable="false"`); os nomes a
 - [ ] Todo AC verificado, cada um com a evidência.
 - [ ] `npx tsc --noEmit` verde.
 - [ ] `npm run build` verde, sem warning de hidratação/SSR.
-- [ ] Validação visual/movimento feita nos viewports afetados (evidência em `docs/references/qa/`).
+- [ ] Validação visual/movimento feita nos viewports afetados (capturas conferidas numa pasta temporária fora do repositório, sem commitar).
 - [ ] Itens tocados do `QA-CHECKLIST.md` atualizados com a evidência.
 - [ ] `PEND-18` marcado `RESOLVED`.
 - [ ] Docs afetados (TECHNICAL-SPEC, ARCHITECTURE, CLAUDE.md — "RemixIcon/FontAwesome via CDN") atualizados.

@@ -283,7 +283,7 @@ branco, que não é token de marca. Se o revisor preferir, troque por
 
 ## Execução
 
-**Arquivos tocados:** [src/app/layout.tsx](../../src/app/layout.tsx) (`<noscript>` no `<head>`), [src/components/motion/ScrollText.tsx](../../src/components/motion/ScrollText.tsx) (só comentário), [scripts/capture_nojs.js](../../scripts/capture_nojs.js) (novo), [docs/references/qa/nojs_375.png](../references/qa/nojs_375.png) e [nojs_1200.png](../references/qa/nojs_1200.png) (evidência final), [TASKS.md](../TASKS.md), [QA-CHECKLIST.md](../QA-CHECKLIST.md), [TECHNICAL-SPEC.md](../TECHNICAL-SPEC.md), [ARCHITECTURE.md](../ARCHITECTURE.md), [CLAUDE.md](../../CLAUDE.md).
+**Arquivos tocados:** [src/app/layout.tsx](../../src/app/layout.tsx) (`<noscript>` no `<head>`), [src/components/motion/ScrollText.tsx](../../src/components/motion/ScrollText.tsx) (só comentário), [scripts/capture_nojs.js](../../scripts/capture_nojs.js) (novo), `docs/references/qa/nojs_375.png` e `nojs_1200.png` (evidência final), [TASKS.md](../TASKS.md), [QA-CHECKLIST.md](../QA-CHECKLIST.md), [TECHNICAL-SPEC.md](../TECHNICAL-SPEC.md), [ARCHITECTURE.md](../ARCHITECTURE.md), [CLAUDE.md](../../CLAUDE.md).
 
 **Medição (AC #1).** O script lê a cor computada da 1ª `[data-word]` de cada um dos 5 textos:
 

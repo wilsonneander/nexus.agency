@@ -66,7 +66,7 @@ Com `prefers-reduced-motion: reduce`, menu e filtro trocam de estado na hora, se
 
 ### AC #5 — Nada regride, e a validação é carimbada
 
-`npx tsc --noEmit` e `npm run build` verdes; sem overflow horizontal; 0 erro no console; captura em [menu_mobile_open_375.png](../references/qa/menu_mobile_open_375.png); SHA no Change Log.
+`npx tsc --noEmit` e `npm run build` verdes; sem overflow horizontal; 0 erro no console; captura em `menu_mobile_open_375.png`; SHA no Change Log.
 
 ## Plano técnico
 
@@ -102,7 +102,7 @@ Com `prefers-reduced-motion: reduce`, menu e filtro trocam de estado na hora, se
 
 ## Execução
 
-**Arquivos tocados:** [Navbar.tsx](../../src/components/layout/Navbar.tsx), [Projects/index.tsx](../../src/sections/Projects/index.tsx), [presets.ts](../../src/animations/presets.ts), [menu_mobile_open_375.png](../references/qa/menu_mobile_open_375.png).
+**Arquivos tocados:** [Navbar.tsx](../../src/components/layout/Navbar.tsx), [Projects/index.tsx](../../src/sections/Projects/index.tsx), [presets.ts](../../src/animations/presets.ts), `menu_mobile_open_375.png`.
 
 **O que divergiu do plano:** nada.
 

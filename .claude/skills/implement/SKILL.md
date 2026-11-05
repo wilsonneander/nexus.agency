@@ -89,7 +89,7 @@ lugares. Refatorar o que a story não toca é escopo extra.
 
 Antes de escrever markup ou estilo, abra o trecho correspondente do legado
 (`grep -n "<classe-ou-texto>" index.html styles.css`) e a referência
-(`docs/references/screenshot.png`, `docs/CONTENT-MAPPING.md`).
+(o legado aberto no navegador, `docs/CONTENT-MAPPING.md`).
 
 O que reprova, e você não escreve:
 
@@ -141,7 +141,7 @@ npx tsc --noEmit
 npm run build
 npx next dev -p <porta>            # em background, para as validações abaixo
 node scripts/check_ids.js          # se mexeu em seção/âncora — ajuste a porta do script
-node scripts/capture_<x>.js        # screenshots → docs/references/qa/ (portas e caminhos fixos no script)
+node scripts/capture_<x>.js        # screenshots → pasta temporária fora do repo (OUT_DIR); nunca commitar
 ```
 
 - **Visual**: compare os screenshots com o legado nos viewports afetados

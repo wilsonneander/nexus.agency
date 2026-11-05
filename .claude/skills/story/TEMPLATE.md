@@ -52,8 +52,8 @@ hidratação, scroll para cima, resize, 375px.
 ### AC #N — Nada regride, e a validação é carimbada
 
 `npx tsc --noEmit` e `npm run build` verdes; nenhum item do QA-CHECKLIST § 9
-violado; validação visual nos viewports afetados com evidência em
-`docs/references/qa/`; **SHA** citado no Change Log.
+violado; validação visual nos viewports afetados (capturas numa pasta temporária
+fora do repositório, nunca commitadas); **SHA** citado no Change Log.
 
 ## Plano técnico
 
@@ -90,7 +90,7 @@ inviolável", keyframes do legado, etc.).
 - [ ] Todo AC verificado, cada um com a evidência.
 - [ ] `npx tsc --noEmit` verde.
 - [ ] `npm run build` verde, sem warning de hidratação/SSR.
-- [ ] Validação visual/movimento feita nos viewports afetados (evidência em `docs/references/qa/`).
+- [ ] Validação visual/movimento feita nos viewports afetados (capturas conferidas numa pasta temporária fora do repositório, sem commitar).
 - [ ] Itens tocados do `QA-CHECKLIST.md` atualizados com a evidência.
 - [ ] `PEND-xx` consumido marcado `RESOLVED`, se houver.
 - [ ] Docs afetados (TECHNICAL-SPEC, ARCHITECTURE, CLAUDE.md) atualizados.

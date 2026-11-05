@@ -86,7 +86,7 @@ Mover só um é o erro mais comum:
    § _Ordem de implementação_ do topo atualizada (a tarefa sai da tabela,
    "Próxima tarefa" aponta a seguinte, data e SHA renovados).
 3. **`QA-CHECKLIST.md`** — os itens que a tarefa validou, com a evidência
-   (`docs/references/qa/<arquivo>.png`, comando).
+   (comando e medida; capturas não entram no repositório).
 
 Mais os docs que a tarefa mudou de padrão (`TECHNICAL-SPEC.md`,
 `ARCHITECTURE.md`, `CLAUDE.md`).

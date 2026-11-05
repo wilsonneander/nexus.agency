@@ -109,7 +109,7 @@ nova; texto visível sem JS (HTML do servidor); nenhuma dependência nova.
 - [x] Todo AC verificado, cada um com a evidência.
 - [x] `npx tsc --noEmit` verde.
 - [x] `npm run build` verde.
-- [x] Validação visual feita nos viewports afetados ([footer_canais_1200.png](../references/qa/footer_canais_1200.png), [footer_canais_1024.png](../references/qa/footer_canais_1024.png), [footer_canais_375.png](../references/qa/footer_canais_375.png)).
+- [x] Validação visual feita nos viewports afetados (`footer_canais_1200.png`, `footer_canais_1024.png`, `footer_canais_375.png`).
 - [x] Itens tocados do [QA-CHECKLIST.md](../QA-CHECKLIST.md) atualizados com a evidência.
 - [x] `PEND-09` atualizado (horário e área resolvidos; demais colchetes abertos).
 - [x] Revisão (`review-mr`) e status `DONE` na story **e** no `TASKS.md`.

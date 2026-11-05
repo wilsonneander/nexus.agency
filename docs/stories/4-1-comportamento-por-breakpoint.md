@@ -358,7 +358,7 @@ condição, o que o FR-07 permite); nenhuma dependência nova (`gsap.matchMedia(
 - [Banners/index.tsx](../../src/sections/Banners/index.tsx) — grade em `min-[481px]:`/`min-[769px]:`, ícone acima do texto em 481–768 px, `min-w-0` (AC #1, #2).
 - [BannersClient.tsx](../../src/sections/Banners/BannersClient.tsx) — `gsap.set` explícito do estado inicial de cards e ícones; destino `fromTo` da 4.7 mantido (AC #6).
 - Docs: [TECHNICAL-SPEC.md](../TECHNICAL-SPEC.md), [ARCHITECTURE.md](../ARCHITECTURE.md), [QA-CHECKLIST.md](../QA-CHECKLIST.md) § 4, [CLAUDE.md](../../CLAUDE.md), [TASKS.md](../TASKS.md).
-- Evidência: [breakpoints_banners_480.png](../references/qa/breakpoints_banners_480.png), [breakpoints_banners_481.png](../references/qa/breakpoints_banners_481.png), [breakpoints_768.png](../references/qa/breakpoints_768.png).
+- Evidência: `breakpoints_banners_480.png`, `breakpoints_banners_481.png`, `breakpoints_768.png`.
 
 **O que divergiu do plano:**
 - **O About não tem parallax.** O `ParallaxImage` é importado em [About/index.tsx](../../src/sections/About/index.tsx) mas não é renderizado, e não há `grafic.png` na página: a story e o CLAUDE.md citavam um efeito que não existe. A primitiva recebeu o mesmo `matchMedia` (para não voltar a rodar em mobile se for usada); o import morto fica para a 6.9. O AC #3/#4 vale só para o brilho do Hero.

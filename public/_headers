@@ -1,0 +1,14 @@
+# Cabeçalhos do Cloudflare Pages (story 8.2). Copiado para out/_headers no build.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+
+# Arquivos do Next com hash no nome: nunca mudam de conteúdo.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Imagens sem hash no nome: cache de 1 dia + revalidação em segundo plano.
+/assets/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800

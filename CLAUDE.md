@@ -20,13 +20,13 @@ Toda a documentação mora em `docs/` — o [docs/README.md](docs/README.md) diz
 - `docs/AUDIT.md` — inventário do legado (§§ 1–11: seções, textos, links, tokens, breakpoints, animações, bugs do legado) e auditoria de funcionalidades/conversão do rebuild (§ 12).
 - `docs/QA-CHECKLIST.md` — critérios de aceite; § 9 é o critério de liberação que nenhuma tarefa pode violar.
 - `docs/stories/` e `docs/tdds/` — uma story por tarefa, um TDD por fluxo; cada pasta tem um `README.md` de índice para manter atualizado.
-- `docs/references/` — `screenshot.png` (referência visual do legado), `client-content.pdf`, `qa/` (capturas de validação).
+- `docs/references/` — `client-content.pdf` e `qa/lighthouse.report.json`. Sem imagens: a referência visual é o próprio legado (`index.html`).
 
 **Fluxo por skills** (`.claude/skills/`): `story` (`docs/stories/<id>-<slug>.md`, status espelhado no `TASKS.md`) → `validate-story` → `implement` → `review-mr` → `close-story` → `merge-request` (PR no GitHub via `gh`, só quando o trabalho estiver numa branch). `tdd` documenta fluxos em `docs/tdds/`. O ID da tarefa vem do `TASKS.md` e nunca se reaproveita.
 
 **Regras de documentação e higiene do repositório:**
 - Em todo arquivo de documentação, a menção a outro arquivo é sempre um link Markdown para ele, nunca um caminho solto.
-- Screenshots e scripts que só servem para executar uma story (capturas "antes", sondas, scripts de captura pontuais) ficam numa pasta temporária fora do repositório — nunca em `scripts/` ou `docs/references/qa/` e nunca commitados. No repositório só entram evidências úteis (ex.: a captura final de validação citada pela story/QA).
+- **Nenhuma imagem de evidência entra no repositório** (decisão do responsável, 2026-11-05 — as 45 capturas de `docs/references/` foram removidas). Screenshots de validação, capturas "antes/depois", sondas e scripts pontuais ficam numa pasta temporária fora do repositório e nunca são commitados. A evidência de uma story é descrita em texto (comando, medida, viewport, SHA), não por link para imagem.
 
 **Git:** trabalho direto na `main`; remoto `origin` no GitHub (`wilsonneander/nexus.agency`). Conventional Commits em inglês (`feat:`, `fix:`, `docs:`). Commit e push só quando pedido.
 
@@ -40,7 +40,7 @@ npx tsc --noEmit     # type-check isolado
 ```
 
 - Não há framework de testes nem config de ESLint (`npm run lint` → `next lint` pedirá configuração interativa).
-- Validação visual: scripts em `scripts/` chamam o Chrome headless (caminhos absolutos do Windows) e salvam em `docs/references/qa/`. Todos esperam o dev server na porta **3008** (sobrescreva com a variável `PORT`): `npx next dev -p 3008`, depois `node scripts/capture_sections.js`. `scripts/check_ids.js` verifica âncoras/IDs.
+- Validação visual: scripts em `scripts/` chamam o Chrome headless (caminhos absolutos do Windows) e salvam numa pasta temporária fora do repositório (`OUT_DIR`, padrão `<tmp>/nexus-qa`). Todos esperam o dev server na porta **3008** (sobrescreva com a variável `PORT`): `npx next dev -p 3008`, depois `node scripts/capture_sections.js`. `scripts/check_ids.js` verifica âncoras/IDs.
 - Viewports de validação: 375, 480, 768, 1024 e 1200px. Movimento: scroll para baixo **e** para cima, `prefers-reduced-motion`, resize.
 
 ## Arquitetura

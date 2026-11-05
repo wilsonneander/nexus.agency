@@ -5,7 +5,7 @@ const path = require('path');
 
 const chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const sections = ['about', 'service', 'project', 'contact'];
-const targetDir = 'C:\\Users\\wilso\\Desktop\\Wilson\\clients\\nexus\\docs\\references\\qa';
+const targetDir = process.env.OUT_DIR || require('fs').mkdtempSync(require('path').join(require('os').tmpdir(), 'nexus-qa-'));
 
 sections.forEach(sec => {
   const outFile = path.join(targetDir, `scroll_${sec}.png`);

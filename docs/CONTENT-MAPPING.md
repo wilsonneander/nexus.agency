@@ -3,7 +3,7 @@
 > **Documento Oficial de Mapeamento:** `docs/CONTENT-MAPPING.md`  
 > **Data:** 02 de Novembro de 2026  
 > **Fontes de Referência:**
-> 1. `docs/references/screenshot.png` (Captura de tela visual do site de referência).
+> 1. Site de referência (legado) — a captura de tela `screenshot.png` foi removida do repositório em 2026-11-05.
 > 2. `docs/references/client-content.pdf` (*Textos do site — Serviços, Sobre nós, Contato, Missão e Valores* por @Wallace, Nov 1, 2026).
 > 3. Código legado original (`index.html`, `styles.css`, `main.js`, `assets/`).
 

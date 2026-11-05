@@ -93,7 +93,7 @@ violado; evidência em `docs/references/qa/`; SHA no Change Log.
 - [x] Todo AC verificado, cada um com a evidência.
 - [x] `npx tsc --noEmit` verde.
 - [x] `npm run build` verde.
-- [x] Validação visual feita nos viewports afetados ([footer_email_1200.png](../references/qa/footer_email_1200.png), [footer_email_375.png](../references/qa/footer_email_375.png)).
+- [x] Validação visual feita nos viewports afetados (`footer_email_1200.png`, `footer_email_375.png`).
 - [x] Itens tocados do [QA-CHECKLIST.md](../QA-CHECKLIST.md) atualizados com a evidência.
 - [x] `PEND-11` marcado `RESOLVED`.
 - [x] Revisão (`review-mr`) e status `DONE` na story **e** no `TASKS.md`.

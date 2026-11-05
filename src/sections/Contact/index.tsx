@@ -82,6 +82,15 @@ export function ContactSection() {
           onSubmit={handleSubmit}
           className="max-w-xl mx-auto flex flex-col gap-6 bg-[#0f1221]/50 p-6 sm:p-10 rounded-2xl border border-white/5 shadow-2xl"
         >
+          {/* Isca anti-spam do Formspree: invisível; robô que preenche tem o envio descartado */}
+          <input
+            type="text"
+            name="_gotcha"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="hidden"
+          />
           <div data-contact-field>
             <label htmlFor="name" className="block text-xs uppercase tracking-wider text-white/70 mb-1">
               Nome

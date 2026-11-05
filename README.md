@@ -131,7 +131,7 @@ node scripts/check_ids.js          # verifica âncoras/IDs
 | `capture_mvv.js` | Missão, Visão e Valores |
 | `check_ids.js` | Âncoras e IDs vs. navegação |
 
-As imagens são salvas em `docs/references/qa/`. O plano de testes e os critérios de aceite estão em [docs/QA-CHECKLIST.md](docs/QA-CHECKLIST.md).
+As imagens vão para uma pasta temporária fora do repositório (`OUT_DIR`, padrão `<tmp>/nexus-qa`) e nunca são commitadas. O plano de testes e os critérios de aceite estão em [docs/QA-CHECKLIST.md](docs/QA-CHECKLIST.md).
 
 ## Documentação
 
@@ -149,7 +149,7 @@ Toda a documentação mora em [docs/](docs/README.md) — o índice lá diz qual
 | [docs/CONTENT-MAPPING.md](docs/CONTENT-MAPPING.md) | Conteúdo do cliente vs. site legado |
 | [docs/stories/](docs/stories/README.md) | Uma story por tarefa |
 | [docs/tdds/](docs/tdds/README.md) | Um TDD por fluxo técnico |
-| [docs/references/](docs/references/) | Screenshot do legado, PDF do cliente e capturas de QA |
+| [docs/references/](docs/references/) | PDF do cliente e relatório do Lighthouse |
 
 ## Fluxo de trabalho
 

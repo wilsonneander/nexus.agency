@@ -121,7 +121,7 @@ resultado não é sobre o alvo: diga isso.
 1. `src/sections/About/AboutClient.tsx:31` — <defeito>. Dispara quando: <cenário>. AC #2.
 
 ### Critérios de aceite
-- AC #1 — entregue (`src/sections/Hero/index.tsx:40`, `docs/references/qa/x.png`).
+- AC #1 — entregue (`src/sections/Hero/index.tsx:40`, sonda em 375/1200).
 - AC #2 — parcial: só 1200px conferido; 375px sem evidência.
 
 ### Além do escopo

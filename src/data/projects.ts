@@ -13,7 +13,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     title: "Wine",
     category: ".web",
     categoryLabel: "Fast Food",
-    image: "/assets/wine.png",
+    image: "/assets/projects/wine.webp",
     alt: "project wine",
   },
   {
@@ -21,7 +21,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     title: "Burguer",
     category: ".web",
     categoryLabel: "Fast Food",
-    image: "/assets/burguer.png",
+    image: "/assets/projects/burguer.webp",
     alt: "project burguer",
   },
   {
@@ -29,7 +29,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     title: "WooCommerce",
     category: ".game",
     categoryLabel: "Tecnologia",
-    image: "/assets/woocommerce.png",
+    image: "/assets/projects/woocommerce.webp",
     alt: "project woocommerce",
   },
   {
@@ -37,7 +37,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     title: "Pixologia",
     category: ".game",
     categoryLabel: "Tecnologia",
-    image: "/assets/pixologia.png",
+    image: "/assets/projects/pixologia.webp",
     alt: "project pixologia",
   },
   {
@@ -45,7 +45,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     title: "Hotel",
     category: ".design",
     categoryLabel: "Viagens",
-    image: "/assets/hotel.png",
+    image: "/assets/projects/hotel.webp",
     alt: "project hotel",
   },
   {
@@ -53,7 +53,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     title: "WDM",
     category: ".design",
     categoryLabel: "Viagens",
-    image: "/assets/wdm.png",
+    image: "/assets/projects/wdm.webp",
     alt: "project wdm",
   },
 ];

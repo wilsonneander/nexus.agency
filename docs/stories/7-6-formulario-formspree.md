@@ -72,7 +72,7 @@ Digitar `61992985392` mostra `(61) 99298-5392`; um fixo de 10 dígitos mostra `(
 | --- | --- | --- |
 | tipos/build | sem erro | `npx tsc --noEmit`, `npm run build` |
 | comportamento | máscara, colagem, backspace, validade | sonda CDP descartável (fora do repo) em 375 e 1200px |
-| visual | campo formatado | [contact_whatsapp_mask_1200.png](../references/qa/contact_whatsapp_mask_1200.png) |
+| visual | campo formatado | `contact_whatsapp_mask_1200.png` |
 
 ## Riscos e armadilhas
 
@@ -84,7 +84,7 @@ Digitar `61992985392` mostra `(61) 99298-5392`; um fixo de 10 dígitos mostra `(
 - [x] Todo AC verificado, cada um com a evidência.
 - [x] `npx tsc --noEmit` verde.
 - [x] `npm run build` verde.
-- [x] Validação visual feita nos viewports afetados ([contact_whatsapp_mask_1200.png](../references/qa/contact_whatsapp_mask_1200.png)).
+- [x] Validação visual feita nos viewports afetados (`contact_whatsapp_mask_1200.png`).
 - [x] Itens tocados do [QA-CHECKLIST.md](../QA-CHECKLIST.md) atualizados com a evidência.
 - [x] `PEND-10` marcado `RESOLVED`.
 - [ ] Envio real conferido no painel do Formspree — não feito: geraria uma mensagem de teste na caixa do cliente; fica para o responsável.

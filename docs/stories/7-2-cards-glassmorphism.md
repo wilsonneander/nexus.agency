@@ -38,7 +38,7 @@ vazio).
 
 O responsável pediu (2026-11-03, `PEND-15`) que **todos esses cards sigam um
 único padrão** no estilo da imagem de referência
-[cards-glass-reference.png](../references/cards-glass-reference.png): fundo
+`cards-glass-reference.png`: fundo
 translúcido com desfoque (vidro), **borda iluminada** (contorno claro/lilás com
 halo roxo suave por fora) e **ícones em cores vivas** (quadrado arredondado com
 gradiente roxo→magenta saturado e glifo branco).
@@ -172,7 +172,7 @@ destaque e métrica do About, Blog e Projetos têm o **mesmo** tratamento: fundo
 translúcido (o brilho ambiente aparece por trás, desfocado), contorno claro de
 1px mais luminoso no topo e halo roxo suave por fora, cantos arredondados
 iguais entre cards do mesmo tipo. Verificação: captura de cada seção ao lado de
-[cards-glass-reference.png](../references/cards-glass-reference.png); na página,
+`cards-glass-reference.png`; na página,
 `document.querySelectorAll('.glass-card').length` é 31 (3 Banners, 6 Serviços,
 3 Pacotes, 2 Missão/Visão, 6 Valores, destaque, métrica, 3 Blog, 6 Projetos);
 `grep -rn "bg-\[#0f1221\]" src/sections --exclude=MissionVisionValues.tsx` só
@@ -401,8 +401,8 @@ botões sociais e WhatsApp intocados; nenhuma dependência nova.
 `data-*`, markup e conteúdo intactos; nenhum `*Client.tsx` tocado);
 [CLAUDE.md](../../CLAUDE.md) (§ Estilo → Cards);
 [QA-CHECKLIST.md](../QA-CHECKLIST.md) (§ 3 e § 5); evidências
-[cards_glass_1200.png](../references/qa/cards_glass_1200.png) e
-[cards_glass_375.png](../references/qa/cards_glass_375.png).
+`cards_glass_1200.png` e
+`cards_glass_375.png`.
 
 **O que divergiu do plano:** o plano original previa `border: 1px`, regras em
 `@layer components`, tokens no `tailwind.config.ts` e um vidro mais claro; a

@@ -27,8 +27,8 @@ responsável (AGENTS.md § 3).
 | Índice das stories | `docs/stories/README.md` — acrescente a linha da story nova |
 | O quadro de status | [docs/TASKS.md](../../../docs/TASKS.md) — a linha `- [ ] <id> …` da fase |
 | Pendências de decisão | `docs/TASKS.md` § _Pendências de Decisão Registradas_ (`PEND-xx`) |
-| Evidência visual | `docs/references/qa/<nome>.png` |
-| Referência do legado | `docs/references/screenshot.png`, `docs/AUDIT.md`, `docs/CONTENT-MAPPING.md`, `docs/references/client-content.pdf` |
+| Evidência visual | pasta temporária fora do repositório — nunca commitada |
+| Referência do legado | legado (`index.html`/`styles.css`), `docs/AUDIT.md`, `docs/CONTENT-MAPPING.md`, `docs/references/client-content.pdf` |
 
 **O ID vem do `TASKS.md`.** Tarefa que já tem linha lá usa aquele ID e aquele
 título. Tarefa nova entra no `TASKS.md` **primeiro**, na fase certa, com o
@@ -138,7 +138,7 @@ violado, validação carimbada com SHA".
 
 Se a tarefa toca conteúdo, cor, fonte, imagem, ordem de seção, botão social ou
 WhatsApp, o AC diz **contra o que se compara** (`index.html:<linha>`,
-`docs/CONTENT-MAPPING.md`, `docs/references/screenshot.png`) e o que deve ser
+`docs/CONTENT-MAPPING.md`, `styles.css:<linha>`) e o que deve ser
 idêntico. Conteúdo novo só entra com fonte aprovada (`client-content.pdf`,
 decisão `PEND-xx` resolvida) — nunca inventado (AGENTS.md § 4).
 
@@ -180,7 +180,7 @@ Não há framework de testes. As camadas de validação deste repositório são:
 | Tipos | sempre | `npx tsc --noEmit` |
 | Build | sempre | `npm run build` (exit 0, sem warning de hidratação/SSR) |
 | Âncoras | mexeu em seção, navbar ou IDs | `node scripts/check_ids.js` contra o dev server (confira a porta no script) |
-| Visual por viewport | mexeu em layout/estilo | script `scripts/capture_*.js` → `docs/references/qa/`, comparado com o legado em 375/480/768/1024/1200 |
+| Visual por viewport | mexeu em layout/estilo | script `scripts/capture_*.js` → pasta temporária fora do repo, comparado com o legado em 375/480/768/1024/1200 |
 | Movimento | mexeu em animação | scroll para baixo **e** para cima, reduced motion, resize; sem conteúdo invisível |
 | Itens do QA-CHECKLIST | sempre | os itens que a tarefa toca, citados por seção |
 

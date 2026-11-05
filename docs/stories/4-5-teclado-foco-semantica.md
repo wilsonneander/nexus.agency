@@ -80,7 +80,7 @@ A lista de títulos (extensão HeadingsMap ou `document.querySelectorAll("h1,h2,
 
 ### AC #6 — Nada regride, e a validação é carimbada
 
-`npx tsc --noEmit` e `npm run build` verdes; Lighthouse Accessibility ≥ o atual (94); nenhum item do QA-CHECKLIST § 9 violado; capturas de foco em `docs/references/qa/`; SHA no Change Log.
+`npx tsc --noEmit` e `npm run build` verdes; Lighthouse Accessibility ≥ o atual (94); nenhum item do QA-CHECKLIST § 9 violado; capturas de foco conferidas fora do repositório (não commitadas); SHA no Change Log.
 
 ## Plano técnico
 
@@ -126,7 +126,7 @@ A lista de títulos (extensão HeadingsMap ou `document.querySelectorAll("h1,h2,
 - [ ] Todo AC verificado, cada um com a evidência.
 - [ ] `npx tsc --noEmit` verde.
 - [ ] `npm run build` verde, sem warning de hidratação/SSR.
-- [ ] Validação visual/movimento feita nos viewports afetados (evidência em `docs/references/qa/`).
+- [ ] Validação visual/movimento feita nos viewports afetados (capturas conferidas numa pasta temporária fora do repositório, sem commitar).
 - [ ] Itens tocados do `QA-CHECKLIST.md` atualizados com a evidência.
 - [ ] `PEND-xx` consumido: nenhum.
 - [ ] Docs afetados (TECHNICAL-SPEC § 5) atualizados.
