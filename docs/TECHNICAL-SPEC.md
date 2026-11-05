@@ -127,6 +127,9 @@ Registradas no `package.json` e `package-lock.json` com sucesso na Fase 1. Build
 - Preservar texto no HTML renderizado.
 - Definir Open Graph e favicon com os assets corretos.
 - Não inventar informações estruturadas ou dados comerciais.
+- **JSON-LD** ([story 8.4](stories/8-4-metadados-dados-estruturados.md)): um `Organization` em `<script type="application/ld+json">` no `<head>` do [layout.tsx](../src/app/layout.tsx), montado só de `SITE_CONFIG` — `name`, `url`, `logo` (absoluto via `new URL`), `email`, `telephone` (`+` + `whatsapp.number`), `sameAs` (`socials`) e `areaServed` (derivado de `serviceArea`). Não é `LocalBusiness`: o Google exige `address` nos subtipos dele e não há endereço aprovado. O `<` do JSON é escapado (`\u003c`).
+- **Imagem OG**: `public/assets/og-image.jpg` (1200×686, a foto do Hero legado sem recorte), com dimensões e tipo declarados em `OG_IMAGE`; a arte 1200×630 aprovada é a 8.8 (`PEND-19`).
+- **Ícones** pela convenção do App Router: `src/app/icon.png` (512×512) e `src/app/apple-icon.png` (180×180); o Next gera os `<link>` com hash. `viewport.themeColor` = `THEME_COLOR` de [constants.ts](../src/lib/constants.ts), espelho de `--secondary-color`.
 
 ## 7. Qualidade de código
 - TypeScript com tipos explícitos para dados e props relevantes.

@@ -91,7 +91,11 @@ Depois de configurados os *build watch paths* do [README.md](../../README.md#dep
 
 ### AC #7 — Nada regride, e a validação é carimbada
 
-`npx tsc --noEmit` e `npm run build` verdes no SHA publicado; nenhum item do QA-CHECKLIST § 9 violado; [QA-CHECKLIST.md](../QA-CHECKLIST.md) § 7 com o item do deploy marcado e a evidência; as pontas da [8.2](8-2-deploy-estatico-cloudflare-pages.md) que vieram para cá registradas como fechadas no Change Log dela; SHA e URL no Change Log desta story.
+`npx tsc --noEmit` e `npm run build` verdes no SHA publicado; o AC #8 conferido; nenhum item do QA-CHECKLIST § 9 violado; [QA-CHECKLIST.md](../QA-CHECKLIST.md) § 7 com o item do deploy marcado e a evidência; as pontas da [8.2](8-2-deploy-estatico-cloudflare-pages.md) que vieram para cá registradas como fechadas no Change Log dela; SHA e URL no Change Log desta story.
+
+### AC #8 — A prévia de compartilhamento aparece (vinda da 8.4)
+
+Resto do AC #2 da [8.4](8-4-metadados-dados-estruturados.md), movido para cá em 2026-11-05 com o aval do responsável (sem projeto no Pages, não havia preview onde testar). Em `$B`, `/assets/og-image.jpg` responde 200 `image/jpeg`, e a URL `$B/` num depurador de OG (ex.: opengraph.xyz) **e** no LinkedIn Post Inspector ou numa mensagem do WhatsApp mostra a prévia com a foto, o título e a descrição. As meta tags `og:*` apontam para o domínio oficial (`metadataBase`), que ainda não resolve (`PEND-20`): se o depurador não carregar a imagem por isso, registrar como esperado e repetir a conferência da imagem no domínio — não é falha do site.
 
 ## Plano técnico
 
@@ -123,6 +127,7 @@ Documentos ao fechar: [QA-CHECKLIST.md](../QA-CHECKLIST.md) § 7, [TASKS.md](../
 - [ ] HTML do formulário no ar; responsável envia o teste (AC #4)
 - [ ] Navegador em 375/1200, console, rede, reduced motion (AC #5)
 - [ ] Push só de docs não gera build (AC #6)
+- [ ] Prévia de OG num depurador e no WhatsApp/LinkedIn (AC #8)
 - [ ] QA-CHECKLIST, TASKS, Change Log da 8.2, README (AC #7)
 
 ## Validações exigidas
@@ -136,6 +141,7 @@ Documentos ao fechar: [QA-CHECKLIST.md](../QA-CHECKLIST.md) § 7, [TASKS.md](../
 | âncoras | os 10 IDs no HTML no ar | laço de `grep` do Plano técnico |
 | movimento | rolagem nos dois sentidos, filtro, reduced motion | Chrome em `$B`, 375 e 1200 |
 | conversão | formulário | envio real pelo responsável + HTML conferido |
+| SEO | prévia de OG (AC #8) | depurador de OG + WhatsApp ou LinkedIn Post Inspector com `$B/` |
 | QA-CHECKLIST | § 6, § 7, § 9 | itens de performance, build/deploy e liberação |
 
 ## Riscos e armadilhas
@@ -172,3 +178,4 @@ Documentos ao fechar: [QA-CHECKLIST.md](../QA-CHECKLIST.md) § 7, [TASKS.md](../
 | --- | --- | --- |
 | 2026-11-05 | TODO | Story criada sobre `d7214b1`. Medido: nenhum deploy/check-run do Pages no GitHub; `nexus-agency.pages.dev` é outro site; `nexusagencybr.com.br` não resolve (aberto o `PEND-20`). |
 | 2026-11-05 | TODO | Validada sobre `d7214b1` (0 commits desde o baseline): AC #1 aceita check-run, status ou deployment do GitHub; AC #6 conta só push de docs feito depois dos *build watch paths*; risco da restrição de domínios do Formspree acrescentado. Aguarda o responsável criar o projeto e informar `<projeto>.pages.dev`. |
+| 2026-11-05 | TODO | AC #8 acrescentado: a prévia de OG no ar, resto do AC #2 da [8.4](8-4-metadados-dados-estruturados.md) (fechada sem ela, com aval do responsável). |

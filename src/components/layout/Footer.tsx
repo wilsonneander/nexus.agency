@@ -23,7 +23,7 @@ export function Footer() {
         <div data-footer-col className="md:col-span-12 xl:col-span-2 flex flex-col gap-5">
           <Link href="#home">
             <Image
-              src="/assets/logo.png"
+              src={SITE_CONFIG.logo}
               alt="Nexus Performance & Insights"
               width={140}
               height={45}

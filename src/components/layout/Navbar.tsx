@@ -88,7 +88,7 @@ export function Navbar() {
         {/* Logo */}
         <Link href="#home" className="flex items-center">
           <Image
-            src="/assets/logo.png"
+            src={SITE_CONFIG.logo}
             alt="Nexus Performance & Insights"
             width={140}
             height={45}

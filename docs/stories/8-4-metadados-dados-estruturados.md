@@ -6,7 +6,7 @@ baseline_commit: 3a87d8651cce981791692b61f5c127889090347e
 
 |                 |                                                                                         |
 | --------------- | --------------------------------------------------------------------------------------- |
-| **Status**      | TODO                                                                                    |
+| **Status**      | DONE                                                                                    |
 | **Fase**        | Fase 8 — Leveza, SEO e deploy no Cloudflare Pages                                       |
 | **Área**        | performance/SEO                                                                         |
 | **Seções**      | global                                                                                  |
@@ -80,11 +80,11 @@ No `out/` servido, `/icon.png` (512×512) e `/apple-icon.png` (180×180) respond
 
 ## Tasks
 
-- [ ] `SITE_CONFIG.logo`/`areaServed`/`themeColor` + Navbar/Footer lendo o logo
-- [ ] JSON-LD (AC #1)
-- [ ] OG em JPG com dimensões reais (AC #2)
-- [ ] Ícones, `theme-color` e remoção dos assets órfãos (AC #3)
-- [ ] Validação (AC #4)
+- [x] `SITE_CONFIG.logo`/`areaServed`/`themeColor` + Navbar/Footer lendo o logo
+- [x] JSON-LD (AC #1), com o validador do schema.org e o Rich Results Test
+- [x] OG em JPG com dimensões reais (AC #2) — a prévia no ar foi para a [8.6](8-6-conferir-primeiro-deploy-pages.md) (AC #8)
+- [x] Ícones, `theme-color` e remoção dos assets órfãos (AC #3)
+- [x] Validação (AC #4)
 
 ## Validações exigidas
 
@@ -107,19 +107,30 @@ No `out/` servido, `/icon.png` (512×512) e `/apple-icon.png` (180×180) respond
 
 ## Definition of Done
 
-- [ ] Todo AC verificado, cada um com a evidência.
-- [ ] `npx tsc --noEmit` verde.
-- [ ] `npm run build` verde, sem warning de hidratação/SSR.
-- [ ] Validação visual: logo do Navbar/Footer inalterado; prévia de OG descrita em texto.
-- [ ] Itens tocados do `QA-CHECKLIST.md` atualizados com a evidência.
-- [ ] Docs afetados (TECHNICAL-SPEC) atualizados.
-- [ ] Status movido na story **e** no `TASKS.md`, com a validação carimbada (comando + SHA) no Change Log.
+- [x] Todo AC verificado, cada um com a evidência — exceto a prévia de OG **no ar** do AC #2, movida para a [8.6](8-6-conferir-primeiro-deploy-pages.md) (AC #8) com o aval do responsável: o projeto do Pages ainda não existe, então não há preview onde testar.
+- [x] `npx tsc --noEmit` verde.
+- [x] `npm run build` verde, sem warning de hidratação/SSR.
+- [x] Validação visual: logo do Navbar/Footer inalterado (sonda CDP 375/1200); prévia de OG descrita em texto pelas meta tags — a prévia renderizada é o AC #8 da 8.6.
+- [x] Itens tocados do `QA-CHECKLIST.md` atualizados com a evidência.
+- [x] Docs afetados (TECHNICAL-SPEC) atualizados.
+- [x] Status movido na story **e** no `TASKS.md`, com a validação carimbada (comando + SHA) no Change Log.
 
 ## Execução
 
-**Arquivos tocados:** <preenchido ao implementar.>
+**Arquivos tocados:** [constants.ts](../../src/lib/constants.ts) (`logo`, `areaServed`, `THEME_COLOR`); [layout.tsx](../../src/app/layout.tsx) (`OG_IMAGE`, `organizationJsonLd`, `viewport`, script JSON-LD no `<head>`, sem `metadata.icons`); [Navbar.tsx](../../src/components/layout/Navbar.tsx) e [Footer.tsx](../../src/components/layout/Footer.tsx) (`src={SITE_CONFIG.logo}`); `public/assets/og-image.jpg` (novo, 1200×686, 124 KB); `src/app/icon.png` (512×512) e `src/app/apple-icon.png` (180×180), novos; `public/assets/header.webp` e `public/assets/icon2.png` removidos; [TECHNICAL-SPEC.md](../TECHNICAL-SPEC.md) § 6; [QA-CHECKLIST.md](../QA-CHECKLIST.md) § 7.
 
-**O que divergiu do plano:** <preenchido ao implementar.>
+**Evidência (árvore de trabalho sobre `fca5e37`):**
+
+- AC #1 — `out/index.html` tem `{"@context":"https://schema.org","@type":"Organization","name":"Nexus Agency","url":"https://nexusagencybr.com.br","logo":"https://nexusagencybr.com.br/assets/logo.png","email":"contato@nexusagencybr.com.br","telephone":"+556192985392","sameAs":[as 3 URLs de SITE_CONFIG.socials, iguais],"areaServed":{"@type":"Country","name":"Brasil"}}`. `grep -n "nexusagencybr.com.br\|556192\|Brasil\|instagram\|linkedin\|facebook" src/app/layout.tsx` → nada. Validador do schema.org (POST do script de `out/index.html` em `validator.schema.org/validate`): 1 objeto `Organization`, **0 erros, 0 avisos**. Rich Results Test, modo código, com o mesmo script: **2 itens válidos, nenhum erro** — `Organização` e "Empresas locais"; neste os 2 "erros não críticos" são `address` e `image` marcados **(opcional)** pelo próprio teste, que não entram (endereço não aprovado — ver Fora de escopo).
+- AC #2 — `og:image` = `https://nexusagencybr.com.br/assets/og-image.jpg`, `og:image:width` 1200, `og:image:height` 686, `og:image:type` `image/jpeg`; `twitter:image` = o mesmo arquivo. `sips` do JPG: 1200×686 (1792:1024 → 1200:685,7, sem recorte). **Movido para a [8.6](8-6-conferir-primeiro-deploy-pages.md) (AC #8), com o aval do responsável:** a prévia renderizada num depurador de OG e no WhatsApp/LinkedIn — o projeto do Pages ainda não existe (8.6), então não há preview onde testar.
+- AC #3 — `out/` servido na 3008: `/icon.png` e `/apple-icon.png` 200 `image/png`; HTML com `<link rel="icon" … sizes="512x512">` e `<link rel="apple-touch-icon" … sizes="180x180">`; `<meta name="theme-color" content="#04091d"/>`; `/assets/header.webp` e `/assets/icon2.png` 404; `grep -rn "icon2\|header.webp" src` → nada.
+- AC #4 — `npx tsc --noEmit` e `npm run build` verdes, sem warning; `npx lighthouse http://localhost:3008 --only-categories=seo` sobre `out/` = **100**; sonda CDP (pasta temporária, fora do repo) em 375 e 1200px: nenhum erro/aviso de console, `<img>` do Navbar e do Footer com `src="/assets/logo.png"` e as mesmas medidas (Navbar 128×44 em 375, 144×49 em 1200; Footer 128×44).
+
+**O que divergiu do plano:**
+
+- **JPG pelo `ffmpeg`, não pelo `sips`.** O `sips --resampleWidth 1200` deu 1200×**685** (trunca) e 236 KB com qualidade 80; para caber em ≤ 150 KB o `sips` precisava de qualidade 50. `ffmpeg -vf scale=1200:686:flags=lanczos -q:v 5` deu 1200×686 com 124 KB e sem artefato visível (conferido a olho). Ferramenta do sistema, não dependência do projeto.
+- **`icon.png` 512 sai de um original de 500** (upscale de 2,4 %), como o plano previa; o ganho de nitidez fica para a 8.3 (`PEND-18`, ícones em SVG).
+- `themeColor` ficou como export `THEME_COLOR` ao lado de `SITE_CONFIG` (não dentro dele), por ser token de estilo e não dado do cliente.
 
 ## Change Log
 
@@ -127,3 +138,5 @@ No `out/` servido, `/icon.png` (512×512) e `/apple-icon.png` (180×180) respond
 | --- | --- | --- |
 | 2026-11-05 | TODO | Story criada sobre `3a87d86`, a partir da [revisão de código](../CODE-REVIEW-2026-11-05.md) §§ 1.5–1.7. AC #4 depende do `PEND-19`. |
 | 2026-11-05 | TODO | Validada sobre `d7214b1`: `ProfessionalService` → `Organization` (o Rich Results Test exige `address` em `LocalBusiness`); `telephone`, `logo` e `areaServed` derivados de `SITE_CONFIG`; OG convertido para JPG 1200×686 sem recorte (responsável); AC #4 (`PEND-19`) desmembrado para a 8.8 e o antigo AC #5 virou AC #4; remoção de `icon2.png`/`header.webp`; comando do Lighthouse e validação sobre `out/`; dependências 8.1/8.2 atualizadas para `DONE`. |
+| 2026-11-05 | IN_PROGRESS | Revalidada sobre `fca5e37` (contexto confere) e implementada: JSON-LD `Organization`, OG `og-image.jpg` 1200×686 `image/jpeg`, `icon.png`/`apple-icon.png` por convenção, `theme-color` `#04091d`, `header.webp`/`icon2.png` removidos. `tsc`/`build` verdes, Lighthouse SEO 100 sobre `out/`, sem erro de console. Falta: validadores de JSON-LD e prévia de OG no preview do Pages. |
+| 2026-11-05 | DONE | Revisada (review-mr) e fechada. **Validado na árvore de trabalho sobre `fca5e37`**, no mesmo estado do commit: `npx tsc --noEmit` ok; `npm run build` ok, sem warning; `out/` servido na 3008 (`npx serve out -l 3008`) — `/icon.png`, `/apple-icon.png`, `/assets/og-image.jpg` 200, `/assets/header.webp` e `/assets/icon2.png` 404, `node scripts/check_ids.js` ok; Lighthouse SEO 100; sonda CDP 375/1200 sem erro de console e logos com o mesmo `src`/medidas; schema.org 0 erros/0 avisos; Rich Results Test sem erro (2 itens válidos). Prévia de OG no ar movida para a [8.6](8-6-conferir-primeiro-deploy-pages.md) (AC #8), com aval do responsável. |

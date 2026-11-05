@@ -6,6 +6,8 @@ export const SITE_CONFIG = {
   // Domínio oficial (confirmado pelo responsável em 2026-11-05); fonte única para
   // canonical, OpenGraph, robots e sitemap.
   url: "https://nexusagencybr.com.br",
+  // Logo da marca (Navbar, Footer e JSON-LD); o mesmo arquivo do legado.
+  logo: "/assets/logo.png",
   whatsapp: {
     number: "556192985392",
     displayNumber: "+55 (61) 9298-5392",
@@ -21,6 +23,9 @@ export const SITE_CONFIG = {
   },
   // Canais do rodapé do cliente (PEND-09 resolvido para estes dois itens em 2026-11-03)
   serviceArea: "Atendimento em todo o Brasil, 100% online",
+  // Área de atendimento para o JSON-LD (story 8.4), derivada de serviceArea
+  // ("em todo o Brasil"); não é dado novo.
+  areaServed: { "@type": "Country", name: "Brasil" },
   businessHours: "Horário: segunda a sexta, das 9h às 18h",
   socials: {
     instagram: "https://www.instagram.com/nexusagencybr/",
@@ -34,3 +39,7 @@ export const SITE_CONFIG = {
     { label: "Serviços", href: "#service" },
   ],
 } as const;
+
+// Cor da barra do navegador (viewport.themeColor). O viewport não lê CSS var:
+// espelho de --secondary-color em globals.css — mude os dois juntos.
+export const THEME_COLOR = "#04091d";
