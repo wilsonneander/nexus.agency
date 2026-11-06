@@ -13,7 +13,7 @@ export const ABOUT_DATA = {
     "Se o seu negócio precisa de direção no digital, é por aí que a gente começa.",
   ],
   metric: {
-    /** O contador do AboutClient anima de 0 até `value`, lido do HTML do servidor. */
+    /** O contador (`MetricCounter`) anima de 0 até `value`, lido do HTML do servidor. */
     prefix: "+",
     value: 50,
     label: "clientes atendidos",

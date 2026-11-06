@@ -1,9 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { gsap } from "gsap";
-import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
-import { REVEAL_MEDIA, revealY, scrubReveal } from "@/animations/scrubReveal";
+import { matchReveal, revealAll } from "@/animations/scrubReveal";
 import { useForm, ValidationError } from "@formspree/react";
 import { FluidButton } from "@/components/ui/FluidButton";
 import { SITE_CONFIG } from "@/lib/constants";
@@ -13,7 +11,6 @@ const fieldErrorClass = "mt-1 text-xs text-red-400";
 
 export function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
   // Envio pelo Formspree (PEND-10): o handleSubmit faz o preventDefault e envia por fetch.
   const [formState, handleSubmit] = useForm(SITE_CONFIG.formspree.formId);
   const [whatsapp, setWhatsapp] = useState("");
@@ -25,34 +22,23 @@ export function ContactSection() {
     { id: "pacote", label: "Pacote completo" },
   ];
 
+  // Cabeçalho, campos e botão atrelados ao scroll (story 4.2), lidos dos `data-reveal-*`
+  // pelo mesmo helper do RevealRoot (story 8.5); a seção é `data-reveal-scope` porque é
+  // Client Component inteiro (formulário).
   useEffect(() => {
-    if (reduced || prefersReducedMotion()) return;
-    if (!sectionRef.current) return;
-
-    // Cabeçalho, campos e botão atrelados ao scroll (story 4.2); `fromTo` com destino
-    // explícito no scrubReveal, não mais `gsap.from` (padrão proibido na 4.7).
-    const mm = gsap.matchMedia();
-    mm.add(
-      REVEAL_MEDIA,
-      ({ conditions }) => {
-        const section = sectionRef.current!;
-        scrubReveal(section.querySelector("[data-contact-header]"), { y: revealY(conditions, 36) });
-        scrubReveal(section.querySelectorAll("[data-contact-field]"), { y: revealY(conditions, 24) });
-        scrubReveal(section.querySelector("[data-contact-cta]"), { scale: 0.92 });
-      },
-      sectionRef
-    );
-
+    const section = sectionRef.current;
+    if (!section) return;
+    const mm = matchReveal((conditions) => revealAll(section, conditions));
     return () => mm.revert();
-  }, [reduced]);
+  }, []);
 
   return (
-    <section ref={sectionRef} id="contact" className="py-24 bg-[#04091d]">
+    <section ref={sectionRef} id="contact" data-reveal-scope className="py-24 bg-secondary">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Cabeçalho */}
-        <div data-contact-header className="text-center max-w-2xl mx-auto mb-14">
-          <p className="text-sm font-semibold uppercase tracking-wider text-[#a15cf5] mb-2">
+        <div data-reveal data-reveal-y="36" className="text-center max-w-2xl mx-auto mb-14">
+          <p className="text-sm font-semibold uppercase tracking-wider text-primary-dark mb-2">
             Fale conosco
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-4">
@@ -68,7 +54,7 @@ export function ContactSection() {
         {formState.succeeded ? (
           <div
             role="status"
-            className="max-w-xl mx-auto bg-[#0f1221]/50 p-6 sm:p-10 rounded-2xl border border-white/5 shadow-2xl text-center"
+            className="max-w-xl mx-auto bg-secondary-light/50 p-6 sm:p-10 rounded-2xl border border-white/5 shadow-2xl text-center"
           >
             <p className="text-white text-base sm:text-lg font-semibold mb-2">Mensagem enviada!</p>
             <p className="text-white/75 text-sm sm:text-base">
@@ -80,7 +66,7 @@ export function ContactSection() {
           action={SITE_CONFIG.formspree.endpoint}
           method="POST"
           onSubmit={handleSubmit}
-          className="max-w-xl mx-auto flex flex-col gap-6 bg-[#0f1221]/50 p-6 sm:p-10 rounded-2xl border border-white/5 shadow-2xl"
+          className="max-w-xl mx-auto flex flex-col gap-6 bg-secondary-light/50 p-6 sm:p-10 rounded-2xl border border-white/5 shadow-2xl"
         >
           {/* Isca anti-spam do Formspree: invisível; robô que preenche tem o envio descartado */}
           <input
@@ -91,7 +77,7 @@ export function ContactSection() {
             aria-hidden="true"
             className="hidden"
           />
-          <div data-contact-field>
+          <div data-reveal data-reveal-y="24">
             <label htmlFor="name" className="block text-xs uppercase tracking-wider text-white/70 mb-1">
               Nome
             </label>
@@ -101,12 +87,12 @@ export function ContactSection() {
               name="name"
               required
               placeholder="Seu nome completo"
-              className="w-full py-3 px-1 bg-transparent border-b-2 border-[#a15cf5] text-white placeholder-white/40 focus:outline-none focus:border-[#ad7dff] transition-colors text-sm"
+              className="w-full py-3 px-1 bg-transparent border-b-2 border-primary-dark text-white placeholder-white/40 focus:outline-none focus:border-accent-span transition-colors text-sm"
             />
             <ValidationError field="name" prefix="Nome" errors={formState.errors} className={fieldErrorClass} />
           </div>
 
-          <div data-contact-field>
+          <div data-reveal data-reveal-y="24">
             <label htmlFor="whatsapp" className="block text-xs uppercase tracking-wider text-white/70 mb-1">
               WhatsApp
             </label>
@@ -123,12 +109,12 @@ export function ContactSection() {
               value={whatsapp}
               onChange={(e) => setWhatsapp(formatPhoneBR(e.target.value))}
               placeholder="(DDD) 99999-9999"
-              className="w-full py-3 px-1 bg-transparent border-b-2 border-[#a15cf5] text-white placeholder-white/40 focus:outline-none focus:border-[#ad7dff] transition-colors text-sm"
+              className="w-full py-3 px-1 bg-transparent border-b-2 border-primary-dark text-white placeholder-white/40 focus:outline-none focus:border-accent-span transition-colors text-sm"
             />
             <ValidationError field="whatsapp" prefix="WhatsApp" errors={formState.errors} className={fieldErrorClass} />
           </div>
 
-          <div data-contact-field>
+          <div data-reveal data-reveal-y="24">
             <label htmlFor="company" className="block text-xs uppercase tracking-wider text-white/70 mb-1">
               Empresa ou projeto
             </label>
@@ -138,12 +124,12 @@ export function ContactSection() {
               name="company"
               required
               placeholder="Nome da sua empresa"
-              className="w-full py-3 px-1 bg-transparent border-b-2 border-[#a15cf5] text-white placeholder-white/40 focus:outline-none focus:border-[#ad7dff] transition-colors text-sm"
+              className="w-full py-3 px-1 bg-transparent border-b-2 border-primary-dark text-white placeholder-white/40 focus:outline-none focus:border-accent-span transition-colors text-sm"
             />
             <ValidationError field="company" prefix="Empresa" errors={formState.errors} className={fieldErrorClass} />
           </div>
 
-          <div data-contact-field className="pt-2">
+          <div data-reveal data-reveal-y="24" className="pt-2">
             <span className="block text-xs uppercase tracking-wider text-white/70 mb-3 text-center sm:text-left">
               O que você precisa?
             </span>
@@ -151,13 +137,13 @@ export function ContactSection() {
               {needsOptions.map((opt) => (
                 <label
                   key={opt.id}
-                  className="flex items-center gap-3 p-3 bg-[#04091d] rounded-lg border border-white/5 hover:border-[#a15cf5]/40 cursor-pointer transition-colors"
+                  className="flex items-center gap-3 p-3 bg-secondary rounded-lg border border-white/5 hover:border-primary-dark/40 cursor-pointer transition-colors"
                 >
                   <input
                     type="radio"
                     name="need"
                     value={opt.id}
-                    className="accent-[#a15cf5] cursor-pointer"
+                    className="accent-primary-dark cursor-pointer"
                   />
                   <span className="text-xs sm:text-sm text-white/90">{opt.label}</span>
                 </label>
@@ -174,14 +160,14 @@ export function ContactSection() {
           )}
 
           {/* Botão de Envio com FluidButton e Pulse Sutil */}
-          <div data-contact-cta className="flex justify-center pt-4">
+          <div data-reveal data-reveal-scale="0.92" className="flex justify-center pt-4">
             <FluidButton
               type="submit"
               variant="primary"
               pulse
               disabled={formState.submitting}
               aria-busy={formState.submitting}
-              className="px-10 py-4 text-base font-bold tracking-wide shadow-lg shadow-[#a15cf5]/20"
+              className="px-10 py-4 text-base font-bold tracking-wide shadow-lg shadow-primary-dark/20"
             >
               {formState.submitting ? "Enviando..." : "Diagnóstico Gratuito"}
             </FluidButton>

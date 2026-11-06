@@ -32,29 +32,26 @@ nexus/
 │   ├── components/
 │   │   ├── layout/
 │   │   │   ├── Navbar.tsx        # Navegação com âncoras e menu mobile
-│   │   │   ├── Footer.tsx        # Rodapé com 3 colunas e links institucionais
-│   │   │   └── FooterClient.tsx  # Wrapper animado do rodapé
+│   │   │   └── Footer.tsx        # Rodapé (Server Component; reveal das colunas por data-reveal)
 │   │   ├── ui/
 │   │   │   ├── SocialIcons.tsx   # Ícones com rotação 3D inalterável (Header, About, Footer)
 │   │   │   └── WhatsAppFloat.tsx # Botão flutuante WhatsApp (WaveWhatsApp + GSAP spring)
 │   │   └── motion/
-│   │       └── ScrollText.tsx    # Leitura progressiva bidirecional (GSAP scrub)
+│   │       ├── ScrollText.tsx    # Leitura progressiva bidirecional (GSAP scrub)
+│   │       └── RevealRoot.tsx    # Reveal único dos [data-reveal] da página (montado no layout)
 │   │
 │   ├── sections/
 │   │   ├── Hero/                 # Dobra de entrada (#home) com HeroClient e ScrollText
-│   │   ├── About/                # Seção Sobre nós (#about) com AboutClient e Métrica
-│   │   ├── Banners/              # Banner horizontal de diferenciais (BannersClient)
+│   │   ├── About/                # Seção Sobre nós (#about); MetricCounter é o único client
+│   │   ├── Banners/              # Banner horizontal de diferenciais (Server Component)
 │   │   ├── Projects/             # Grid de portfólio (#project) com GSAP Flip
-│   │   ├── Services/             # Grid de 6 serviços (#service) + 3 Pacotes com ServicesClient
+│   │   ├── Services/             # Grid de 6 serviços (#service) + 3 Pacotes (Server Component)
 │   │   └── Contact/              # Formulário (#contact) com validação e animações
 │   │
 │   ├── animations/
 │   │   ├── presets.ts            # Easings, scrubReveal, menu, filtro; MOTION_MEDIA
-│   │   └── scrubReveal.ts        # Entrada por elemento atrelada ao scroll (story 4.2)
-│   │
-│   ├── hooks/
-│   │   ├── useReducedMotion.ts   # Detecção e respeito a prefers-reduced-motion
-│   │   └── useScrollProgress.ts  # Utilitário para progresso de leitura
+│   │   ├── scrubReveal.ts        # Entrada por elemento atrelada ao scroll (4.2); data-reveal-* (8.5)
+│   │   └── reducedMotion.ts      # Leitor síncrono da preferência, só para handlers de clique
 │   │
 │   ├── lib/
 │   │   ├── utils.ts              # Helpers de classes Tailwind e formatação
@@ -98,16 +95,13 @@ Elementos compartilhados de estrutura, como cabeçalho e rodapé, se existirem n
 Elementos de interface reutilizáveis. `WhatsAppButton` só deve ser abstraído se houver mais de uma ocorrência ou benefício claro.
 
 ### `components/motion/`
-Componentes reutilizáveis para padrões de movimento. Devem ser opt-in, com fallback acessível e sem impor animação a todo conteúdo.
+Componentes reutilizáveis para padrões de movimento. Devem ser opt-in, com fallback acessível e sem impor animação a todo conteúdo. O `RevealRoot` é o reveal único da página: só anima o que o markup marca com `data-reveal` (story [8.5](stories/8-5-simplificar-motion-estilos.md)).
 
 ### `sections/`
-Componentes que representam seções reais do site. Cada pasta pode conter componente, estilos locais e configuração de animação, conforme a complexidade.
+Componentes que representam seções reais do site. São Server Components; o reveal dos blocos vem dos atributos `data-reveal-*` no markup. Client só para efeito que não é reveal (contador do About, entrada e parallax do Hero) ou para a seção que é client inteira (Projetos com Flip, Contato com formulário).
 
 ### `animations/`
 Registro de plugins, presets e funções de animação. Não deve conter conteúdo de negócio nem markup de seção.
-
-### `hooks/`
-Hooks React genuinamente reutilizáveis. Não criar hook para lógica usada uma única vez sem benefício.
 
 ### `lib/`
 Funções utilitárias puras, tratamento de links e helpers sem estado React.
@@ -120,7 +114,8 @@ Dados reais do site, como listas de serviços ou projetos, quando for útil sepa
 `app/page.tsx` deve compor as seções na ordem descoberta durante a auditoria. O componente de página deve permanecer legível e não concentrar a implementação dos efeitos.
 
 ## 5. Padrões de animação
-- Cada seção controla ou inicializa suas animações dentro de seu próprio escopo.
+- Cada seção controla ou inicializa suas animações dentro de seu próprio escopo. Exceção: os reveals de entrada, um só caminho para a página inteira (`RevealRoot` + `data-reveal`, story [8.5](stories/8-5-simplificar-motion-estilos.md)); um efeito próprio que precisa refazer os triggers marca o contêiner com `data-reveal-scope`.
+- Reduced motion pela condição `MOTION_MEDIA.motionOk` do `gsap.matchMedia()` em todo efeito GSAP, que desfaz e refaz sozinho quando a preferência muda; regra em [TECHNICAL-SPEC.md](TECHNICAL-SPEC.md#gsap).
 - Reutilizar presets somente quando o comportamento e o timing forem realmente comuns.
 - Não compartilhar um único timeline global entre seções independentes.
 - A animação de leitura deve ser um padrão isolado e configurável.

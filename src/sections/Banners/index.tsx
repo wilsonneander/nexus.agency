@@ -1,5 +1,3 @@
-import { BannersClient } from "./BannersClient";
-
 const cards = [
   {
     icon: "ri-pen-nib-line",
@@ -21,9 +19,10 @@ const cards = [
   },
 ];
 
+// Reveal dos cards pelos `data-reveal` (RevealRoot, story 8.5): ícone em escala dentro do card.
 export function BannersSection() {
   return (
-    <BannersClient>
+    <section className="py-14 bg-secondary">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Colunas nos pontos exatos do legado (`width > 480/768px`; story 4.1, PEND-16) */}
         <div className="glass-ambient grid grid-cols-1 min-[481px]:grid-cols-2 min-[769px]:grid-cols-3 gap-6">
@@ -32,7 +31,10 @@ export function BannersSection() {
             // e a página rola para o lado — no legado também.
             <div
               key={card.title}
-              data-banner-card
+              data-reveal
+              data-reveal-y="50"
+              data-reveal-pop="[data-banner-icon]"
+              data-reveal-pop-scale="0.5"
               className="glass-card group p-6 min-[481px]:p-5 min-[769px]:p-6 rounded-2xl flex items-start gap-5 min-[481px]:flex-col min-[769px]:flex-row"
             >
               <div
@@ -51,6 +53,6 @@ export function BannersSection() {
           ))}
         </div>
       </div>
-    </BannersClient>
+    </section>
   );
 }

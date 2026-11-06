@@ -46,7 +46,7 @@ diff tocou. Área que não se aplica, pule.
   estado inicial **no markup do servidor**: sem JS, ele nunca aparece.
 - `gsap.from(...)` / `fromTo` sem `immediateRender: false` em elemento com
   ScrollTrigger: aplica o estado inicial na montagem e o conteúdo some até o
-  trigger (o "bug do 1º card" de `AboutClient.tsx`).
+  trigger (o "bug do 1º card", story 4.7).
 - `ScrollText` iniciando com cor que torna o texto ilegível (o padrão é
   `rgba(255,255,255,0.22)` — mais baixo que isso reprova contraste).
 - Caminho de reduced motion que retorna cedo **depois** de já ter aplicado
@@ -87,9 +87,9 @@ diff tocou. Área que não se aplica, pule.
 
 - Breakpoint presumido como o padrão do Tailwind — aqui `sm`=480, `md`=768,
   `lg`=1024, `xl`=1200.
-- Hex literal novo em `className`/`style` em vez de token (`primary`,
-  `secondary`, `accent-span`, `whatsapp`). Os existentes em `Navbar.tsx` e
-  `FooterClient.tsx` não são precedente.
+- Hex literal em `className`/`style` em vez de token (`primary-dark`,
+  `secondary`, `secondary-light`, `secondary-dark`, `accent-span`, `whatsapp`;
+  aceitam alfa, ex. `border-primary-dark/20`).
 - `!important`, estilo global que vaza entre seções.
 - Overflow horizontal em 375px (largura fixa, `w-screen` com padding, texto
   sem quebra).

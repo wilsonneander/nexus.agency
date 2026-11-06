@@ -1,3 +1,6 @@
+// ID do formulário no Formspree (PEND-10); o endpoint do `action` sem JS deriva dele.
+const FORMSPREE_FORM_ID = "xpppnoer";
+
 export const SITE_CONFIG = {
   name: "Nexus Agency",
   title: "Nexus | Agency",
@@ -18,8 +21,8 @@ export const SITE_CONFIG = {
   email: "contato@nexusagencybr.com.br",
   // Formulário de contato (#contact) enviado pelo Formspree (PEND-10, 2026-11-05)
   formspree: {
-    formId: "xpppnoer",
-    endpoint: "https://formspree.io/f/xpppnoer",
+    formId: FORMSPREE_FORM_ID,
+    endpoint: `https://formspree.io/f/${FORMSPREE_FORM_ID}`,
   },
   // Canais do rodapé do cliente (PEND-09 resolvido para estes dois itens em 2026-11-03)
   serviceArea: "Atendimento em todo o Brasil, 100% online",

@@ -2,10 +2,15 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MOTION_MEDIA, MOTION_PRESETS } from "./presets";
 
-/** Condições do `gsap.matchMedia()` dos reveals: a função roda em qualquer faixa. */
+/**
+ * Condições do `gsap.matchMedia()` dos reveals: a função roda em qualquer faixa, e
+ * `motionOk` é a guarda de reduced motion (story 8.5). Use por `matchReveal`, que só
+ * chama o setup com `motionOk` verdadeiro.
+ */
 export const REVEAL_MEDIA = {
   narrow: MOTION_MEDIA.narrow,
   desktop: MOTION_MEDIA.desktop,
+  motionOk: MOTION_MEDIA.motionOk,
 };
 
 /** Deslocamento da faixa: único até 768px, o da seção acima. */
@@ -99,4 +104,51 @@ export function popInside(selector: string, fromScale: number) {
       0.4
     );
   };
+}
+
+/**
+ * Lê as opções de um alvo `[data-reveal]` (story 8.5):
+ * - `data-reveal-y="<px>"` — `y` inicial acima de 768px (até 768px vale `revealY`);
+ *   sem ele, `y: 0` em qualquer faixa;
+ * - `data-reveal-scale="<escala>"` — escala inicial;
+ * - `data-reveal-pop="<seletor>"` + `data-reveal-pop-scale="<escala>"` — ícone/selo
+ *   dentro do alvo que entra em escala (`popInside`).
+ */
+export function revealOptions(el: HTMLElement, conditions?: gsap.Conditions): ScrubRevealOptions {
+  const { revealY: y, revealScale: scale, revealPop: pop, revealPopScale: popScale } = el.dataset;
+  return {
+    y: y === undefined ? 0 : revealY(conditions, Number(y)),
+    scale: scale === undefined ? undefined : Number(scale),
+    extra: pop ? popInside(pop, Number(popScale ?? 0)) : undefined,
+  };
+}
+
+/**
+ * Alvos `[data-reveal]` de `root`. Um efeito próprio marca o seu contêiner com
+ * `data-reveal-scope` (Projetos, Contato): o `RevealRoot` (root = document) pula o que
+ * está dentro dele, e o efeito da seção pega só o seu.
+ */
+function revealTargets(root: Element | Document): HTMLElement[] {
+  const scope = root instanceof Element ? root.closest("[data-reveal-scope]") : null;
+  return Array.from(root.querySelectorAll<HTMLElement>("[data-reveal]")).filter(
+    (el) => el.closest("[data-reveal-scope]") === scope
+  );
+}
+
+/** Um `scrubReveal` por alvo `[data-reveal]` de `root`, com as opções dos `data-reveal-*`. */
+export function revealAll(root: Element | Document, conditions?: gsap.Conditions): void {
+  revealTargets(root).forEach((el) => scrubReveal(el, revealOptions(el, conditions)));
+}
+
+/**
+ * `gsap.matchMedia()` dos reveals: o setup roda em qualquer faixa, só sem reduced motion,
+ * e é desfeito/refeito ao cruzar 768px ou ao mudar a preferência. Devolve o `MatchMedia`
+ * para o cleanup (`mm.revert()`).
+ */
+export function matchReveal(setup: (conditions: gsap.Conditions) => void): gsap.MatchMedia {
+  const mm = gsap.matchMedia();
+  mm.add(REVEAL_MEDIA, ({ conditions }) => {
+    if (conditions?.motionOk) setup(conditions);
+  });
+  return mm;
 }

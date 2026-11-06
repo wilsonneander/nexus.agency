@@ -8,12 +8,13 @@
  *      (story 7.1: o parallax de backgroundPositionY virou yPercent no [data-hero-glow])
  * B2 — gsap.set inicial no useEffect (depois do 1º paint: o Hero ainda pisca na
  *      hidratação, ver story 4.4/4.1)
+ * Reduced motion (story 8.5): condição `motionOk` do gsap.matchMedia() na entrada e no
+ * parallax; ao ligar a preferência, o revert devolve o estado visível do servidor.
  */
 
 import { useRef, useEffect, ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
 import { MOTION_MEDIA } from "@/animations/presets";
 
 interface HeroClientProps {
@@ -22,10 +23,8 @@ interface HeroClientProps {
 
 export function HeroClient({ children }: HeroClientProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
 
   useEffect(() => {
-    if (reduced || prefersReducedMotion()) return;
     if (!wrapperRef.current) return;
 
     // Encontra o <section id="home"> que está como filho direto do wrapper
@@ -39,9 +38,10 @@ export function HeroClient({ children }: HeroClientProps) {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
-      // Estado inicial da entrada. Dentro do contexto, para o ctx.revert() devolver o
-      // estado visível do servidor (fora dele, o Hero sumia com reduced motion — story 4.3).
+    const mm = gsap.matchMedia();
+    mm.add(MOTION_MEDIA.motionOk, () => {
+      // Estado inicial da entrada. Dentro do callback, para o revert devolver o estado
+      // visível do servidor (fora dele, o Hero sumia com reduced motion — story 4.3).
       if (h4) gsap.set(h4, { opacity: 0, y: 20 });
       if (h1) gsap.set(h1, { opacity: 0, y: 30 });
       if (social) gsap.set(social, { opacity: 0, x: 20 });
@@ -51,15 +51,13 @@ export function HeroClient({ children }: HeroClientProps) {
       if (h4) tl.to(h4, { opacity: 1, y: 0, duration: 0.6 }, 0.15);
       if (h1) tl.to(h1, { opacity: 1, y: 0, duration: 0.7 }, 0.35);
       if (social) tl.to(social, { opacity: 1, x: 0, duration: 0.6 }, 0.55);
-
-    }, wrapperRef);
+    });
 
     // Parallax do brilho (story 7.1): só o contêiner [data-hero-glow], nunca a <section>
     // — transform nela prenderia o bloco social `fixed` ao Hero. Reverte com o scrub.
     // Só acima de 768px (story 4.1); o matchMedia desfaz e refaz ao cruzar a faixa.
-    const mm = gsap.matchMedia();
     if (glow) {
-      mm.add(MOTION_MEDIA.desktop, () => {
+      mm.add(`${MOTION_MEDIA.desktop} and ${MOTION_MEDIA.motionOk}`, () => {
         gsap.to(glow, {
           yPercent: 12,
           ease: "none",
@@ -74,11 +72,8 @@ export function HeroClient({ children }: HeroClientProps) {
       });
     }
 
-    return () => {
-      mm.revert();
-      ctx.revert();
-    };
-  }, [reduced]);
+    return () => mm.revert();
+  }, []);
 
   return (
     <div ref={wrapperRef}>

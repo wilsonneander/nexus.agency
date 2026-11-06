@@ -20,7 +20,6 @@ import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { SITE_CONFIG } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
 import { MOTION_MEDIA } from "@/animations/presets";
 
 interface WhatsAppFloatProps {
@@ -29,10 +28,8 @@ interface WhatsAppFloatProps {
 
 export function WhatsAppFloat({ className }: WhatsAppFloatProps) {
   const linkRef = useRef<HTMLAnchorElement>(null);
-  const reduced = useReducedMotion();
 
   useEffect(() => {
-    if (reduced || prefersReducedMotion()) return;
     const el = linkRef.current;
     if (!el) return;
 
@@ -61,10 +58,20 @@ export function WhatsAppFloat({ className }: WhatsAppFloatProps) {
         .to(el, { scale: 1, duration: 0.35, ease: "elastic.out(1, 0.5)" });
     };
 
+    // Tudo sob a condição `motionOk` (story 8.5): ao ligar reduced motion o matchMedia
+    // tira os listeners e a escala que um tween tenha deixado no meio.
+    const mm = gsap.matchMedia();
+    mm.add(MOTION_MEDIA.motionOk, () => {
+      el.addEventListener("click", onClick);
+      return () => {
+        el.removeEventListener("click", onClick);
+        gsap.killTweensOf(el);
+        gsap.set(el, { clearProps: "scale" });
+      };
+    });
     // Mola de hover só com mouse (story 4.1, FR-10): em toque o navegador emula
     // mouseenter/mouseleave e a mola brigava com o feedback de clique.
-    const mm = gsap.matchMedia();
-    mm.add(MOTION_MEDIA.finePointer, () => {
+    mm.add(`${MOTION_MEDIA.finePointer} and ${MOTION_MEDIA.motionOk}`, () => {
       el.addEventListener("mouseenter", onEnter);
       el.addEventListener("mouseleave", onLeave);
       return () => {
@@ -72,14 +79,9 @@ export function WhatsAppFloat({ className }: WhatsAppFloatProps) {
         el.removeEventListener("mouseleave", onLeave);
       };
     });
-    el.addEventListener("click", onClick);
 
-    return () => {
-      mm.revert();
-      el.removeEventListener("click", onClick);
-      gsap.killTweensOf(el);
-    };
-  }, [reduced]);
+    return () => mm.revert();
+  }, []);
 
   return (
     <a

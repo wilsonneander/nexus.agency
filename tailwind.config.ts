@@ -19,17 +19,18 @@ const config: Config = {
     },
     extend: {
       colors: {
+        // Canais RGB (globals.css, story 8.5): aceitam alfa (`bg-secondary-light/50`).
         primary: {
           DEFAULT: "var(--primary-color)",
-          dark: "var(--primary-color-dark)",
+          dark: "rgb(var(--primary-color-dark-rgb) / <alpha-value>)",
         },
         secondary: {
-          DEFAULT: "var(--secondary-color)",
-          light: "var(--secondary-color-light)",
-          dark: "var(--secondary-color-dark)",
+          DEFAULT: "rgb(var(--secondary-color-rgb) / <alpha-value>)",
+          light: "rgb(var(--secondary-color-light-rgb) / <alpha-value>)",
+          dark: "rgb(var(--secondary-color-dark-rgb) / <alpha-value>)",
         },
         accent: {
-          span: "var(--span)",
+          span: "rgb(var(--span-rgb) / <alpha-value>)",
         },
         whatsapp: "#218e49",
       },

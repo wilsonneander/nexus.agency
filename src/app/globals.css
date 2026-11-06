@@ -3,35 +3,32 @@
 @tailwind utilities;
 
 :root {
+  /* Tokens de cor em canais RGB (story 8.5): o Tailwind os expõe como
+     `rgb(var(--…-rgb) / <alpha-value>)`, o que permite `bg-secondary-light/50` etc.
+     As vars sem `-rgb` são o mesmo valor opaco, para o CSS deste arquivo. */
   --primary-color: #ffffff;
-  --primary-color-dark: #a15cf5;
-  --secondary-color: #04091d;
-  --secondary-color-light: #0f1221;
-  --secondary-color-dark: #03060f;
-  --text-light: #ffffff;
+  --primary-color-dark-rgb: 161 92 245;    /* #a15cf5 */
+  --secondary-color-rgb: 4 9 29;           /* #04091d */
+  --secondary-color-light-rgb: 15 18 33;   /* #0f1221 */
+  --secondary-color-dark-rgb: 3 6 15;      /* #03060f */
+  --span-rgb: 173 125 255;                 /* #ad7dff */
+  --primary-color-dark: rgb(var(--primary-color-dark-rgb));
+  --secondary-color: rgb(var(--secondary-color-rgb));
+  --span: rgb(var(--span-rgb));
   --white: #ffffff;
-  --span: #ad7dff;
-  --max-width: 1200px;
-  --gradient: linear-gradient(
-    to right,
-    var(--primary-color-dark),
-    var(--primary-color)
-  );
 
   /* Cards de vidro (story 7.2, PEND-15). Canais RGB para compor alfa. */
   --glass-tint-rgb: 18 12 42;      /* roxo-escuro do preenchimento (mantém #a15cf5 em ≥ 4,5:1) */
   --glass-edge-rgb: 214 190 255;   /* lilás claro da borda iluminada */
   --glass-halo-rgb: 161 92 245;    /* --primary-color-dark */
-  --glass-icon-from: #a15cf5;      /* --primary-color-dark */
+  --glass-icon-from: var(--primary-color-dark);
   --glass-icon-to: #d63fd1;        /* magenta da referência cards-glass-reference.png */
 }
 
+/* Fonte, fundo e cor do texto vêm do Tailwind (preflight + classes do <body>). */
 html,
 body {
   scroll-behavior: smooth;
-  background-color: var(--secondary-color);
-  color: var(--white);
-  font-family: var(--font-poppins), 'Poppins', sans-serif;
 }
 
 /* ==========================================================================
@@ -123,7 +120,6 @@ body {
   box-shadow: 1px 1px 2px #888;
   z-index: 1000;
   margin-top: 5px;
-  transition: transform 0.4s;
   animation: WaveWhatsApp 1.5s ease infinite;
   display: flex;
   align-items: center;
@@ -131,7 +127,8 @@ body {
   text-decoration: none;
 }
 
-/* hover scale gerenciado pelo GSAP (WhatsAppFloat.tsx) para animação spring */
+/* hover scale gerenciado pelo GSAP (WhatsAppFloat.tsx) para animação spring; sem
+   `transition` de transform aqui, que amolecia a mola (story 8.5, achado 2.6). */
 .whatsapp-link:hover {
   transform: none;
 }
@@ -185,9 +182,9 @@ body {
 }
 
 .fluid-btn:focus-visible {
-  ring: 2px solid #ad7dff;
+  ring: 2px solid var(--span);
   ring-offset: 2px;
-  ring-offset-color: #04091d;
+  ring-offset-color: var(--secondary-color);
 }
 
 .fluid-btn__content {
@@ -230,14 +227,14 @@ body {
 /* --- Variante: Primary (Diagnóstico Gratuito / CTA Principal) --- */
 .fluid-btn--primary {
   background-color: #ffffff;
-  color: #a15cf5;
+  color: var(--primary-color-dark);
   box-shadow: 0 4px 18px -2px rgba(161, 92, 245, 0.28),
               inset 0 1px 1px rgba(255, 255, 255, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .fluid-btn--primary .fluid-btn__overlay {
-  background: linear-gradient(135deg, #a15cf5 0%, #512c91 100%);
+  background: linear-gradient(135deg, var(--primary-color-dark) 0%, #512c91 100%);
 }
 
 @media (hover: hover) {
@@ -262,7 +259,7 @@ body {
 
 @media (hover: hover) {
   .fluid-btn--secondary:hover {
-    border-color: #ad7dff;
+    border-color: var(--span);
     color: #ffffff;
     box-shadow: 0 0 16px rgba(161, 92, 245, 0.22);
   }
@@ -280,7 +277,7 @@ body {
 }
 
 .fluid-btn--filter .fluid-btn__overlay {
-  background: linear-gradient(135deg, #a15cf5 0%, #512c91 100%);
+  background: linear-gradient(135deg, var(--primary-color-dark) 0%, #512c91 100%);
 }
 
 @media (hover: hover) {
@@ -294,7 +291,7 @@ body {
 
 .fluid-btn--filter.fluid-btn--active {
   background: #ffffff;
-  color: #a15cf5;
+  color: var(--primary-color-dark);
   font-weight: 600;
   border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 4px 18px -2px rgba(161, 92, 245, 0.45);
@@ -317,6 +314,16 @@ body {
     box-shadow: 0 6px 24px -2px rgba(161, 92, 245, 0.45),
                 0 0 0 8px rgba(161, 92, 245, 0);
   }
+}
+
+/* ==========================================================================
+   Leitura progressiva (ScrollText, FR-03): cor inicial das palavras, já no HTML do
+   servidor para não piscar (story 8.5). `:where()` zera a especificidade: o <noscript>
+   do layout.tsx e a regra de reduced motion (`[data-word]`) vencem sem `!important`.
+   O GSAP grava inline por cima durante o scrub.
+   ========================================================================== */
+:where(.scroll-word) {
+  color: rgb(255 255 255 / 0.22);
 }
 
 /* ==========================================================================
@@ -604,13 +611,11 @@ body {
   }
 
   /* Leitura progressiva (ScrollText) no estado final com reduced motion (story 4.3):
-     - antes da hidratação, o servidor grava 22% inline e não conhece a preferência;
-     - ao ligar a preferência com a página aberta, o ctx.revert() do ScrollText devolve
-       o inline anterior ao gsap.set (22%), e é esta regra que mantém o branco.
-     Com reduced motion o GSAP não toca as palavras, então o !important só disputa com
-     o style="" inline. Mesmo seletor e valor do <noscript> da story 4.4, em layout.tsx. */
+     vale antes da hidratação e depois do revert do GSAP ao ligar a preferência.
+     Vence a `.scroll-word` por especificidade (o `:where()` dela é zero), sem
+     `!important` (story 8.5). Mesmo seletor e valor do <noscript> da story 4.4. */
   [data-word] {
-    color: rgb(255 255 255) !important;
+    color: rgb(255 255 255);
   }
 }
 

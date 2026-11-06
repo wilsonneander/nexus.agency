@@ -1,12 +1,12 @@
 import { ABOUT_DATA } from "@/data/about";
 import { SocialIcons } from "@/components/ui/SocialIcons";
-import { AboutClient } from "./AboutClient";
+import { MetricCounter } from "./MetricCounter";
 import { ScrollText } from "@/components/motion/ScrollText";
 
-
+// Reveals pelos `data-reveal` (RevealRoot, story 8.5); o contador é o único client.
 export function AboutSection() {
   return (
-    <AboutClient>
+    <section id="about" className="py-24 bg-secondary">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Bloco Principal: Imagem + Narrativa ── */}
@@ -16,7 +16,7 @@ export function AboutSection() {
           {/* Conteúdo institucional */}
           <div className="flex flex-col gap-6">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#a15cf5] mb-2">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary-dark mb-2">
                 Sobre nós
               </p>
 
@@ -42,13 +42,14 @@ export function AboutSection() {
               >
                 {ABOUT_DATA.paragraphs[0]}
               </ScrollText>
-              <p data-about-para>{ABOUT_DATA.paragraphs[1]}</p>
-              <p data-about-para>{ABOUT_DATA.paragraphs[2]}</p>
+              <p data-reveal data-reveal-y="30">{ABOUT_DATA.paragraphs[1]}</p>
+              <p data-reveal data-reveal-y="30">{ABOUT_DATA.paragraphs[2]}</p>
             </div>
 
             {/* Destaque institucional */}
             <div
-              data-about-highlight
+              data-reveal
+              data-reveal-y="24"
               className="glass-card p-6 rounded-2xl border-l-2 border-primary-dark text-white/90 text-sm sm:text-base leading-relaxed"
             >
               <p className="mb-2 font-medium">{ABOUT_DATA.paragraphs[3]}</p>
@@ -57,9 +58,9 @@ export function AboutSection() {
 
             {/* Métrica — B3: número em span separado para não quebrar bg-clip-text */}
             <div className="glass-card flex items-center gap-6 p-4 rounded-2xl">
-              <div className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#a15cf5] to-white">
+              <div className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-dark to-white">
                 <span data-about-metric-value>{ABOUT_DATA.metric.prefix}</span>
-                <span data-about-metric-number>{ABOUT_DATA.metric.value}</span>
+                <MetricCounter value={ABOUT_DATA.metric.value} />
               </div>
               <div>
                 <p className="text-base font-semibold text-white uppercase tracking-wide">
@@ -81,7 +82,8 @@ export function AboutSection() {
         {/* ── Missão e Visão ── */}
         <div className="glass-ambient grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <div
-            data-about-mv
+            data-reveal
+            data-reveal-y="32"
             className="glass-card group p-8 rounded-2xl"
           >
             <div className="glass-icon w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4">
@@ -94,7 +96,8 @@ export function AboutSection() {
           </div>
 
           <div
-            data-about-mv
+            data-reveal
+            data-reveal-y="32"
             className="glass-card group p-8 rounded-2xl"
           >
             <div className="glass-icon w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4">
@@ -116,11 +119,12 @@ export function AboutSection() {
             {ABOUT_DATA.values.map((val, index) => (
               <div
                 key={val.title}
-                data-about-value
+                data-reveal
+                data-reveal-y="40"
                 className="glass-card p-6 rounded-2xl flex flex-col justify-between"
               >
                 <div>
-                  <div className="text-xs font-mono text-[#ad7dff] mb-2">
+                  <div className="text-xs font-mono text-accent-span mb-2">
                     0{index + 1}
                   </div>
                   <h4 className="text-base font-semibold text-white mb-2">
@@ -136,6 +140,6 @@ export function AboutSection() {
         </div>
 
       </div>
-    </AboutClient>
+    </section>
   );
 }

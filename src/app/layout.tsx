@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/ui/WhatsAppFloat";
+import { RevealRoot } from "@/components/motion/RevealRoot";
 import { SITE_CONFIG, THEME_COLOR } from "@/lib/constants";
 
 // Imagem de compartilhamento provisória (story 8.4): a foto do Hero legado em JPG,
@@ -88,13 +89,13 @@ export default function RootLayout({
         />
         {/*
           Fallback sem JS (FR-03 aceite, story 4.4): só vale com JavaScript desligado.
-          O ScrollText grava a cor inicial (22%) inline em cada [data-word] e só o GSAP
-          a ilumina; sem JS o texto ficaria ilegível. O !important é o único jeito de
-          uma folha de estilo vencer o style="" inline. Com JS, o <noscript> não se aplica.
+          O ScrollText sai do servidor em 22% (classe .scroll-word) e só o GSAP o ilumina;
+          sem JS o texto ficaria apagado. A .scroll-word tem especificidade zero, então
+          o [data-word] vence sem !important (story 8.5). Com JS, o <noscript> não se aplica.
         */}
         <noscript
           dangerouslySetInnerHTML={{
-            __html: "<style>[data-word]{color:rgb(255 255 255)!important}</style>",
+            __html: "<style>[data-word]{color:rgb(255 255 255)}</style>",
           }}
         />
         {/* "<" escapado: um valor nunca fecha o <script> antes da hora. */}
@@ -110,6 +111,8 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <WhatsAppFloat />
+        {/* Reveal único dos [data-reveal] da página, inclusive do Footer (story 8.5). */}
+        <RevealRoot />
       </body>
     </html>
   );

@@ -7,18 +7,17 @@ import { gsap } from "gsap";
 import { SITE_CONFIG } from "@/lib/constants";
 import { FluidLink } from "@/components/ui/FluidButton";
 import { RollingLink, RollingText } from "@/components/ui/RollingText";
-import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
+import { prefersReducedMotion } from "@/animations/reducedMotion";
 import { MOTION_PRESETS } from "@/animations/presets";
 
 const MOBILE_MENU_ID = "mobile-menu";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const reduced = useReducedMotion();
   const drawerRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
-  // Lido pelo efeito da timeline, que é recriada quando a preferência muda.
+  // Lido pelo efeito da timeline, para nascer no estado atual da gaveta.
   const isOpenRef = useRef(isOpen);
   isOpenRef.current = isOpen;
   const prevIsOpenRef = useRef(isOpen);
@@ -56,13 +55,16 @@ export function Navbar() {
       timelineRef.current = null;
       ctx.revert();
     };
-  }, [reduced]);
+  }, []);
 
   useEffect(() => {
     const tl = timelineRef.current;
     if (!tl) return;
 
-    if (reduced || prefersReducedMotion()) {
+    // Responde ao clique, fora de efeito de animação: sem matchMedia que reverta, a
+    // preferência é lida na hora (story 8.5).
+    const reduced = prefersReducedMotion();
+    if (reduced) {
       tl.pause().progress(isOpen ? 1 : 0);
     } else if (isOpen) {
       tl.timeScale(1).play();
@@ -73,17 +75,17 @@ export function Navbar() {
     // O ícone só gira quando o estado muda de fato (não no carregamento).
     const toggled = prevIsOpenRef.current !== isOpen;
     prevIsOpenRef.current = isOpen;
-    if (toggled && iconRef.current && !(reduced || prefersReducedMotion())) {
+    if (toggled && iconRef.current && !reduced) {
       gsap.fromTo(
         iconRef.current,
         { rotate: isOpen ? -90 : 90, scale: 0.6, opacity: 0 },
         { rotate: 0, scale: 1, opacity: 1, duration: 0.35, ease: MOTION_PRESETS.ease.smooth }
       );
     }
-  }, [isOpen, reduced]);
+  }, [isOpen]);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-[#04091d]/85 backdrop-blur-md border-b border-white/5 transition-colors">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-secondary/85 backdrop-blur-md border-b border-white/5 transition-colors">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link href="#home" className="flex items-center">
@@ -104,7 +106,7 @@ export function Navbar() {
             <li key={item.href}>
               <RollingLink
                 href={item.href}
-                className="text-white hover:text-[#ad7dff] transition-colors duration-200"
+                className="text-white hover:text-accent-span transition-colors duration-200"
               >
                 {item.label}
               </RollingLink>
@@ -145,7 +147,7 @@ export function Navbar() {
       >
         <div
           data-nav-panel
-          className="invisible pointer-events-auto bg-[#0f1221] px-6 py-6 border-b border-[#a15cf5]/20 flex flex-col gap-4 text-base"
+          className="invisible pointer-events-auto bg-secondary-light px-6 py-6 border-b border-primary-dark/20 flex flex-col gap-4 text-base"
         >
           {SITE_CONFIG.navLinks.map((item) => (
             <Link
@@ -153,7 +155,7 @@ export function Navbar() {
               href={item.href}
               data-nav-item
               onClick={() => setIsOpen(false)}
-              className="text-white hover:text-[#a15cf5] py-1 transition-colors"
+              className="text-white hover:text-primary-dark py-1 transition-colors"
             >
               {item.label}
             </Link>

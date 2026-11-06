@@ -17,9 +17,9 @@ desenho; o que ainda não existe está marcado com ⛔>
 | Ator | Onde | Papel neste fluxo |
 | --- | --- | --- |
 | Seção (Server Component) | `src/sections/<X>/index.tsx` | markup, conteúdo, atributos `data-*` |
-| Wrapper client | `src/sections/<X>/<X>Client.tsx` | registra e limpa as animações |
+| Reveal / wrapper client | `data-reveal-*` + `RevealRoot`, ou `src/sections/<X>/<X>Client.tsx` | registra e limpa as animações |
 | Primitiva de motion | `src/components/motion/<Y>.tsx` | … |
-| Presets / hook | `src/animations/presets.ts`, `src/hooks/useReducedMotion.ts` | timings, preferência de movimento |
+| Presets | `src/animations/presets.ts` (`MOTION_MEDIA.motionOk`) | timings, preferência de movimento |
 | Dados | `src/data/<z>.ts`, `src/lib/constants.ts` | … |
 | Estilos | `src/app/globals.css`, `tailwind.config.ts` | … |
 | <externo> | … | … |
@@ -65,7 +65,7 @@ interface <Y>Props { … }
 | Estado | O que o usuário vê | Quem transiciona | Para onde |
 | --- | --- | --- | --- |
 | Antes da hidratação / sem JS | conteúdo final, sem animação | — | — |
-| Reduced motion | conteúdo final, sem animação | `useReducedMotion` | — |
+| Reduced motion | conteúdo final, sem animação | `matchMedia` com `motionOk` | — |
 | … | … | … | … |
 
 **Transições impossíveis:** <ex.: "conteúdo invisível" — e o que impede.>

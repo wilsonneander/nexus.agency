@@ -29,7 +29,7 @@ export function RollingText({ children, className }: RollingTextProps) {
       </span>
       <span
         aria-hidden="true"
-        className="absolute top-full left-0 inline-block text-[#ad7dff] transition-transform duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-full will-change-transform"
+        className="absolute top-full left-0 inline-block text-accent-span transition-transform duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-full will-change-transform"
       >
         {children}
       </span>
@@ -52,7 +52,7 @@ export const RollingLink = forwardRef<HTMLAnchorElement, RollingLinkProps>(
         <Link
           ref={ref}
           href={href}
-          className={cn("group inline-flex items-center text-white/70 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ad7dff] rounded", className)}
+          className={cn("group inline-flex items-center text-white/70 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-span rounded", className)}
           {...props}
         >
           <RollingText>{children}</RollingText>
@@ -64,7 +64,7 @@ export const RollingLink = forwardRef<HTMLAnchorElement, RollingLinkProps>(
       <a
         ref={ref}
         href={href}
-        className={cn("group inline-flex items-center text-white/70 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ad7dff] rounded", className)}
+        className={cn("group inline-flex items-center text-white/70 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-span rounded", className)}
         {...props}
       >
         <RollingText>{children}</RollingText>

@@ -60,15 +60,15 @@ Confira que o arquivo ainda existe — o mapa envelhece.
 
 | Preciso de… | Faça como |
 | --- | --- |
-| Seção nova ou alterada | `src/sections/<Nome>/index.tsx` (Server Component, markup + conteúdo) + `<Nome>Client.tsx` (`"use client"`, recebe `children`, anima por `data-*`). Vizinhos: `Hero/`, `About/`, `Services/`. Registre em `src/app/page.tsx` **na ordem do legado**. |
-| Animação de elementos da seção | no wrapper client: `useEffect` → `if (reduced) return` → `gsap.registerPlugin(ScrollTrigger)` → `gsap.context(() => …, ref)` → `return () => ctx.revert()`. Selecione por `data-<secao>-<parte>` dentro do `ref`. Ver `AboutClient.tsx`. |
-| Entrada que não pode piscar | `gsap.fromTo(el, {from}, {to, immediateRender: false, scrollTrigger: {…, invalidateOnRefresh: true}})` — é a correção do "bug do 1º card" em `AboutClient.tsx`. |
+| Seção nova ou alterada | `src/sections/<Nome>/index.tsx` (Server Component, markup + conteúdo); reveal só por `data-reveal` no markup. `<Nome>Client.tsx` (`"use client"`, recebe `children`, anima por `data-*`) só para efeito que não é reveal. Vizinhos: `Hero/`, `About/`, `Services/`. Registre em `src/app/page.tsx` **na ordem do legado**. |
+| Animação de elementos da seção (não reveal) | no wrapper client: `useEffect` → `gsap.registerPlugin(ScrollTrigger)` → `const mm = gsap.matchMedia(); mm.add(MOTION_MEDIA.motionOk, () => …)` → `return () => mm.revert()`. Selecione por `data-<secao>-<parte>` dentro do `ref`. Ver `Hero/HeroClient.tsx`, `About/MetricCounter.tsx`. |
+| Entrada que não pode piscar | `gsap.fromTo(el, {from}, {to, immediateRender: false, scrollTrigger: {…, invalidateOnRefresh: true}})` — é a correção do "bug do 1º card" (story 4.7), hoje dentro do `scrubReveal`. |
 | Leitura progressiva (FR-03) | `ScrollText` (`components/motion/ScrollText.tsx`), passando a string; **só** nos textos aprovados no PRD/TASKS. |
-| Reveal de entrada | `scrubReveal` de `src/animations/scrubReveal.ts`, um trigger por elemento, dentro de `gsap.matchMedia()` com `REVEAL_MEDIA` + `revealY` (ver `AboutClient.tsx`). Sem `stagger` em grupo. |
+| Reveal de entrada | `data-reveal` no markup do Server Component, com `data-reveal-y="<px acima de 768px>"`, `data-reveal-scale`, `data-reveal-pop` + `data-reveal-pop-scale`; o `RevealRoot` (layout) anima. Seção client que refaz triggers: `data-reveal-scope` no contêiner + `matchReveal`/`revealAll` (ver `Projects/index.tsx`). Sem `stagger` em grupo. |
 | Parallax leve | só o do brilho do Hero (`[data-hero-glow]`, `MOTION_MEDIA.desktop`) — parallax novo precisa de aprovação. |
 | Reordenar/filtrar cards | GSAP `Flip` como em `sections/Projects/index.tsx` (`flushSync` antes do `Flip.from`). |
 | Timings e easings | `MOTION_PRESETS` de `src/animations/presets.ts`. Valor novo entra lá se for reutilizado. |
-| Reduced motion | `useReducedMotion()` de `src/hooks/useReducedMotion.ts` — retorna cedo e o conteúdo fica no estado final visível. |
+| Reduced motion | condição `MOTION_MEDIA.motionOk` do `gsap.matchMedia()` (combine por `and`); o revert devolve o estado final visível. `prefersReducedMotion()` (`src/animations/reducedMotion.ts`) só em handler de clique fora de efeito. |
 | Botão / CTA | `FluidButton` / `FluidLink` (`components/ui/FluidButton.tsx`, variantes `primary`/`secondary`/`filter`); link de texto com `RollingLink`. |
 | Redes sociais | `SocialIcons` — **reutilizar, nunca alterar** (FR-07). |
 | WhatsApp | `SITE_CONFIG.whatsapp` (`src/lib/constants.ts`) e `WhatsAppFloat` — nunca hardcode de número/mensagem. |
@@ -95,9 +95,9 @@ O que reprova, e você não escreve:
 
 - texto diferente do legado/aprovado (inclusive pontuação e acentos), seção
   criada, removida ou reordenada, número ou depoimento inventado;
-- cor fora dos tokens (`primary`, `secondary`, `accent-span`, `whatsapp` no
-  `tailwind.config.ts`; vars em `globals.css`). Os hex literais que existem em
-  `Navbar.tsx`/`FooterClient.tsx` são legado da migração — não espalhe o padrão;
+- cor fora dos tokens (`primary-dark`, `secondary`, `secondary-light`,
+  `secondary-dark`, `accent-span`, `whatsapp` no `tailwind.config.ts`, com alfa:
+  `bg-secondary-light/50`; vars em `globals.css`);
 - fonte diferente de Poppins, peso fora de 400/500/600/700;
 - breakpoint padrão do Tailwind presumido — aqui `sm`=480, `md`=768, `lg`=1024,
   `xl`=1200, container 1200px;

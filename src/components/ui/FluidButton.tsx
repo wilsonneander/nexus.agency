@@ -1,5 +1,4 @@
 import { ButtonHTMLAttributes, AnchorHTMLAttributes, forwardRef, ReactNode } from "react";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 /**
@@ -20,25 +19,29 @@ interface BaseFluidProps {
 
 export type FluidButtonProps = BaseFluidProps & ButtonHTMLAttributes<HTMLButtonElement>;
 
+/** Classes do botão fluido, iguais para `<button>` e `<a>`. */
+function fluidClasses({
+  variant = "primary",
+  pulse = false,
+  isActive = false,
+  className,
+}: Omit<BaseFluidProps, "children">) {
+  return cn(
+    "fluid-btn group",
+    `fluid-btn--${variant}`,
+    pulse && "fluid-btn--pulse",
+    isActive && "fluid-btn--active",
+    className
+  );
+}
+
 export const FluidButton = forwardRef<HTMLButtonElement, FluidButtonProps>(
-  ({ className, variant = "primary", pulse = false, isActive = false, children, ...props }, ref) => {
-    return (
-      <button
-        ref={ref}
-        className={cn(
-          "fluid-btn group",
-          `fluid-btn--${variant}`,
-          pulse && "fluid-btn--pulse",
-          isActive && "fluid-btn--active",
-          className
-        )}
-        {...props}
-      >
-        <span className="fluid-btn__overlay" aria-hidden="true" />
-        <span className="fluid-btn__content">{children}</span>
-      </button>
-    );
-  }
+  ({ className, variant, pulse, isActive, children, ...props }, ref) => (
+    <button ref={ref} className={fluidClasses({ variant, pulse, isActive, className })} {...props}>
+      <span className="fluid-btn__overlay" aria-hidden="true" />
+      <span className="fluid-btn__content">{children}</span>
+    </button>
+  )
 );
 
 FluidButton.displayName = "FluidButton";
@@ -48,48 +51,14 @@ export type FluidLinkProps = BaseFluidProps &
     href: string;
   };
 
+/** `<a>` simples também para âncoras (`#contact`): o `next/link` não acrescenta nada a elas. */
 export const FluidLink = forwardRef<HTMLAnchorElement, FluidLinkProps>(
-  ({ className, variant = "primary", pulse = false, isActive = false, href, children, ...props }, ref) => {
-    const isInternalAnchor = href.startsWith("#");
-
-    if (isInternalAnchor) {
-      return (
-        <Link
-          ref={ref}
-          href={href}
-          className={cn(
-            "fluid-btn group",
-            `fluid-btn--${variant}`,
-            pulse && "fluid-btn--pulse",
-            isActive && "fluid-btn--active",
-            className
-          )}
-          {...props}
-        >
-          <span className="fluid-btn__overlay" aria-hidden="true" />
-          <span className="fluid-btn__content">{children}</span>
-        </Link>
-      );
-    }
-
-    return (
-      <a
-        ref={ref}
-        href={href}
-        className={cn(
-          "fluid-btn group",
-          `fluid-btn--${variant}`,
-          pulse && "fluid-btn--pulse",
-          isActive && "fluid-btn--active",
-          className
-        )}
-        {...props}
-      >
-        <span className="fluid-btn__overlay" aria-hidden="true" />
-        <span className="fluid-btn__content">{children}</span>
-      </a>
-    );
-  }
+  ({ className, variant, pulse, isActive, children, ...props }, ref) => (
+    <a ref={ref} className={fluidClasses({ variant, pulse, isActive, className })} {...props}>
+      <span className="fluid-btn__overlay" aria-hidden="true" />
+      <span className="fluid-btn__content">{children}</span>
+    </a>
+  )
 );
 
 FluidLink.displayName = "FluidLink";

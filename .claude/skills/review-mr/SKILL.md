@@ -118,7 +118,7 @@ resultado não é sobre o alvo: diga isso.
 **Veredicto:** pode seguir | ajustes antes de commitar | precisa de conversa
 
 ### Bloqueadores
-1. `src/sections/About/AboutClient.tsx:31` — <defeito>. Dispara quando: <cenário>. AC #2.
+1. `src/sections/Hero/HeroClient.tsx:31` — <defeito>. Dispara quando: <cenário>. AC #2.
 
 ### Critérios de aceite
 - AC #1 — entregue (`src/sections/Hero/index.tsx:40`, sonda em 375/1200).

@@ -64,11 +64,10 @@ As regras completas e inegociáveis estão em [AGENTS.md](AGENTS.md) — leia an
 │   ├── sections/       # Hero, About, Banners, Projects, Services, Contact
 │   ├── components/
 │   │   ├── layout/     # Navbar, Footer
-│   │   ├── motion/     # ScrollText
+│   │   ├── motion/     # ScrollText, RevealRoot
 │   │   └── ui/         # FluidButton, RollingText, SocialIcons, WhatsAppFloat
-│   ├── animations/     # presets.ts (timings/easings, MOTION_MEDIA), scrubReveal.ts (reveals)
+│   ├── animations/     # presets.ts (timings/easings, MOTION_MEDIA), scrubReveal.ts (reveals), reducedMotion.ts
 │   ├── data/           # conteúdo tipado (about, packages, projects, services)
-│   ├── hooks/          # useReducedMotion
 │   ├── lib/            # constants.ts (SITE_CONFIG), utils.ts (cn)
 │   └── types/          # tipos do conteúdo
 ├── scripts/            # capturas headless e verificação de âncoras
@@ -80,10 +79,10 @@ As regras completas e inegociáveis estão em [AGENTS.md](AGENTS.md) — leia an
 
 - **Página única.** [src/app/page.tsx](src/app/page.tsx) compõe as seções em ordem fixa: Hero → About → Banners → Projects → Services → Contact. [src/app/layout.tsx](src/app/layout.tsx) monta Navbar, Footer e `WhatsAppFloat`, carrega Poppins via `next/font` e RemixIcon/FontAwesome via CDN (os ícones originais usam essas classes).
 - **Navegação por âncoras** (`#home`, `#about`, `#project`, `#service`; mais `#contact` para os CTAs e âncoras nos cards de serviço para o rodapé). Os IDs das seções precisam bater com `SITE_CONFIG.navLinks`.
-- **Padrão Server + Client por seção** (`src/sections/<Nome>/`):
-  - `index.tsx` — Server Component com markup e conteúdo.
-  - `<Nome>Client.tsx` (`"use client"`) — envolve o markup e aplica as animações GSAP selecionando elementos por atributos `data-*` (ex.: `data-hero-sub`).
-  - Para animar algo novo, marque o elemento com `data-*` no server component e anime no client wrapper. Não mova o markup para o cliente.
+- **Seções são Server Components** (`src/sections/<Nome>/index.tsx`, markup e conteúdo):
+  - Reveal de entrada: marque o bloco com `data-reveal` (+ `data-reveal-y`, `data-reveal-scale`, `data-reveal-pop`/`data-reveal-pop-scale`); o `RevealRoot` do layout anima.
+  - Outro efeito: `<Nome>Client.tsx` (`"use client"`) envolve o markup e anima por `data-*` (ex.: `data-hero-sub`). Não mova o markup para o cliente.
+  - Projects e Contact são Client Components inteiros (Flip, formulário).
 - **Conteúdo** em `src/data/*.ts`, tipado por `src/types/index.ts`. Contatos, WhatsApp, redes sociais e metadados ficam em `SITE_CONFIG` ([src/lib/constants.ts](src/lib/constants.ts)).
 
 ## Movimento (GSAP)
@@ -92,12 +91,13 @@ Componentes em `src/components/motion/`:
 
 | Componente | Uso |
 |---|---|
+| `RevealRoot` | Reveal único dos `[data-reveal]` da página, montado no `layout.tsx`. |
 | `ScrollText` | Leitura progressiva (FR-03): divide o texto em palavras e anima a cor de muted → branco com `scrub`, reversível. Somente nos textos aprovados: parágrafo do Hero, título + 1º parágrafo do About, título + subtítulo de Services. Nunca inicia invisível. |
 
 Toda animação deve:
 
-1. Respeitar `useReducedMotion()` — retornar cedo, com o conteúdo visível.
-2. Ser escopada com `gsap.context()` e limpa com `ctx.revert()` no cleanup.
+1. Respeitar reduced motion pela condição `MOTION_MEDIA.motionOk` do `gsap.matchMedia()` — com `reduce` o conteúdo fica visível, e o GSAP desfaz/refaz sozinho quando a preferência muda.
+2. Ser limpa com `mm.revert()` (ou `ctx.revert()`) no cleanup.
 3. Animar apenas `transform`, `opacity` e `color`.
 4. Funcionar nos dois sentidos do scroll.
 5. Usar os timings/easings de [src/animations/presets.ts](src/animations/presets.ts).

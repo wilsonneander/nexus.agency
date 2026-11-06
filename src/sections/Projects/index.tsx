@@ -3,7 +3,7 @@
 /**
  * ProjectsSection — Client Component com:
  * - Filtros padronizados com FluidButton (variant="filter") e microinteração do botão Contato
- * - Entrada de cada card atrelada ao scroll (story 4.2), no filho [data-project-reveal]:
+ * - Entrada de cada card atrelada ao scroll (story 4.2), no filho [data-reveal] (story 8.5):
  *   o Flip anima o transform do [data-project-card] e os dois não podem dividir o mesmo nó
  * - Troca de categoria em três tempos: saída dos cards, Flip dos que ficam e entrada em sequência (story 7.7)
  *
@@ -20,15 +20,14 @@ import { Flip } from "gsap/Flip";
 import { flushSync } from "react-dom";
 import { PROJECTS_DATA, PROJECT_FILTERS } from "@/data/projects";
 import { ProjectCategory } from "@/types";
-import { prefersReducedMotion, useReducedMotion } from "@/hooks/useReducedMotion";
+import { prefersReducedMotion } from "@/animations/reducedMotion";
 import { FluidButton } from "@/components/ui/FluidButton";
-import { REVEAL_MEDIA, revealY, scrubReveal } from "@/animations/scrubReveal";
+import { matchReveal, revealAll } from "@/animations/scrubReveal";
 import { MOTION_PRESETS } from "@/animations/presets";
 
 export function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>("all");
   const gridRef = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
   const revealRef = useRef<gsap.MatchMedia | null>(null);
 
   const filteredProjects =
@@ -36,25 +35,16 @@ export function ProjectsSection() {
       ? PROJECTS_DATA
       : PROJECTS_DATA.filter((p) => p.category === activeFilter);
 
-  // Entrada atrelada ao scroll, um trigger por card. Refeita depois de cada filtro
-  // (cards novos e posições novas), por isso fica numa função guardada no ref.
+  // Entrada atrelada ao scroll, um trigger por card, pelos `data-reveal-*` (a grade é
+  // `data-reveal-scope`). Refeita depois de cada filtro (cards novos e posições novas),
+  // por isso fica numa função guardada no ref. Reduced motion: condição do matchMedia.
   const setupReveal = useCallback(() => {
     revealRef.current?.revert();
     revealRef.current = null;
-    if (reduced || prefersReducedMotion() || !gridRef.current) return;
-
-    const mm = gsap.matchMedia();
-    mm.add(
-      REVEAL_MEDIA,
-      ({ conditions }) => {
-        scrubReveal(gridRef.current!.querySelectorAll("[data-project-reveal]"), {
-          y: revealY(conditions, 48),
-        });
-      },
-      gridRef
-    );
-    revealRef.current = mm;
-  }, [reduced]);
+    const grid = gridRef.current;
+    if (!grid) return;
+    revealRef.current = matchReveal((conditions) => revealAll(grid, conditions));
+  }, []);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger, Flip);
@@ -83,7 +73,8 @@ export function ProjectsSection() {
   const handleFilter = useCallback(
     (filter: string) => {
       const nextFilter = filter as ProjectCategory;
-      if (reduced || prefersReducedMotion() || !gridRef.current) {
+      // Handler de clique, fora de efeito: sem matchMedia que reverta, lê a preferência na hora.
+      if (prefersReducedMotion() || !gridRef.current) {
         setActiveFilter(nextFilter);
         return;
       }
@@ -141,11 +132,11 @@ export function ProjectsSection() {
       });
       transitionRef.current = tl;
     },
-    [reduced, setupReveal]
+    [setupReveal]
   );
 
   return (
-    <section id="project" className="py-24 bg-[#04091d]">
+    <section id="project" className="py-24 bg-secondary">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-center text-white mb-10">
           Criação e Desenvolvimento
@@ -174,6 +165,7 @@ export function ProjectsSection() {
         {/* Grid de Projetos */}
         <div
           ref={gridRef}
+          data-reveal-scope
           className="glass-ambient grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           {filteredProjects.map((project) => (
@@ -183,7 +175,7 @@ export function ProjectsSection() {
               data-category={project.category}
               data-flip-id={project.id}
             >
-              <div data-project-reveal className="glass-card group rounded-2xl overflow-hidden">
+              <div data-reveal data-reveal-y="48" className="glass-card group rounded-2xl overflow-hidden">
                 <div className="aspect-[4/3] w-full overflow-hidden">
                   <Image
                     src={project.image}

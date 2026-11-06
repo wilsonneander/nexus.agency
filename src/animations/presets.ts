@@ -47,4 +47,10 @@ export const MOTION_MEDIA = {
   narrow: "not all and (min-width: 769px)",
   /** Microinterações de hover só com mouse; em toque o hover emulado briga com o clique. */
   finePointer: "(hover: hover) and (pointer: fine)",
+  /**
+   * Guarda de reduced motion de todo efeito GSAP (story 8.5): o callback só roda sem
+   * `reduce`, e o `matchMedia` reverte e refaz sozinho quando a preferência muda.
+   * Combine com as outras consultas por `and` (ex.: `${desktop} and ${motionOk}`).
+   */
+  motionOk: "(prefers-reduced-motion: no-preference)",
 } as const;

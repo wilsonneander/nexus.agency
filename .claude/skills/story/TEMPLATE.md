@@ -62,8 +62,8 @@ para alguém executar sem refazer a investigação; **não é o diff**.
 
 **Regras que se aplicam** ([AGENTS.md](../../AGENTS.md) § 4 e § 7,
 [TECHNICAL-SPEC.md](../TECHNICAL-SPEC.md) § 2): Server Component por padrão e
-animação no `*Client.tsx` via `data-*`; `gsap.context()` + `ctx.revert()`;
-`useReducedMotion`; só `transform`/`opacity`/`color`; sem `pin`; tokens do
+reveal por `data-reveal` (`RevealRoot`), outra animação no `*Client.tsx` via
+`data-*`; `gsap.matchMedia()` com `MOTION_MEDIA.motionOk` + `mm.revert()`; só `transform`/`opacity`/`color`; sem `pin`; tokens do
 Tailwind (sem hex solto); breakpoints 480/768/1024/1200; botões sociais e
 WhatsApp intocados; nenhuma dependência nova sem justificativa. — "Nada se
 aplica." quando for o caso.

@@ -6,12 +6,12 @@ baseline_commit: 3a87d8651cce981791692b61f5c127889090347e
 
 |                 |                                                                                         |
 | --------------- | --------------------------------------------------------------------------------------- |
-| **Status**      | TODO                                                                                    |
+| **Status**      | DONE                                                                                    |
 | **Fase**        | Fase 8 — Leveza, SEO e deploy no Cloudflare Pages                                       |
 | **Área**        | motion, performance/SEO                                                                 |
 | **Seções**      | About, Banners, Services, Contact, Footer, Projects, Hero (só `ScrollText`)             |
 | **Tamanho**     | L — primitivas compartilhadas (`components/motion`, `animations/`, `hooks/`, `globals.css`) e várias seções |
-| **Depende de**  | [6.9](6-9-remover-codigo-nao-usado.md) (`DONE`, `fca5e37`); [4.8](4-8-piscar-hero-hidratacao.md) (`TODO` — ambas tocam motion/Hero, a 4.8 vai antes); [8.4](8-4-metadados-dados-estruturados.md) (`DONE`, `ad2aa8c` — tocou `layout.tsx`, `constants.ts`, `Footer.tsx`, `Navbar.tsx`) |
+| **Depende de**  | [6.9](6-9-remover-codigo-nao-usado.md) (`DONE`, `fca5e37`); [4.8](4-8-piscar-hero-hidratacao.md) (`TODO` — dispensada pelo responsável em 2026-11-05: a 8.5 foi antes, e no Hero só a guarda de reduced motion mudou); [8.4](8-4-metadados-dados-estruturados.md) (`DONE`, `ad2aa8c` — tocou `layout.tsx`, `constants.ts`, `Footer.tsx`, `Navbar.tsx`) |
 | **Requisitos**  | FR-03, FR-04, FR-11, QA-CHECKLIST § 3 e § 6                                             |
 | **Baseline**    | `3a87d86` — o "hoje" do Contexto vale nesse commit; os números foram reconferidos em `fca5e37`. As medidas de antes (sonda, First Load JS, capturas) são tomadas no HEAD do início da implementação |
 
@@ -108,15 +108,15 @@ Trace com CPU 4× no Chrome, 375px, rolando a página inteira de cima a baixo: q
 
 ## Tasks
 
-- [ ] Conferir que a 4.8 está `DONE`; anotar o SHA de início
-- [ ] Recriar a sonda (fora do repositório) e gravar o baseline no SHA de início; anotar First Load JS e cores computadas (AC #1, AC #4, AC #5)
-- [ ] `RevealRoot` + migração das seções (AC #1, AC #4)
-- [ ] Reduced motion por `matchMedia` em todos os efeitos; hook removido (AC #2)
-- [ ] `ScrollText` com classe (AC #3)
-- [ ] FluidButton, Formspree, globals.css, tokens em canais RGB + hex → token, transição do WhatsApp (AC #5)
-- [ ] Medir o vidro em CPU 4× (AC #7)
-- [ ] Docs (TECHNICAL-SPEC, ARCHITECTURE, CLAUDE.md)
-- [ ] Validação (AC #6)
+- [x] ~~Conferir que a 4.8 está `DONE`~~ — dependência dispensada pelo responsável; SHA de início `147aea4`
+- [x] Recriar a sonda (fora do repositório) e gravar o baseline no SHA de início; anotar First Load JS e cores computadas (AC #1, AC #4, AC #5)
+- [x] `RevealRoot` + migração das seções (AC #1, AC #4)
+- [x] Reduced motion por `matchMedia` em todos os efeitos; hook removido (AC #2)
+- [x] `ScrollText` com classe (AC #3)
+- [x] FluidButton, Formspree, globals.css, tokens em canais RGB + hex → token, transição do WhatsApp (AC #5)
+- [x] Medir o vidro em CPU 4× (AC #7)
+- [x] Docs (TECHNICAL-SPEC, ARCHITECTURE, CLAUDE.md)
+- [x] Validação (AC #6)
 
 ## Validações exigidas
 
@@ -139,20 +139,36 @@ Trace com CPU 4× no Chrome, 375px, rolando a página inteira de cima a baixo: q
 
 ## Definition of Done
 
-- [ ] Todo AC verificado, cada um com a evidência.
-- [ ] `npx tsc --noEmit` verde.
-- [ ] `npm run build` verde, sem warning de hidratação/SSR.
-- [ ] Validação visual/movimento feita nos viewports afetados (capturas conferidas numa pasta temporária fora do repositório, sem commitar).
-- [ ] Itens tocados do `QA-CHECKLIST.md` atualizados com a evidência.
-- [ ] `PEND-xx` consumido: nenhum (abre um se a medição do vidro pedir).
-- [ ] Docs afetados (TECHNICAL-SPEC, ARCHITECTURE, CLAUDE.md) atualizados.
-- [ ] Status movido na story **e** no `TASKS.md`, com a validação carimbada (comando + SHA) no Change Log.
+- [x] Todo AC verificado, cada um com a evidência.
+- [x] `npx tsc --noEmit` verde.
+- [x] `npm run build` verde, sem warning de hidratação/SSR.
+- [x] Validação visual/movimento feita nos viewports afetados (capturas conferidas numa pasta temporária fora do repositório, sem commitar).
+- [x] Itens tocados do `QA-CHECKLIST.md` atualizados com a evidência.
+- [x] `PEND-xx` consumido: nenhum; a medição do vidro não pediu um (0 quadros > 50 ms).
+- [x] Docs afetados (TECHNICAL-SPEC, ARCHITECTURE, CLAUDE.md) atualizados — e README, skills `implement`/`review-mr`/`story`/`tdd`, que citavam o código removido.
+- [x] Status movido na story **e** no `TASKS.md`, com a validação carimbada (comando + SHA) no Change Log.
 
 ## Execução
 
-**Arquivos tocados:** <preenchido ao implementar.>
+**Arquivos tocados:** novos [RevealRoot.tsx](../../src/components/motion/RevealRoot.tsx), [reducedMotion.ts](../../src/animations/reducedMotion.ts) (`prefersReducedMotion`, `keepScrollOnMediaChange`) e [MetricCounter.tsx](../../src/sections/About/MetricCounter.tsx); removidos `AboutClient`, `BannersClient`, `ServicesClient`, `FooterClient` e `src/hooks/useReducedMotion.ts`; alterados [scrubReveal.ts](../../src/animations/scrubReveal.ts) (`revealOptions`, `revealAll`, `matchReveal`), [presets.ts](../../src/animations/presets.ts) (`MOTION_MEDIA.motionOk`), [layout.tsx](../../src/app/layout.tsx), [globals.css](../../src/app/globals.css), [tailwind.config.ts](../../tailwind.config.ts), [ScrollText.tsx](../../src/components/motion/ScrollText.tsx), [FluidButton.tsx](../../src/components/ui/FluidButton.tsx), [RollingText.tsx](../../src/components/ui/RollingText.tsx), [WhatsAppFloat.tsx](../../src/components/ui/WhatsAppFloat.tsx), [Navbar.tsx](../../src/components/layout/Navbar.tsx), [Footer.tsx](../../src/components/layout/Footer.tsx), [constants.ts](../../src/lib/constants.ts), [about.ts](../../src/data/about.ts) (comentário) e as seções About, Banners, Services, Contact, Projects e Hero; docs [CLAUDE.md](../../CLAUDE.md), [README.md](../../README.md), [TECHNICAL-SPEC.md](../TECHNICAL-SPEC.md), [ARCHITECTURE.md](../ARCHITECTURE.md) e as skills `implement`, `review-mr`, `story`, `tdd`.
 
-**O que divergiu do plano:** <preenchido ao implementar.>
+**O que divergiu do plano:**
+
+- **Ordem:** implementada antes da [4.8](4-8-piscar-hero-hidratacao.md), por decisão do responsável (2026-11-05). No Hero só a guarda de reduced motion mudou; a entrada fica para a 4.8.
+- **`data-reveal-pop-scale`, não `data-reveal-pop-at`:** o 2º parâmetro do `popInside` é a escala inicial do ícone/selo (Banners `0.5`, Services `0`), não a posição na timeline (fixa em `0.4`). A story trocou os dois; o código preserva o comportamento.
+- **`data-reveal-scope`:** não previsto. Projetos e Contact marcam o contêiner; o `RevealRoot` pula o que está dentro dele e o efeito da seção pega só o seu, sem trigger em dobro.
+- **`keepScrollOnMediaChange`** ([reducedMotion.ts](../../src/animations/reducedMotion.ts)), não previsto, necessário para o AC #2: ao desligar reduced motion com a página aberta, os ScrollTriggers recriados zeravam a memória de scroll e a página voltava ao topo (GSAP 3.15). Guarda o `scrollY` no evento `revert` e o restaura no `matchMedia`.
+- **Mola do WhatsApp:** a `transition: transform 0.4s` saiu (achado 2.6); o efeito agora é a mola `elastic` sem amortecimento — mudança de movimento intencional, prevista no escopo item 7 e no AC #5.
+
+**Medições** (todas sobre `out/` servido estático; o baseline é o `147aea4` construído numa worktree temporária e servido em paralelo; sondas CDP numa pasta temporária fora do repositório, apagada depois):
+
+- **AC #1** — sonda (opacidade, `translateY` e escala computados + topo por `offsetTop` de 48 alvos, um ponto a cada 50 px, relógio da página acelerado 20× igual nos dois builds para o scrub assentar), **mesmo script** antes × depois: 375 descendo e subindo (491 pontos), 1200 descendo e subindo (255), resize 1200 → 375 (246), resize 375 → 1200 (128), filtro dos Projetos em 375 (246) e 1200 (128): **0 desvios** em todas as grandezas (Δopacidade 0,000, Δy 0,0 px, Δescala 0,000, Δtopo 0 px). A sonda enxerga o movimento: 366 leituras em opacidade parcial em 375, `y` até 24 px em 375 e 55 px em 1200, escalas do CTA/ícones, alvos voltando a 0 ao subir. Repetição da mesma passada: 0 desvio (ruído da sonda nulo).
+- **AC #2** — `reduce` desde o carregamento, 1200 e 375, 5 posições: 0 alvo animado (os 7–8 com `transform` são estáticos de layout — `translateY(-50%)` do bloco social, `-translate` dos selos, `scale-105` do pacote em destaque — idênticos no baseline), 142/142 palavras do `ScrollText` em branco, brilho do Hero sem `transform`, hover do WhatsApp sem escala. Ligando `reduce` em `scrollY` 2600: tudo no estado final, palavras brancas, `scrollY` 2600; desligando: movimento de volta (29–44 alvos fora do final, 31 palavras em 22%), `scrollY` 2600. Menu mobile e filtro com `reduce`: estado final 30 ms depois do clique. `grep -rn useReducedMotion src`: vazio.
+- **AC #3** — `node scripts/capture_nojs.js`: 5 textos em branco pleno, rodapé presente, capturas 375/1200 **idênticas byte a byte** às do baseline.
+- **AC #4** — os 4 wrappers não existem; About, Banners, Services e Footer são Server Components; `RevealRoot` no `layout.tsx`. First Load JS de `/`: **184 kB** (baseline 187 kB). Nenhum `!important` para `[data-word]`.
+- **AC #5** — capturas da página inteira (reduced motion, botão do WhatsApp mascarado pelo pulso CSS) 375×13113, 768×9069, 1200×7237: **0 pixels diferentes** (uma rodada em 375 deu 11 px isolados que não se repetiram em duas novas rodadas — ruído de rasterização). `getComputedStyle` (cor, fundo, gradiente, bordas, sombra, outline, `accent-color`, ring) de 611 elementos visíveis × 2 larguras: 0 diferença; com `:hover`, `:focus` e `:focus-visible` forçados (131/95/95 elementos): 0 diferença além da serialização do gradiente do `fluid-btn__overlay` (`rgb(…), rgb(…)` × `rgb(…) 0px, rgb(…) 100%`, mesma renderização). Mola do WhatsApp com mouse em 1200: baseline `transition: transform 0.4s`, escala 1,00 → 1,08 em 360 ms; agora `all 0s`, pico 1,20 e assenta em ~1,18.
+- **AC #7** — 375×812, CPU 4×, gesto de toque do topo ao fim (12 301 px, ~21 s), 3 rodadas: **0 quadros > 50 ms** pelos intervalos de rAF e pelos `BeginFrame` do trace, maior quadro 33–50 ms, p95 17 ms, 0 tarefas > 50 ms (baseline: 2 quadros > 50 ms numa das 3 rodadas). Chrome headless num Mac com CPU 4×, não um aparelho Android real. Nenhum `PEND` aberto.
+- **AC #6** — `npx tsc --noEmit` e `npm run build` verdes, sem warning; `node scripts/check_ids.js` ok (5 seções + 5 âncoras de serviço); console com 0 erro/warning/exceção em 375 e 1200 rolando a página inteira nos dois sentidos e trocando 3 filtros.
 
 ## Change Log
 
@@ -160,3 +176,5 @@ Trace com CPU 4× no Chrome, 375px, rolando a página inteira de cima a baixo: q
 | --- | --- | --- |
 | 2026-11-05 | TODO | Story criada sobre `3a87d86`, a partir da [revisão de código](../CODE-REVIEW-2026-11-05.md) § 4 e achado 2.6. |
 | 2026-11-05 | TODO | Validada sobre `fca5e37`: dependências (6.9 e 8.4 `DONE`, 4.8 antes); reduced motion via `matchMedia` em todo efeito GSAP, leitor síncrono só nos handlers de clique; `.icon`/`.fa-whatsapp` fora (FR-07/FR-06); hex recontado (51, 6 com alfa → tokens em canais RGB); atributos `data-reveal-scale`/`-pop-at`; `RevealRoot` no `layout.tsx`; sonda recriada com o mesmo script antes × depois; AC #7 do vidro com orçamento de 50 ms. |
+| 2026-11-05 | IN_PROGRESS | Implementada sobre `147aea4`, antes da 4.8 por decisão do responsável. |
+| 2026-11-06 | DONE | Revisada e validada na árvore de trabalho sobre `147aea4`: `tsc` e `build` verdes (First Load JS 187 → 184 kB), sonda antes × depois com 0 desvio em 375/1200, nos dois sentidos, resize e filtro; reduced motion no carregamento e alternado no meio da página; sem JS idêntico ao baseline; capturas 375/768/1200 e cores computadas sem diferença; CPU 4× sem quadro > 50 ms; `check_ids` ok; console limpo. Detalhes na Execução. |
